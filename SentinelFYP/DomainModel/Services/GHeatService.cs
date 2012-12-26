@@ -8,70 +8,53 @@ using System.Drawing.Imaging;
 using System.IO;
 using DomainModel.Models;
 using GMap.NET;
+using DomainModel.Interfaces.Repositories;
 
 namespace DomainModel.Services
 {
     public class GHeatService : IGHeatService
     {
-        /// <summary>
-        /// Dots folder
-        /// </summary>
-        public const string DOTS_FOLDER = "dots";
-        /// <summary>
-        /// Color scheme folder name
-        /// </summary>
-        public const string COLOR_SCHMES_FOLDER = "color-schemes";
+        private IGHeatRepository _gheatRepository;
 
-        private readonly ISettingsService _settingsService;
-        private readonly IPointService _pointService;
-        private Dictionary<string, Bitmap> _dotsList;
-        private Dictionary<string, Bitmap> _colourSchemeList;
-
-        public GHeatService(ISettingsService settingsService, IPointService pointService)
+        public GHeatService(IGHeatRepository gheatRepository)
         {
-            _settingsService = settingsService;
+            if (gheatRepository == null)
+                throw new ArgumentNullException("GHeat Repository");
 
-            _pointService = pointService;
-
-            string directory = _settingsService.BaseDirectory;
-
-            _dotsList = new Dictionary<string, Bitmap>();
-            _colourSchemeList = new Dictionary<string, Bitmap>();
-
-            foreach (string file in System.IO.Directory.GetFiles(directory + DOTS_FOLDER, "*." + ImageFormat.Png.ToString().ToLower()))
-                _dotsList.Add(Path.GetFileName(file), new Bitmap(file));
-
-            foreach (string file in System.IO.Directory.GetFiles(directory + COLOR_SCHMES_FOLDER, "*." + ImageFormat.Png.ToString().ToLower()))
-                _colourSchemeList.Add(Path.GetFileName(file), new Bitmap(file));
+            _gheatRepository = gheatRepository;
         }
 
         public Bitmap GetTile(List<PointLatLng> _points, string colourScheme, int zoom, int x, int y)
         {
-            //Do a little error checking
-            if (colourScheme == string.Empty) throw new Exception("A color scheme is required");
-            return Tile.Generate(GetColourScheme(colourScheme), GetDot(zoom), zoom, x, y, _pointService.GetPointsForTile(x, y, GetDot(zoom), zoom, _points));
+            if (_points == null || _points.Count <= 0)
+                throw new ArgumentNullException("Points");
+            if(string.IsNullOrEmpty(colourScheme))
+                throw new ArgumentNullException("Colour Scheme");
+            if (string.IsNullOrEmpty(colourScheme)) 
+                throw new Exception("A color scheme is required");
+
+            return _gheatRepository.GetTile(_points, colourScheme, zoom, x, y);
         }
 
         public Bitmap GetDot(int zoom)
         {
-            return _dotsList["dot" + zoom.ToString() + "." + ImageFormat.Png.ToString().ToLower()];
+            if (zoom <= 0)
+                throw new ArgumentNullException("Zoom");
+
+            return _gheatRepository.GetDot(zoom);
         }
 
         public Bitmap GetColourScheme(string schemeName)
         {
-            if (!_colourSchemeList.ContainsKey(schemeName + "." + ImageFormat.Png.ToString().ToLower()))
-                throw new Exception("Color scheme '" + schemeName + " could not be found");
-            return _colourSchemeList[schemeName + "." + ImageFormat.Png.ToString().ToLower()];
+            if (string.IsNullOrEmpty(schemeName))
+                throw new ArgumentNullException("Scheme Name");
+
+            return _gheatRepository.GetColourScheme(schemeName);
         }
 
         public string[] AvailableColourSchemes()
         {
-            List<string> colourSchemes = new List<string>();
-
-            //I dont want to return the file extention just the name
-            foreach (string key in _colourSchemeList.Keys)
-                colourSchemes.Add(key.Replace("." + ImageFormat.Png.ToString().ToLower(), ""));
-            return colourSchemes.ToArray(); 
+            return _gheatRepository.AvailableColourSchemes();
         }
     }
 }

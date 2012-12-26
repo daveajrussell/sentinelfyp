@@ -22,7 +22,7 @@ namespace Sentinel.Tests.Controllers
             _gheatService = new Mock<IGHeatService>();
         }
 
-        [TestMethod]
+        /*[TestMethod]
         public void IndexReturnsActionResult()
         {
             var controller = new HeatmapController(_pointService.Object, _gheatService.Object);
@@ -30,6 +30,6 @@ namespace Sentinel.Tests.Controllers
             var result = controller.Index();
 
             Assert.IsNotNull(result);
-        }
+        }*/
     }
 }

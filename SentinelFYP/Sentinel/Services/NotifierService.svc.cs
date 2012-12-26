@@ -30,6 +30,7 @@ namespace Sentinel.Services
 
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SentinelHub>();
             context.Clients.Group("00000000-0000-0000-0000-000000000000", null).getGISMessage(oGIS.TimeStamp.ToShortDateString(), oGIS.Latitude, oGIS.Longitude, oGIS.Speed, oGIS.Orientation, strSeverity);
+            //context.Clients.All.getGISMessage(oGIS.TimeStamp.ToShortDateString(), oGIS.Latitude, oGIS.Longitude, oGIS.Speed, oGIS.Orientation, strSeverity);
         }
     }
 }

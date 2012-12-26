@@ -72,7 +72,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstracts\JsonR.cs" />
+    <Compile Include="DomainRepositories\GHeatRepository.cs" />
+    <Compile Include="DomainRepositories\SettingsRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IGHeatRepository.cs" />
     <Compile Include="Interfaces\Repositories\IGISRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ISettingsRepository.cs" />
     <Compile Include="Interfaces\Services\IGISService.cs" />
     <Compile Include="Models\GIS.cs" />
     <Compile Include="SecurityModels\Session.cs" />

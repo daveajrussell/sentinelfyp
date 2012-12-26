@@ -64,7 +64,7 @@ namespace Sentinel
 
             IKernel kernel = new StandardKernel();
 
-            kernel.Bind<ISettingsService>().To<SettingsService>().WithConstructorArgument("baseDirectory", baseDirectory);
+            kernel.Bind<ISettingsService>().To<SettingsService>();
             kernel.Bind<IUserService>().To<UserService>();
             kernel.Bind<ISecurityService>().To<SecurityService>();
             kernel.Bind<IGHeatService>().To<GHeatService>();
@@ -72,6 +72,8 @@ namespace Sentinel
             kernel.Bind<IGISService>().To<GISService>();
             kernel.Bind<IWeightHandler>().To<IWeightHandler>();
 
+            kernel.Bind<ISettingsRepository>().To<SettingsRepository>().WithConstructorArgument("baseDirectory", baseDirectory);
+            kernel.Bind<IGHeatRepository>().To<GHeatRepository>();
             kernel.Bind<IPointRepository>().To<SqlPointRepository>().WithConstructorArgument("connectionString", _connectionString);
             kernel.Bind<IUserRepository>().To<SqlUserRepository>().WithConstructorArgument("connectionString", _connectionString);
             kernel.Bind<ISecurityRepository>().To<SqlSecurityRepository>().WithConstructorArgument("connectionString", _connectionString);
