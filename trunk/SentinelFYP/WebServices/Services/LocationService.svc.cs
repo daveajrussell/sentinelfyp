@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;using System.Linq;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Activation;
@@ -13,6 +14,7 @@ using System.Net;
 using DomainModel.Models;
 using DomainModel.Abstracts;
 using WebServices.DataContracts;
+using WebServices.Interfaces;
 
 namespace WebServices.Services
 {
@@ -65,8 +67,7 @@ namespace WebServices.Services
                 {
                     var data = new DataContractJsonSerializer(typeof(GISDataContract));
                     data.WriteObject(stream, strGISObject);
-                    //client.UploadData("http://fyp.daveajrussell.com/Services/NotifierService.svc/GISNotify", "POST", stream.ToArray());
-                    client.UploadData("http://localhost/Sentinel/Services/NotifierService.svc/GISNotify", "POST", stream.ToArray());
+                    client.UploadData("http://fyp.daveajrussell.com/Services/NotifierService.svc/GISNotify", "POST", stream.ToArray());
                 }
             }
         }

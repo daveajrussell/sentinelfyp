@@ -2,24 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using DomainModel.Interfaces.Repositories;
 using DomainModel.Interfaces.Services;
 
 namespace DomainModel.Services
 {
     public class SettingsService : ISettingsService
     {
-        private readonly string _baseDirectory;
+        private ISettingsRepository _settingsRepository;
 
-        public SettingsService(string baseDirectory)
+        public SettingsService(ISettingsRepository settingsRepository)
         {
-            _baseDirectory = baseDirectory;
+            _settingsRepository = settingsRepository;
         }
 
         public string BaseDirectory
         {
             get
             {
-                return _baseDirectory;
+                return _settingsRepository.BaseDirectory;
             }
         }
     }
