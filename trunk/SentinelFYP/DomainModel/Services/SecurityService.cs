@@ -37,7 +37,7 @@ namespace DomainModel.Services
         public void Logout(int iSessionID)
         {
             if (iSessionID <= 0)
-                throw new ArgumentNullException("Session ID");
+                throw new ArgumentOutOfRangeException("Session ID");
 
             _securityRepository.Logout(iSessionID);
         }

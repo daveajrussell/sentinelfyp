@@ -72,8 +72,9 @@
     <Compile Include="Tests\GHeatServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\PointServiceTests.cs" />
-    <Compile Include="Tests\GISServiceTest.cs" />
-    <Compile Include="Tests\UnitTest1.cs" />
+    <Compile Include="Tests\GISServiceTests.cs" />
+    <Compile Include="Tests\SecurityServiceTests.cs" />
+    <Compile Include="Tests\SettingsServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
