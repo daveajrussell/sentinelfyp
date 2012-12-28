@@ -5,7 +5,6 @@ namespace DomainModel.Test.Tests
 {
     public class SettingsServiceTests
     {
-        private Mock<ISettingsRepository
         public SettingsServiceTests()
         {
 
