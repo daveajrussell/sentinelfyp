@@ -13,3 +13,6 @@ C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\DomainModel.Test\bin\Debug\Newtonsoft.
 C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\DomainModel.Test\obj\Debug\DomainModel.Test.csprojResolveAssemblyReference.cache
 C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\DomainModel.Test\obj\Debug\DomainModel.Test.dll
 C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\DomainModel.Test\obj\Debug\DomainModel.Test.pdb
+C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\DomainModel.Test\bin\Debug\DomainModel.Test.dll.config
+C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\DomainModel.Test\bin\Debug\xunit.extensions.dll
+C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\DomainModel.Test\bin\Debug\xunit.extensions.xml
