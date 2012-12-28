@@ -15,22 +15,23 @@ namespace DomainModel.Services
         public GISService(IGISRepository gisRepository)
         {
             if (gisRepository == null)
-                throw new ArgumentNullException("gis repository");
+                throw new ArgumentNullException("GIS repository");
 
             _gisRepository = gisRepository;
+        }
+
+        public void AddGIS(GIS oGIS)
+        {
+            if (oGIS == null)
+                throw new ArgumentNullException("Geo Data");
+
+            _gisRepository.AddGIS(oGIS);
         }
 
         public GIS GetGIS()
         {
             return _gisRepository.GetGIS();
         }
-
-
-        public void AddGIS(GIS oGIS)
-        {
-            _gisRepository.AddGIS(oGIS);
-        }
-
 
         public IEnumerable<GIS> GetAllGISData()
         {

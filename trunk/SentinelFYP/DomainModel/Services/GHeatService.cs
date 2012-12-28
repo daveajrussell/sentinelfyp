@@ -30,16 +30,14 @@ namespace DomainModel.Services
                 throw new ArgumentNullException("Points");
             if(string.IsNullOrEmpty(colourScheme))
                 throw new ArgumentNullException("Colour Scheme");
-            if (string.IsNullOrEmpty(colourScheme)) 
-                throw new Exception("A color scheme is required");
 
             return _gheatRepository.GetTile(_points, colourScheme, zoom, x, y);
         }
 
         public Bitmap GetDot(int zoom)
         {
-            if (zoom <= 0)
-                throw new ArgumentNullException("Zoom");
+            if (zoom < 0)
+                throw new ArgumentOutOfRangeException("Zoom");
 
             return _gheatRepository.GetDot(zoom);
         }

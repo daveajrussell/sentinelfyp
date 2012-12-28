@@ -9,16 +9,15 @@ using DomainModel.Test.TestHelpers;
 using GMap.NET;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Xunit;
 
 namespace DomainModel.Test.Tests
 {
-    [TestClass]
     public class PointServiceTests
     {
         private Mock<IPointRepository> _pointRepository;
 
-        [TestInitialize]
-        public void Init()
+        public PointServiceTests()
         {
             _pointRepository = new Mock<IPointRepository>();
 
@@ -37,44 +36,42 @@ namespace DomainModel.Test.Tests
                 .Returns(PointServiceTestHelper.GetPointsForTileMock(It.IsAny<int>(), It.IsAny<int>()));
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [Fact]
         public void InjectingNullReferenceIntoConstructorShouldThrow()
         {
-            var pointService = new PointService(null);
+            Xunit.Assert.Throws<ArgumentNullException>(() => new PointService(null));
         }
 
-        [TestMethod]
-        public void InjectingInterfaceIntoConsructorShouldPass()
+        [Fact]
+        public void InjectingInterfaceIntoConsructorShouldWork()
         {
-            var pointService = new PointService(_pointRepository.Object);
+            Xunit.Assert.DoesNotThrow(() => new PointService(_pointRepository.Object));
         }
 
-        [TestMethod]
+        [Fact]
         public void LoadPointsShouldNotReturnNull()
         {
             var pointService = new PointService(_pointRepository.Object);
-
             var points = pointService.LoadPoints();
+
             Xunit.Assert.NotNull(points);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [Fact]
         public void AddNullLocationShouldThrow()
         {
             var pointService = new PointService(_pointRepository.Object);
-            pointService.AddLocation(null);
+            Xunit.Assert.Throws<ArgumentNullException>(() => pointService.AddLocation(null));
         }
 
-        [TestMethod]
+        [Fact]
         public void AddLocationShouldNotThrow()
         {
             var pointService = new PointService(_pointRepository.Object);
-            pointService.AddLocation(new GIS());
+            Xunit.Assert.DoesNotThrow(() => pointService.AddLocation(new GIS()));
         }
 
-        [TestMethod]
+        [Fact]
         public void AdjustMapPixelsToTilePixelsShouldNotReturnNullPoint()
         {
             var pointService = new PointService(_pointRepository.Object);
@@ -84,31 +81,28 @@ namespace DomainModel.Test.Tests
             Xunit.Assert.NotEqual(0, result.Y);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [Fact]
         public void GetPointsForTileShouldThrowWhenPassedNullCoordinates()
         {
             var pointService = new PointService(_pointRepository.Object);
-            pointService.GetPointsForTile(0, 1, null, 0, null);
+            Xunit.Assert.Throws<ArgumentNullException>(() => pointService.GetPointsForTile(0, 1, null, 0, null));
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [Fact]
         public void GetPointsForTileShouldThrowWhenPassedNullBitmap()
         {
             var pointService = new PointService(_pointRepository.Object);
-            pointService.GetPointsForTile(12, 13, null, 2, null);
+            Xunit.Assert.Throws<ArgumentNullException>(() => pointService.GetPointsForTile(12, 13, null, 2, null));
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [Fact]
         public void GetPointsForTileShouldThrowWhenPassedNullList()
         {
             var pointService = new PointService(_pointRepository.Object);
-            pointService.GetPointsForTile(12, 13, new Bitmap(1, 1), 2, null);
+            Xunit.Assert.Throws<ArgumentNullException>(() => pointService.GetPointsForTile(12, 13, new Bitmap(1, 1), 2, null));
         }
 
-        [TestMethod]
+        [Fact]
         public void GetPointsForTileShouldReturnArrayOfPoints()
         {
             var pointService = new PointService(_pointRepository.Object);
