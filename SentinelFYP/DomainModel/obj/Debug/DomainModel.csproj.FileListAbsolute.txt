@@ -9,3 +9,4 @@ C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\DomainModel\bin\Debug\EntityFramework.
 C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\DomainModel\bin\Debug\Newtonsoft.Json.xml
 C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\DomainModel\obj\Debug\DomainModel.dll
 C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\DomainModel\obj\Debug\DomainModel.pdb
+C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\DomainModel\obj\Debug\DomainModel.csprojResolveAssemblyReference.cache
