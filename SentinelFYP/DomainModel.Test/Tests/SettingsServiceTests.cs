@@ -1,5 +1,6 @@
 ﻿using System;
 using Moq;
+using Xunit;
 
 namespace DomainModel.Test.Tests
 {
@@ -10,8 +11,10 @@ namespace DomainModel.Test.Tests
 
         }
 
+        [Fact]
         public void TestMethod1()
         {
+            Xunit.Assert.Equal(1, 2);
         }
     }
 }
