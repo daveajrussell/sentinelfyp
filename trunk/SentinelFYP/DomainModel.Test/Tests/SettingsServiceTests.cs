@@ -14,7 +14,6 @@ namespace DomainModel.Test.Tests
         [Fact]
         public void TestMethod1()
         {
-            Xunit.Assert.Equal(0, 1);
         }
     }
 }
