@@ -13,6 +13,9 @@ namespace DomainModel.Services
 
         public SettingsService(ISettingsRepository settingsRepository)
         {
+            if (settingsRepository == null)
+                throw new ArgumentNullException("Repository");
+
             _settingsRepository = settingsRepository;
         }
 
