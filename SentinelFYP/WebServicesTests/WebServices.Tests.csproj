@@ -70,6 +70,10 @@
       <Project>{5d3f52f5-a1d0-4401-a177-04c2631b69a9}</Project>
       <Name>DomainModel %28DomainModel\DomainModel%29</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WebServices.Test.Clients\WebServices.Test.Clients.csproj">
+      <Project>{4ed52fc2-cc3d-4082-9c80-014883376fc8}</Project>
+      <Name>WebServices.Test.Clients</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebServices\WebServices.csproj">
       <Project>{22de6170-af7e-4a47-8589-e84014309312}</Project>
       <Name>WebServices %28WebServices\WebServices%29</Name>

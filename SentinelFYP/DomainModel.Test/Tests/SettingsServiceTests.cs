@@ -33,5 +33,16 @@ namespace DomainModel.Test.Tests
             Xunit.Assert.NotNull(service);
             Xunit.Assert.IsAssignableFrom<SettingsService>(service);
         }
+
+        [Fact]
+        public void BaseDirectoryReturnsCurrentWorkingDirectory()
+        {
+            var service = new SettingsService(_repository.Object);
+            var result = service.BaseDirectory;
+
+            Xunit.Assert.NotNull(result);
+            Xunit.Assert.IsAssignableFrom<string>(result);
+            Xunit.Assert.Equal(Environment.CurrentDirectory, result);
+        }
     }
 }
