@@ -1,27 +1,26 @@
 ﻿using System;
 using DomainModel.Interfaces.Services;
 using DomainModel.Models;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using WebServices.Interfaces;
+using WebServices.Test.Clients;
+using Xunit;
 
 namespace WebServicesTests
 {
-    [TestClass]
     public class LocationServiceTests
     {
-        private Mock<ILocationService> _locationService;
-        private Mock<IGISService> _gisService;
+        LocationServiceClient oLocationServiceClient;
 
-        [TestInitialize]
-        public void Init()
+        public LocationServiceTests()
         {
-            _locationService = new Mock<ILocationService>();
-            _gisService = new Mock<IGISService>();
+            oLocationServiceClient = new LocationServiceClient();
+        }
 
-            /*_gisService.Setup(m => m.AddGIS(It.IsAny<GIS>())).
-
-            _locationService.Setup(m => m.PostGISData("Data")).*/
+        [Fact]
+        public void TestCeption()
+        {
+            Xunit.Assert.DoesNotThrow(() => oLocationServiceClient.PostGISData("Blah"));
         }
     }
 }
