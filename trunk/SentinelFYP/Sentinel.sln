@@ -49,6 +49,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{DB85A4
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServices.Test.Clients", "WebServices.Test.Clients\WebServices.Test.Clients.csproj", "{4ED52FC2-CC3D-4082-9C80-014883376FC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -159,6 +161,16 @@ Global
 		{3A830501-B45C-4097-A8CA-471DDAFCCD39}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{3A830501-B45C-4097-A8CA-471DDAFCCD39}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{3A830501-B45C-4097-A8CA-471DDAFCCD39}.Release|x86.ActiveCfg = Release|Any CPU
+		{4ED52FC2-CC3D-4082-9C80-014883376FC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4ED52FC2-CC3D-4082-9C80-014883376FC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4ED52FC2-CC3D-4082-9C80-014883376FC8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4ED52FC2-CC3D-4082-9C80-014883376FC8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4ED52FC2-CC3D-4082-9C80-014883376FC8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4ED52FC2-CC3D-4082-9C80-014883376FC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4ED52FC2-CC3D-4082-9C80-014883376FC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4ED52FC2-CC3D-4082-9C80-014883376FC8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4ED52FC2-CC3D-4082-9C80-014883376FC8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{4ED52FC2-CC3D-4082-9C80-014883376FC8}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -176,6 +188,7 @@ Global
 		{1E7935A2-2781-463F-B73C-1543BE46C439} = {BED71638-51D3-4E44-BC66-58AC0A686A6D}
 		{22DE6170-AF7E-4A47-8589-E84014309312} = {B5665885-ABF6-4AFC-B52C-323167D00943}
 		{C0EBF0F6-406F-42D1-A6DE-DAA13DE92318} = {B5665885-ABF6-4AFC-B52C-323167D00943}
+		{4ED52FC2-CC3D-4082-9C80-014883376FC8} = {B5665885-ABF6-4AFC-B52C-323167D00943}
 		{AC133F9A-AE4A-4865-A2C4-7112C2CE33BD} = {798B2909-90F5-4BD2-A39D-33E69501E6A8}
 	EndGlobalSection
 EndGlobal
