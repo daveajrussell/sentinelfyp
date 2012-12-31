@@ -17,6 +17,9 @@ public interface ILocationService
     
     [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILocationService/PostGISData", ReplyAction="http://tempuri.org/ILocationService/PostGISDataResponse")]
     void PostGISData(string strGISObject);
+    
+    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILocationService/PostGISData", ReplyAction="http://tempuri.org/ILocationService/PostGISDataResponse")]
+    System.Threading.Tasks.Task PostGISDataAsync(string strGISObject);
 }
 
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -56,5 +59,10 @@ public partial class LocationServiceClient : System.ServiceModel.ClientBase<ILoc
     public void PostGISData(string strGISObject)
     {
         base.Channel.PostGISData(strGISObject);
+    }
+    
+    public System.Threading.Tasks.Task PostGISDataAsync(string strGISObject)
+    {
+        return base.Channel.PostGISDataAsync(strGISObject);
     }
 }

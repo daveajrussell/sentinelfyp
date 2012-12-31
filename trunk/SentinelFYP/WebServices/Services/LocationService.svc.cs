@@ -39,11 +39,13 @@ namespace WebServices.Services
         public void PostGISData(string strGISObject)
         {
             GISDataContract obj = JsonR.JsonDeserializer<GISDataContract>(strGISObject);
-            GIS oGIS = new GIS { TimeStamp = new DateTime(1970, 1, 1).AddMilliseconds(obj.lngTimeStamp), 
-                Latitude = obj.dLatitude, 
-                Longitude = obj.dLongitude, 
-                Speed = obj.dSpeed, 
-                Orientation = obj.intOrientation 
+            GIS oGIS = new GIS
+            {
+                TimeStamp = new DateTime(1970, 1, 1).AddMilliseconds(obj.lngTimeStamp),
+                Latitude = obj.dLatitude,
+                Longitude = obj.dLongitude,
+                Speed = obj.dSpeed,
+                Orientation = obj.intOrientation
             };
 
             try
