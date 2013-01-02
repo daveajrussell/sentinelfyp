@@ -10,15 +10,19 @@ namespace WebServices.Services
 {
     public class DeliveryService : IDeliveryService
     {
-        public void SubmitGeoTaggedDelivery(string srGeoTaggedDeliveryObject)
+        public void SubmitGeoTaggedDelivery(string strGeoTaggedDeliveryObject)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(strGeoTaggedDeliveryObject))
+                throw new ArgumentNullException("Delivery Object");
         }
 
 
         public string GetDeliveryInformation(string strItemID)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(strItemID))
+                throw new ArgumentNullException("Item ID");
+
+            return "{\"TestData\": \"Test\"}";
         }
     }
 }

@@ -39,7 +39,7 @@ namespace WebServices.Test.Tests
         }
 
         [Fact]
-        public void SubmittingValidDeliveryItemIDShouldWork()
+        public void SubmittingValidDeliveryItemIDShouldNotThrow()
         {
             Xunit.Assert.DoesNotThrow(() => client.GetDeliveryInformation("{\"TestData\": \"Test\"}"));
         }
