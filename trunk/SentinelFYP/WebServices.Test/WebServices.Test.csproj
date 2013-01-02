@@ -68,7 +68,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Proxies\DeliveryService.cs" />
-    <Compile Include="Proxies\DeliveryService.cs" />
     <Compile Include="Proxies\LocationService.cs" />
     <Compile Include="Tests\LocationServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
