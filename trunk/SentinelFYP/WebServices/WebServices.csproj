@@ -97,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Services\DeliveryService.svc" />
     <Content Include="Services\LocationService.svc" />
     <Content Include="Services\AuthenticationService.svc" />
     <Content Include="Web.config">
@@ -111,6 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataContracts\CredentialsDataContract.cs" />
+    <Compile Include="DataContracts\GeoTaggedDeliveryDataContract.cs" />
     <Compile Include="DataContracts\GISDataContract.cs" />
     <Compile Include="DataContracts\UserDataContract.cs" />
     <Compile Include="Global.asax.cs">
@@ -118,6 +120,10 @@
     </Compile>
     <Compile Include="Interfaces\ILocationService.cs" />
     <Compile Include="Interfaces\IAuthenticationService.cs" />
+    <Compile Include="Services\DeliveryService.svc.cs">
+      <DependentUpon>DeliveryService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaces\IDeliveryService.cs" />
     <Compile Include="Services\LocationService.svc.cs">
       <DependentUpon>LocationService.svc</DependentUpon>
     </Compile>

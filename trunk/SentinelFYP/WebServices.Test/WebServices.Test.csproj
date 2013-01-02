@@ -6,8 +6,8 @@
     <ProjectGuid>{C0EBF0F6-406F-42D1-A6DE-DAA13DE92318}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WebServicesTests</RootNamespace>
-    <AssemblyName>WebServicesTests</AssemblyName>
+    <RootNamespace>WebServices.Test</RootNamespace>
+    <AssemblyName>WebServices.Test</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -16,6 +16,10 @@
     <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
     <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -63,9 +67,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="LocationService.cs" />
-    <Compile Include="LocationServiceTests.cs" />
+    <Compile Include="Proxies\DeliveryService.cs" />
+    <Compile Include="Proxies\DeliveryService.cs" />
+    <Compile Include="Proxies\LocationService.cs" />
+    <Compile Include="Tests\LocationServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\DeliveryServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

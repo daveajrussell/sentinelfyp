@@ -6,7 +6,7 @@ using Moq;
 using WebServices.Services;
 using Xunit;
 
-namespace WebServicesTests
+namespace WebServices.Test.Tests
 {
     public class LocationServiceTests
     {
