@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DomainModel", "DomainModel"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProjectDependencies", "ProjectDependencies", "{AADB9DCE-34BB-4705-887A-D686F071319E}"
 	ProjectSection(SolutionItems) = preProject
+		ProjectDependancies\Gma.QrCodeNet.Encoding.dll = ProjectDependancies\Gma.QrCodeNet.Encoding.dll
 		ProjectDependancies\GMap.NET.Core.dll = ProjectDependancies\GMap.NET.Core.dll
 		ProjectDependancies\Moq.dll = ProjectDependancies\Moq.dll
 		ProjectDependancies\Ninject.dll = ProjectDependancies\Ninject.dll
