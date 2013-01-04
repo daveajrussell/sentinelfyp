@@ -40,11 +40,15 @@ namespace Sentinel.Controllers
         public ActionResult Index(LogonUserViewModel model)
         {
             var userAgent = Request.UserAgent;
-            var addresses = Dns.GetHostEntry(Dns.GetHostName()).AddressList;
-            var ipAddress = "";
+            var ipAddress = "127.0.0.0";
 
-            if(addresses.Length > 1)
-                ipAddress = addresses[1].ToString();
+            foreach (IPAddress ip in Dns.GetHostEntry(Dns.GetHostName()).AddressList)
+            {
+                if (ip.AddressFamily.ToString() == "InterNetwork")
+                {
+                    ipAddress = ip.ToString();
+                }
+            }
 
             var user = _securityService.LogIn(model.Username, model.Password, userAgent, ipAddress);
             State.User = user;

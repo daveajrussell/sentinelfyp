@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="Controllers\HeatmapControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestHelpers\SentinelTestHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
