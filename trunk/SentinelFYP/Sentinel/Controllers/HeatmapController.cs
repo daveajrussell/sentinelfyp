@@ -17,7 +17,14 @@ namespace Sentinel.Controllers
 
         public HeatmapController(IPointService pointService, IGHeatService gheatService)
         {
+            if (pointService == null)
+                throw new ArgumentNullException("Point Service");
+
             _pointService = pointService;
+
+            if (gheatService == null)
+                throw new ArgumentNullException("GHeat Service");
+
             _gheatService = gheatService;
 
             if (_points == null)
