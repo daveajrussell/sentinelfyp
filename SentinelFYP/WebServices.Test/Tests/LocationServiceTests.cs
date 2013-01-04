@@ -26,7 +26,7 @@ namespace WebServices.Test.Tests
         [Fact]
         public void PassingJSONStringToServiceShouldNotThrow()
         {
-            Xunit.Assert.DoesNotThrow(() => client.PostGISData("{\"TestData\": \"Test\"}"));
+            Xunit.Assert.DoesNotThrow(() => client.PostGISData("{\"lngTimeStamp\":1355267165704,\"oUserIdentification\":\"00000000-0000-0000-0000-000000000000\",\"dLatitude\":37.422005,\"dLongitude\":-122.084095,\"intOrientation\":1,\"dSpeed\":0}"));
         }
     }
 }
