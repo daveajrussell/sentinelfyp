@@ -35,8 +35,8 @@ namespace SqlRepositories
             {
                 if (oReader.Read())
                 {
-                    strUserSalt = (string)oReader[oReader.GetOrdinal("SALT")];
-                    strUserHash = (string)oReader[oReader.GetOrdinal("HASH")];
+                    strUserSalt = (string)oReader[oReader.GetOrdinal("USER_SALT")];
+                    strUserHash = (string)oReader[oReader.GetOrdinal("USER_HASH")];
                     oUserKey = (Guid)oReader[oReader.GetOrdinal("USER_KEY")];
 
                     return LoginToSystem(oUserKey, strUserSalt, strUserHash, strPassword, strUserAgent, strIPAddress);

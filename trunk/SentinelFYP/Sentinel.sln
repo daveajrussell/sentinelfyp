@@ -17,6 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProjectDependencies", "Proj
 		ProjectDependancies\GMap.NET.Core.dll = ProjectDependancies\GMap.NET.Core.dll
 		ProjectDependancies\Moq.dll = ProjectDependancies\Moq.dll
 		ProjectDependancies\Ninject.dll = ProjectDependancies\Ninject.dll
+		ProjectDependancies\xunit.dll = ProjectDependancies\xunit.dll
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NinjectResolver", "NinjectResolver", "{BED71638-51D3-4E44-BC66-58AC0A686A6D}"
