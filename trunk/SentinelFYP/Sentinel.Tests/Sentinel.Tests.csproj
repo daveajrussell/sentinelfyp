@@ -68,7 +68,7 @@
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="xunit">
-      <HintPath>..\..\..\..\..\xUnit\xunit.dll</HintPath>
+      <HintPath>..\ProjectDependancies\xunit.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
