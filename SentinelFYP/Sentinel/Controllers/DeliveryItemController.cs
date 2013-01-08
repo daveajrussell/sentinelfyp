@@ -20,5 +20,11 @@ namespace Sentinel.Controllers
             return new QRCodeResult(strQRString);
         }
 
+        public ActionResult TestTwo()
+        {
+            string strQRString = "http://www.daveajrussell.com";
+            var result = new QRCodeResult(strQRString);
+            return PartialView("QRPartial", result);
+        }
     }
 }

@@ -18,6 +18,10 @@ namespace Sentinel.Controllers
             new MenuViewModel() {
                 Display = "Real-time Monitor",
                 URL = "~/Monitor"
+            },
+            new MenuViewModel() {
+                Display = "Delivery Items",
+                URL = "~/DeliveryItem"
             }
         };
 

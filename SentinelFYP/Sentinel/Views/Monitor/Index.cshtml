@@ -7,37 +7,15 @@
 
     $(function () {
 
-        //Create SignalR object to get communicate with server
+        // Create SignalR object to get communicate with server
         var sentinelHub = $.connection.sentinelHub;
-        $.connection.id = "00000000-0000-0000-0000-000000000000";
 
-        sentinelHub.client.getGISMessage = function (timestamp, latitude, longitude, speed, orientation, eventType) {
-            getUpdate();
-            writeEvent('message from server: Time: ' + timestamp + " Latitude: " + latitude + " Longitude: " + longitude + " Speed: " + speed + " Orientation: " + orientation, eventType);
-        };
-
-        // Start the connection with server
-        $.connection.hub.start().done(function () {
-            sentinelHub.server.addGroup($.connection.id);
-        });
-
-
-        //alert(sentinelHub.server.send());
-
-        // Function calling our controller to get an updated map
-        function getUpdate() {
+        // Get the updated map 
+        sentinelHub.client.getUpdatedMap = function (timestamp, latitude, longitude, speed, orientation, eventType) {
             $.post('@Url.Action("GetUpdate", "Monitor")', function (data) {
                 $("#map-container").replaceWith(data);
             });
-        }
-
-        //A function to write events to the page
-        function writeEvent(eventLog, logClass) {
-            var now = new Date();
-            var nowStr = now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
-            $('#events-list').prepend('<span class="ui-icon ui-icon-alert event-icon ' + logClass + '"></span>');
-            $('#events-list').prepend('<span class="event-msg ' + logClass + '">' + nowStr + ': ' + eventLog + '.</span> <br />');
-        }
+        };
     });
 </script>
 
