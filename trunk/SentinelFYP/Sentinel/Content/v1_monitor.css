@@ -1,9 +1,7 @@
 ﻿#updates-window
 {
-    position: absolute;
-    top: 5.1em;
-    left: 75.8%;
-    width: 24%;
+    width: 195px;
+    min-height: 500px;
     height: 100%;
     border-left: .2em solid #666;
     background: url(../Content/images/ui-bg_monitor.png) repeat; 
@@ -11,11 +9,8 @@
 
 #updates-window-header
 {
-    position: relative;
-    top: 0;
-    margin-top: 1em;
-    margin-left: 35%;
-    height: 1em;
+    
+    text-align:center;
     font-weight: bold;
 }
 

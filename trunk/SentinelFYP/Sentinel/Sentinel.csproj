@@ -257,6 +257,8 @@
     <Content Include="Content\etc\dots\dot8.png" />
     <Content Include="Content\etc\dots\dot9.png" />
     <Content Include="Views\DeliveryItem\Index.cshtml" />
+    <Content Include="Views\Shared\RealTimeMonitorPartial.cshtml" />
+    <Content Include="Views\DeliveryItem\QRPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
