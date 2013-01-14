@@ -24,7 +24,6 @@ namespace Sentinel
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new LogonAuthorise());
             filters.Add(new HandleErrorAttribute());
         }
 
@@ -35,7 +34,7 @@ namespace Sentinel
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+                new { controller = "Account", action = "Login", id = UrlParameter.Optional } // Parameter defaults
             );
 
         }
