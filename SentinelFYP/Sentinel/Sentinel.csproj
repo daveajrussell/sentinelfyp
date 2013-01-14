@@ -140,6 +140,7 @@
     <Compile Include="Helpers\ExtensionMethods\TileResult.cs" />
     <Compile Include="Helpers\ExtensionMethods\ToViewModel.cs" />
     <Compile Include="Infrastructure\SentinelMembershipProvider.cs" />
+    <Compile Include="Infrastructure\SentinelRoleProvider.cs" />
     <Compile Include="Models\MenuViewModel.cs" />
     <Compile Include="Models\Tracking.cs" />
     <Compile Include="Models\LogonUserViewModel.cs" />
