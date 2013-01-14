@@ -9,6 +9,7 @@ using DomainModel.SecurityModels;
 using Sentinel.Models;
 using System.Web.Security;
 using System.Net;
+using Sentinel.Infrastructure;
 
 namespace Sentinel.Controllers
 {
@@ -16,8 +17,9 @@ namespace Sentinel.Controllers
     {
         private IUserService _userService;
         private ISecurityService _securityService;
+        private ISentinelAuthProvider _authProvider;
 
-        public AccountController(IUserService userService, ISecurityService securityService)
+        public AccountController(IUserService userService, ISecurityService securityService, ISentinelAuthProvider authProvider)
         {
             if (userService == null)
                 throw new ArgumentNullException("user service");
@@ -28,6 +30,11 @@ namespace Sentinel.Controllers
                 throw new ArgumentNullException("security service");
 
             _securityService = securityService;
+
+            if (authProvider == null)
+                throw new ArgumentNullException("auth provider");
+
+            _authProvider = authProvider;
         }
 
         public ActionResult Login()
@@ -38,7 +45,7 @@ namespace Sentinel.Controllers
         [HttpPost]
         public ActionResult Login(LogonUserViewModel model)
         {
-            var userAgent = Request.UserAgent;
+            /*var userAgent = Request.UserAgent;
             var ipAddress = "127.0.0.0";
 
             foreach (IPAddress ip in Dns.GetHostEntry(Dns.GetHostName()).AddressList)
@@ -56,19 +63,38 @@ namespace Sentinel.Controllers
                 return RedirectToAction("Index", "Account");
             else
             {
-                FormsAuthentication.SetAuthCookie(model.Username, true);
+                _authProvider.Authenticate("", "");
                 return RedirectToAction("Index", "Home");
+            }*/
+            if (ModelState.IsValid)
+            {
+                if (_authProvider.Authenticate(model.Username, model.Password))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Incorrect Username or Password");
+                    return View();
+                }
+            }
+            else
+            {
+                return View();
             }
         }
 
         public ActionResult Logout()
         {
             _securityService.Logout(State.Session.SessionID);
-
+            /*
             FormsAuthentication.SignOut();
             Session.Clear();
             Session.Abandon();
             return RedirectToAction("Index", "Account");
+            */
+            _authProvider.ClearAuthentication(this);
+            return RedirectToAction("Login", "Account");
         }
     }
 }

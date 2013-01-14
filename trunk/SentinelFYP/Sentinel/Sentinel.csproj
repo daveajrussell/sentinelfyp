@@ -139,6 +139,8 @@
     <Compile Include="Helpers\ExtensionMethods\QRCodeResult.cs" />
     <Compile Include="Helpers\ExtensionMethods\TileResult.cs" />
     <Compile Include="Helpers\ExtensionMethods\ToViewModel.cs" />
+    <Compile Include="Infrastructure\ISentinelAuthProvider.cs" />
+    <Compile Include="Infrastructure\SentinelAuthProvider.cs" />
     <Compile Include="Infrastructure\SentinelMembershipProvider.cs" />
     <Compile Include="Infrastructure\SentinelRoleProvider.cs" />
     <Compile Include="Models\MenuViewModel.cs" />
@@ -178,6 +180,7 @@
     <Content Include="Content\images\ui-login_dark.png" />
     <Content Include="Content\jquery-ui-1.9.0.custom.css" />
     <Content Include="Content\jquery-ui-1.9.0.custom.min.css" />
+    <Content Include="Content\jquery.qtip.min.css" />
     <Content Include="Content\v1_login.css" />
     <Content Include="Content\v1_header.css" />
     <Content Include="Content\v1_master.css" />
@@ -191,6 +194,7 @@
     <Content Include="Scripts\jquery-ui-1.9.0.custom.js" />
     <Content Include="Scripts\jquery-ui-1.9.0.custom.min.js" />
     <Content Include="Scripts\jquery.blockUI.js" />
+    <Content Include="Scripts\jquery.qtip.min.js" />
     <Content Include="Scripts\jquery.signalR-1.0.0-rc1.js" />
     <Content Include="Scripts\jquery.signalR-1.0.0-rc1.min.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js" />

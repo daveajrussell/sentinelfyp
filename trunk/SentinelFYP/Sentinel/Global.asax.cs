@@ -14,6 +14,7 @@ using NinjectResolver;
 using Ninject;
 using Sentinel.Helpers;
 using Microsoft.AspNet.SignalR;
+using Sentinel.Infrastructure;
 
 namespace Sentinel
 {
@@ -70,6 +71,7 @@ namespace Sentinel
             kernel.Bind<IPointService>().To<PointService>();
             kernel.Bind<IGISService>().To<GISService>();
             kernel.Bind<IWeightHandler>().To<IWeightHandler>();
+            kernel.Bind<ISentinelAuthProvider>().To<SentinelAuthProvider>();
 
             kernel.Bind<ISettingsRepository>().To<SettingsRepository>().WithConstructorArgument("baseDirectory", baseDirectory);
             kernel.Bind<IGHeatRepository>().To<GHeatRepository>();
