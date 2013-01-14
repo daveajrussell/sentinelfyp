@@ -12,7 +12,6 @@ using System.Net;
 
 namespace Sentinel.Controllers
 {
-    [AllowAnonymous]
     public class AccountController : Controller
     {
         private IUserService _userService;
@@ -31,13 +30,13 @@ namespace Sentinel.Controllers
             _securityService = securityService;
         }
 
-        public ActionResult Index()
+        public ActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Index(LogonUserViewModel model)
+        public ActionResult Login(LogonUserViewModel model)
         {
             var userAgent = Request.UserAgent;
             var ipAddress = "127.0.0.0";

@@ -136,11 +136,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\AllowAnonymousAttribute.cs" />
     <Compile Include="Helpers\ExtensionMethods\QRCodeResult.cs" />
     <Compile Include="Helpers\ExtensionMethods\TileResult.cs" />
     <Compile Include="Helpers\ExtensionMethods\ToViewModel.cs" />
-    <Compile Include="Helpers\LogonAuthorise.cs" />
+    <Compile Include="Infrastructure\SentinelMembershipProvider.cs" />
     <Compile Include="Models\MenuViewModel.cs" />
     <Compile Include="Models\Tracking.cs" />
     <Compile Include="Models\LogonUserViewModel.cs" />
@@ -273,7 +272,7 @@
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <Content Include="Views\Menu\MenuPartial.cshtml" />
     <Content Include="Views\Header\HeaderPartial.cshtml" />
-    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Heatmap\Index.cshtml" />
     <Content Include="Views\Monitor\Index.cshtml" />
     <Content Include="Views\Monitor\MapPartial.cshtml" />
