@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web.Security;
 
 namespace DomainModel.SecurityModels
 {
     [Serializable]
-    public class User
+    public class User : MembershipUser
     {
         public Guid UserKey { get; set; }
         public Session Session { get; set; }

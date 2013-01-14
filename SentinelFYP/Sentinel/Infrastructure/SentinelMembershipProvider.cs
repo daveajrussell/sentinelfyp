@@ -3,11 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
+using DomainModel.Interfaces.Services;
+using DomainModel.SecurityModels;
 
 namespace Sentinel.Infrastructure
 {
     public class SentinelMembershipProvider : MembershipProvider
     {
+        private ISecurityService _securityService;
+        
+        public SentinelMembershipProvider(ISecurityService securityService)
+        {
+            if (securityService == null)
+                throw new ArgumentNullException("Security Service");
+
+            _securityService = securityService;
+        }
+
+        public override bool ValidateUser(string username, string password)
+        {
+            var user = _securityService.LogIn(username, password, "", "");
+            if (user != null)
+            {
+                State.User = user;
+                return true;
+            }
+            else
+                return false;
+        }
+
         public override string ApplicationName
         {
             get
@@ -141,11 +165,6 @@ namespace Sentinel.Infrastructure
         }
 
         public override void UpdateUser(MembershipUser user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override bool ValidateUser(string username, string password)
         {
             throw new NotImplementedException();
         }
