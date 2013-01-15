@@ -32,12 +32,12 @@ namespace Sentinel.Tests.TestHelpers
 
         public static Bitmap GetDotMock(int zoom)
         {
-            return new Bitmap(System.IO.Directory.GetFiles("C:\\Work\\FYP\\SentinelFYP\\Sentinel\\Content\\etc\\dots", "dot" + zoom + "." + ImageFormat.Png.ToString().ToLower()).First());
+            return new Bitmap(System.IO.Directory.GetFiles(strDirectory + "dots", "dot" + zoom + "." + ImageFormat.Png.ToString().ToLower()).First());
         }
 
         public static Bitmap GetColourSchemeMock(string colourScheme)
         {
-            return new Bitmap(System.IO.Directory.GetFiles("C:\\Work\\FYP\\SentinelFYP\\Sentinel\\Content\\etc\\color-schemes", colourScheme + "." + ImageFormat.Png.ToString().ToLower()).First());
+            return new Bitmap(System.IO.Directory.GetFiles(strDirectory + "color-schemes", colourScheme + "." + ImageFormat.Png.ToString().ToLower()).First());
         }
     }
 }
