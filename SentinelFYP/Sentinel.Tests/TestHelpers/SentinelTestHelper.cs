@@ -11,7 +11,7 @@ namespace Sentinel.Tests.TestHelpers
 {
     public static class SentinelTestHelper
     {
-        private static string strDirectory = "C:\\Work\\FYP\\SentinelFYP\\Sentinel\\Content\\etc\\";
+        private static string strDirectory = "C:\\Work\\FYP\\SentinelFYP\\trunk\\SentinelFYP\\Sentinel\\Content\\etc\\";
 
         public static Bitmap GetTileMock(List<PointLatLng> points, string colourScheme, int zoom, int x, int y)
         {
