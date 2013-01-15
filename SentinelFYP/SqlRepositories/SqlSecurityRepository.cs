@@ -25,8 +25,11 @@ namespace SqlRepositories
             _connectionString = connectionString;
         }
 
-        public User LogIn(string strUserName, string strPassword, string strUserAgent, string strIPAddress)
+        public void LogIn(string strUserName, string strPassword, out User oUser, out Session oSession)
         {
+            oUser = null;
+            oSession = null;
+
             string strUserSalt;
             string strUserHash;
             Guid oUserKey;
@@ -39,31 +42,30 @@ namespace SqlRepositories
                     strUserHash = (string)oReader[oReader.GetOrdinal("USER_HASH")];
                     oUserKey = (Guid)oReader[oReader.GetOrdinal("USER_KEY")];
 
-                    return LoginToSystem(oUserKey, strUserSalt, strUserHash, strPassword, strUserAgent, strIPAddress);
+                    LoginToSystem(oUserKey, strUserSalt, strUserHash, strPassword, out oUser, out oSession);
                 }
             }
-            return null;
         }
 
-        private User LoginToSystem(Guid oUserKey, string strUserSalt, string strUserHash, string strUserPassword, string strUserAgent, string strIPAddress)
+        private void LoginToSystem(Guid oUserKey, string strUserSalt, string strUserHash, string strUserPassword, out User oUser, out Session oSession)
         {
+            oUser = null;
+            oSession = null;
+
             if (SecurityHelper.ValidatePassword(strUserPassword, strUserSalt, strUserHash))
             {
                 var arrParams = new SqlParameter[] {
                         new SqlParameter("@IP_USER_KEY", oUserKey),
                         new SqlParameter("@IP_SALT", strUserSalt),
-                        new SqlParameter("@IP_HASH", strUserHash),
-                        new SqlParameter("@IP_USER_AGENT", strUserAgent),
-                        new SqlParameter("@IP_IP_ADDRESS", strIPAddress)
+                        new SqlParameter("@IP_HASH", strUserHash)
                 };
 
                 using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[SECURITY].[LOGIN_TO_SYSTEM]", arrParams))
                 {
-                    State.Session = oSet.ToSession();
-                    return oSet.ToUser();
+                    oSession = oSet.ToSession();
+                    oUser = oSet.ToUser();
                 }
             }
-            return null;
         }
 
         public void Logout(int iSessionID)

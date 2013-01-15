@@ -10,19 +10,15 @@ namespace DomainModel.SecurityModels
     {
         public int SessionID { get; set; }
         public DateTime SessionBeginDateTime { get; set; }
-        public string UserAgent { get; set; }
-        public string IPAddress { get; set; }
 
         public Session()
         {
         }
 
-        public Session(int iSessionID, DateTime dtSessionBeginDateTime, string strUserAgent, string strIPAddress)
+        public Session(int iSessionID, DateTime dtSessionBeginDateTime)
         {
             SessionID = iSessionID;
             SessionBeginDateTime = dtSessionBeginDateTime;
-            UserAgent = strUserAgent;
-            IPAddress = strIPAddress;
         }
     }
 }

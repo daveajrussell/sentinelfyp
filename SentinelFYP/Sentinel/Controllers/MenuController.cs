@@ -13,15 +13,19 @@ namespace Sentinel.Controllers
         {
             new MenuViewModel() {
                 Display = "Heatmap",
-                URL = "~/Heatmap"
+                URL = "~/Heatmap/Index"
             },
             new MenuViewModel() {
                 Display = "Real-time Monitor",
-                URL = "~/Monitor"
+                URL = "~/Monitor/Index"
             },
             new MenuViewModel() {
                 Display = "Delivery Items",
-                URL = "~/DeliveryItem"
+                URL = "~/DeliveryItem/Index"
+            },
+            new MenuViewModel() {
+                Display = "Administration",
+                URL = "~/Home/Index"
             }
         };
 

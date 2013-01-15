@@ -3,31 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
+using DomainModel.Interfaces.Repositories;
 using DomainModel.Interfaces.Services;
 using DomainModel.SecurityModels;
+using Ninject;
 
 namespace Sentinel.Infrastructure
 {
     public class SentinelMembershipProvider : MembershipProvider
     {
-        private ISecurityService _securityService;
-        
-        public SentinelMembershipProvider(ISecurityService securityService)
-        {
-            if (securityService == null)
-                throw new ArgumentNullException("Security Service");
-
-            _securityService = securityService;
-        }
+        [Inject]
+        public ISecurityService _securityService { get; set; }
 
         public override bool ValidateUser(string username, string password)
         {
-            var user = _securityService.LogIn(username, password, "", "");
-            if (user != null)
-            {
-                State.User = user;
+            _securityService.LogIn(username, password);
+
+            if (State.User != null && State.Session != null)
                 return true;
-            }
             else
                 return false;
         }
@@ -36,7 +29,7 @@ namespace Sentinel.Infrastructure
         {
             get
             {
-                throw new NotImplementedException();
+                return "Sentinel";
             }
             set
             {

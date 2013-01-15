@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using GMap.NET;
 using System.Data;
+using SqlRepositories.Helper.Extensions;
 
 namespace SqlRepositories.Helper.Builders
 {

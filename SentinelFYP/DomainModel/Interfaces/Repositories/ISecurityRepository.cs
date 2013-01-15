@@ -8,7 +8,7 @@ namespace DomainModel.Interfaces.Repositories
 {
     public interface ISecurityRepository
     {
-        User LogIn(string strUsername, string strPassword, string strUserAgent, string strIPAddress);
+        void LogIn(string strUsername, string strPassword, out User oUser, out Session oSession);
         void Logout(int iSessionID);
     }
 }

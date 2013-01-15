@@ -34,7 +34,7 @@ namespace SqlRepositories
 
         public List<PointLatLng> LoadPoints()
         {
-            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT * FROM [dbo].[LATITUDE_LONGITUDE]"))
+            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT * FROM [GIS].[LATITUDE_LONGITUDE]"))
             {
                 return (from row in oSet.FirstDataTableAsEnumerable()
                         select row.ToPointLatLng()).ToList();

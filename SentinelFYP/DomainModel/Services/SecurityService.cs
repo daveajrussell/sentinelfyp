@@ -20,26 +20,37 @@ namespace DomainModel.Services
             _securityRepository = securityRepository;
         }
 
-        public User LogIn(string strUsername, string strPassword, string strUserAgent, string strIPAddress)
+        public void LogIn(string strUsername, string strPassword)
         {
             if (string.IsNullOrEmpty(strUsername))
                 throw new ArgumentNullException("Username");
             if (string.IsNullOrEmpty(strPassword))
                 throw new ArgumentNullException("Password");
-            if (string.IsNullOrEmpty(strUserAgent))
-                throw new ArgumentNullException("User Agent");
-            if (string.IsNullOrEmpty(strIPAddress))
-                throw new ArgumentNullException("IP Address");
 
-            return _securityRepository.LogIn(strUsername, strPassword, strUserAgent, strIPAddress);
+            User oUser = null;
+            Session oSession = null;
+
+            _securityRepository.LogIn(strUsername, strPassword, out oUser, out oSession);
+
+            BeginSession(oUser, oSession);
         }
 
-        public void Logout(int iSessionID)
+        private void BeginSession(User oUser, Session oSession)
         {
-            if (iSessionID <= 0)
+            if (oSession != null && oUser != null)
+            {
+                State.Session = oSession;
+                State.User = oUser;
+            }
+        }
+
+        public void Logout()
+        {
+            if (State.Session.SessionID <= 0)
                 throw new ArgumentOutOfRangeException("Session ID");
 
-            _securityRepository.Logout(iSessionID);
+            _securityRepository.Logout(State.Session.SessionID);
         }
+
     }
 }
