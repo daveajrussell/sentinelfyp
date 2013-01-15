@@ -35,3 +35,4 @@ C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\Sentinel\bin\Ninject.Web.Mvc.xml
 C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\Sentinel\bin\Ninject.Extensions.Wcf.dll
 C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\Sentinel\bin\Ninject.Extensions.Wcf.pdb
 C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\Sentinel\bin\Ninject.Extensions.Wcf.xml
+C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\Sentinel\bin\Gma.QrCodeNet.Encoding.dll
