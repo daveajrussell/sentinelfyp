@@ -29,6 +29,7 @@ namespace Sentinel.Tests.TestHelpers
             return Tile.Generate(GetColourSchemeMock(colourScheme), GetDotMock(zoom), zoom, x, y, _points);
         }
 
+
         public static Bitmap GetDotMock(int zoom)
         {
             return new Bitmap(System.IO.Directory.GetFiles(strDirectory + "dots", "dot" + zoom + "." + ImageFormat.Png.ToString().ToLower()).First());
