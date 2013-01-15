@@ -1,0 +1,23 @@
+﻿#top
+{
+    height: 5em;
+    border-bottom: 2px solid #666;
+    background-color: #373C40;
+}
+
+#tbl-menu
+{
+    width:100%;
+}
+
+#td-menu-left
+{
+    padding-left: 1em;
+    text-align: left;
+}
+
+#td-menu-right
+{
+    padding-right: 1em;
+    text-align:right;
+}

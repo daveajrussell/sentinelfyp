@@ -1,0 +1,49 @@
+﻿#updates-window
+{
+    width: 195px;
+    min-height: 500px;
+    height: 100%;
+    border-left: .2em solid #666;
+    background: url(../Content/images/ui-bg_monitor.png) repeat; 
+}
+
+#updates-window-header
+{
+    
+    text-align:center;
+    font-weight: bold;
+}
+
+#events-list
+{
+    margin: 1em;
+}
+
+.event-icon
+{
+    border-radius: 1em;
+}
+
+.event-msg
+{
+    font-weight: bold;
+    background-color: transparent !important;
+}
+
+.severe
+{
+    background-color: #cc0033;
+    color: #cc0033;
+}
+
+.caution
+{
+    background-color: Yellow;
+    color: Yellow;
+}
+
+.normal
+{
+    background-color: Green;
+    color: Green;
+}
