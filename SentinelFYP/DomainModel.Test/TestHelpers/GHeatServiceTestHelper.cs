@@ -12,7 +12,7 @@ namespace DomainModel.Test.TestHelpers
 {
     public static class GHeatServiceTestHelper
     {
-        private static string strDirectory = "C:\\Work\\FYP\\SentinelFYP\\Sentinel\\Content\\etc\\";
+        private static string strDirectory = "C:\\Work\\FYP\\SentinelFYP\\trunk\\SentinelFYP\\Sentinel\\Content\\etc\\";
 
         public static List<PointLatLng> GetListOfMockPointLatLng()
         {
