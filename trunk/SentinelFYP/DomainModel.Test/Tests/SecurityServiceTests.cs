@@ -2,6 +2,7 @@
 using DomainModel.Interfaces.Repositories;
 using DomainModel.SecurityModels;
 using DomainModel.Services;
+using DomainModel.Test.TestHelpers;
 using Moq;
 using Xunit;
 
@@ -10,18 +11,16 @@ namespace DomainModel.Test.Tests
     public class SecurityServiceTest
     {
         private Mock<ISecurityRepository> _repository;
+        private User _user = null;
+        private Session _session = null;
 
         public SecurityServiceTest()
         {
             _repository = new Mock<ISecurityRepository>();
 
-            User _user = new User();
-            Session _session = new Session();
-
-            _repository.Setup(m => m.LogIn(It.IsAny<string>(), It.IsAny<string>(), out _user, out _session));
+            _repository.Setup(m => m.LogIn(It.IsAny<string>(), It.IsAny<string>(), out _user, out _session))
+                .Callback(() => SecurityTestHelper.MockLogin("Username", "Password", out _user, out _session));
             //   .Returns(new User(Guid.NewGuid(), "Test User", "Test", "User", "Test@User.com", DateTime.Now, DateTime.Now, DateTime.Now));
-
-            //_repository.Setup(m => m.Logout());
         }
 
         [Fact]
@@ -59,17 +58,9 @@ namespace DomainModel.Test.Tests
         public void LogInShouldReturnUserObject()
         {
             var service = new SecurityService(_repository.Object);
-            var user = new User();
 
             Xunit.Assert.DoesNotThrow(() => service.LogIn("Username", "Password"));
-            Xunit.Assert.NotNull(user);
-        }
-
-        [Fact]
-        public void PassingZeroToLogoutShouldThrow()
-        {
-            var service = new SecurityService(_repository.Object);
-            Xunit.Assert.Throws<ArgumentOutOfRangeException>(() => service.Logout());
+            Xunit.Assert.NotNull(_user);
         }
     }
 }
