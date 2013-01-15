@@ -3,11 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
+using DomainModel.Interfaces.Services;
+using Ninject;
 
 namespace Sentinel.Infrastructure
 {
     public class SentinelRoleProvider : RoleProvider
     {
+        [Inject]
+        public IRoleService _roleService { get; set; }
+
+        public override string[] GetRolesForUser(string username)
+        {
+            return _roleService.GetRolesForUser(username);
+        }
+
+        public override bool IsUserInRole(string username, string roleName)
+        {
+            return _roleService.IsUserInRole(username, roleName);
+        }
+
+        /*NON IMPLEMENTED METHODS*/
+
+        public override string[] GetUsersInRole(string roleName)
+        {
+            throw new NotImplementedException();
+        }
+
         public override void AddUsersToRoles(string[] usernames, string[] roleNames)
         {
             throw new NotImplementedException();
@@ -41,21 +63,6 @@ namespace Sentinel.Infrastructure
         }
 
         public override string[] GetAllRoles()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override string[] GetRolesForUser(string username)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override string[] GetUsersInRole(string roleName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override bool IsUserInRole(string username, string roleName)
         {
             throw new NotImplementedException();
         }

@@ -15,6 +15,7 @@ using Ninject;
 using Sentinel.Helpers;
 using Microsoft.AspNet.SignalR;
 using Sentinel.Infrastructure;
+using System.Web.Security;
 
 namespace Sentinel
 {
@@ -64,21 +65,25 @@ namespace Sentinel
 
             IKernel kernel = new StandardKernel();
 
+
             kernel.Bind<ISettingsService>().To<SettingsService>();
-            kernel.Bind<IUserService>().To<UserService>();
             kernel.Bind<ISecurityService>().To<SecurityService>();
             kernel.Bind<IGHeatService>().To<GHeatService>();
             kernel.Bind<IPointService>().To<PointService>();
             kernel.Bind<IGISService>().To<GISService>();
             kernel.Bind<IWeightHandler>().To<IWeightHandler>();
             kernel.Bind<ISentinelAuthProvider>().To<SentinelAuthProvider>();
+            kernel.Bind<IRoleService>().To<RoleService>();
 
             kernel.Bind<ISettingsRepository>().To<SettingsRepository>().WithConstructorArgument("baseDirectory", baseDirectory);
             kernel.Bind<IGHeatRepository>().To<GHeatRepository>();
             kernel.Bind<IPointRepository>().To<SqlPointRepository>().WithConstructorArgument("connectionString", _connectionString);
-            kernel.Bind<IUserRepository>().To<SqlUserRepository>().WithConstructorArgument("connectionString", _connectionString);
             kernel.Bind<ISecurityRepository>().To<SqlSecurityRepository>().WithConstructorArgument("connectionString", _connectionString);
             kernel.Bind<IGISRepository>().To<SqlGISRepository>().WithConstructorArgument("connectionString", _connectionString);
+            kernel.Bind<IRoleRepository>().To<SqlRoleRepository>().WithConstructorArgument("connectionString", _connectionString);
+            
+            kernel.Inject(Membership.Provider);
+            kernel.Inject(Roles.Provider);
 
             DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
         }

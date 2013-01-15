@@ -15,10 +15,13 @@ namespace DomainModel.Test.Tests
         {
             _repository = new Mock<ISecurityRepository>();
 
-            _repository.Setup(m => m.LogIn(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
-                .Returns(new User(Guid.NewGuid(), "Test User", "Test", "User", "Test@User.com", DateTime.Now, DateTime.Now, DateTime.Now));
+            User _user = new User();
+            Session _session = new Session();
 
-            _repository.Setup(m => m.Logout(It.IsAny<int>()));
+            _repository.Setup(m => m.LogIn(It.IsAny<string>(), It.IsAny<string>(), out _user, out _session));
+            //   .Returns(new User(Guid.NewGuid(), "Test User", "Test", "User", "Test@User.com", DateTime.Now, DateTime.Now, DateTime.Now));
+
+            //_repository.Setup(m => m.Logout());
         }
 
         [Fact]
@@ -42,28 +45,14 @@ namespace DomainModel.Test.Tests
         public void PassingNullUserNameToLogInShouldThrow()
         {
             var service = new SecurityService(_repository.Object);
-            Xunit.Assert.Throws<ArgumentNullException>(() => service.LogIn(null, "Password", "Test User Agent", "Test IP Address"));
+            Xunit.Assert.Throws<ArgumentNullException>(() => service.LogIn(null, "Password"));
         }
 
         [Fact]
         public void PassingNullPasswordToLogInShouldThrow()
         {
             var service = new SecurityService(_repository.Object);
-            Xunit.Assert.Throws<ArgumentNullException>(() => service.LogIn("Username", null, "Test User Agent", "Test IP Address"));
-        }
-
-        [Fact]
-        public void PassingNullUserAgentToLogInShouldThrow()
-        {
-            var service = new SecurityService(_repository.Object);
-            Xunit.Assert.Throws<ArgumentNullException>(() => service.LogIn("Username", "Password", null, "Test IP Address"));
-        }
-
-        [Fact]
-        public void PassingNullIPAddressToLogInShouldThrow()
-        {
-            var service = new SecurityService(_repository.Object);
-            Xunit.Assert.Throws<ArgumentNullException>(() => service.LogIn("Username", "Password", "Test User Agent", null));
+            Xunit.Assert.Throws<ArgumentNullException>(() => service.LogIn("Username", null));
         }
 
         [Fact]
@@ -72,7 +61,7 @@ namespace DomainModel.Test.Tests
             var service = new SecurityService(_repository.Object);
             var user = new User();
 
-            Xunit.Assert.DoesNotThrow(() => user = service.LogIn("Username", "Password", "User Agent", "IP Address"));
+            Xunit.Assert.DoesNotThrow(() => service.LogIn("Username", "Password"));
             Xunit.Assert.NotNull(user);
         }
 
@@ -80,7 +69,7 @@ namespace DomainModel.Test.Tests
         public void PassingZeroToLogoutShouldThrow()
         {
             var service = new SecurityService(_repository.Object);
-            Xunit.Assert.Throws<ArgumentOutOfRangeException>(() => service.Logout(0));
+            Xunit.Assert.Throws<ArgumentOutOfRangeException>(() => service.Logout());
         }
     }
 }

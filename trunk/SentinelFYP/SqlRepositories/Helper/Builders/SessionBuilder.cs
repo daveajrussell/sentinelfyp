@@ -17,8 +17,6 @@ namespace SqlRepositories.Helper.Builders
 
                 session.SessionID = data.Select(p => p.Field<int>("SESSION_ID")).First();
                 session.SessionBeginDateTime = data.Select(p => p.Field<DateTime>("SESSION_BEGIN_DATE_TIME")).First();
-                session.UserAgent = data.Select(p => p.Field<string>("USER_AGENT")).First();
-                session.IPAddress = data.Select(p => p.Field<string>("IP_ADDRESS")).First();
 
                 return session;
             }

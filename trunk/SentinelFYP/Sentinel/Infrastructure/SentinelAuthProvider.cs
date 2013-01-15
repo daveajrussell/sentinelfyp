@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;  
+using System.Web.Security;
+using DomainModel.SecurityModels;  
 
 namespace Sentinel.Infrastructure
 {
@@ -11,7 +12,8 @@ namespace Sentinel.Infrastructure
     {
         public bool Authenticate(string strUsername, string strPassword)
         {
-            bool blnResult = Membership.ValidateUser(strUsername, strPassword);//FormsAuthentication.Authenticate(strUsername, strPassword);
+            bool blnResult = Membership.ValidateUser(strUsername, strPassword);
+
             if (blnResult)
                 FormsAuthentication.SetAuthCookie(strUsername, false);
 

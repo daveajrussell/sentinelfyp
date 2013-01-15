@@ -6,7 +6,9 @@ using DomainModel.SecurityModels;
 
 namespace DomainModel.Interfaces.Repositories
 {
-    public interface IUserRepository
+    public interface IRoleRepository
     {
+        string[] GetRolesForUser(string strUsername);
+        bool IsUserInRole(string strUsername, string strRoleName);
     }
 }

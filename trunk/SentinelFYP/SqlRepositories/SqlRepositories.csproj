@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Helper\Builders\GISBuilder.cs" />
     <Compile Include="Helper\Builders\PointLatLngBuilder.cs" />
+    <Compile Include="Helper\Builders\RoleBuilder.cs" />
     <Compile Include="Helper\Builders\SessionBuilder.cs" />
     <Compile Include="Helper\Builders\UserBuilder.cs" />
     <Compile Include="Helper\SecurityHelper.cs" />
@@ -71,8 +72,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlGISRepository.cs" />
     <Compile Include="SqlPointRepository.cs" />
+    <Compile Include="SqlRoleRepository.cs" />
     <Compile Include="SqlSecurityRepository.cs" />
-    <Compile Include="SqlUserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">

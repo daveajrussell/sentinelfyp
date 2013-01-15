@@ -8,7 +8,7 @@ namespace DomainModel.Interfaces.Services
 {
     public interface ISecurityService
     {
-        User LogIn(string strUsername, string strPassword, string strUserAgent, string strIPAddress);
-        void Logout(int iSessionID);
+        void LogIn(string strUsername, string strPassword);
+        void Logout();
     }
 }

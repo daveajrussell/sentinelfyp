@@ -15,17 +15,11 @@ namespace Sentinel.Controllers
 {
     public class AccountController : Controller
     {
-        private IUserService _userService;
         private ISecurityService _securityService;
         private ISentinelAuthProvider _authProvider;
 
-        public AccountController(IUserService userService, ISecurityService securityService, ISentinelAuthProvider authProvider)
+        public AccountController(ISecurityService securityService, ISentinelAuthProvider authProvider)
         {
-            if (userService == null)
-                throw new ArgumentNullException("user service");
-
-            _userService = userService;
-
             if (securityService == null)
                 throw new ArgumentNullException("security service");
 
@@ -45,27 +39,6 @@ namespace Sentinel.Controllers
         [HttpPost]
         public ActionResult Login(LogonUserViewModel model)
         {
-            /*var userAgent = Request.UserAgent;
-            var ipAddress = "127.0.0.0";
-
-            foreach (IPAddress ip in Dns.GetHostEntry(Dns.GetHostName()).AddressList)
-            {
-                if (ip.AddressFamily.ToString() == "InterNetwork")
-                {
-                    ipAddress = ip.ToString();
-                }
-            }
-
-            var user = _securityService.LogIn(model.Username, model.Password, userAgent, ipAddress);
-            State.User = user;
-
-            if (user == null)
-                return RedirectToAction("Index", "Account");
-            else
-            {
-                _authProvider.Authenticate("", "");
-                return RedirectToAction("Index", "Home");
-            }*/
             if (ModelState.IsValid)
             {
                 if (_authProvider.Authenticate(model.Username, model.Password))
@@ -86,13 +59,7 @@ namespace Sentinel.Controllers
 
         public ActionResult Logout()
         {
-            _securityService.Logout(State.Session.SessionID);
-            /*
-            FormsAuthentication.SignOut();
-            Session.Clear();
-            Session.Abandon();
-            return RedirectToAction("Index", "Account");
-            */
+            _securityService.Logout();
             _authProvider.ClearAuthentication(this);
             return RedirectToAction("Login", "Account");
         }

@@ -79,20 +79,20 @@
     <Compile Include="DomainRepositories\SettingsRepository.cs" />
     <Compile Include="Interfaces\Repositories\IGHeatRepository.cs" />
     <Compile Include="Interfaces\Repositories\IGISRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IRoleRepository.cs" />
     <Compile Include="Interfaces\Repositories\ISettingsRepository.cs" />
     <Compile Include="Interfaces\Services\IGISService.cs" />
+    <Compile Include="Interfaces\Services\IRoleService.cs" />
     <Compile Include="Models\GIS.cs" />
     <Compile Include="SecurityModels\Session.cs" />
     <Compile Include="SecurityModels\State.cs" />
     <Compile Include="Interfaces\IWeightHandler.cs" />
     <Compile Include="Interfaces\Repositories\IPointRepository.cs" />
     <Compile Include="Interfaces\Repositories\ISecurityRepository.cs" />
-    <Compile Include="Interfaces\Repositories\IUserRepository.cs" />
     <Compile Include="Interfaces\Services\IGHeatService.cs" />
     <Compile Include="Interfaces\Services\IPointService.cs" />
     <Compile Include="Interfaces\Services\ISecurityService.cs" />
     <Compile Include="Interfaces\Services\ISettingsService.cs" />
-    <Compile Include="Interfaces\Services\IUserService.cs" />
     <Compile Include="Models\Opacity.cs" />
     <Compile Include="Models\Tile.cs" />
     <Compile Include="SecurityModels\User.cs" />
@@ -101,9 +101,9 @@
     <Compile Include="Services\GISService.cs" />
     <Compile Include="Services\KVImageBlender.cs" />
     <Compile Include="Services\PointService.cs" />
+    <Compile Include="Services\RoleService.cs" />
     <Compile Include="Services\SecurityService.cs" />
     <Compile Include="Services\SettingsService.cs" />
-    <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
