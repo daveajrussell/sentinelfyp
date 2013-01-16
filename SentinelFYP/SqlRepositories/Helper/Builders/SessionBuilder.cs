@@ -5,6 +5,7 @@ using System.Text;
 using DomainModel.SecurityModels;
 using System.Data;
 using SqlRepositories.Helper.Extensions;
+using DomainModel.Models.AuditModels;
 
 namespace SqlRepositories.Helper.Builders
 {

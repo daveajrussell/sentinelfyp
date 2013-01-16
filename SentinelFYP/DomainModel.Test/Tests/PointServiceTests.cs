@@ -4,6 +4,7 @@ using System.Drawing;
 using DomainModel.Interfaces.Repositories;
 using DomainModel.Interfaces.Services;
 using DomainModel.Models;
+using DomainModel.Models.GISModels;
 using DomainModel.Services;
 using DomainModel.Test.TestHelpers;
 using GMap.NET;

@@ -7,6 +7,7 @@ using DomainModel.SecurityModels;
 using Sentinel.Helpers.ExtensionMethods;
 using System.Web.Security;
 using System.Security.Principal;
+using DomainModel.Models.AuditModels;
 
 namespace Sentinel.Controllers
 {

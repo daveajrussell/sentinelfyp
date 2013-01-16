@@ -5,6 +5,7 @@ using System.Text;
 using DomainModel.Interfaces.Services;
 using DomainModel.Models;
 using DomainModel.Interfaces.Repositories;
+using DomainModel.Models.GISModels;
 
 namespace DomainModel.Services
 {

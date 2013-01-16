@@ -5,6 +5,7 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using DomainModel.Models;
+using DomainModel.Models.GISModels;
 using GMap.NET;
 
 namespace Sentinel.Tests.TestHelpers

@@ -1,5 +1,6 @@
 ﻿using System;
 using DomainModel.Interfaces.Repositories;
+using DomainModel.Models.AuditModels;
 using DomainModel.SecurityModels;
 using DomainModel.Services;
 using DomainModel.Test.TestHelpers;

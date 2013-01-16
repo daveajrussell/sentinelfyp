@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using GMap.NET;
 
-namespace DomainModel.Models
+namespace DomainModel.Models.GISModels
 {
     /// <summary>
     /// Gets a single tile

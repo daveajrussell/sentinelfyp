@@ -15,6 +15,7 @@ using DomainModel.Models;
 using DomainModel.Abstracts;
 using WebServices.DataContracts;
 using WebServices.Interfaces;
+using DomainModel.Models.GISModels;
 
 namespace WebServices.Services
 {

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Security;
 using DomainModel.Interfaces.Repositories;
 using DomainModel.Interfaces.Services;
+using DomainModel.Models.AuditModels;
 using DomainModel.SecurityModels;
 using Ninject;
 
