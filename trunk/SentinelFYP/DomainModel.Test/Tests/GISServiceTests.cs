@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DomainModel.Interfaces.Repositories;
 using DomainModel.Models;
+using DomainModel.Models.GISModels;
 using DomainModel.Services;
 using Moq;
 using Xunit;

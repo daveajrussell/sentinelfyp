@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using DomainModel.Models;
+using DomainModel.Models.GISModels;
 using GMap.NET;
 
 namespace DomainModel.Test.TestHelpers

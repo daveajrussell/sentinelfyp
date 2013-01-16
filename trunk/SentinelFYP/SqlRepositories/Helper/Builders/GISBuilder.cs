@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DomainModel.Models;
 using System.Data;
+using DomainModel.Models.GISModels;
 
 namespace SqlRepositories.Helper.Builders
 {

@@ -9,6 +9,7 @@ using DomainModel.Interfaces;
 using System.Drawing;
 using DomainModel.Interfaces.Repositories;
 using DomainModel.Models;
+using DomainModel.Models.GISModels;
 
 namespace DomainModel.Services
 {

@@ -5,22 +5,19 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
 using Gma.QrCodeNet.Encoding;
 using Gma.QrCodeNet.Encoding.Windows.Controls;
 
-namespace Sentinel.Helpers.ExtensionMethods
+namespace Sentinel.Handlers
 {
-    public class QRCodeResult : ActionResult
+    /// <summary>
+    /// Summary description for QRHandler
+    /// </summary>
+    public class QRHandler : IHttpHandler
     {
-        private string _qrString { get; set; }
+        private string _qrString = "http://www.daveajrussell.com";
 
-        public QRCodeResult(string qrString)
-        {
-            _qrString = qrString;
-        }
-
-        public override void ExecuteResult(ControllerContext context)
+        public void ProcessRequest(HttpContext context)
         {
             if (string.IsNullOrEmpty(_qrString))
                 throw new ArgumentNullException("QR String");
@@ -41,15 +38,21 @@ namespace Sentinel.Helpers.ExtensionMethods
 
             using (MemoryStream oStream = new MemoryStream())
             {
-                HttpContextBase httpContext = context.HttpContext;
-
-                httpContext.Response.Clear();
-                httpContext.Response.ContentType = "image/png";
+                context.Response.Clear();
+                context.Response.ContentType = "image/png";
 
                 qrImage.Save(oStream, ImageFormat.Png);
                 qrImage.Dispose();
 
-                oStream.WriteTo(httpContext.Response.OutputStream);
+                oStream.WriteTo(context.Response.OutputStream);
+            }
+        }
+
+        public bool IsReusable
+        {
+            get
+            {
+                return false;
             }
         }
     }

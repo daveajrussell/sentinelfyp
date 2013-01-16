@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DomainModel.SecurityModels
+namespace DomainModel.Models.AuditModels
 {
     [Serializable]
     public class Session

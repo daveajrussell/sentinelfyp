@@ -5,6 +5,7 @@ using System.Text;
 using DomainModel.Interfaces.Services;
 using DomainModel.Interfaces.Repositories;
 using DomainModel.SecurityModels;
+using DomainModel.Models.AuditModels;
 
 namespace DomainModel.Services
 {

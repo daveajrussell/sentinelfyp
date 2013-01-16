@@ -72,6 +72,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="TestHelpers\ConsignmentManagementTestHelper.cs" />
     <Compile Include="TestHelpers\GHeatServiceTestHelper.cs" />
     <Compile Include="TestHelpers\PointServiceTestHelper.cs" />
     <Compile Include="TestHelpers\SecurityTestHelper.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Tests\GISServiceTests.cs" />
     <Compile Include="Tests\SecurityServiceTests.cs" />
     <Compile Include="Tests\SettingsServiceTests.cs" />
+    <Compile Include="Tests\ConsignmentManagementServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

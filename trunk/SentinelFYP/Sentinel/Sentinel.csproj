@@ -126,7 +126,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\DeliveryItemController.cs" />
+    <Compile Include="Controllers\ConsignmentManagementController.cs" />
     <Compile Include="Controllers\HeaderController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HeatmapController.cs" />
@@ -136,7 +136,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\ExtensionMethods\QRCodeResult.cs" />
+    <Compile Include="Handlers\QRHandler.ashx.cs">
+      <DependentUpon>QRHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\ExtensionMethods\TileResult.cs" />
     <Compile Include="Helpers\ExtensionMethods\ToViewModel.cs" />
     <Compile Include="Infrastructure\ISentinelAuthProvider.cs" />
@@ -187,6 +189,7 @@
     <Content Include="Content\v1_menu.css" />
     <Content Include="Content\v1_monitor.css" />
     <Content Include="Global.asax" />
+    <Content Include="Handlers\QRHandler.ashx" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />
@@ -260,9 +263,8 @@
     <Content Include="Content\etc\dots\dot7.png" />
     <Content Include="Content\etc\dots\dot8.png" />
     <Content Include="Content\etc\dots\dot9.png" />
-    <Content Include="Views\DeliveryItem\Index.cshtml" />
+    <Content Include="Views\ConsignmentManagement\Index.cshtml" />
     <Content Include="Views\Shared\RealTimeMonitorPartial.cshtml" />
-    <Content Include="Views\DeliveryItem\QRPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

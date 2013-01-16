@@ -10,6 +10,7 @@ using System.Data;
 using SqlRepositories.Helper.Builders;
 using SqlRepositories.Helper;
 using System.Net;
+using DomainModel.Models.AuditModels;
 
 namespace SqlRepositories
 {

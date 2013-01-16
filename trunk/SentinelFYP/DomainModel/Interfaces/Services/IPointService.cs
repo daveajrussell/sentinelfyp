@@ -5,6 +5,7 @@ using System.Text;
 using GMap.NET;
 using System.Drawing;
 using DomainModel.Models;
+using DomainModel.Models.GISModels;
 
 namespace DomainModel.Interfaces.Services
 {

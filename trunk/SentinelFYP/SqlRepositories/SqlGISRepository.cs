@@ -9,6 +9,7 @@ using Sentinel.SqlDataAccess;
 using SqlRepositories.Helper.Builders;
 using System.Data.SqlClient;
 using SqlRepositories.Helper.Extensions;
+using DomainModel.Models.GISModels;
 
 namespace SqlRepositories
 {

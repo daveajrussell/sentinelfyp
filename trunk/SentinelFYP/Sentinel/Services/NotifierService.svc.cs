@@ -9,6 +9,7 @@ using DomainModel.Models;
 using Microsoft.AspNet.SignalR.Hubs;
 using Microsoft.AspNet.SignalR;
 using Sentinel.Hubs;
+using DomainModel.Models.GISModels;
 
 namespace Sentinel.Services
 {

@@ -9,6 +9,7 @@ using System.IO;
 using DomainModel.Models;
 using GMap.NET;
 using DomainModel.Interfaces.Repositories;
+using DomainModel.Models.GISModels;
 
 namespace DomainModel.Services
 {
