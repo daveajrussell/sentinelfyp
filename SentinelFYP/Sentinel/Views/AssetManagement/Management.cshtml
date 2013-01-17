@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Management";
+}
+
+<script type="text/javascript">
+
+    $(function () {
+        $('#btn-get-consignments').on('click', function () {
+            $.post('../AssetManagement/GetAllConsignments', function (data) {
+                $('#div-consignments-grid').replaceWith(data);
+            });
+        });
+    });
+
+</script>
+
+<h2>Management</h2>
+
+<div id="div-consignments-grid">
+    Stuff goes here
+</div>
+
+<br />
+
+<div id="div-controls">
+    <input id="btn-get-consignments" type="button" value="Get Consignments" />
+</div>

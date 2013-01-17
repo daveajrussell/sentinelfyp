@@ -1,0 +1,19 @@
+﻿@model IEnumerable<DomainModel.Models.AssetModels.DeliveryItem>
+@using Sentinel.Grid;
+@using Sentinel.Helpers.ExtensionMethods;
+
+@{
+    var grid = new ASPRazorWebGrid(source: Model);
+    grid.UsePostBack = false;
+}
+
+<div id="div-consignments-grid">
+    @grid.GetHtml(columns: new ASPRazorWebGridColumn[]{
+                            grid.CreateColumn(dataField: "DeliveryItemKey", headerText: "Delivery Item Key", headerHorizontalAlignment: "center"),
+                            grid.CreateColumn(dataFieldFormat: @<text> @{string key = item.DeliveryItemKey.ToString();} @(Html.QRCode(key)) </text>, itemHorizontalAlignment: "center")
+                        },
+                  pager: new Pager { Alignment = PagerAlign.Center, TotalRows = ViewBag.GridRecordCount, RowsPerPage = 5, CssClass = "pager" },
+                  tableStyle: "table",
+                  headerStyle: "head",
+                  alternatingRowStyle: "alt")
+</div>

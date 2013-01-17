@@ -1,0 +1,46 @@
+﻿@model IEnumerable<DomainModel.Models.AssetModels.Consignment>
+@using Sentinel.Grid;
+
+@{
+    var grid = new ASPRazorWebGrid(source: Model);
+}
+
+<script type="text/javascript">
+
+    $(function () {
+        $('.show').on('click', function () {
+            var consignmentKey = $(this).attr('value');
+
+            if ($(this).hasClass('ui-icon-plus')) {
+                $(this).removeClass('ui-icon-plus').addClass('ui-icon-minus');
+
+                var self = $(this);
+
+                // render grid
+                $.post('../AssetManagement/GetConsignmentDeliveryItem', { strConsignmentKey: consignmentKey }, function (data) {
+                    self.parents('tr:first').after('<tr><td colspan="4">' + data + '</td></tr>').slideDown();
+                });
+            } else {
+                $(this).removeClass('ui-icon-minus').addClass('ui-icon-plus');
+                // remove grid
+                $(this).parents('tr:first').next().remove().slideUp();
+            }
+
+
+        });
+    });
+
+</script>
+
+<div id="div-consignments-grid">
+    @grid.GetHtml(columns: new ASPRazorWebGridColumn[]{
+                            grid.CreateColumn(headerHorizontalAlignment: "center", headerText: "Items", dataFieldFormat: @<text> <a value="@item.ConsignmentKey" class="show ui-icon ui-icon-plus">Click me!</a> </text>),
+                            grid.CreateColumn(dataField: "ConsignmentKey", headerText: "Consignment Key", headerHorizontalAlignment: "center"),
+                            grid.CreateColumn(dataField: "AssignedDriverKey", headerText: "Assigned Driver Key", headerHorizontalAlignment: "center"),
+                            grid.CreateColumn(dataField: "ConsignmentDeliveryDate", headerText: "Consignment Delivery Date", headerHorizontalAlignment: "center")
+                        },
+                  pager: new Pager { Alignment = PagerAlign.Center, TotalRows = ViewBag.GridRecordCount, RowsPerPage = 5, CssClass = "pager" },
+                  tableStyle: "table",
+                  headerStyle: "head",
+                  alternatingRowStyle: "alt")
+</div>

@@ -126,7 +126,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\ConsignmentManagementController.cs" />
+    <Compile Include="Controllers\AssetManagementController.cs" />
     <Compile Include="Controllers\HeaderController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HeatmapController.cs" />
@@ -136,9 +136,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Grid\ASPRazorWebGrid.cs" />
+    <Compile Include="Grid\Dynamic.cs" />
     <Compile Include="Handlers\QRHandler.ashx.cs">
       <DependentUpon>QRHandler.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ExtensionMethods\QRCodeHtmlHelper.cs" />
     <Compile Include="Helpers\ExtensionMethods\TileResult.cs" />
     <Compile Include="Helpers\ExtensionMethods\ToViewModel.cs" />
     <Compile Include="Infrastructure\ISentinelAuthProvider.cs" />
@@ -158,11 +161,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\ASPRazorWebGrid.css" />
     <Content Include="Content\etc\color-schemes\classic.png" />
     <Content Include="Content\etc\color-schemes\fire.png" />
     <Content Include="Content\etc\color-schemes\omg.png" />
     <Content Include="Content\etc\color-schemes\pbj.png" />
     <Content Include="Content\etc\color-schemes\pgaitch.png" />
+    <Content Include="Content\images\asc.gif" />
+    <Content Include="Content\images\desc.gif" />
     <Content Include="Content\images\FYP-Diagram.png" />
     <Content Include="Content\images\map_loader.gif" />
     <Content Include="Content\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -265,6 +271,9 @@
     <Content Include="Content\etc\dots\dot9.png" />
     <Content Include="Views\ConsignmentManagement\Index.cshtml" />
     <Content Include="Views\Shared\RealTimeMonitorPartial.cshtml" />
+    <Content Include="Views\AssetManagement\ConsignmentsPartial.cshtml" />
+    <Content Include="Views\AssetManagement\Management.cshtml" />
+    <Content Include="Views\AssetManagement\DeliveryItemGridPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

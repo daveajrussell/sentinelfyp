@@ -8,6 +8,8 @@ namespace DomainModel.Interfaces.Services
 {
     public interface IDeliveryItemManagementService
     {
+        IEnumerable<DeliveryItem> GetAllAssignedDeliveryItems();
+        IEnumerable<DeliveryItem> GetConsignmentDeliveryItems(Guid oConsignmentKey);
         IEnumerable<DeliveryItem> GetAllUnassignedDeliveryItems();
         DeliveryItem AssignDeliveryItemToConsignment(Guid oDeliveryItemKey, Guid oConsingmentKey);
         DeliveryItem ReAssignDeliveryItem(Guid oDeliveryItemKey, Guid oPreviousConsignmentKey, Guid ReAssignedConsignmentKey);

@@ -8,7 +8,6 @@ namespace DomainModel.Interfaces.Services
 {
     public interface IConsignmentManagementService
     {
-        /* Consignments */
         Consignment CreateConsignment(DateTime dtConsignmentDeliveryDate);
         Consignment AssignConsignmentToDriver(Guid oConsignmentKey, Guid oDriverKey);
         Consignment ReAssignConsignment(Guid oConsignmentKey, Guid oPreviousDriverKey, Guid oReAssignedDriverKey);

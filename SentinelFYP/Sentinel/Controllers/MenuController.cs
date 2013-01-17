@@ -20,8 +20,8 @@ namespace Sentinel.Controllers
                 URL = "~/Monitor/Index"
             },
             new MenuViewModel() {
-                Display = "Delivery Items",
-                URL = "~/DeliveryItem/Index"
+                Display = "Asset Management",
+                URL = "~/AssetManagement/Management"
             },
             new MenuViewModel() {
                 Display = "Administration",

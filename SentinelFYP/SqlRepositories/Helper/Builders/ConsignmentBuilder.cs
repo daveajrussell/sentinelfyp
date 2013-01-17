@@ -16,7 +16,7 @@ namespace SqlRepositories.Helper.Builders
                    select new Consignment()
                    {
                        ConsignmentKey = consignment.Field<Guid>("CONSIGNMENT_KEY"),
-                       AssignedDriverKey = consignment.Field<Guid>("CONSIGNMENT_ASSIGNED_DRIVER_KEY"),
+                       AssignedDriverKey = consignment.IsNull("CONSIGNMENT_ASSIGNED_DRIVER_KEY") ? Guid.Empty : consignment.Field<Guid>("CONSIGNMENT_ASSIGNED_DRIVER_KEY"),
                        ConsignmentDeliveryDate = consignment.Field<DateTime>("CONSIGNMENT_DATE_TIME")
                    }).First();
         }
@@ -27,7 +27,7 @@ namespace SqlRepositories.Helper.Builders
                     select new Consignment()
                     {
                         ConsignmentKey = consignment.Field<Guid>("CONSIGNMENT_KEY"),
-                        AssignedDriverKey = consignment.Field<Guid>("CONSIGNMENT_ASSIGNED_DRIVER_KEY"),
+                        AssignedDriverKey = consignment.IsNull("CONSIGNMENT_ASSIGNED_DRIVER_KEY") ? Guid.Empty : consignment.Field<Guid>("CONSIGNMENT_ASSIGNED_DRIVER_KEY"),
                         ConsignmentDeliveryDate = consignment.Field<DateTime>("CONSIGNMENT_DATE_TIME") 
                     });
         }
