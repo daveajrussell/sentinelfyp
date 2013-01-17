@@ -5,8 +5,14 @@
 <script type="text/javascript">
 
     $(function () {
-        $('#btn-get-consignments').on('click', function () {
-            $.post('../AssetManagement/GetAllConsignments', function (data) {
+        $('#btn-get-assigned-consignments').on('click', function () {
+            $.post('../AssetManagement/GetAssignedConsignments', function (data) {
+                $('#div-consignments-grid').replaceWith(data);
+            });
+        });
+
+        $('#btn-get-unassigned-consignments').on('click', function () {
+            $.post('../AssetManagement/GetUnAssignedConsignments', function (data) {
                 $('#div-consignments-grid').replaceWith(data);
             });
         });
@@ -17,11 +23,11 @@
 <h2>Management</h2>
 
 <div id="div-consignments-grid">
-    Stuff goes here
 </div>
 
 <br />
 
 <div id="div-controls">
-    <input id="btn-get-consignments" type="button" value="Get Consignments" />
+    <input id="btn-get-assigned-consignments" type="button" value="Get Assigned Consignments" />
+    <input id="btn-get-unassigned-consignments" type="button" value="Get UnAssigned Consignments" />
 </div>

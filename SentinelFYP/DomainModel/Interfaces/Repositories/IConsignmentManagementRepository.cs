@@ -8,14 +8,13 @@ namespace DomainModel.Interfaces.Repositories
 {
     public interface IConsignmentManagementRepository
     {
-        Consignment CreateConsignment(DateTime dtConsignmentDeliveryDate);
-        Consignment AssignConsignmentToDriver(Guid oConsignmentKey, Guid oDriverKey);
-        Consignment ReAssignConsignment(Guid oConsignmentKey, Guid oPreviousDriverKey, Guid oReAssignedDriverKey);
+        UnAssignedConsignment CreateConsignment(DateTime dtConsignmentDeliveryDate);
+        AssignedConsignment AssignConsignmentToDriver(Guid oConsignmentKey, Guid oDriverKey);
+        AssignedConsignment ReAssignConsignment(Guid oConsignmentKey, Guid oPreviousDriverKey, Guid oReAssignedDriverKey);
         void UnAssignConsignment(Guid oConsignmentKey, Guid oAssignedDriverKey);
-        IEnumerable<Consignment> GetAllConsignments();
-        IEnumerable<Consignment> GetAssignedConsignments();
-        IEnumerable<Consignment> GetUnAssignedConsignments();
-        Consignment GetConsignmentByDriverKey(Guid oDriverKey);
-        IEnumerable<Consignment> GetCompletedConsignments();
+        IEnumerable<AssignedConsignment> GetAssignedConsignments();
+        IEnumerable<UnAssignedConsignment> GetUnAssignedConsignments();
+        AssignedConsignment GetConsignmentByDriverKey(Guid oDriverKey);
+        IEnumerable<CompletedConsignment> GetCompletedConsignments();
     }
 }

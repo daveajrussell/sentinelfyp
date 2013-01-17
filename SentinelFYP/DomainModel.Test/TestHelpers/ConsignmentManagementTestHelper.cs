@@ -8,45 +8,34 @@ namespace DomainModel.Test.TestHelpers
 {
     public static class ConsignmentManagementTestHelper
     {
-        public static Consignment CreateConsignmentMock(DateTime dtConsignmentDeliveryDate)
+        public static UnAssignedConsignment CreateConsignmentMock(DateTime dtConsignmentDeliveryDate)
         {
             return CreateConsignment();
         }
 
-        public static Consignment AssignConsignmentToDriverMock(Guid oConsignmentKey, Guid oDriverKey)
+        public static AssignedConsignment AssignConsignmentToDriverMock(Guid oConsignmentKey, Guid oDriverKey)
         {
-            var consignment = CreateConsignment();
-            consignment.AssignedDriverKey = oDriverKey;
+            UnAssignedConsignment oUnAssignedConsignment = CreateConsignment();
 
-            return consignment;
+            return new AssignedConsignment(oUnAssignedConsignment.ConsignmentKey, oDriverKey, "Test", "User", 0141242123, oUnAssignedConsignment.ConsignmentDateTime);
         }
 
-        public static Consignment ReAssignConsignmentMock(Guid oConsignmentKey, Guid oPreviousDriverKey, Guid oReAssignedDriverKey)
+        public static AssignedConsignment ReAssignConsignmentMock(Guid oConsignmentKey, Guid oPreviousDriverKey, Guid oReAssignedDriverKey)
         {
-            return new Consignment()
-            {
-               ConsignmentKey = oConsignmentKey,
-               AssignedDriverKey = oReAssignedDriverKey,
-               ConsignmentDeliveryDate = DateTime.Today
-            };
+            return new AssignedConsignment(oConsignmentKey, oReAssignedDriverKey, "Test", "User", 0141242123, DateTime.Today);
         }
 
-        public static Consignment UnAssignConsignmentMock(Guid oConsignmentKey, Guid oAssignedDriverKey)
+        public static UnAssignedConsignment UnAssignConsignmentMock(Guid oConsignmentKey, Guid oAssignedDriverKey)
         {
-            return new Consignment()
-            {
-                ConsignmentKey = oConsignmentKey,
-                AssignedDriverKey = Guid.Empty,
-                ConsignmentDeliveryDate = DateTime.Today
-            };
+            return new UnAssignedConsignment(oConsignmentKey, DateTime.Today);
         }
 
-        private static Consignment CreateConsignment()
+        private static UnAssignedConsignment CreateConsignment()
         {
-            var _Key = Guid.NewGuid();
-            var _DeliveryDate = DateTime.Today;
+            var _ConsignmentKey = Guid.NewGuid();
+            var _ConsignmentDateTime = DateTime.Today;
 
-            return new Consignment(_Key, _DeliveryDate);
+            return new UnAssignedConsignment(_ConsignmentKey, _ConsignmentDateTime);
         }
     }
 }

@@ -34,15 +34,27 @@ namespace Sentinel.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult GetAllConsignments()
+        public ActionResult GetAssignedConsignments()
         {
             var gridParameters = GridParameters.GetGridParameters();
-            var data = _consignmentService.GetAllConsignments();
+            var data = _consignmentService.GetAssignedConsignments();
 
             ViewBag.GridRecordCount = data.Count();
 
-            return PartialView("ConsignmentsPartial", data);
+            return PartialView("AssignedConsignmentsPartial", data);
         }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult GetUnAssignedConsignments()
+        {
+            var gridParameters = GridParameters.GetGridParameters();
+            var data = _consignmentService.GetUnAssignedConsignments();
+
+            ViewBag.GridRecordCount = data.Count();
+
+            return PartialView("UnAssignedConsignmentsPartial", data);
+        }
+
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult GetConsignmentDeliveryItem(string strConsignmentKey)
