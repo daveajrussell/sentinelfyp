@@ -271,9 +271,10 @@
     <Content Include="Content\etc\dots\dot9.png" />
     <Content Include="Views\ConsignmentManagement\Index.cshtml" />
     <Content Include="Views\Shared\RealTimeMonitorPartial.cshtml" />
-    <Content Include="Views\AssetManagement\ConsignmentsPartial.cshtml" />
+    <Content Include="Views\AssetManagement\AssignedConsignmentsPartial.cshtml" />
     <Content Include="Views\AssetManagement\Management.cshtml" />
     <Content Include="Views\AssetManagement\DeliveryItemGridPartial.cshtml" />
+    <Content Include="Views\AssetManagement\UnAssignedConsignmentsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

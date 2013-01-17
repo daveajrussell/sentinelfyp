@@ -41,12 +41,12 @@ namespace DomainModel.Test.Tests
         public void CreateConsignmentReturnsNewConsignmentWithID()
         {
             var service = new ConsignmentManagementService(_repository.Object);
-            Consignment result = null;
+            UnAssignedConsignment result = null;
 
-            Xunit.Assert.DoesNotThrow(() => result = service.CreateConsignment(DateTime.Now));
+            Xunit.Assert.DoesNotThrow(() => result = service.CreateConsignment(DateTime.Today));
 
             Xunit.Assert.NotNull(result);
-            Xunit.Assert.IsAssignableFrom<Consignment>(result);
+            Xunit.Assert.IsAssignableFrom<AssignedConsignment>(result);
 
             Xunit.Assert.NotNull(result.ConsignmentKey);
             Xunit.Assert.IsAssignableFrom<Guid>(result.ConsignmentKey);
@@ -71,17 +71,14 @@ namespace DomainModel.Test.Tests
         {
             var service = new ConsignmentManagementService(_repository.Object);
 
-            Consignment consignment = service.CreateConsignment(DateTime.Today);
-            Consignment updatedConsignment = null;
+            UnAssignedConsignment consignment = service.CreateConsignment(DateTime.Today);
+            AssignedConsignment updatedConsignment = null;
             User user = new User() { UserKey = Guid.NewGuid() };
             
-            Xunit.Assert.Equal(Guid.Empty, consignment.AssignedDriverKey);
-
             Xunit.Assert.DoesNotThrow(() => updatedConsignment = service.AssignConsignmentToDriver(consignment.ConsignmentKey, user.UserKey));
 
             Xunit.Assert.NotNull(updatedConsignment);
-            Xunit.Assert.NotSame(consignment.AssignedDriverKey, updatedConsignment.AssignedDriverKey);
-            Xunit.Assert.Equal(consignment.ConsignmentDeliveryDate, updatedConsignment.ConsignmentDeliveryDate);
+            Xunit.Assert.Equal(consignment.ConsignmentDateTime, updatedConsignment.ConsignmentDateTime);
         }
 
         [Fact]
@@ -110,18 +107,16 @@ namespace DomainModel.Test.Tests
         {
             var service = new ConsignmentManagementService(_repository.Object);
             
-            Consignment consignment = service.CreateConsignment(DateTime.Today);
-            Consignment reassignedConsignment = null;
+            UnAssignedConsignment consignment = service.CreateConsignment(DateTime.Today);
+            AssignedConsignment reassignedConsignment = null;
             User driverOne = new User() { UserKey = Guid.NewGuid() };
             User driverTwo = new User() { UserKey = Guid.NewGuid() };
 
-            consignment = service.AssignConsignmentToDriver(consignment.ConsignmentKey, driverOne.UserKey);
+            reassignedConsignment = service.AssignConsignmentToDriver(consignment.ConsignmentKey, driverOne.UserKey);
 
-            Xunit.Assert.NotSame(Guid.Empty, consignment.AssignedDriverKey);
+            Xunit.Assert.NotSame(Guid.Empty, reassignedConsignment.AssignedDriverKey);
 
             Xunit.Assert.DoesNotThrow(() => reassignedConsignment = service.ReAssignConsignment(consignment.ConsignmentKey, driverOne.UserKey, driverTwo.UserKey));
-
-            Xunit.Assert.NotSame(consignment.AssignedDriverKey, reassignedConsignment.AssignedDriverKey);
         }
 
         [Fact]
@@ -143,15 +138,15 @@ namespace DomainModel.Test.Tests
         {
             var service = new ConsignmentManagementService(_repository.Object);
 
-            Consignment consignment = service.CreateConsignment(DateTime.Today);
+            UnAssignedConsignment oUnAssignedConsignment = service.CreateConsignment(DateTime.Today);
+            AssignedConsignment oAssignedConsignment;
+
             User driver = new User() { UserKey = Guid.NewGuid() };
 
-            consignment = service.AssignConsignmentToDriver(consignment.ConsignmentKey, driver.UserKey);
-            Xunit.Assert.NotSame(Guid.Empty, consignment.AssignedDriverKey);
+            oAssignedConsignment = service.AssignConsignmentToDriver(oUnAssignedConsignment.ConsignmentKey, driver.UserKey);
+            Xunit.Assert.NotSame(Guid.Empty, oAssignedConsignment.AssignedDriverKey);
 
-            Xunit.Assert.DoesNotThrow(() => service.UnAssignConsignment(consignment.ConsignmentKey, driver.UserKey));
-
-            Xunit.Assert.Equal(Guid.Empty, consignment.AssignedDriverKey);
+            Xunit.Assert.DoesNotThrow(() => service.UnAssignConsignment(oUnAssignedConsignment.ConsignmentKey, driver.UserKey));
         }
     }
 }

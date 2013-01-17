@@ -20,12 +20,12 @@ namespace DomainModel.Services
             _consignmentManagementRepository = consignmentManagementRepository;
         }
 
-        public Consignment CreateConsignment(DateTime dtConsignmentDeliveryDate)
+        public UnAssignedConsignment CreateConsignment(DateTime dtConsignmentDeliveryDate)
         {
             return _consignmentManagementRepository.CreateConsignment(dtConsignmentDeliveryDate);
         }
 
-        public Consignment AssignConsignmentToDriver(Guid oConsignmentKey, Guid oDriverKey)
+        public AssignedConsignment AssignConsignmentToDriver(Guid oConsignmentKey, Guid oDriverKey)
         {
             if (oConsignmentKey == Guid.Empty)
                 throw new ArgumentOutOfRangeException("Consignment Key");
@@ -36,7 +36,7 @@ namespace DomainModel.Services
             return _consignmentManagementRepository.AssignConsignmentToDriver(oConsignmentKey, oDriverKey);
         }
 
-        public Consignment ReAssignConsignment(Guid oConsignmentKey, Guid oPreviousDriverKey, Guid oReAssignedDriverKey)
+        public AssignedConsignment ReAssignConsignment(Guid oConsignmentKey, Guid oPreviousDriverKey, Guid oReAssignedDriverKey)
         {
             if (oConsignmentKey == Guid.Empty)
                 throw new ArgumentOutOfRangeException("Consignment Key");
@@ -61,22 +61,17 @@ namespace DomainModel.Services
             _consignmentManagementRepository.UnAssignConsignment(oConsignmentKey, oAssignedDriverKey);
         }
 
-        public IEnumerable<Consignment> GetAllConsignments()
-        {
-            return _consignmentManagementRepository.GetAllConsignments();
-        }
-
-        public IEnumerable<Consignment> GetAssignedConsignments()
+        public IEnumerable<AssignedConsignment> GetAssignedConsignments()
         {
             return _consignmentManagementRepository.GetAssignedConsignments();
         }
 
-        public IEnumerable<Consignment> GetUnAssignedConsignments()
+        public IEnumerable<UnAssignedConsignment> GetUnAssignedConsignments()
         {
             return _consignmentManagementRepository.GetUnAssignedConsignments();
         }
 
-        public Consignment GetConsignmentByDriverKey(Guid oDriverKey)
+        public AssignedConsignment GetConsignmentByDriverKey(Guid oDriverKey)
         {
             if (oDriverKey == Guid.Empty)
                 throw new ArgumentOutOfRangeException("Driver Key");
@@ -84,7 +79,7 @@ namespace DomainModel.Services
             return _consignmentManagementRepository.GetConsignmentByDriverKey(oDriverKey);
         }
 
-        public IEnumerable<Consignment> GetCompletedConsignments()
+        public IEnumerable<CompletedConsignment> GetCompletedConsignments()
         {
             return _consignmentManagementRepository.GetCompletedConsignments();
         }

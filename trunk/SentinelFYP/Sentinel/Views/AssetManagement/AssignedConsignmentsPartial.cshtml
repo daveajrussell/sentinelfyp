@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DomainModel.Models.AssetModels.Consignment>
+﻿@model IEnumerable<DomainModel.Models.AssetModels.AssignedConsignment>
 @using Sentinel.Grid;
 
 @{
@@ -25,8 +25,6 @@
                 // remove grid
                 $(this).parents('tr:first').next().remove().slideUp();
             }
-
-
         });
     });
 
@@ -37,7 +35,10 @@
                             grid.CreateColumn(headerHorizontalAlignment: "center", headerText: "Items", dataFieldFormat: @<text> <a value="@item.ConsignmentKey" class="show ui-icon ui-icon-plus">Click me!</a> </text>),
                             grid.CreateColumn(dataField: "ConsignmentKey", headerText: "Consignment Key", headerHorizontalAlignment: "center"),
                             grid.CreateColumn(dataField: "AssignedDriverKey", headerText: "Assigned Driver Key", headerHorizontalAlignment: "center"),
-                            grid.CreateColumn(dataField: "ConsignmentDeliveryDate", headerText: "Consignment Delivery Date", headerHorizontalAlignment: "center")
+                            grid.CreateColumn(dataField: "AssignedDriverFirstName", headerText: "Driver First Name", headerHorizontalAlignment: "center"),
+                            grid.CreateColumn(dataField: "AssignedDriverLastName", headerText: "Driver Second Name", headerHorizontalAlignment: "center"),
+                            grid.CreateColumn(dataField: "AssignedDriverContactNumber", headerText: "Driver Contact Number", headerHorizontalAlignment: "center"), 
+                            grid.CreateColumn(dataField: "ConsignmentDateTime", headerText: "Consignment Created", headerHorizontalAlignment: "center")
                         },
                   pager: new Pager { Alignment = PagerAlign.Center, TotalRows = ViewBag.GridRecordCount, RowsPerPage = 5, CssClass = "pager" },
                   tableStyle: "table",
