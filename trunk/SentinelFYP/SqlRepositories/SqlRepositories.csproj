@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helper\Builders\ConsignmentBuilder.cs" />
+    <Compile Include="Helper\Builders\DeliveryItemBuilder.cs" />
     <Compile Include="Helper\Builders\GISBuilder.cs" />
     <Compile Include="Helper\Builders\PointLatLngBuilder.cs" />
     <Compile Include="Helper\Builders\RoleBuilder.cs" />

@@ -75,6 +75,7 @@ namespace Sentinel
             kernel.Bind<ISentinelAuthProvider>().To<SentinelAuthProvider>();
             kernel.Bind<IRoleService>().To<RoleService>();
             kernel.Bind<IConsignmentManagementService>().To<ConsignmentManagementService>();
+            kernel.Bind<IDeliveryItemManagementService>().To<DeliveryItemManagementService>();
 
             kernel.Bind<ISettingsRepository>().To<SettingsRepository>().WithConstructorArgument("baseDirectory", baseDirectory);
             kernel.Bind<IGHeatRepository>().To<GHeatRepository>();
@@ -83,6 +84,7 @@ namespace Sentinel
             kernel.Bind<IGISRepository>().To<SqlGISRepository>().WithConstructorArgument("connectionString", _connectionString);
             kernel.Bind<IRoleRepository>().To<SqlRoleRepository>().WithConstructorArgument("connectionString", _connectionString);
             kernel.Bind<IConsignmentManagementRepository>().To<SqlConsignmentManagementRepository>().WithConstructorArgument("connectionString", _connectionString);
+            kernel.Bind<IDeliveryItemManagementRepository>().To<SqlDeliveryItemManagementRepository>().WithConstructorArgument("connectionString", _connectionString);
             
             kernel.Inject(Membership.Provider);
             kernel.Inject(Roles.Provider);
