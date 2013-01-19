@@ -15,24 +15,6 @@ namespace SqlRepositories
     {
         private string _connectionString;
 
-        public IEnumerable<DeliveryItem> GetAllAssignedDeliveryItems()
-        {
-            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT * FROM [ASSET].[CONSIGNMENT_ITEMS]"))
-            {
-                return oSet.ToDeliveryItemSet();
-            }
-        }
-
-        public IEnumerable<DeliveryItem> GetConsignmentDeliveryItems(Guid oConsignmentKey)
-        {
-            var sqlParam = new SqlParameter("@IP_CONSIGNMENT_KEY", oConsignmentKey);
-
-            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT * FROM [ASSET].[CONSIGNMENT_ITEMS] WHERE CONSIGNMENT_KEY = @IP_CONSIGNMENT_KEY", sqlParam))
-            {
-                return oSet.ToDeliveryItemSet();
-            }
-        }
-
         public SqlDeliveryItemManagementRepository(string connectionString)
         {
             if (string.IsNullOrEmpty(connectionString))
@@ -41,24 +23,74 @@ namespace SqlRepositories
             _connectionString = connectionString;
         }
 
+        public AssignedDeliveryItem GetDeliveryItemByKey(Guid oDeliveryItemKey)
+        {
+            var sqlParam = new SqlParameter("@IP_DELIVERY_ITEM_KEY", oDeliveryItemKey);
+
+            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[ASSET].[GET_DELIVERY_ITEM_BY_KEY]", sqlParam))
+            {
+                return oSet.ToAssignedDeliveryItem();
+            }
+        }
+
+        public IEnumerable<AssignedDeliveryItem> GetAllAssignedDeliveryItems()
+        {
+            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[ASSET].[GET_ALL_ASSIGNED_DELIVERY_ITEMS]"))
+            {
+                return oSet.ToAssignedDeliveryItemSet();
+            }
+        }
+
+        public IEnumerable<AssignedDeliveryItem> GetConsignmentDeliveryItems(Guid oConsignmentKey)
+        {
+            var sqlParam = new SqlParameter("@IP_CONSIGNMENT_KEY", oConsignmentKey);
+
+            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[ASSET].[GET_ALL_CONSIGNMENT_DELIVERY_ITEMS]", sqlParam))
+            {
+                return oSet.ToAssignedDeliveryItemSet();
+            }
+        }
+
         public IEnumerable<DeliveryItem> GetAllUnassignedDeliveryItems()
         {
-            throw new NotImplementedException();
+            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[ASSET].[GET_ALL_UNASSIGNED_DELIVERY_ITEMS]"))
+            {
+                return oSet.ToDeliveryItemSet();
+            }
         }
 
-        public DeliveryItem AssignDeliveryItemToConsignment(Guid oDeliveryItemKey, Guid oConsingmentKey)
+        public void AssignDeliveryItemToConsignment(Guid oDeliveryItemKey, Guid oConsingmentKey)
         {
-            throw new NotImplementedException();
+            var arrParams = new SqlParameter[]
+            {
+                new SqlParameter("@IP_DELIVERY_ITEM_KEY", oDeliveryItemKey),
+                new SqlParameter("@IP_CONSIGNMENT_KEY", oConsingmentKey)
+            };
+
+            SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "[ASSET].[ASSIGN_DELIVERY_ITEM_TO_CONSIGNMENT]", arrParams);
         }
 
-        public DeliveryItem ReAssignDeliveryItem(Guid oDeliveryItemKey, Guid oPreviousConsignmentKey, Guid ReAssignedConsignmentKey)
+        public void ReAssignDeliveryItem(Guid oDeliveryItemKey, Guid oPreviousConsignmentKey, Guid oReAssignedConsignmentKey)
         {
-            throw new NotImplementedException();
+            var arrParams = new SqlParameter[]
+            {
+                new SqlParameter("@IP_DELIVERY_ITEM_KEY", oDeliveryItemKey),
+                new SqlParameter("@IP_PREVIOUS_CONSIGNMENT_KEY", oPreviousConsignmentKey),
+                new SqlParameter("@IP_REASSIGNED_CONSIGNMENT_KEY", oReAssignedConsignmentKey)
+            };
+
+            SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "[ASSET].[REASSIGN_DELIVERY_ITEM]", arrParams);
         }
 
-        public DeliveryItem UnAssignDeliveryItem(Guid oDeliveryItemKey, Guid oAssignedConsignmentKey)
+        public void UnAssignDeliveryItem(Guid oAssignmentKey, Guid oDeliveryItemKey)
         {
-            throw new NotImplementedException();
+            var arrParams = new SqlParameter[]
+            {
+                new SqlParameter("@IP_CONSIGNMENT_KEY", oAssignmentKey),
+                new SqlParameter("@IP_DELIVERY_ITEM_KEY", oDeliveryItemKey)
+            };
+
+            SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "[ASSET].[UNASSIGN_DELIVERY_ITEM]", arrParams);
         }
     }
 }
