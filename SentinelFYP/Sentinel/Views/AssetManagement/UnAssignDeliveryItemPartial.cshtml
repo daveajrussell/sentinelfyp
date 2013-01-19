@@ -15,6 +15,8 @@
                 false,
             modal:
                 true,
+            title:
+                "Un-Assign Delivery Item",
             buttons:
                 [
                     {
@@ -35,11 +37,10 @@
                     }
                 ]
         });
-        $('#unassign-dialog').open();
     });
 </script>
 
-<div id="unassign-dialog">
+<div id="unassign-dialog" style="display:none">
     <span>Are you sure you wish to un-assign this item?</span>
     <span id="span-consignment-key" value="@Model.ConsignmentKey"></span>
     <span id="span-item-key" value="@Model.DeliveryItemKey"></span>
