@@ -21,7 +21,7 @@ namespace Sentinel.Controllers
             },
             new MenuViewModel() {
                 Display = "Asset Management",
-                URL = "~/AssetManagement/Management"
+                URL = "~/AssetManagement/Index"
             },
             new MenuViewModel() {
                 Display = "Administration",

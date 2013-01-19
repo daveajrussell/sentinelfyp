@@ -4,7 +4,7 @@
     min-height: 500px;
     height: 100%;
     border-left: .2em solid #666;
-    background: url(../Content/images/ui-bg_diagonals-medium_50_999999_40x40.png) repeat; 
+    background: url(../Content/images/test.png)  repeat-x; 
     color: #000;
 }
 

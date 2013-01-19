@@ -96,6 +96,9 @@
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="PdfSharp">
+      <HintPath>..\ProjectDependancies\PdfSharp.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Services" />
@@ -138,12 +141,10 @@
     </Compile>
     <Compile Include="Grid\ASPRazorWebGrid.cs" />
     <Compile Include="Grid\Dynamic.cs" />
-    <Compile Include="Handlers\QRHandler.ashx.cs">
-      <DependentUpon>QRHandler.ashx</DependentUpon>
-    </Compile>
     <Compile Include="Helpers\ExtensionMethods\QRCodeHtmlHelper.cs" />
     <Compile Include="Helpers\ExtensionMethods\TileResult.cs" />
     <Compile Include="Helpers\ExtensionMethods\ToViewModel.cs" />
+    <Compile Include="Helpers\ExtensionMethods\PDFResult.cs" />
     <Compile Include="Infrastructure\ISentinelAuthProvider.cs" />
     <Compile Include="Infrastructure\SentinelAuthProvider.cs" />
     <Compile Include="Infrastructure\SentinelMembershipProvider.cs" />
@@ -171,6 +172,7 @@
     <Content Include="Content\images\desc.gif" />
     <Content Include="Content\images\FYP-Diagram.png" />
     <Content Include="Content\images\map_loader.gif" />
+    <Content Include="Content\images\test.png" />
     <Content Include="Content\images\ui-bg_diagonals-medium_50_999999_40x40.png" />
     <Content Include="Content\images\ui-bg_diagonals-medium_50_CC0033_40x40.png" />
     <Content Include="Content\images\ui-bg_diagonals-medium_50_fdf5ce_40x40.png" />
@@ -182,6 +184,10 @@
     <Content Include="Content\images\ui-bg_gloss-wave_35_EBF5FA_500x100.png" />
     <Content Include="Content\images\ui-bg_highlight-soft_100_FFFFFF_1x100.png" />
     <Content Include="Content\images\ui-bg_monitor.png" />
+    <Content Include="Content\images\ui-icon-minus_8E8F8F_13x13.png" />
+    <Content Include="Content\images\ui-icon-minus_hover_5586A3_13x13.png" />
+    <Content Include="Content\images\ui-icon-plus_8E8F8F_13x13.png" />
+    <Content Include="Content\images\ui-icon-plus_hover_5586A3_13x13.png" />
     <Content Include="Content\images\ui-icons_000000_256x240.png" />
     <Content Include="Content\images\ui-icons_50748C_256x240.png" />
     <Content Include="Content\images\ui-icons_FFFFFF_256x240.png" />
@@ -189,6 +195,7 @@
     <Content Include="Content\jquery-ui-1.10.0.custom.css" />
     <Content Include="Content\jquery-ui-1.10.0.custom.min.css" />
     <Content Include="Content\jquery.qtip.min.css" />
+    <Content Include="Content\v1_actions.css" />
     <Content Include="Content\v1_grid.css" />
     <Content Include="Content\v1_login.css" />
     <Content Include="Content\v1_header.css" />
@@ -196,7 +203,6 @@
     <Content Include="Content\v1_menu.css" />
     <Content Include="Content\v1_monitor.css" />
     <Content Include="Global.asax" />
-    <Content Include="Handlers\QRHandler.ashx" />
     <Content Include="Scripts\jquery-1.9.0.js" />
     <Content Include="Scripts\jquery-ui-1.10.0.custom.js" />
     <Content Include="Scripts\jquery-ui-1.10.0.custom.min.js" />
@@ -302,6 +308,9 @@
     <Content Include="Views\AssetManagement\ReAssignDeliveryItemPartial.cshtml" />
     <Content Include="Views\AssetManagement\UnAssignDeliveryItemPartial.cshtml" />
     <Content Include="Views\AssetManagement\AssignDeliveryItemPartial.cshtml" />
+    <Content Include="Views\AssetManagement\Index.cshtml" />
+    <Content Include="Views\AssetManagement\DeliveryItemManagement.cshtml" />
+    <Content Include="Views\AssetManagement\DriverManagement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">

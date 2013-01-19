@@ -21,9 +21,11 @@
 <div id="div-items-grid">
     @grid.GetHtml(columns: new ASPRazorWebGridColumn[]
                         {
-                            grid.CreateColumn(headerText: "Recipient Details", headerHorizontalAlignment: "center", dataFieldFormat: @<text> <span>@item.RecipientFirstName @item.RecipientLastName</span> <br /> <span> @item.RecipientAddress </span> <br /> <span> @item.RecipientTown</span> <br /> <span> @item.RecipientPostCode </span> </text>),
-                            grid.CreateColumn(headerText: "Tag", headerHorizontalAlignment: "center", dataFieldFormat: @<text> @{string key = item.DeliveryItemKey.ToString();} @(Html.QRCode(key)) </text>, itemHorizontalAlignment: "center"),
-                            grid.CreateColumn(headerText: "Un Assign Item", headerHorizontalAlignment: "center", dataFieldFormat: @<text> <input type="button" id="test" class="btn-unassign" value="@item.DeliveryItemKey" /> </text>)
+                            grid.CreateColumn(width: "13px", itemHorizontalAlignment: "center", dataFieldFormat: @<text> <input type="checkbox" value="@item.DeliveryItemKey" /> </text>),
+                            grid.CreateColumn(headerText: "Recipient Name", headerHorizontalAlignment: "center", dataFieldFormat: @<text> @item.RecipientFirstName @item.RecipientLastName </text>),
+                            grid.CreateColumn(headerText: "Recipient Address", headerHorizontalAlignment: "center", dataFieldFormat: @<text> @item.RecipientAddress  </text>),
+                            grid.CreateColumn(headerText: "Recipient Town", headerHorizontalAlignment: "center", dataFieldFormat: @<text> @item.RecipientTown </text>),
+                            grid.CreateColumn(headerText: "Recipient Post Code", headerHorizontalAlignment: "center", dataFieldFormat: @<text> @item.RecipientPostCode </text>),
                         },
                   pager: new Pager { Alignment = PagerAlign.Center, TotalRows = ViewBag.GridRecordCount, RowsPerPage = 5, CssClass = "pager" },
                   tableStyle: "table",

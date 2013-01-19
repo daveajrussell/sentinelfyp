@@ -23,17 +23,17 @@ namespace Sentinel.Helpers.ExtensionMethods
             if (_tile == null)
                 throw new ArgumentNullException("Tile");
 
-            using (MemoryStream stream = new MemoryStream())
+            using (MemoryStream oStream = new MemoryStream())
             {
                 HttpContextBase httpContext = context.HttpContext;
 
                 httpContext.Response.Clear();
                 httpContext.Response.ContentType = "image/png";
 
-                _tile.Save(stream, ImageFormat.Png);
+                _tile.Save(oStream, ImageFormat.Png);
                 _tile.Dispose();
 
-                stream.WriteTo(httpContext.Response.OutputStream);
+                oStream.WriteTo(httpContext.Response.OutputStream);
             }
         }
     }

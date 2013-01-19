@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Sentinel.Models.MenuViewModel>
+@{
+    ViewBag.Title = "Asset Management";
+}
+
+<h2>Asset Management</h2>
+
+<section id="section-title">
+
+</section>
+
+<section id="section-actions">
+    <ul id="actions">
+    @foreach (var item in Model)
+    {
+        <li class="action-item">
+            <a class="action-link" href="@Url.Content(@item.URL)">
+                @item.Display
+            </a>
+        </li>
+    }
+    </ul>
+</section>

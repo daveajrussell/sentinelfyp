@@ -9,24 +9,21 @@
 
     $(function () {
         $('.show-item').on('click', function () {
-            var consignmentKey = $(this).attr('value');
+            var consignmentKey = $(this).attr('key');
 
-            if ($(this).hasClass('ui-icon-plus')) {
-                $(this).removeClass('ui-icon-plus').addClass('ui-icon-minus');
+            if ($(this).hasClass('ui-plus')) {
+                $(this).removeClass('ui-plus').addClass('ui-minus');
 
                 var self = $(this);
 
-                // render grid
                 $.post('../AssetManagement/GetConsignmentDeliveryItem', { strConsignmentKey: consignmentKey }, function (data) {
                     self.parents('tr:first').after('<tr><td colspan="4">' + data + '</td></tr>').slideDown();
                 });
+
             } else {
-                $(this).removeClass('ui-icon-minus').addClass('ui-icon-plus');
-                // remove grid
+                $(this).removeClass('ui-minus').addClass('ui-plus');
                 $(this).parents('tr:first').next().remove().slideUp();
             }
-
-
         });
     });
 
@@ -34,7 +31,7 @@
 
 <div id="div-consignments-grid">
     @grid.GetHtml(columns: new ASPRazorWebGridColumn[]{
-                            grid.CreateColumn(headerHorizontalAlignment: "center", headerText: "Items", dataFieldFormat: @<text> <a value="@item.ConsignmentKey" class="show-item ui-icon ui-icon-plus"></a> </text>),
+                            grid.CreateColumn(itemHorizontalAlignment: "center", width: "13px", dataFieldFormat: @<text> <a key="@item.ConsignmentKey" class="show-item ui-plus"></a> </text>),
                             grid.CreateColumn(dataField: "ConsignmentKey", headerText: "Consignment Key", headerHorizontalAlignment: "center"),
                             grid.CreateColumn(dataField: "ConsignmentDateTime", headerText: "Consignment Created", headerHorizontalAlignment: "center"),
                         },

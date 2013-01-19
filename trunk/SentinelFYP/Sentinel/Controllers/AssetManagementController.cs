@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -7,6 +8,7 @@ using DomainModel.Interfaces.Services;
 using Sentinel.Grid;
 using Sentinel.Helpers;
 using Sentinel.Helpers.ExtensionMethods;
+using Sentinel.Models;
 
 namespace Sentinel.Controllers
 {
@@ -14,6 +16,25 @@ namespace Sentinel.Controllers
     {
         private IConsignmentManagementService _consignmentService;
         private IDeliveryItemManagementService _itemService;
+
+        List<MenuViewModel> menuItems = new List<MenuViewModel>()
+        {
+            new MenuViewModel()
+            {
+                Display = "Consignment Management",
+                URL = "~/AssetManagement/ConsignmentManagement"
+            },
+            new MenuViewModel()
+            {
+                Display = "Delivery Item Management",
+                URL = "~/AssetManagement/DeliveryItemManagement"
+            },
+            new MenuViewModel()
+            {
+                Display = "Driver Management",
+                URL = "~/AssetManagement/DriverManagement"
+            }
+        };
 
         public AssetManagementController(IConsignmentManagementService consignmentService, IDeliveryItemManagementService itemService)
         {
@@ -28,7 +49,22 @@ namespace Sentinel.Controllers
             _itemService = itemService;
         }
 
-        public ActionResult Management()
+        public ActionResult Index()
+        {
+            return View(menuItems);
+        }
+
+        public ActionResult ConsignmentManagement()
+        {
+            return View();
+        }
+
+        public ActionResult DeliveryItemManagement()
+        {
+            return View();
+        }
+
+        public ActionResult DriverManagement()
         {
             return View();
         }
@@ -60,7 +96,7 @@ namespace Sentinel.Controllers
         public ActionResult GetConsignmentDeliveryItem(string strConsignmentKey)
         {
             var gridParameters = GridParameters.GetGridParameters();
-            
+
             var oConsignmentKey = new Guid(strConsignmentKey);
 
             var data = _itemService.GetConsignmentDeliveryItems(oConsignmentKey);
@@ -84,7 +120,7 @@ namespace Sentinel.Controllers
         {
             var oConsignmentKey = new Guid(strConsignmentKey);
             var oDeliveryItemKey = new Guid(strDeliveryItemKey);
-            //_itemService.UnAssignDeliveryItem(oConsignmentKey, oDeliveryItemKey);
+            //_itemService.UnAssignDeliveryItem(oConsignmentKey, oDeliveryItemKey); DEBUG
 
             return GetDeliveryItems(oConsignmentKey);
         }
@@ -97,5 +133,14 @@ namespace Sentinel.Controllers
 
             return PartialView("DeliveryItemGridPartial", data);
         }
+
+        //[AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult PrintDeliveryItemLabel(string strDeliveryItemKey)
+        {
+            var oDeliveryItemKey = new Guid(strDeliveryItemKey);
+            var item = _itemService.GetDeliveryItemByKey(oDeliveryItemKey);
+            return new PDFResult(item);
+        }
+
     }
 }
