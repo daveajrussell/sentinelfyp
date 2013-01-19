@@ -20,34 +20,39 @@ namespace DomainModel.Services
             _repository = repository;
         }
 
-        public IEnumerable<DeliveryItem> GetAllAssignedDeliveryItems()
+        public AssignedDeliveryItem GetDeliveryItemByKey(Guid oDeliveryItemKey)
+        {
+            return _repository.GetDeliveryItemByKey(oDeliveryItemKey);
+        }
+
+        public IEnumerable<AssignedDeliveryItem> GetAllAssignedDeliveryItems()
         {
             return _repository.GetAllAssignedDeliveryItems();
         }
 
-        public IEnumerable<DeliveryItem> GetConsignmentDeliveryItems(Guid oConsignmentKey)
+        public IEnumerable<AssignedDeliveryItem> GetConsignmentDeliveryItems(Guid oConsignmentKey)
         {
             return _repository.GetConsignmentDeliveryItems(oConsignmentKey);
         }
 
         public IEnumerable<DeliveryItem> GetAllUnassignedDeliveryItems()
         {
-            throw new NotImplementedException();
+            return _repository.GetAllUnassignedDeliveryItems();
         }
 
-        public DeliveryItem AssignDeliveryItemToConsignment(Guid oDeliveryItemKey, Guid oConsingmentKey)
+        public void AssignDeliveryItemToConsignment(Guid oDeliveryItemKey, Guid oConsingmentKey)
         {
-            throw new NotImplementedException();
+            _repository.AssignDeliveryItemToConsignment(oDeliveryItemKey, oConsingmentKey);
         }
 
-        public DeliveryItem ReAssignDeliveryItem(Guid oDeliveryItemKey, Guid oPreviousConsignmentKey, Guid ReAssignedConsignmentKey)
+        public void ReAssignDeliveryItem(Guid oDeliveryItemKey, Guid oPreviousConsignmentKey, Guid oReAssignedConsignmentKey)
         {
-            throw new NotImplementedException();
+            _repository.ReAssignDeliveryItem(oDeliveryItemKey, oPreviousConsignmentKey, oReAssignedConsignmentKey);
         }
 
-        public DeliveryItem UnAssignDeliveryItem(Guid oDeliveryItemKey, Guid oAssignedConsignmentKey)
+        public void UnAssignDeliveryItem(Guid oAssignmentKey, Guid oDeliveryItemKey)
         {
-            throw new NotImplementedException();
+            _repository.UnAssignDeliveryItem(oAssignmentKey, oDeliveryItemKey);
         }
     }
 }

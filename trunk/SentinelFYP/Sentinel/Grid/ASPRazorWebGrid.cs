@@ -78,6 +78,11 @@ namespace Sentinel.Grid
                     if (!string.IsNullOrEmpty(style))
                         cell.MergeAttribute("style", style);
 
+                    if (!string.IsNullOrEmpty(item.HeaderText))
+                    {
+                        cell.SetInnerText(item.HeaderText ?? "");
+                    }
+
                     if (!string.IsNullOrEmpty(item.DataField))
                     {
                         cell.SetInnerText(item.HeaderText ?? item.DataField);
@@ -131,8 +136,14 @@ namespace Sentinel.Grid
                 {
                     var row = new TagBuilder("tr");
 
-                    if (!rowNormal && !string.IsNullOrEmpty(alternatingRowStyle))                    
+                    if (!rowNormal && !string.IsNullOrEmpty(alternatingRowStyle))
+                    {
                         row.Attributes["class"] = alternatingRowStyle;
+                    }
+                    else
+                    {
+                        row.Attributes["class"] = "normal";
+                    }
 
                     rowNormal = !rowNormal;
 

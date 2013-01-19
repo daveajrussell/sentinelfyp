@@ -1,24 +1,9 @@
-﻿@{
+﻿
+<script src="@Url.Content("~/Scripts/Views/Management.js")" type="text/javascript"></script>
+
+@{
     ViewBag.Title = "Management";
 }
-
-<script type="text/javascript">
-
-    $(function () {
-        $('#btn-get-assigned-consignments').on('click', function () {
-            $.post('../AssetManagement/GetAssignedConsignments', function (data) {
-                $('#div-consignments-grid').replaceWith(data);
-            });
-        });
-
-        $('#btn-get-unassigned-consignments').on('click', function () {
-            $.post('../AssetManagement/GetUnAssignedConsignments', function (data) {
-                $('#div-consignments-grid').replaceWith(data);
-            });
-        });
-    });
-
-</script>
 
 <h2>Management</h2>
 

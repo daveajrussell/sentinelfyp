@@ -1,0 +1,46 @@
+﻿@model DomainModel.Models.AssetModels.AssignedDeliveryItem
+
+<script type="text/javascript">
+    $(function () {
+
+        var consignmentKey = $('#span-consignment-key').attr('value');
+        var itemKey = $('#span-item-key').attr('value');
+
+        $('#unassign-dialog').dialog({
+            autoOpen:
+                true,
+            resizable:
+                false,
+            draggable:
+                false,
+            modal:
+                true,
+            buttons:
+                [
+                    {
+                        text: "Yes",
+                        click: function () {
+                            var self = this;
+                            $.post('../AssetManagement/UnAssignDeliveryItem', { strConsignmentKey: consignmentKey, strDeliveryItemKey: itemKey }, function (data) {
+                                $(self).dialog("close");
+                                $('#div-items-grid').replaceWith(data);
+                            });
+                        }
+                    },
+                    {
+                        text: "No",
+                        click: function () {
+                            $(this).dialog("destroy");
+                        }
+                    }
+                ]
+        });
+        $('#unassign-dialog').open();
+    });
+</script>
+
+<div id="unassign-dialog">
+    <span>Are you sure you wish to un-assign this item?</span>
+    <span id="span-consignment-key" value="@Model.ConsignmentKey"></span>
+    <span id="span-item-key" value="@Model.DeliveryItemKey"></span>
+</div>

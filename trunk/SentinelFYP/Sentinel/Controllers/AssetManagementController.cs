@@ -69,5 +69,33 @@ namespace Sentinel.Controllers
 
             return PartialView("DeliveryItemGridPartial", data);
         }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult GetUnAssignDeliveryItemPartial(string strDeliveryItemKey)
+        {
+            var oDeliveryItemKey = new Guid(strDeliveryItemKey);
+
+            var item = _itemService.GetDeliveryItemByKey(oDeliveryItemKey);
+            return PartialView("UnAssignDeliveryItemPartial", item);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult UnAssignDeliveryItem(string strConsignmentKey, string strDeliveryItemKey)
+        {
+            var oConsignmentKey = new Guid(strConsignmentKey);
+            var oDeliveryItemKey = new Guid(strDeliveryItemKey);
+            _itemService.UnAssignDeliveryItem(oConsignmentKey, oDeliveryItemKey);
+
+            return GetDeliveryItems(oConsignmentKey);
+        }
+
+        public ActionResult GetDeliveryItems(Guid oConsignmentKey)
+        {
+            var gridParameters = GridParameters.GetGridParameters();
+            var data = _itemService.GetConsignmentDeliveryItems(oConsignmentKey);
+            ViewBag.GridRecordCount = data.Count();
+
+            return PartialView("DeliveryItemGridPartial", data);
+        }
     }
 }

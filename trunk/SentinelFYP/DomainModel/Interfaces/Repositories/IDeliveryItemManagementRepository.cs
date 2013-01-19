@@ -8,11 +8,12 @@ namespace DomainModel.Interfaces.Repositories
 {
     public interface IDeliveryItemManagementRepository
     {
-        IEnumerable<DeliveryItem> GetAllAssignedDeliveryItems();
-        IEnumerable<DeliveryItem> GetConsignmentDeliveryItems(Guid oConsignmentKey);
+        AssignedDeliveryItem GetDeliveryItemByKey(Guid oDeliveryItemKey);
+        IEnumerable<AssignedDeliveryItem> GetAllAssignedDeliveryItems();
+        IEnumerable<AssignedDeliveryItem> GetConsignmentDeliveryItems(Guid oConsignmentKey);
         IEnumerable<DeliveryItem> GetAllUnassignedDeliveryItems();
-        DeliveryItem AssignDeliveryItemToConsignment(Guid oDeliveryItemKey, Guid oConsingmentKey);
-        DeliveryItem ReAssignDeliveryItem(Guid oDeliveryItemKey, Guid oPreviousConsignmentKey, Guid ReAssignedConsignmentKey);
-        DeliveryItem UnAssignDeliveryItem(Guid oDeliveryItemKey, Guid oAssignedConsignmentKey);
+        void AssignDeliveryItemToConsignment(Guid oDeliveryItemKey, Guid oConsingmentKey);
+        void ReAssignDeliveryItem(Guid oDeliveryItemKey, Guid oPreviousConsignmentKey, Guid oReAssignedConsignmentKey);
+        void UnAssignDeliveryItem(Guid oAssignmentKey, Guid oDeliveryItemKey);
     }
 }
