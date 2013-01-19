@@ -84,7 +84,7 @@ namespace Sentinel.Controllers
         {
             var oConsignmentKey = new Guid(strConsignmentKey);
             var oDeliveryItemKey = new Guid(strDeliveryItemKey);
-            _itemService.UnAssignDeliveryItem(oConsignmentKey, oDeliveryItemKey);
+            //_itemService.UnAssignDeliveryItem(oConsignmentKey, oDeliveryItemKey);
 
             return GetDeliveryItems(oConsignmentKey);
         }

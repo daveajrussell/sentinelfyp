@@ -7,12 +7,23 @@
     grid.UsePostBack = false;
 }
 
+<script type="text/javascript">
+    $(function () {
+        $('.btn-unassign').on('click', function () {
+            var itemKey = $(this).attr('value');
+            $.post('../AssetManagement/GetUnAssignDeliveryItemPartial', { strDeliveryItemKey: itemKey }, function (data) {
+                $('#div-consignments-grid').after(data);
+            });
+        });
+    });
+</script>
+
 <div id="div-items-grid">
     @grid.GetHtml(columns: new ASPRazorWebGridColumn[]
                         {
                             grid.CreateColumn(headerText: "Recipient Details", headerHorizontalAlignment: "center", dataFieldFormat: @<text> <span>@item.RecipientFirstName @item.RecipientLastName</span> <br /> <span> @item.RecipientAddress </span> <br /> <span> @item.RecipientTown</span> <br /> <span> @item.RecipientPostCode </span> </text>),
                             grid.CreateColumn(headerText: "Tag", headerHorizontalAlignment: "center", dataFieldFormat: @<text> @{string key = item.DeliveryItemKey.ToString();} @(Html.QRCode(key)) </text>, itemHorizontalAlignment: "center"),
-                            grid.CreateColumn(headerText: "Un Assign Item", headerHorizontalAlignment: "center", dataFieldFormat: @<text> <input type="button" class="btn-unassign" value="@item.DeliveryItemKey" /> </text>)
+                            grid.CreateColumn(headerText: "Un Assign Item", headerHorizontalAlignment: "center", dataFieldFormat: @<text> <input type="button" id="test" class="btn-unassign" value="@item.DeliveryItemKey" /> </text>)
                         },
                   pager: new Pager { Alignment = PagerAlign.Center, TotalRows = ViewBag.GridRecordCount, RowsPerPage = 5, CssClass = "pager" },
                   tableStyle: "table",
