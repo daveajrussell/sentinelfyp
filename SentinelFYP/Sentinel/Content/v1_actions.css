@@ -1,0 +1,41 @@
+﻿#section-actions
+{
+    
+}
+
+#actions
+{
+    list-style: none;
+    padding: 0;
+    margin:0;
+}
+
+.action-item
+{
+    display: inline-block;
+    font-size: 1.2em;
+    cursor: pointer;
+    white-space: nowrap;
+    color: #999999;
+    background-color: #fff;
+    border-radius: .5em;
+    height: 10em;
+    width: 18em;
+    margin: .2em;
+}
+
+.action-link
+{
+    position: relative;
+    display: block;
+    margin: .5em;
+    /*padding: .5em;
+    padding-top: 1em;*/
+}
+/*
+.link:hover
+{
+    background-color: #fff;
+    box-shadow: inset 0em .05em .1em rgba(0,0,0,0.4);
+}
+*/
