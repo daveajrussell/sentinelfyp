@@ -5,34 +5,35 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LastUsedBuildConfiguration>Debug</LastUsedBuildConfiguration>
+    <LastUsedBuildConfiguration>Release</LastUsedBuildConfiguration>
     <LastUsedPlatform>Any CPU</LastUsedPlatform>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA3/OP2nbYAEOeMO2CS9tqJAAAAAACAAAAAAAQZgAAAAEAACAAAADQpwqGZQYtapk5FZ0UENRWkxsRyZvw0L6e72Vj+vgnUAAAAAAOgAAAAAIAACAAAABxA5zl7J7W/o2oFN2jLR/cz9ZKKM6HwRtAmvVT8EXsViAAAAApPL5vas2MKCjxfUiCtnB4kalj/GQnZJaTMsvOy/ir+kAAAABo0P908mn0ZlTqqEXi26xiSQGRFIH1UjYSS/q4kWo3LidBePgbj8bR0/Z7RjasE5xDt7JJ3Flf3NbtA4Sswy28</EncryptedPassword>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/DomainModel.dll">
-      <publishTime>12/14/2012 11:28:27</publishTime>
+      <publishTime>01/16/2013 22:44:51</publishTime>
     </File>
     <File Include="bin/DomainModel.pdb">
       <publishTime>12/14/2012 11:28:27</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
-      <publishTime>12/14/2012 10:43:20</publishTime>
+      <publishTime>01/15/2013 17:15:33</publishTime>
     </File>
     <File Include="bin/GMap.NET.Core.dll">
-      <publishTime>12/14/2012 10:40:49</publishTime>
+      <publishTime>01/15/2013 17:15:06</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
-      <publishTime>12/14/2012 10:45:45</publishTime>
+      <publishTime>01/15/2013 17:15:50</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>12/14/2012 10:44:24</publishTime>
+      <publishTime>01/15/2013 17:16:24</publishTime>
     </File>
     <File Include="bin/Ninject.dll">
-      <publishTime>12/14/2012 10:46:51</publishTime>
+      <publishTime>01/15/2013 17:17:09</publishTime>
     </File>
     <File Include="bin/Ninject.Extensions.Wcf.dll">
-      <publishTime>12/14/2012 10:47:42</publishTime>
+      <publishTime>01/15/2013 17:16:29</publishTime>
     </File>
     <File Include="bin/Ninject.Extensions.Wcf.pdb">
       <publishTime>12/14/2012 10:47:42</publishTime>
@@ -41,34 +42,34 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/14/2012 10:46:51</publishTime>
     </File>
     <File Include="bin/Ninject.Web.Common.dll">
-      <publishTime>12/14/2012 10:46:52</publishTime>
+      <publishTime>01/15/2013 17:15:55</publishTime>
     </File>
     <File Include="bin/Ninject.Web.Common.pdb">
       <publishTime>12/14/2012 10:46:52</publishTime>
     </File>
     <File Include="bin/SqlDataAccess.dll">
-      <publishTime>12/14/2012 11:28:26</publishTime>
+      <publishTime>01/16/2013 22:44:51</publishTime>
     </File>
     <File Include="bin/SqlDataAccess.pdb">
       <publishTime>12/14/2012 11:28:26</publishTime>
     </File>
     <File Include="bin/SqlRepositories.dll">
-      <publishTime>12/14/2012 11:28:27</publishTime>
+      <publishTime>01/16/2013 22:44:52</publishTime>
     </File>
     <File Include="bin/SqlRepositories.pdb">
       <publishTime>12/14/2012 11:28:27</publishTime>
     </File>
     <File Include="bin/WebServices.dll">
-      <publishTime>12/15/2012 14:27:54</publishTime>
+      <publishTime>01/16/2013 22:44:52</publishTime>
     </File>
     <File Include="bin/WebServices.pdb">
       <publishTime>12/15/2012 14:27:54</publishTime>
     </File>
     <File Include="Global.asax">
-      <publishTime>12/14/2012 10:40:39</publishTime>
+      <publishTime>01/15/2013 17:14:04</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>12/14/2012 10:40:39</publishTime>
+      <publishTime>01/15/2013 17:14:03</publishTime>
     </File>
     <File Include="Scripts/jquery.signalR-1.0.0-alpha2.js">
       <publishTime>12/14/2012 10:40:39</publishTime>
@@ -77,13 +78,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/14/2012 10:40:39</publishTime>
     </File>
     <File Include="Services/AuthenticationService.svc">
-      <publishTime>12/15/2012 13:53:47</publishTime>
+      <publishTime>01/15/2013 17:14:04</publishTime>
+    </File>
+    <File Include="Services/DeliveryService.svc">
+      <publishTime>01/15/2013 17:14:04</publishTime>
     </File>
     <File Include="Services/LocationService.svc">
-      <publishTime>12/14/2012 10:40:39</publishTime>
+      <publishTime>01/15/2013 17:14:03</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>12/15/2012 14:27:54</publishTime>
+      <publishTime>01/16/2013 22:44:55</publishTime>
     </File>
   </ItemGroup>
 </Project>

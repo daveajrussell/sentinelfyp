@@ -30,3 +30,8 @@ C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\Sentinel.Tests\obj\Debug\Sentinel.Test
 C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\Sentinel.Tests\obj\Debug\Sentinel.Tests.pdb
 C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\Sentinel.Tests\bin\Debug\Ninject.pdb
 C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\Sentinel.Tests\bin\Debug\Ninject.xml
+C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\Sentinel.Tests\bin\Debug\DomainModel.Test.dll
+C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\Sentinel.Tests\bin\Debug\xunit.dll
+C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\Sentinel.Tests\bin\Debug\DomainModel.Test.pdb
+C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\Sentinel.Tests\bin\Debug\PdfSharp.dll
+C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\Sentinel.Tests\bin\Debug\Gma.QrCodeNet.Encoding.dll

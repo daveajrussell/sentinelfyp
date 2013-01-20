@@ -5,4 +5,5 @@ C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\SqlDataAccess\SqlDataAccess\obj\Debug\
 C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\SqlDataAccess\SqlDataAccess\obj\Debug\SqlDataAccess.pdb
 C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\SqlDataAccess\SqlDataAccess\bin\Debug\EntityFramework.dll
 C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\SqlDataAccess\SqlDataAccess\bin\Debug\EntityFramework.xml
-C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\SqlDataAccess\SqlDataAccess\obj\Debug\SqlDataAccess.csprojResolveAssemblyReference.cache
+C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\SqlDataAccess\SqlDataAccess\bin\Debug\SqlDataAccess.dll.CodeAnalysisLog.xml
+C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\SqlDataAccess\SqlDataAccess\bin\Debug\SqlDataAccess.dll.lastcodeanalysissucceeded
