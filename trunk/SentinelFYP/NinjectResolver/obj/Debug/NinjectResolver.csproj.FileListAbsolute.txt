@@ -7,3 +7,5 @@ C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\NinjectResolver\obj\Debug\NinjectResol
 C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\NinjectResolver\obj\Debug\NinjectResolver.pdb
 C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\NinjectResolver\bin\Debug\EntityFramework.dll
 C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\NinjectResolver\bin\Debug\EntityFramework.xml
+C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\NinjectResolver\bin\Debug\NinjectResolver.dll.CodeAnalysisLog.xml
+C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\NinjectResolver\bin\Debug\NinjectResolver.dll.lastcodeanalysissucceeded

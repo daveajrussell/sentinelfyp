@@ -6,3 +6,5 @@ C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\EFTest\bin\Debug\EntityFramework.xml
 C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\EFTest\obj\Debug\EFTest.exe
 C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\EFTest\obj\Debug\EFTest.pdb
 C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\EFTest\obj\Debug\EFTest.csprojResolveAssemblyReference.cache
+C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\EFTest\bin\Debug\EFTest.exe.CodeAnalysisLog.xml
+C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\EFTest\bin\Debug\EFTest.exe.lastcodeanalysissucceeded
