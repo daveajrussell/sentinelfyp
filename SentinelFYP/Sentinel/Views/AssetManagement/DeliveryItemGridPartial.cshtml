@@ -9,19 +9,28 @@
 
 <script type="text/javascript">
     $(function () {
-        $('.btn-unassign').on('click', function () {
-            var itemKey = $(this).attr('value');
-            $.post('../AssetManagement/GetUnAssignDeliveryItemPartial', { strDeliveryItemKey: itemKey }, function (data) {
-                $('#div-consignments-grid').after(data);
+        $('#btnAssignItems').on('click', function () {
+            alert('boop');
+        });
+
+        $('#btnUnassignItems').on('click', function () {
+            
+            var keys = new Array();
+            $('.keys:checked').each(function () {
+                keys.push($(this).val());
+            });
+
+            $.post('../AssetManagement/GetUnAssignDeliveryItemPartial', { strDeliveryItemKeys: keys .toString()}, function (data) {
+                $('#items-grid').after(data);
             });
         });
     });
 </script>
 
-<div id="div-items-grid">
+<section id="items-grid">
     @grid.GetHtml(columns: new ASPRazorWebGridColumn[]
                         {
-                            grid.CreateColumn(width: "13px", itemHorizontalAlignment: "center", dataFieldFormat: @<text> <input type="checkbox" value="@item.DeliveryItemKey" /> </text>),
+                            grid.CreateColumn(width: "13px", itemHorizontalAlignment: "center", dataFieldFormat: @<text> <input class="keys" type="checkbox" value="@item.DeliveryItemKey" /> </text>),
                             grid.CreateColumn(headerText: "Recipient Name", headerHorizontalAlignment: "center", dataFieldFormat: @<text> @item.RecipientFirstName @item.RecipientLastName </text>),
                             grid.CreateColumn(headerText: "Recipient Address", headerHorizontalAlignment: "center", dataFieldFormat: @<text> @item.RecipientAddress  </text>),
                             grid.CreateColumn(headerText: "Recipient Town", headerHorizontalAlignment: "center", dataFieldFormat: @<text> @item.RecipientTown </text>),
@@ -31,6 +40,6 @@
                   tableStyle: "table",
                   headerStyle: "head",
                   alternatingRowStyle: "alt")
-</div>
+</section>
 
 @Html.Action("DeliveryItemsGridActions")

@@ -20,9 +20,9 @@ namespace DomainModel.Services
             _repository = repository;
         }
 
-        public AssignedDeliveryItem GetDeliveryItemByKey(Guid oDeliveryItemKey)
+        public IEnumerable<AssignedDeliveryItem> GetDeliveryItemsByKey(IEnumerable<Guid> oDeliveryItemKeys)
         {
-            return _repository.GetDeliveryItemByKey(oDeliveryItemKey);
+            return _repository.GetDeliveryItemsByKey(oDeliveryItemKeys);
         }
 
         public IEnumerable<AssignedDeliveryItem> GetAllAssignedDeliveryItems()
@@ -40,19 +40,19 @@ namespace DomainModel.Services
             return _repository.GetAllUnassignedDeliveryItems();
         }
 
-        public void AssignDeliveryItemToConsignment(Guid oDeliveryItemKey, Guid oConsingmentKey)
+        public void AssignDeliveryItemsToConsignment(IEnumerable<Guid> oDeliveryItemKeys, Guid oConsingmentKey)
         {
-            _repository.AssignDeliveryItemToConsignment(oDeliveryItemKey, oConsingmentKey);
+            _repository.AssignDeliveryItemsToConsignment(oDeliveryItemKeys, oConsingmentKey);
         }
 
-        public void ReAssignDeliveryItem(Guid oDeliveryItemKey, Guid oPreviousConsignmentKey, Guid oReAssignedConsignmentKey)
+        public void ReAssignDeliveryItems(IEnumerable<Guid> oDeliveryItemKeys, Guid oPreviousConsignmentKey, Guid oReAssignedConsignmentKey)
         {
-            _repository.ReAssignDeliveryItem(oDeliveryItemKey, oPreviousConsignmentKey, oReAssignedConsignmentKey);
+            _repository.ReAssignDeliveryItems(oDeliveryItemKeys, oPreviousConsignmentKey, oReAssignedConsignmentKey);
         }
 
-        public void UnAssignDeliveryItem(Guid oAssignmentKey, Guid oDeliveryItemKey)
+        public void UnAssignDeliveryItems(Guid oAssignmentKey, IEnumerable<Guid> oDeliveryItemKeys)
         {
-            _repository.UnAssignDeliveryItem(oAssignmentKey, oDeliveryItemKey);
+            _repository.UnAssignDeliveryItems(oAssignmentKey, oDeliveryItemKeys);
         }
     }
 }

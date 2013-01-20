@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Xml.Linq;
 using DomainModel.Interfaces.Repositories;
 using DomainModel.Models.AssetModels;
 using Sentinel.SqlDataAccess;
@@ -23,13 +24,15 @@ namespace SqlRepositories
             _connectionString = connectionString;
         }
 
-        public AssignedDeliveryItem GetDeliveryItemByKey(Guid oDeliveryItemKey)
+        public IEnumerable<AssignedDeliveryItem> GetDeliveryItemsByKey(IEnumerable<Guid> oDeliveryItemKeys)
         {
-            var sqlParam = new SqlParameter("@IP_DELIVERY_ITEM_KEY", oDeliveryItemKey);
+            var oXml = GetXDoc(oDeliveryItemKeys);
 
-            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[ASSET].[GET_DELIVERY_ITEM_BY_KEY]", sqlParam))
+            var sqlParam = new SqlParameter("@IP_DELIVERY_ITEM_KEYS", oXml.ToString());
+
+            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[ASSET].[GET_DELIVERY_ITEMS_BY_KEY]", sqlParam))
             {
-                return oSet.ToAssignedDeliveryItem();
+                return oSet.ToAssignedDeliveryItemSet();
             }
         }
 
@@ -59,22 +62,22 @@ namespace SqlRepositories
             }
         }
 
-        public void AssignDeliveryItemToConsignment(Guid oDeliveryItemKey, Guid oConsingmentKey)
+        public void AssignDeliveryItemsToConsignment(IEnumerable<Guid> oDeliveryItemKeys, Guid oConsingmentKey)
         {
             var arrParams = new SqlParameter[]
             {
-                new SqlParameter("@IP_DELIVERY_ITEM_KEY", oDeliveryItemKey),
+                //new SqlParameter("@IP_DELIVERY_ITEM_KEY", oDeliveryItemKeys), change to XML
                 new SqlParameter("@IP_CONSIGNMENT_KEY", oConsingmentKey)
             };
 
             SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "[ASSET].[ASSIGN_DELIVERY_ITEM_TO_CONSIGNMENT]", arrParams);
         }
 
-        public void ReAssignDeliveryItem(Guid oDeliveryItemKey, Guid oPreviousConsignmentKey, Guid oReAssignedConsignmentKey)
+        public void ReAssignDeliveryItems(IEnumerable<Guid> oDeliveryItemKeys, Guid oPreviousConsignmentKey, Guid oReAssignedConsignmentKey)
         {
             var arrParams = new SqlParameter[]
             {
-                new SqlParameter("@IP_DELIVERY_ITEM_KEY", oDeliveryItemKey),
+                //new SqlParameter("@IP_DELIVERY_ITEM_KEY", oDeliveryItemKeys), change to XML
                 new SqlParameter("@IP_PREVIOUS_CONSIGNMENT_KEY", oPreviousConsignmentKey),
                 new SqlParameter("@IP_REASSIGNED_CONSIGNMENT_KEY", oReAssignedConsignmentKey)
             };
@@ -82,15 +85,23 @@ namespace SqlRepositories
             SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "[ASSET].[REASSIGN_DELIVERY_ITEM]", arrParams);
         }
 
-        public void UnAssignDeliveryItem(Guid oAssignmentKey, Guid oDeliveryItemKey)
+        public void UnAssignDeliveryItems(Guid oAssignmentKey, IEnumerable<Guid> oDeliveryItemKeys)
         {
+            var oXml = GetXDoc(oDeliveryItemKeys);
+
             var arrParams = new SqlParameter[]
             {
                 new SqlParameter("@IP_CONSIGNMENT_KEY", oAssignmentKey),
-                new SqlParameter("@IP_DELIVERY_ITEM_KEY", oDeliveryItemKey)
+                new SqlParameter("@IP_DELIVERY_ITEM_KEYS", oXml.ToString())
             };
 
-            SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "[ASSET].[UNASSIGN_DELIVERY_ITEM]", arrParams);
+            SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "[ASSET].[UNASSIGN_DELIVERY_ITEMS]", arrParams);
+        }
+
+        private XDocument GetXDoc(IEnumerable<Guid> oKeys)
+        {
+            return new XDocument(new XElement("ITEM_KEYS", from key in oKeys
+                                                           select new XElement("ITEM", new XAttribute("KEY", key))));
         }
     }
 }
