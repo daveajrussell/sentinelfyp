@@ -5,11 +5,10 @@ using System.Web;
 
 namespace Sentinel.Models
 {
-    public class MenuViewModel
+    public class ActionButtonsViewModel
     {
-        public string ID { get; set; }
-        public string URL { get; set; }
+        public string Action { get; set; }
         public string Display { get; set; }
-        public string Description { get; set; }
+        public string Javascript { get; set; }
     }
 }

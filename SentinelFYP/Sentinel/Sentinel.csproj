@@ -149,6 +149,7 @@
     <Compile Include="Infrastructure\SentinelAuthProvider.cs" />
     <Compile Include="Infrastructure\SentinelMembershipProvider.cs" />
     <Compile Include="Infrastructure\SentinelRoleProvider.cs" />
+    <Compile Include="Models\ActionButtonsViewModel.cs" />
     <Compile Include="Models\MenuViewModel.cs" />
     <Compile Include="Models\Tracking.cs" />
     <Compile Include="Models\LogonUserViewModel.cs" />
@@ -169,6 +170,7 @@
     <Content Include="Content\etc\color-schemes\pbj.png" />
     <Content Include="Content\etc\color-schemes\pgaitch.png" />
     <Content Include="Content\images\asc.gif" />
+    <Content Include="Content\images\bgs\management-img.png" />
     <Content Include="Content\images\desc.gif" />
     <Content Include="Content\images\FYP-Diagram.png" />
     <Content Include="Content\images\map_loader.gif" />
@@ -199,6 +201,7 @@
     <Content Include="Content\v1_grid.css" />
     <Content Include="Content\v1_login.css" />
     <Content Include="Content\v1_header.css" />
+    <Content Include="Content\v1_management.css" />
     <Content Include="Content\v1_master.css" />
     <Content Include="Content\v1_menu.css" />
     <Content Include="Content\v1_monitor.css" />
@@ -311,6 +314,11 @@
     <Content Include="Views\AssetManagement\Index.cshtml" />
     <Content Include="Views\AssetManagement\DeliveryItemManagement.cshtml" />
     <Content Include="Views\AssetManagement\DriverManagement.cshtml" />
+    <Content Include="Views\AssetManagement\ConsignmentManagement.cshtml" />
+    <Content Include="Views\AssetManagement\ConsignmentManagement\Assigned.cshtml" />
+    <Content Include="Views\AssetManagement\ConsignmentManagement\UnAssigned.cshtml" />
+    <Content Include="Views\ActionButtons\PageActionButtonsPartial.cshtml" />
+    <Content Include="Views\ActionButtons\GridActionButtonsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">

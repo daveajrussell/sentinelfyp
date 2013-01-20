@@ -22,17 +22,82 @@ namespace Sentinel.Controllers
             new MenuViewModel()
             {
                 Display = "Consignment Management",
-                URL = "~/AssetManagement/ConsignmentManagement"
+                URL = "~/AssetManagement/ConsignmentManagement",
+                Description = "Do Consignment Stuff"
             },
             new MenuViewModel()
             {
                 Display = "Delivery Item Management",
-                URL = "~/AssetManagement/DeliveryItemManagement"
+                URL = "~/AssetManagement/DeliveryItemManagement",
+                Description = "Do Delivery Item Stuff"
             },
             new MenuViewModel()
             {
                 Display = "Driver Management",
-                URL = "~/AssetManagement/DriverManagement"
+                URL = "~/AssetManagement/DriverManagement",
+                Description = "Do Driver Stuff"
+            }
+        };
+
+        List<MenuViewModel> consignmentManagementOptions = new List<MenuViewModel>()
+        {
+            new MenuViewModel()
+            {
+                ID = "AssignedConsignments",
+                Display = "Assigned Consignments",
+                Description = "Display all consignments that have been assigned to a driver"
+            },
+            new MenuViewModel()
+            {
+                ID = "UnAssignedConsignments",
+                Display = "Unassigned Consignments",
+                Description = "Display all consignents that have not yet been assigned"
+            }
+        };
+
+        List<ActionButtonsViewModel> consignmentsDeliveryItemGridActions = new List<ActionButtonsViewModel>()
+        {
+            new ActionButtonsViewModel()
+            {
+                Display = "Unassign Selected Items"
+            },
+            new ActionButtonsViewModel()
+            {
+                Display = "Assign Items"
+            }
+        };
+
+        List<ActionButtonsViewModel> assignedConsignmentsPageActions = new List<ActionButtonsViewModel>()
+        {
+            new ActionButtonsViewModel()
+            {
+                Display = "Back",
+                Javascript = "javascript:history.back(1)"
+            },
+            new ActionButtonsViewModel()
+            {
+                Display = "Unassign Selected Consignments"
+            },
+            new ActionButtonsViewModel()
+            {
+                Display = "Reassign Selected Consignments"
+            },
+            new ActionButtonsViewModel()
+            {
+                Display = "Print Labels For Selected Consignments"
+            }
+        };
+
+        List<ActionButtonsViewModel> unassignedConsignmentsPageActions = new List<ActionButtonsViewModel>()
+        {
+            new ActionButtonsViewModel()
+            {
+                Display = "Back",
+                Javascript = "javascript:history.back(1)"
+            },
+           new ActionButtonsViewModel()
+            {
+                Display = "Assign Selected Consignments"
             }
         };
 
@@ -56,7 +121,37 @@ namespace Sentinel.Controllers
 
         public ActionResult ConsignmentManagement()
         {
-            return View();
+            return View(consignmentManagementOptions);
+        }
+
+        public ActionResult AssignedConsignments()
+        {
+            var gridParameters = GridParameters.GetGridParameters();
+            var data = _consignmentService.GetAssignedConsignments();
+
+            ViewBag.GridRecordCount = data.Count();
+
+            return View("ConsignmentManagement/Assigned", data);
+        }
+
+        public ActionResult AssignedConsignmentsPageActions()
+        {
+            return PartialView("../ActionButtons/PageActionButtonsPartial", assignedConsignmentsPageActions);
+        }
+
+        public ActionResult UnAssignedConsignments()
+        {
+            var gridParameters = GridParameters.GetGridParameters();
+            var data = _consignmentService.GetUnAssignedConsignments();
+
+            ViewBag.GridRecordCount = data.Count();
+
+            return View("ConsignmentManagement/UnAssigned", data);
+        }
+
+        public ActionResult UnAssignedConsignmentsPageActions()
+        {
+            return PartialView("../ActionButtons/PageActionButtonsPartial", unassignedConsignmentsPageActions);
         }
 
         public ActionResult DeliveryItemManagement()
@@ -70,48 +165,27 @@ namespace Sentinel.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult GetAssignedConsignments()
-        {
-            var gridParameters = GridParameters.GetGridParameters();
-            var data = _consignmentService.GetAssignedConsignments();
-
-            ViewBag.GridRecordCount = data.Count();
-
-            return PartialView("AssignedConsignmentsPartial", data);
-        }
-
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult GetUnAssignedConsignments()
-        {
-            var gridParameters = GridParameters.GetGridParameters();
-            var data = _consignmentService.GetUnAssignedConsignments();
-
-            ViewBag.GridRecordCount = data.Count();
-
-            return PartialView("UnAssignedConsignmentsPartial", data);
-        }
-
-
-        [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult GetConsignmentDeliveryItem(string strConsignmentKey)
         {
             var gridParameters = GridParameters.GetGridParameters();
-
             var oConsignmentKey = new Guid(strConsignmentKey);
-
             var data = _itemService.GetConsignmentDeliveryItems(oConsignmentKey);
-
             ViewBag.GridRecordCount = data.Count();
 
             return PartialView("DeliveryItemGridPartial", data);
+        }
+
+        public ActionResult DeliveryItemsGridActions()
+        {
+            return PartialView("../ActionButtons/GridActionButtonsPartial", consignmentsDeliveryItemGridActions);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult GetUnAssignDeliveryItemPartial(string strDeliveryItemKey)
         {
             var oDeliveryItemKey = new Guid(strDeliveryItemKey);
-
             var item = _itemService.GetDeliveryItemByKey(oDeliveryItemKey);
+
             return PartialView("UnAssignDeliveryItemPartial", item);
         }
 
@@ -120,7 +194,7 @@ namespace Sentinel.Controllers
         {
             var oConsignmentKey = new Guid(strConsignmentKey);
             var oDeliveryItemKey = new Guid(strDeliveryItemKey);
-            //_itemService.UnAssignDeliveryItem(oConsignmentKey, oDeliveryItemKey); DEBUG
+            _itemService.UnAssignDeliveryItem(oConsignmentKey, oDeliveryItemKey);
 
             return GetDeliveryItems(oConsignmentKey);
         }
@@ -134,11 +208,11 @@ namespace Sentinel.Controllers
             return PartialView("DeliveryItemGridPartial", data);
         }
 
-        //[AcceptVerbs(HttpVerbs.Post)]
         public ActionResult PrintDeliveryItemLabel(string strDeliveryItemKey)
         {
             var oDeliveryItemKey = new Guid(strDeliveryItemKey);
             var item = _itemService.GetDeliveryItemByKey(oDeliveryItemKey);
+
             return new PDFResult(item);
         }
 

@@ -2,13 +2,19 @@
 @using Sentinel.Grid;
 
 @{
+    ViewBag.Title = "Assigned Consignments";
+}
+
+
+@{
     var grid = new ASPRazorWebGrid(source: Model);
     grid.UsePostBack = false;
 }
 
-<section class="consignment-grid">
+<section>
     @grid.GetHtml(columns: new ASPRazorWebGridColumn[]{
                             grid.CreateColumn(headerHorizontalAlignment: "center", headerText: "Items", dataFieldFormat: @<text> <a value="@item.ConsignmentKey" class="show-items ui-icon ui-icon-plus"></a> </text>),
+                            
                             grid.CreateColumn(dataField: "ConsignmentKey", headerText: "Consignment Key", headerHorizontalAlignment: "center"),
                             grid.CreateColumn(dataField: "AssignedDriverKey", headerText: "Assigned Driver Key", headerHorizontalAlignment: "center"),
                             grid.CreateColumn(dataField: "AssignedDriverFirstName", headerText: "Driver First Name", headerHorizontalAlignment: "center"),
@@ -21,3 +27,5 @@
                   headerStyle: "head",
                   alternatingRowStyle: "alt")
 </section>
+
+@Html.Action("AssignedConsignmentsPageActions")
