@@ -4,13 +4,13 @@
         var self = this;
 
         $(function () {
-            $('#btn-get-assigned-consignments').on('click', function () {
+            /*$('#GetAssignedConsignments').on('click', function () {
                 self.GetAssignedConsignments();
             });
 
-            $('#btn-get-unassigned-consignments').on('click', function () {
+            $('#GetUnAssignedConsignments').on('click', function () {
                 self.GetUnAssignedConsignments();
-            });
+            });*/
 
             $('.btn-unassign').on('click', function () {
                 var itemKey = $(this).attr('value');
@@ -24,22 +24,22 @@
         });
 
     },
-    
+    /*
     GetAssignedConsignments: function () {
         $.post('../AssetManagement/GetAssignedConsignments', function (data) {
-            $('#div-consignments-grid').replaceWith(data);
+            $('.consignment-management').replaceWith(data);
         });
     },
 
     GetUnAssignedConsignments: function () {
         $.post('../AssetManagement/GetUnAssignedConsignments', function (data) {
-            $('#div-consignments-grid').replaceWith(data);
+            $('.consignment-management').replaceWith(data);
         });
-    },
+    },*/
 
     GetUnAssignedDeliveryItems: function (itemKey) {
         $.post('../AssetManagement/GetUnAssignDeliveryItemPartial', { strDeliveryItemKey: itemKey }, function (data) {
-            $('#div-consignments-grid').after(data);
+            $('.consignment-management').after(data);
         });
     },
 
@@ -48,11 +48,13 @@
             $(self).removeClass('ui-icon-plus').addClass('ui-icon-minus');
 
             $.post('../AssetManagement/GetConsignmentDeliveryItem', { strConsignmentKey: consignmentKey }, function (data) {
-                $(self).parents('tr:first').after('<tr><td colspan="4">' + data + '</td></tr>').slideDown();
+                alert('yeahno');
+                $(self).parents('tr:first').after('<tr class="child"><td colspan="4">' + data + '</td></tr>').slideDown();
             });
         } else {
             $(this).removeClass('ui-icon-minus').addClass('ui-icon-plus');
-            $(this).parents('tr:first').next().remove().slideUp();
+            //$(this).parents('tr:first').next().remove().slideUp();
+            $(this).find('.child').remove().slideUp();
         }
     }
 };

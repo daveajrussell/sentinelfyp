@@ -2,6 +2,10 @@
 @using Sentinel.Grid;
 
 @{
+    ViewBag.Title = "Unassigned Consignments";
+}
+
+@{
     var grid = new ASPRazorWebGrid(source: Model);
 }
 
@@ -29,9 +33,10 @@
 
 </script>
 
-<section id="asset-management" class="consignment-grid">
+<section>
     @grid.GetHtml(columns: new ASPRazorWebGridColumn[]{
-                            grid.CreateColumn(itemHorizontalAlignment: "center", width: "13px", dataFieldFormat: @<text> <a key="@item.ConsignmentKey" class="show-item ui-plus"></a> </text>),
+                            grid.CreateColumn(itemHorizontalAlignment: "center", width: "13px", dataFieldFormat: @<text> <a key="@item.ConsignmentKey" class="show-item ui-plus"></a></text>),
+                            grid.CreateColumn(width: "13px", itemHorizontalAlignment: "center", dataFieldFormat: @<text> <input type="checkbox" value="@item.ConsignmentKey" /> </text>),
                             grid.CreateColumn(dataField: "ConsignmentKey", headerText: "Consignment Key", headerHorizontalAlignment: "center"),
                             grid.CreateColumn(dataField: "ConsignmentDateTime", headerText: "Consignment Created", headerHorizontalAlignment: "center"),
                         },
@@ -40,3 +45,5 @@
                   headerStyle: "head",
                   alternatingRowStyle: "alt")
 </section>
+
+@Html.Action("UnAssignedConsignmentsPageActions")
