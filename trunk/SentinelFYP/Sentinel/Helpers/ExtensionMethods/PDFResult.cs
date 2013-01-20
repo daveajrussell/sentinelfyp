@@ -18,16 +18,14 @@ namespace Sentinel.Helpers.ExtensionMethods
 {
     public class PDFResult : ActionResult
     {
-        //private IEnumerable<AssignedDeliveryItem> _items;
-        private AssignedDeliveryItem _item;
+        private IEnumerable<AssignedDeliveryItem> _items;
 
-        public PDFResult(/*IEnumerable<AssignedDeliveryItem> items*/AssignedDeliveryItem item)
+        public PDFResult(IEnumerable<AssignedDeliveryItem> items)
         {
-            /*if (items.Count() <= 0)
+            if (items.Count() <= 0)
                 throw new ArgumentNullException("Collection contains no elements");
 
-            _items = items;*/
-            _item = item;
+            _items = items;
         }
 
         public override void ExecuteResult(ControllerContext context)
@@ -51,38 +49,37 @@ namespace Sentinel.Helpers.ExtensionMethods
             // Create a font
             XFont font = new XFont("Verdana", 12, XFontStyle.Bold);
 
-            // Draw the text
-            /*foreach (var item in _items)
-            {
-                gfx.DrawString(item.RecipientFirstName, font, XBrushes.Black, new XRect(0, 0, page.Width, page.Height), XStringFormats.Center);
-                gfx.DrawString(item.RecipientLastName, font, XBrushes.Black, new XRect(0, 0, page.Width, page.Height), XStringFormats.Center);
-                gfx.DrawString(item.RecipientAddress, font, XBrushes.Black, new XRect(0, 0, page.Width, page.Height), XStringFormats.Center);
-                gfx.DrawString(item.RecipientTown, font, XBrushes.Black, new XRect(0, 0, page.Width, page.Height), XStringFormats.Center);
-                gfx.DrawString(item.RecipientPostCode, font, XBrushes.Black, new XRect(0, 0, page.Width, page.Height), XStringFormats.Center);
-            }*/
-
-            gfx.DrawString(_item.RecipientFirstName + " " + _item.RecipientLastName, font, XBrushes.Black, new XRect(10, 30, page.Width, page.Height), XStringFormats.TopLeft);
-            gfx.DrawString(_item.RecipientAddress, font, XBrushes.Black, new XRect(10, 45, page.Width, page.Height), XStringFormats.TopLeft);
-            gfx.DrawString(_item.RecipientTown, font, XBrushes.Black, new XRect(10, 60, page.Width, page.Height), XStringFormats.TopLeft);
-            gfx.DrawString(_item.RecipientPostCode, font, XBrushes.Black, new XRect(10, 75, page.Width, page.Height), XStringFormats.TopLeft);
-
-            var qrString = "http://webservices.daveajrussell.com/Services/DeliveryService.svc/GetDeliveryInformation/" + _item.DeliveryItemKey;
-
+            // Create QR objects
             QrEncoder qrEncoder = new QrEncoder(ErrorCorrectionLevel.H);
             QrCode qrCode = new QrCode();
-            Image qrImage;
-
-            qrEncoder.TryEncode(qrString, out qrCode);
             Renderer renderer = new Renderer(2, Brushes.Black, Brushes.White);
 
-            using (MemoryStream oStream = new MemoryStream())
-            {
-                renderer.WriteToStream(qrCode.Matrix, oStream, ImageFormat.Png);
-                qrImage = Bitmap.FromStream(oStream);
-            }
+            int _Y = 15;
 
-            gfx.DrawImage(XImage.FromGdiPlusImage(qrImage), new XPoint(300, 10));
-            
+            // Draw the text
+            foreach (var item in _items)
+            {
+                gfx.DrawString(item.RecipientFirstName, font, XBrushes.Black, new XRect(10, _Y += 15, page.Width, page.Height), XStringFormats.Center);
+                gfx.DrawString(item.RecipientLastName, font, XBrushes.Black, new XRect(10, _Y += 15, page.Width, page.Height), XStringFormats.Center);
+                gfx.DrawString(item.RecipientAddress, font, XBrushes.Black, new XRect(10, _Y += 15, page.Width, page.Height), XStringFormats.Center);
+                gfx.DrawString(item.RecipientTown, font, XBrushes.Black, new XRect(10, _Y += 15, page.Width, page.Height), XStringFormats.Center);
+                gfx.DrawString(item.RecipientPostCode, font, XBrushes.Black, new XRect(10, _Y += 15, page.Width, page.Height), XStringFormats.Center);
+
+                var qrString = "http://webservices.daveajrussell.com/Services/DeliveryService.svc/GetDeliveryInformation/" + item.DeliveryItemKey;
+
+                Image qrImage;
+                qrEncoder.TryEncode(qrString, out qrCode);
+
+                using (MemoryStream oStream = new MemoryStream())
+                {
+                    renderer.WriteToStream(qrCode.Matrix, oStream, ImageFormat.Png);
+                    qrImage = Bitmap.FromStream(oStream);
+                }
+
+                gfx.DrawImage(XImage.FromGdiPlusImage(qrImage), new XPoint(300, (_Y - 65)));
+                
+                qrImage.Dispose();
+            }
 
             // Send PDF to browser
             using (MemoryStream oStream = new MemoryStream())

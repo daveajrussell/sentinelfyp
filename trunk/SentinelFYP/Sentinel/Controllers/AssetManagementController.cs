@@ -59,11 +59,13 @@ namespace Sentinel.Controllers
         {
             new ActionButtonsViewModel()
             {
+                ID = "btnUnassignItems",
                 Display = "Unassign Selected Items"
             },
             new ActionButtonsViewModel()
             {
-                Display = "Assign Items"
+                ID = "btnAssignItems",
+                Display = "Assign New Items"
             }
         };
 
@@ -181,20 +183,20 @@ namespace Sentinel.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult GetUnAssignDeliveryItemPartial(string strDeliveryItemKey)
+        public ActionResult GetUnAssignDeliveryItemPartial(string strDeliveryItemKeys)
         {
-            var oDeliveryItemKey = new Guid(strDeliveryItemKey);
-            var item = _itemService.GetDeliveryItemByKey(oDeliveryItemKey);
-
+            var keys = GetEnumerableGuidSourceFromString(strDeliveryItemKeys);
+            var item = _itemService.GetDeliveryItemsByKey(keys);
             return PartialView("UnAssignDeliveryItemPartial", item);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult UnAssignDeliveryItem(string strConsignmentKey, string strDeliveryItemKey)
+        public ActionResult UnAssignDeliveryItems(string strConsignmentKey, string strDeliveryItemKeys)
         {
             var oConsignmentKey = new Guid(strConsignmentKey);
-            var oDeliveryItemKey = new Guid(strDeliveryItemKey);
-            _itemService.UnAssignDeliveryItem(oConsignmentKey, oDeliveryItemKey);
+            var keys = GetEnumerableGuidSourceFromString(strDeliveryItemKeys);
+            
+            _itemService.UnAssignDeliveryItems(oConsignmentKey, keys);
 
             return GetDeliveryItems(oConsignmentKey);
         }
@@ -208,12 +210,23 @@ namespace Sentinel.Controllers
             return PartialView("DeliveryItemGridPartial", data);
         }
 
-        public ActionResult PrintDeliveryItemLabel(string strDeliveryItemKey)
+        public ActionResult PrintDeliveryItemLabel(string strDeliveryItemKeys)
         {
-            var oDeliveryItemKey = new Guid(strDeliveryItemKey);
-            var item = _itemService.GetDeliveryItemByKey(oDeliveryItemKey);
+            var keys = GetEnumerableGuidSourceFromString(strDeliveryItemKeys);
+            var items = _itemService.GetDeliveryItemsByKey(keys);
 
-            return new PDFResult(item);
+            return new PDFResult(items);
+        }
+
+        private IEnumerable<Guid> GetEnumerableGuidSourceFromString(string strKeys)
+        {
+            if (string.IsNullOrEmpty(strKeys))
+                return null;
+
+            var keys = strKeys.Split(',');
+
+            return from key in keys
+                   select new Guid(key);
         }
 
     }

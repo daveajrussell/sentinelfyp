@@ -1,10 +1,13 @@
-﻿@model DomainModel.Models.AssetModels.AssignedDeliveryItem
-
+﻿@model  IEnumerable<DomainModel.Models.AssetModels.AssignedDeliveryItem>
 <script type="text/javascript">
+    
     $(function () {
+        var keys = new Array();
 
-        var consignmentKey = $('#span-consignment-key').attr('value');
-        var itemKey = $('#span-item-key').attr('value');
+        @foreach (var item in Model)
+        {
+            @:keys.push('@item.DeliveryItemKey')
+        }
 
         $('#unassign-dialog').dialog({
             autoOpen:
@@ -16,16 +19,17 @@
             modal:
                 true,
             title:
-                "Un-Assign Delivery Item",
+                "Unassign Delivery Items",
             buttons:
                 [
                     {
                         text: "Yes",
                         click: function () {
                             var self = this;
-                            $.post('../AssetManagement/UnAssignDeliveryItem', { strConsignmentKey: consignmentKey, strDeliveryItemKey: itemKey }, function (data) {
+
+                            $.post('../AssetManagement/UnAssignDeliveryItems', { strConsignmentKey: consignmentKey, strDeliveryItemKeys: keys }, function (data) {
                                 $(self).dialog("close");
-                                $('#div-items-grid').replaceWith(data);
+                                $('#items-grid').replaceWith(data);
                             });
                         }
                     },
@@ -40,8 +44,12 @@
     });
 </script>
 
-<div id="unassign-dialog" style="display:none">
-    <span>Are you sure you wish to un-assign this item?</span>
-    <span id="span-consignment-key" value="@Model.ConsignmentKey"></span>
-    <span id="span-item-key" value="@Model.DeliveryItemKey"></span>
+<div id="unassign-dialog" style="display: none">
+    <span>Are you sure you wish to unassign these items?</span>
+    <br />
+    @foreach (var item in Model)
+    {
+        <span>@item.DeliveryItemKey</span>
+        <br />
+    }
 </div>

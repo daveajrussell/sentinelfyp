@@ -280,9 +280,7 @@
     <Content Include="Views\ConsignmentManagement\Index.cshtml" />
     <Content Include="Views\Shared\RealTimeMonitorPartial.cshtml" />
     <Content Include="Views\AssetManagement\AssignedConsignmentsPartial.cshtml" />
-    <Content Include="Views\AssetManagement\Management.cshtml" />
     <Content Include="Views\AssetManagement\DeliveryItemGridPartial.cshtml" />
-    <Content Include="Views\AssetManagement\UnAssignedConsignmentsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -305,9 +303,7 @@
     <None Include="Properties\PublishProfiles\SENTINEL_APP.pubxml" />
     <Content Include="Views\AssetManagement\AssignConsignmentPartial.cshtml" />
     <Content Include="Views\AssetManagement\ReAssignConsignmentPartial.cshtml" />
-    <Content Include="Views\AssetManagement\UnAssignConsignmentPartial.cshtml" />
     <Content Include="Views\AssetManagement\AssignedDeliveryItemsPartial.cshtml" />
-    <Content Include="Views\AssetManagement\UnAssignedDeliveryItemsPartial.cshtml" />
     <Content Include="Views\AssetManagement\ReAssignDeliveryItemPartial.cshtml" />
     <Content Include="Views\AssetManagement\UnAssignDeliveryItemPartial.cshtml" />
     <Content Include="Views\AssetManagement\AssignDeliveryItemPartial.cshtml" />
