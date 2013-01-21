@@ -25,23 +25,47 @@ namespace SqlRepositories.Helper.Builders
         {
             return from item in oSet.FirstDataTableAsEnumerable()
                    orderby item.Field<DateTime>("TIMESTAMP") descending
-                   group item by item.Field<DateTime>("TIMESTAMP").Date into g
+                   group item by new { Period = item.Field<DateTime>("TIMESTAMP").Date, DriverKey = item.Field<Guid>("USER_KEY") } into g
                    select new HistoricalGeographicInformation()
                    {
-                       Period = g.Key,
-                       Items =  from item in g.AsEnumerable()
-                                select new GeographicInformation()
-                                {
-                                    TimeStamp = item.Field<DateTime>("TIMESTAMP"),
-                                    Latitude = item.Field<decimal>("LATITUDE"),
-                                    Longitude = item.Field<decimal>("LONGITUDE"),
-                                    Speed = item.Field<decimal>("SPEED"),
-                                    Bearing = item.Field<int>("BEARING"),
-                                    Altitude = item.Field<int>("ALTITUDE"),
-                                    Orientation = item.Field<int>("ORIENTATION")
-                                }
+                       DriverKey = g.Key.DriverKey,
+                       Period = g.Key.Period,
+                       PeriodGeographicData = from item in g
+                                              select new GeographicInformation()
+                                              {
+                                                  TimeStamp = item.Field<DateTime>("TIMESTAMP"),
+                                                  Latitude = item.Field<decimal>("LATITUDE"),
+                                                  Longitude = item.Field<decimal>("LONGITUDE"),
+                                                  Speed = item.Field<decimal>("SPEED"),
+                                                  Bearing = item.Field<int>("BEARING"),
+                                                  Altitude = item.Field<int>("ALTITUDE"),
+                                                  Orientation = item.Field<int>("ORIENTATION")
+                                              }
                    };
-                   
+
+        }
+
+        public static HistoricalGeographicInformation ToGeographicInformation(this DataSet oSet)
+        {
+            return (from item in oSet.FirstDataTableAsEnumerable()
+                   orderby item.Field<DateTime>("TIMESTAMP") descending
+                   group item by new { Period = item.Field<DateTime>("TIMESTAMP").Date, DriverKey = item.Field<Guid>("USER_KEY") } into g
+                   select new HistoricalGeographicInformation()
+                   {
+                       DriverKey = g.Key.DriverKey,
+                       Period = g.Key.Period,
+                       PeriodGeographicData = from item in g
+                                              select new GeographicInformation()
+                                              {
+                                                  TimeStamp = item.Field<DateTime>("TIMESTAMP"),
+                                                  Latitude = item.Field<decimal>("LATITUDE"),
+                                                  Longitude = item.Field<decimal>("LONGITUDE"),
+                                                  Speed = item.Field<decimal>("SPEED"),
+                                                  Bearing = item.Field<int>("BEARING"),
+                                                  Altitude = item.Field<int>("ALTITUDE"),
+                                                  Orientation = item.Field<int>("ORIENTATION")
+                                              }
+                   }).First();
         }
     }
 }

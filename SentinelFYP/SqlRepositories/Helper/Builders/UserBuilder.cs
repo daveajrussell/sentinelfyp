@@ -12,19 +12,34 @@ namespace SqlRepositories.Helper.Builders
     {
         public static User ToUser(this DataSet oSet)
         {
-            var user = new User();
-            var data = oSet.FirstDataTableAsEnumerable();
+            return (from user in oSet.FirstDataTableAsEnumerable()
+                    select new User()
+                    {
+                        UserKey = user.Field<Guid>("USER_KEY"),
+                        UserName = user.Field<string>("USERNAME"),
+                        FirstName = user.Field<string>("USER_FIRST_NAME"),
+                        LastName = user.Field<string>("USER_LAST_NAME"),
+                        Email = user.Field<string>("USER_EMAIL"),
+                        UserAccountCreatedOn = user.Field<DateTime>("USER_ACCOUNT_CREATED_ON_DATE_TIME"),
+                        UserAccountExpires = user.Field<DateTime>("USER_ACCOUNT_EXPIRES_DATE_TIME"),
+                        UserLastLogon = user.Field<DateTime>("USER_LAST_LOGON_DATE_TIME")
+                    }).First();
+        }
 
-            user.UserKey = data.Select(p => p.Field<Guid>("USER_KEY")).First();
-            user.UserName = data.Select(p => p.Field<string>("USERNAME")).First();
-            user.FirstName = data.Select(p => p.Field<string>("USER_FIRST_NAME")).First();
-            user.LastName = data.Select(p => p.Field<string>("USER_LAST_NAME")).First();
-            user.Email = data.Select(p => p.Field<string>("USER_EMAIL")).First();
-            user.UserAccountCreatedOn = data.Select(p => p.Field<DateTime>("USER_ACCOUNT_CREATED_ON_DATE_TIME")).First();
-            user.UserAccountExpires = data.Select(p => p.Field<DateTime>("USER_ACCOUNT_EXPIRES_DATE_TIME")).First();
-            user.UserLastLogon = data.Select(p => p.Field<DateTime>("USER_LAST_LOGON_DATE_TIME")).First();
-
-            return user;
+        public static IEnumerable<User> ToUserSet(this DataSet oSet)
+        {
+            return from user in oSet.FirstDataTableAsEnumerable()
+                   select new User()
+                   {
+                       UserKey = user.Field<Guid>("USER_KEY"),
+                       UserName = user.Field<string>("USERNAME"),
+                       FirstName = user.Field<string>("USER_FIRST_NAME"),
+                       LastName = user.Field<string>("USER_LAST_NAME"),
+                       Email = user.Field<string>("USER_EMAIL"),
+                       UserAccountCreatedOn = user.Field<DateTime>("USER_ACCOUNT_CREATED_ON_DATE_TIME"),
+                       UserAccountExpires = user.Field<DateTime>("USER_ACCOUNT_EXPIRES_DATE_TIME"),
+                       UserLastLogon = user.Field<DateTime>("USER_LAST_LOGON_DATE_TIME")
+                   };
         }
     }
 }

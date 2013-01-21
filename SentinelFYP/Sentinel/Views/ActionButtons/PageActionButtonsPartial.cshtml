@@ -23,7 +23,7 @@
             <td class="right">
                 @foreach (var item in Model.Skip(1))
                 {
-                    <a class="action">@item.Display</a>
+                    <a class="action" onclick="@item.Javascript">@item.Display</a>
                 }
             </td>
         </tr>

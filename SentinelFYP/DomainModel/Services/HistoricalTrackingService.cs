@@ -5,6 +5,7 @@ using System.Text;
 using DomainModel.Interfaces.Repositories;
 using DomainModel.Interfaces.Services;
 using DomainModel.Models.GISModels;
+using DomainModel.SecurityModels;
 
 namespace DomainModel.Services
 {
@@ -23,6 +24,17 @@ namespace DomainModel.Services
         public IEnumerable<HistoricalGeographicInformation> GetAllHistoricalTrackingDataByDriverKey(Guid oDriverKey)
         {
             return _trackingRepository.GetAllHistoricalTrackingDataByDriverKey(oDriverKey);
+        }
+
+
+        public HistoricalGeographicInformation GetFilteredHistoricalDataByDriverKey(Guid oDriverKey, DateTime oRange)
+        {
+            return _trackingRepository.GetFilteredHistoricalDataByDriverKey(oDriverKey, oRange);
+        }
+
+        public IEnumerable<User> GetDrivers()
+        {
+            return _trackingRepository.GetDrivers();
         }
     }
 }

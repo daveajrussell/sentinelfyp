@@ -1,93 +1,24 @@
-﻿@model IEnumerable<DomainModel.Models.GISModels.HistoricalGeographicInformation>
-
-@{
+﻿@{
     ViewBag.Title = "Tracking";
 }
 
 <h2>Tracking</h2>
 
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&language=en&key=AIzaSyBwj3Xpcnn2FB0zuqe8T4Zs3sxAtozOXNw"></script>
+<section id="tracking" class="index">
 
-<script type="text/javascript">
+</section>
 
-    $(function () {
-        // Create a LatLng object to set to the center
-        var pos = new google.maps.LatLng(0, 0);
-
-        // Create an array of Map options
-        var mapOpts = {
-            zoom: 7,
-            center: pos,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-
-        var map = new google.maps.Map(document.getElementById('map'), mapOpts);
-
-        @foreach (var period in Model)
-        {
-            <text> 
-                var path = [];
-            </text>
-            foreach (var dataItem in period.PeriodGeographicData)
-            {
-                <text>
-                    var latlng = new google.maps.LatLng();
-                    path.push(latlng);
-                </text>
-            }
-        }
-
-    });
-
-
-
-
-
-
-
-
-
-
-    
-    $.each(arrGISInfo, function (index, value) {
-        var latlng = new google.maps.LatLng(value[0],
-                                            value[1]);
-        path.push(latlng);
-
-    });
-
-    
-        var arrGISInfo = Array();
-        @foreach (var item in Model)
-        {
-            <text>
-                var gis = [@item.Latitude, @item.Longitude, "@item.TimeStamp.ToShortDateString()", "@item.TimeStamp.ToShortTimeString()",  @item.Speed, @item.Orientation];
-                arrGISInfo.push(gis);
-            </text>
-        }
-    Monitor.Init(@(Model.First().Latitude), @(Model.First().Longitude), arrGISInfo);
-
-    InitPolyline: function (map, path) {
-
-        // Setup Polylines
-        poly = new google.maps.Polyline({
-            path: path,
-            strokeColor: '#000000',
-            strokeOpacity: 1.0,
-            strokeWeight: 3
-        });
-
-        poly.setMap(map);
-    },
-</script>
-
-<div id="map-container">
-    <div id="map">
-    </div>
-</div>
-
-<section>
-
-
-
+<section id="section-actions">
+    <ul id="actions">
+    @foreach (var item in Model)
+    {
+        <li class="action">
+            <a class="action-item action-link" href="@Url.Content(@item.URL)">
+                @item.Display
+                <br />
+                <span class="action-description">@item.Description</span>
+            </a>
+        </li>
+    }
+    </ul>
 </section>
