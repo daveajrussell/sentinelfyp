@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DomainModel.Models.AssetModels.DeliveryItem>
+﻿@model IEnumerable<DomainModel.Models.AssetModels.AssignedDeliveryItem>
 @using Sentinel.Grid;
 @using Sentinel.Helpers.ExtensionMethods;
 
@@ -9,8 +9,13 @@
 
 <script type="text/javascript">
     $(function () {
+
+        var consignmentKey = '@Model.First().ConsignmentKey.ToString()';
+
         $('#btnAssignItems').on('click', function () {
-            alert('Not yet implemented');
+            $.post('../AssetManagement/GetAssignDeliveryItemPartial', { strConsignmentKey: consignmentKey }, function (data) {
+                $('#items-grid').after(data);
+            });
         });
 
         $('#btnUnassignItems').on('click', function () {
@@ -36,7 +41,7 @@
                             grid.CreateColumn(headerText: "Recipient Town", headerHorizontalAlignment: "center", dataFieldFormat: @<text> @item.RecipientTown </text>),
                             grid.CreateColumn(headerText: "Recipient Post Code", headerHorizontalAlignment: "center", dataFieldFormat: @<text> @item.RecipientPostCode </text>),
                         },
-                  pager: new Pager { Alignment = PagerAlign.Center, TotalRows = ViewBag.GridRecordCount, RowsPerPage = 5, CssClass = "pager" },
+                  pager: new Pager { Alignment = PagerAlign.Center, TotalRows = ViewBag.GridRecordCount, RowsPerPage = 20, CssClass = "pager" },
                   tableStyle: "table",
                   headerStyle: "head",
                   alternatingRowStyle: "alt")

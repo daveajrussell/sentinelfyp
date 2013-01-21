@@ -69,7 +69,7 @@ namespace DomainModel.Test.Tests
         public void AddLocationShouldNotThrow()
         {
             var pointService = new PointService(_pointRepository.Object);
-            Xunit.Assert.DoesNotThrow(() => pointService.AddLocation(new GIS()));
+            Xunit.Assert.DoesNotThrow(() => pointService.AddLocation(new GeographicInformation()));
         }
 
         [Fact]

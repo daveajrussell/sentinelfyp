@@ -1,0 +1,28 @@
+﻿@model string
+
+<script type="text/javascript">
+
+    $(function () {
+        $('#error-dialog').dialog({
+            autoOpen: true,
+            resizable: false,
+            draggable: false,
+            modal: true,
+            title: "Notice",
+            buttons:
+                [
+                    {
+                        text: "Ok",
+                        click: function () {
+                            $(this).dialog("destroy");
+                        }
+                    }
+                ]
+        });
+    });
+
+</script>
+
+<div id="error-dialog" style="display:none">
+    <span>@Model</span>
+</div>

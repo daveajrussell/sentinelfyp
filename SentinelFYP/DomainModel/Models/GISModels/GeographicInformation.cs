@@ -5,20 +5,22 @@ using System.Text;
 
 namespace DomainModel.Models.GISModels
 {
-    public class GIS
+    public class GeographicInformation
     {
         public DateTime TimeStamp { get; set; }
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }
         public decimal Speed { get; set; }
+        public int Bearing { get; set; }
+        public int Altitude { get; set; }
         public int Orientation { get; set; }
 
-        public GIS()
+        public GeographicInformation()
         {
 
         }
 
-        public GIS(DateTime dtStamp, decimal dLatitude, decimal dLongitude, decimal dSpeed, int iOrientation)
+        public GeographicInformation(DateTime dtStamp, decimal dLatitude, decimal dLongitude, decimal dSpeed, int iOrientation)
         {
             TimeStamp = dtStamp;
             Latitude = dLatitude;

@@ -9,8 +9,8 @@ namespace DomainModel.Interfaces.Services
 {
     public interface IGISService
     {
-        GIS GetGIS();
-        void AddGIS(GIS oGIS);
-        IEnumerable<GIS> GetAllGISData();
+        GeographicInformation GetGIS();
+        void AddGIS(GeographicInformation oGIS);
+        IEnumerable<GeographicInformation> GetAllGISData();
     }
 }

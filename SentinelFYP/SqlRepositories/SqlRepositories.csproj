@@ -75,6 +75,7 @@
     <Compile Include="SqlConsignmentManagementRepository.cs" />
     <Compile Include="SqlDeliveryItemManagementRepository.cs" />
     <Compile Include="SqlGISRepository.cs" />
+    <Compile Include="SqlHistoricalTrackingRepository.cs" />
     <Compile Include="SqlPointRepository.cs" />
     <Compile Include="SqlRoleRepository.cs" />
     <Compile Include="SqlSecurityRepository.cs" />

@@ -136,6 +136,7 @@
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MonitorController.cs" />
+    <Compile Include="Controllers\TrackingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -150,6 +151,8 @@
     <Compile Include="Infrastructure\SentinelMembershipProvider.cs" />
     <Compile Include="Infrastructure\SentinelRoleProvider.cs" />
     <Compile Include="Models\ActionButtonsViewModel.cs" />
+    <Compile Include="Models\AssignDeliveryItemViewModel.cs" />
+    <Compile Include="Models\DriverHistoricalTrackingViewModel.cs" />
     <Compile Include="Models\MenuViewModel.cs" />
     <Compile Include="Models\Tracking.cs" />
     <Compile Include="Models\LogonUserViewModel.cs" />
@@ -219,6 +222,7 @@
     <Content Include="Scripts\jquery.watermark.min.js" />
     <Content Include="Scripts\Views\Account.js" />
     <Content Include="Scripts\Views\Heatmap.js" />
+    <Content Include="Scripts\Views\HistoricalTracking.js" />
     <Content Include="Scripts\Views\Management.js" />
     <Content Include="Scripts\Views\Monitor.js" />
     <Content Include="Scripts\Views\RealTimeMessageMonitor.js" />
@@ -315,6 +319,11 @@
     <Content Include="Views\AssetManagement\ConsignmentManagement\UnAssigned.cshtml" />
     <Content Include="Views\ActionButtons\PageActionButtonsPartial.cshtml" />
     <Content Include="Views\ActionButtons\GridActionButtonsPartial.cshtml" />
+    <Content Include="Views\Shared\ErrorDialogPartial.cshtml" />
+    <Content Include="Views\Tracking\Index.cshtml" />
+    <Content Include="Views\Tracking\LiveTracking.cshtml" />
+    <Content Include="Views\Tracking\HistoricalTracking.cshtml" />
+    <Content Include="Views\Tracking\DriverHistoricalTrackingPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">

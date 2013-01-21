@@ -17,17 +17,17 @@ namespace DomainModel.Test.Tests
         {
             _repository = new Mock<IGISRepository>();
 
-            _repository.Setup(m => m.AddGIS(It.IsAny<GIS>()))
+            _repository.Setup(m => m.AddGIS(It.IsAny<GeographicInformation>()))
                 .Verifiable();
 
             _repository.Setup(m => m.GetGIS())
-                .Returns(new GIS(DateTime.Now, 1, 1, 0, 270));
+                .Returns(new GeographicInformation(DateTime.Now, 1, 1, 0, 270));
 
             _repository.Setup(m => m.GetAllGISData())
-                .Returns(new List<GIS>() 
+                .Returns(new List<GeographicInformation>() 
                 { 
-                    new GIS(DateTime.Now, 1, 1, 0, 270), 
-                    new GIS(DateTime.Now, 2, 2, 0, 270) 
+                    new GeographicInformation(DateTime.Now, 1, 1, 0, 270), 
+                    new GeographicInformation(DateTime.Now, 2, 2, 0, 270) 
                 });
         }
 
@@ -60,7 +60,7 @@ namespace DomainModel.Test.Tests
         {
             var service = new GISService(_repository.Object);
             
-            service.AddGIS(new GIS(DateTime.Now, 1, 2, 0, 270));
+            service.AddGIS(new GeographicInformation(DateTime.Now, 1, 2, 0, 270));
         }
     }
 }

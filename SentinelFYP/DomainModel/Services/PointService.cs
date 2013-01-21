@@ -51,7 +51,7 @@ namespace DomainModel.Services
             return _pointRepository.GetPointsForTile(x, y, dot, zoom, _points);
         }
 
-        public void AddLocation(GIS location)
+        public void AddLocation(GeographicInformation location)
         {
             if (location == null)
                 throw new ArgumentNullException("Location");

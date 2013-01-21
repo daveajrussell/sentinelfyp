@@ -18,7 +18,7 @@ namespace Sentinel.Services
         public void GISNotify(string message)
         {
             GISDataContract obj = JsonR.JsonDeserializer<GISDataContract>(message);
-            GIS oGIS = new GIS { TimeStamp = new DateTime(1970, 1, 1).AddMilliseconds(obj.lngTimeStamp), Latitude = obj.dLatitude, Longitude = obj.dLongitude, Speed = obj.dSpeed, Orientation = obj.intOrientation };
+            GeographicInformation oGIS = new GeographicInformation { TimeStamp = new DateTime(1970, 1, 1).AddMilliseconds(obj.lngTimeStamp), Latitude = obj.dLatitude, Longitude = obj.dLongitude, Speed = obj.dSpeed, Orientation = obj.intOrientation };
 
             string strSeverity;
 
