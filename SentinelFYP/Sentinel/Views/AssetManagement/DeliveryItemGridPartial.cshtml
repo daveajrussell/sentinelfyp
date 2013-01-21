@@ -10,7 +10,7 @@
 <script type="text/javascript">
     $(function () {
         $('#btnAssignItems').on('click', function () {
-            alert('boop');
+            alert('Not yet implemented');
         });
 
         $('#btnUnassignItems').on('click', function () {
@@ -20,7 +20,7 @@
                 keys.push($(this).val());
             });
 
-            $.post('../AssetManagement/GetUnAssignDeliveryItemPartial', { strDeliveryItemKeys: keys .toString()}, function (data) {
+            $.post('../AssetManagement/GetUnAssignDeliveryItemPartial', { strDeliveryItemKeys: keys.toString()}, function (data) {
                 $('#items-grid').after(data);
             });
         });
@@ -40,6 +40,7 @@
                   tableStyle: "table",
                   headerStyle: "head",
                   alternatingRowStyle: "alt")
-</section>
 
-@Html.Action("DeliveryItemsGridActions")
+    @Html.Action("DeliveryItemsGridActions")
+
+</section>

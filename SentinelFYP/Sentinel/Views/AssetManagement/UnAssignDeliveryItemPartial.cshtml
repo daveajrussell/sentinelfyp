@@ -3,6 +3,7 @@
     
     $(function () {
         var keys = new Array();
+        var consignmentKey = '@Model.First().ConsignmentKey';
 
         @foreach (var item in Model)
         {
@@ -27,7 +28,7 @@
                         click: function () {
                             var self = this;
 
-                            $.post('../AssetManagement/UnAssignDeliveryItems', { strConsignmentKey: consignmentKey, strDeliveryItemKeys: keys }, function (data) {
+                            $.post('../AssetManagement/UnAssignDeliveryItems', { strConsignmentKey: consignmentKey, strDeliveryItemKeys: keys.toString() }, function (data) {
                                 $(self).dialog("close");
                                 $('#items-grid').replaceWith(data);
                             });
