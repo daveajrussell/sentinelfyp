@@ -40,7 +40,7 @@ namespace WebServices.Services
         public void PostGISData(string strGISObject)
         {
             GISDataContract obj = JsonR.JsonDeserializer<GISDataContract>(strGISObject);
-            GIS oGIS = new GIS
+            GeographicInformation oGIS = new GeographicInformation
             {
                 TimeStamp = new DateTime(1970, 1, 1).AddMilliseconds(obj.lngTimeStamp),
                 Latitude = obj.dLatitude,

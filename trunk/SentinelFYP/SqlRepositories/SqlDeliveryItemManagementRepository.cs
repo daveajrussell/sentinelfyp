@@ -64,13 +64,14 @@ namespace SqlRepositories
 
         public void AssignDeliveryItemsToConsignment(IEnumerable<Guid> oDeliveryItemKeys, Guid oConsingmentKey)
         {
+            var oXml = GetXDoc(oDeliveryItemKeys);
             var arrParams = new SqlParameter[]
             {
-                //new SqlParameter("@IP_DELIVERY_ITEM_KEY", oDeliveryItemKeys), change to XML
+                new SqlParameter("@IP_DELIVERY_ITEM_KEYS", oXml.ToString()), 
                 new SqlParameter("@IP_CONSIGNMENT_KEY", oConsingmentKey)
             };
 
-            SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "[ASSET].[ASSIGN_DELIVERY_ITEM_TO_CONSIGNMENT]", arrParams);
+            SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "[ASSET].[ASSIGN_DELIVERY_ITEMS_TO_CONSIGNMENT]", arrParams);
         }
 
         public void ReAssignDeliveryItems(IEnumerable<Guid> oDeliveryItemKeys, Guid oPreviousConsignmentKey, Guid oReAssignedConsignmentKey)

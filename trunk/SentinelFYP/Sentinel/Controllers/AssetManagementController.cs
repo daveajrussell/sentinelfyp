@@ -183,6 +183,18 @@ namespace Sentinel.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult GetAssignDeliveryItemPartial(string strConsignmentKey)
+        {
+            var key = new Guid(strConsignmentKey);
+            var items = _itemService.GetAllUnassignedDeliveryItems();
+
+            if (items.Count() <= 0)
+                return PartialView("ErrorDialogPartial", "No items are available to assign");
+            else
+                return PartialView("AssignDeliveryItemPartial", items.ToViewModel(key));
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult GetUnAssignDeliveryItemPartial(string strDeliveryItemKeys)
         {
             var keys = GetEnumerableGuidSourceFromString(strDeliveryItemKeys);
@@ -191,17 +203,31 @@ namespace Sentinel.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult AssignDeliveryItems(string strConsignmentKey, string strDeliveryItemKeys)
+        {
+            var keys = GetEnumerableGuidSourceFromString(strDeliveryItemKeys);
+            var oConsignmentKey = new Guid(strConsignmentKey);
+
+            _itemService.AssignDeliveryItemsToConsignment(keys, oConsignmentKey);
+
+            var data = _itemService.GetConsignmentDeliveryItems(oConsignmentKey);
+            ViewBag.GridRecordCount = data.Count();
+
+            return PartialView("DeliveryItemGridPartial", data);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult UnAssignDeliveryItems(string strConsignmentKey, string strDeliveryItemKeys)
         {
             var oConsignmentKey = new Guid(strConsignmentKey);
             var keys = GetEnumerableGuidSourceFromString(strDeliveryItemKeys);
-            
+
             _itemService.UnAssignDeliveryItems(oConsignmentKey, keys);
 
             return GetDeliveryItems(oConsignmentKey);
         }
 
-        public ActionResult GetDeliveryItems(Guid oConsignmentKey)
+        private ActionResult GetDeliveryItems(Guid oConsignmentKey)
         {
             var gridParameters = GridParameters.GetGridParameters();
             var data = _itemService.GetConsignmentDeliveryItems(oConsignmentKey);

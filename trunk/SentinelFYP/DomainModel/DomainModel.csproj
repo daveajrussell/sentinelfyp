@@ -81,11 +81,13 @@
     <Compile Include="Interfaces\Repositories\IDeliveryItemManagementRepository.cs" />
     <Compile Include="Interfaces\Repositories\IGHeatRepository.cs" />
     <Compile Include="Interfaces\Repositories\IGISRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IHistoricalTrackingRepository.cs" />
     <Compile Include="Interfaces\Repositories\IRoleRepository.cs" />
     <Compile Include="Interfaces\Repositories\ISettingsRepository.cs" />
     <Compile Include="Interfaces\Services\IConsignmentManagementService.cs" />
     <Compile Include="Interfaces\Services\IDeliveryItemManagementService.cs" />
     <Compile Include="Interfaces\Services\IGISService.cs" />
+    <Compile Include="Interfaces\Services\IHistoricalTrackingService.cs" />
     <Compile Include="Interfaces\Services\IRoleService.cs" />
     <Compile Include="Models\AssetModels\AssignedConsignment.cs" />
     <Compile Include="Models\AssetModels\AssignedDeliveryItem.cs" />
@@ -93,7 +95,7 @@
     <Compile Include="Models\AssetModels\CompletedConsignment.cs" />
     <Compile Include="Models\AssetModels\DeliveryItem.cs" />
     <Compile Include="Models\AssetModels\UnAssignedConsignment.cs" />
-    <Compile Include="Models\GISModels\GIS.cs" />
+    <Compile Include="Models\GISModels\GeographicInformation.cs" />
     <Compile Include="Models\AuditModels\Session.cs" />
     <Compile Include="Models\AuditModels\State.cs" />
     <Compile Include="Interfaces\IWeightHandler.cs" />
@@ -103,6 +105,7 @@
     <Compile Include="Interfaces\Services\IPointService.cs" />
     <Compile Include="Interfaces\Services\ISecurityService.cs" />
     <Compile Include="Interfaces\Services\ISettingsService.cs" />
+    <Compile Include="Models\GISModels\HistoricalGeographicInformation.cs" />
     <Compile Include="Models\GISModels\Opacity.cs" />
     <Compile Include="Models\GISModels\Tile.cs" />
     <Compile Include="Models\SecurityModels\User.cs" />
@@ -111,6 +114,7 @@
     <Compile Include="Services\DeliveryItemManagementService.cs" />
     <Compile Include="Services\GHeatService.cs" />
     <Compile Include="Services\GISService.cs" />
+    <Compile Include="Services\HistoricalTrackingService.cs" />
     <Compile Include="Services\KVImageBlender.cs" />
     <Compile Include="Services\PointService.cs" />
     <Compile Include="Services\RoleService.cs" />

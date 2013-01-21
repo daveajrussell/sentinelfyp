@@ -21,7 +21,7 @@ namespace DomainModel.Services
             _gisRepository = gisRepository;
         }
 
-        public void AddGIS(GIS oGIS)
+        public void AddGIS(GeographicInformation oGIS)
         {
             if (oGIS == null)
                 throw new ArgumentNullException("Geo Data");
@@ -29,12 +29,12 @@ namespace DomainModel.Services
             _gisRepository.AddGIS(oGIS);
         }
 
-        public GIS GetGIS()
+        public GeographicInformation GetGIS()
         {
             return _gisRepository.GetGIS();
         }
 
-        public IEnumerable<GIS> GetAllGISData()
+        public IEnumerable<GeographicInformation> GetAllGISData()
         {
             return _gisRepository.GetAllGISData();
         }

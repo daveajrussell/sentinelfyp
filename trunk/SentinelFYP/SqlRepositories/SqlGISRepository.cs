@@ -25,17 +25,17 @@ namespace SqlRepositories
             _connectionString = connectionString;
         }
 
-        public GIS GetGIS()
+        public GeographicInformation GetGIS()
         {
             using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[GIS].[GET_GIS]"))
             {
                 return (from data in oSet.FirstDataTableAsEnumerable()
-                        select data.ToGis()).First();
+                        select data.ToGeographicInformation()).First();
             }
         }
 
 
-        public void AddGIS(GIS oGIS)
+        public void AddGIS(GeographicInformation oGIS)
         {
             var arrParams = new SqlParameter[] {
                 new SqlParameter("@IP_TIME_STAMP", oGIS.TimeStamp),
@@ -49,12 +49,12 @@ namespace SqlRepositories
         }
 
 
-        public IEnumerable<GIS> GetAllGISData()
+        public IEnumerable<GeographicInformation> GetAllGISData()
         {
             using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[GIS].[GET_ALL_GIS_DATA]"))
             {
                 return from data in oSet.FirstDataTableAsEnumerable()
-                       select data.ToGis();
+                       select data.ToGeographicInformation();
             }
         }
     }
