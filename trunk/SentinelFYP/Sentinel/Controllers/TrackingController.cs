@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using DomainModel.Interfaces.Services;
 using DomainModel.Models.AuditModels;
+using Sentinel.Models;
 
 namespace Sentinel.Controllers
 {
@@ -20,11 +21,96 @@ namespace Sentinel.Controllers
             _service = service;
         }
 
+        List<MenuViewModel> menuItems = new List<MenuViewModel>()
+        {
+            new MenuViewModel()
+            {
+                Display = "Historical Tracking",
+                URL = "~/Tracking/HistoricalTracking",
+                Description = "View Historical Tracking Data"
+            },
+            new MenuViewModel()
+            {
+                Display = "Live Tracking",
+                URL = "~/Tracking/LiveTracking",
+                Description = "View Live Tracking Data"
+            }
+        };
+
         public ActionResult Index()
         {
-            var data = _service.GetAllHistoricalTrackingDataByDriverKey(State.User.UserKey);
-            return View(data);
+            return View(menuItems);
         }
+
+        public ActionResult HistoricalTracking()
+        {
+            return View();
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult GetAllHistoricalDataByDriverKey(string strDriverKey)
+        {
+            var oDriverKey = GetKeyFromString(strDriverKey);
+            var data = _service.GetAllHistoricalTrackingDataByDriverKey(oDriverKey);
+
+            return PartialView("AllDriverHistoricalTrackingPartial", data);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult GetFilteredHistoricalData(string strDriverKey, string strDateRange)
+        {
+            var oDriverKey = GetKeyFromString(strDriverKey);
+            var oDateRange = DateTime.Parse(strDateRange);
+
+            var data = _service.GetFilteredHistoricalDataByDriverKey(oDriverKey, oDateRange);
+
+            return PartialView("FilteredDriverHistoricalTrackingPartial", data);
+        }
+
+        public ActionResult FilteredHistoricalPageDataPageActions()
+        {
+            var actions = new List<ActionButtonsViewModel>()
+            {
+                new ActionButtonsViewModel()
+                {
+                    Display = "Back",
+                    Javascript = "javascript:showAllHistoricalData()"
+                }
+            };
+
+            return PartialView("../ActionButtons/PageActionButtonsPartial", actions);
+        }
+
+        public ActionResult AllHistoricalPageDataPageActions()
+        {
+            var actions = new List<ActionButtonsViewModel>()
+            {
+                new ActionButtonsViewModel()
+                {
+                    Display = "Back",
+                    Javascript = "navigateBack('Index')"
+                },
+                new ActionButtonsViewModel()
+                {
+                    Display = "Select New Driver",
+                    Javascript = "selectDriver()"
+                }
+            };
+
+            return PartialView("../ActionButtons/PageActionButtonsPartial", actions);
+        }
+
+        public ActionResult GetAllDriversForDriverSelect()
+        {
+            var data = _service.GetDrivers();
+            return PartialView("Dialogs/DriverSelectDialog", data);
+        }
+
+        private Guid GetKeyFromString(string strKey)
+        {
+            return new Guid(strKey);
+        }
+
         
         /*
         public ActionResult LiveTracking()
@@ -47,22 +133,6 @@ namespace Sentinel.Controllers
             var oDriverKey = GetKeyFromString(strDriverKey);
             return View();
         }
-
-        public ActionResult HistoricalTracking()
-        {
-            return View();
-        }
-
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult GetDriverTrackingHistoricalData(string strDriverKey)
-        {
-            var oDriverKey = GetKeyFromString(strDriverKey);
-            return View();
-        }
-
-        private Guid GetKeyFromString(string strKey)
-        {
-            return new Guid(strKey);
-        }*/
+        */
     }
 }

@@ -1,0 +1,79 @@
+﻿@model IEnumerable<DomainModel.Models.GISModels.HistoricalGeographicInformation>
+
+
+
+<script type="text/javascript">
+
+    $(function () {
+        // Create a LatLng object to set to the center
+        var pos = new google.maps.LatLng('@Model.First().PeriodGeographicData.First().Latitude', '@Model.First().PeriodGeographicData.First().Longitude');
+
+        // Create an array of Map options
+        var mapOpts = {
+            zoom: 7,
+            center: pos,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        var map = new google.maps.Map(document.getElementById('map'), mapOpts);
+
+        @foreach (var period in Model)
+        {
+            <text> 
+                var path = [];
+            </text>
+            
+            foreach (var dataItem in period.PeriodGeographicData)
+            {
+                <text>
+                    var latlng = new google.maps.LatLng('@dataItem.Latitude', '@dataItem.Longitude');
+                    path.push(latlng);
+                </text> 
+            }
+            
+            <text>
+            var hex = getHex();
+
+            $('#key').append('<span style="background-color:' + hex + ';width:10px;height:10px;display:inline-block"></span> = <a class="btnFilter" href="#" val="@period.Period.ToShortDateString()">@period.Period.ToShortDateString()</a><br />');
+
+            // Setup Polylines
+            poly = new google.maps.Polyline({
+                path: path,
+                strokeColor: hex,
+                strokeOpacity: 1.0,
+                strokeWeight: 3
+            });
+
+            poly.setMap(map);
+            </text>
+        }
+
+        $('.btnFilter').on('click', function () {
+            var data = $(this).attr('val');
+            var key = '@Model.First().DriverKey.ToString()';
+
+            $.post('GetFilteredHistoricalData', { strDriverKey: key, strDateRange: data }, function (data) {
+                $('#tracking').replaceWith(data);
+            });
+        });
+    });
+
+    function selectDriver() {
+        $.ajax({
+            url: 'GetAllDriversForDriverSelect',
+            success: function (data) {
+                $('#tracking').append(data);
+            }
+        });
+    }
+</script>
+
+<section id="tracking">
+    <div id="map">
+    </div>
+    <div id="key">
+
+    </div>
+
+    @Html.Action("AllHistoricalPageDataPageActions")
+</section>

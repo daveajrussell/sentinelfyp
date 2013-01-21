@@ -12,12 +12,8 @@ namespace Sentinel.Controllers
         List<MenuViewModel> items = new List<MenuViewModel>()
         {
             new MenuViewModel() {
-                Display = "Heatmap",
-                URL = "~/Heatmap/Index"
-            },
-            new MenuViewModel() {
-                Display = "Real-time Monitor",
-                URL = "~/Monitor/Index"
+                Display = "Tracking",
+                URL = "~/Tracking/Index"
             },
             new MenuViewModel() {
                 Display = "Asset Management",

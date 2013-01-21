@@ -1,0 +1,57 @@
+﻿@model DomainModel.Models.GISModels.HistoricalGeographicInformation
+
+<script type="text/javascript">
+
+    function showAllHistoricalData() {
+
+        var key = '@Model.DriverKey.ToString()';
+
+            $.post('GetAllHistoricalDataByDriverKey', { strDriverKey: key }, function (data) {
+                $('#tracking').replaceWith(data);
+            });
+        }
+
+    $(function () {
+
+        // Create a LatLng object to set to the center
+        var pos = new google.maps.LatLng('@Model.PeriodGeographicData.First().Latitude', '@Model.PeriodGeographicData.First().Longitude');
+
+        // Create an array of Map options
+        var mapOpts = {
+            zoom: 7,
+            center: pos,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        var map = new google.maps.Map(document.getElementById('map'), mapOpts);
+        var path = [];
+                      
+            @foreach (var dataItem in Model.PeriodGeographicData)
+            {
+                <text>
+                    var latlng = new google.maps.LatLng('@dataItem.Latitude', '@dataItem.Longitude');
+                    path.push(latlng);
+                </text> 
+            }
+           
+        var hex = getHex();
+
+        // Setup Polylines
+        poly = new google.maps.Polyline({
+            path: path,
+            strokeColor: hex,
+            strokeOpacity: 1.0,
+            strokeWeight: 3
+        });
+
+        poly.setMap(map);
+
+    });
+</script>
+
+<section id="tracking">
+    <div id="map">
+    </div>
+
+    @Html.Action("FilteredHistoricalPageDataPageActions")
+</section>
