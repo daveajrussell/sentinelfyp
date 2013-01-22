@@ -20,10 +20,12 @@ namespace WebServices
             /* SERVICES */
             Bind<IPointService>().To<PointService>();
             Bind<IGISService>().To<GISService>();
+            Bind<ISecurityService>().To<SecurityService>();
 
             /* REPOSITORIES */
             Bind<IPointRepository>().To<SqlPointRepository>().WithConstructorArgument("connectionString", _connectionString);
             Bind<IGISRepository>().To<SqlGISRepository>().WithConstructorArgument("connectionString", _connectionString);
+            Bind<ISecurityRepository>().To<SqlSecurityRepository>().WithConstructorArgument("connectionString", _connectionString);
         }
     }
 }

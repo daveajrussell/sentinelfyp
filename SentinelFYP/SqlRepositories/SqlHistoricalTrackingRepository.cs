@@ -24,17 +24,17 @@ namespace SqlRepositories
             _connectionString = connectionString;
         }
 
-        public IEnumerable<HistoricalGeographicInformation> GetAllHistoricalTrackingDataByDriverKey(Guid oDriverKey)
+        public IEnumerable<HistoricalGeospatialInformation> GetAllHistoricalTrackingDataByDriverKey(Guid oDriverKey)
         {
             var sqlParam = new SqlParameter("@IP_DRIVER_KEY", oDriverKey);
 
-            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT * FROM [daveajru].[GIS].[GEOSPATIAL_INFORMATION]", sqlParam))
+            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT * FROM [daveajru].[GIS].[HISTORICAL_GEOSPATIAL_INFORMATION]", sqlParam))
             {
                 return oSet.ToGeographicInformationSet();
             }
         }
 
-        public HistoricalGeographicInformation GetFilteredHistoricalDataByDriverKey(Guid oDriverKey, DateTime oRange)
+        public HistoricalGeospatialInformation GetFilteredHistoricalDataByDriverKey(Guid oDriverKey, DateTime oRange)
         {
             var dateFrom = oRange.Date.ToString("yyyy-MM-dd HH:mm:ss");
             var dateTo = oRange.AddDays(1).Date.ToString("yyyy-MM-dd HH:mm:ss");
@@ -46,7 +46,7 @@ namespace SqlRepositories
                 new SqlParameter("@IP_DATE_RANGE_TO", dateTo)
             };
 
-            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT * FROM [daveajru].[GIS].[GEOSPATIAL_INFORMATION] WHERE TIMESTAMP BETWEEN @IP_DATE_RANGE_FROM AND @IP_DATE_RANGE_TO", arrParams))
+            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT * FROM [daveajru].[GIS].[HISTORICAL_GEOSPATIAL_INFORMATION] WHERE TIMESTAMP BETWEEN @IP_DATE_RANGE_FROM AND @IP_DATE_RANGE_TO", arrParams))
             {
                 return oSet.ToGeographicInformation();
             }

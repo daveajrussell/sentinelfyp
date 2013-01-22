@@ -9,6 +9,7 @@ namespace DomainModel.Interfaces.Repositories
 {
     public interface ISecurityRepository
     {
+        //string AuthenticateDriver(string strUsername, string strPassword);
         void LogIn(string strUsername, string strPassword, out User oUser, out Session oSession);
         void Logout(int iSessionID);
     }

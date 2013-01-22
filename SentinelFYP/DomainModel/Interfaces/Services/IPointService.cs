@@ -14,6 +14,6 @@ namespace DomainModel.Interfaces.Services
         List<PointLatLng> LoadPoints();
         GMap.NET.Point[] GetPointsForTile(int x, int y, Bitmap bitmap, int zoom, List<PointLatLng> _points);
         GMap.NET.Point AdjustMapPixelsToTilePixels(GMap.NET.Point tileXYPoint, GMap.NET.Point mapPixelPoint);
-        void AddLocation(GeographicInformation location);
+        void AddLocation(GeospatialInformation location);
     }
 }

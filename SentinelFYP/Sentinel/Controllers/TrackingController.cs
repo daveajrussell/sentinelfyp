@@ -11,14 +11,20 @@ namespace Sentinel.Controllers
 {
     public class TrackingController : Controller
     {
-        private IHistoricalTrackingService _service;
+        private IHistoricalTrackingService _histroicalTrackingService;
+        private ILiveTrackingService _liveTrackingService;
 
-        public TrackingController(IHistoricalTrackingService service)
+        public TrackingController(IHistoricalTrackingService historicalTrackingService, ILiveTrackingService liveTrackingService)
         {
-            if (service == null)
-                throw new ArgumentNullException("tracking service");
+            if (historicalTrackingService == null)
+                throw new ArgumentNullException("historical tracking service");
 
-            _service = service;
+            _histroicalTrackingService = historicalTrackingService;
+
+            if (liveTrackingService == null)
+                throw new ArgumentNullException("live tracking service");
+
+            _liveTrackingService = liveTrackingService;
         }
 
         List<MenuViewModel> menuItems = new List<MenuViewModel>()
@@ -51,7 +57,7 @@ namespace Sentinel.Controllers
         public ActionResult GetAllHistoricalDataByDriverKey(string strDriverKey)
         {
             var oDriverKey = GetKeyFromString(strDriverKey);
-            var data = _service.GetAllHistoricalTrackingDataByDriverKey(oDriverKey);
+            var data = _histroicalTrackingService.GetAllHistoricalTrackingDataByDriverKey(oDriverKey);
 
             return PartialView("AllDriverHistoricalTrackingPartial", data);
         }
@@ -62,7 +68,7 @@ namespace Sentinel.Controllers
             var oDriverKey = GetKeyFromString(strDriverKey);
             var oDateRange = DateTime.Parse(strDateRange);
 
-            var data = _service.GetFilteredHistoricalDataByDriverKey(oDriverKey, oDateRange);
+            var data = _histroicalTrackingService.GetFilteredHistoricalDataByDriverKey(oDriverKey, oDateRange);
 
             return PartialView("FilteredDriverHistoricalTrackingPartial", data);
         }
@@ -102,8 +108,36 @@ namespace Sentinel.Controllers
 
         public ActionResult GetAllDriversForDriverSelect()
         {
-            var data = _service.GetDrivers();
+            var data = _histroicalTrackingService.GetDrivers();
             return PartialView("Dialogs/DriverSelectDialog", data);
+        }
+
+        public ActionResult LiveTracking()
+        {
+            return View();
+        }
+
+        public ActionResult GetAllDriversForLiveTracking()
+        {
+            var data = _liveTrackingService.GetLiveDrivers();
+            return PartialView("Dialogs/DriverSelectDialog", data);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult GetLiveUpdateByDriverKey(string strDriverKey, int iSessionID)
+        {
+            var oDriverKey = GetKeyFromString(strDriverKey);
+            var data = _liveTrackingService.GetLiveUpdate(oDriverKey, iSessionID);
+
+            return PartialView("", data);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult GetLiveElapsedRoute(string strDriverKey, int iSessionID)
+        {
+            var oDriverKey = GetKeyFromString(strDriverKey);
+
+            return View();
         }
 
         private Guid GetKeyFromString(string strKey)

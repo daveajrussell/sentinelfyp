@@ -9,8 +9,8 @@ namespace DomainModel.Interfaces.Services
 {
     public interface IHistoricalTrackingService
     {
-        IEnumerable<HistoricalGeographicInformation> GetAllHistoricalTrackingDataByDriverKey(Guid oDriverKey);
-        HistoricalGeographicInformation GetFilteredHistoricalDataByDriverKey(Guid oDriverKey, DateTime oRange);
+        IEnumerable<HistoricalGeospatialInformation> GetAllHistoricalTrackingDataByDriverKey(Guid oDriverKey);
+        HistoricalGeospatialInformation GetFilteredHistoricalDataByDriverKey(Guid oDriverKey, DateTime oRange);
         IEnumerable<User> GetDrivers();
     }
 }
