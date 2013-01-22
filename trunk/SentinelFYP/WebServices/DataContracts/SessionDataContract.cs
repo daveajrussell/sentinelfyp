@@ -7,9 +7,11 @@ using System.Web;
 namespace WebServices.DataContracts
 {
     [DataContract]
-    public class UserDataContract
+    public class SessionDataContract
     {
         [DataMember]
-        public Guid oUserIdentification { get; set; }
+        public int iSessionID { get; set; }
+        [DataMember]
+        public long lSessionBeginDateTime { get; set; }
     }
 }

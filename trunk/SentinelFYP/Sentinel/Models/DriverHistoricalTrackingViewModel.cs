@@ -10,6 +10,6 @@ namespace Sentinel.Models
     public class DriverHistoricalTrackingViewModel
     {
         public User Driver { get; set; }
-        public IEnumerable<GeographicInformation> GeoInformation { get; set; }
+        public IEnumerable<GeospatialInformation> GeoInformation { get; set; }
     }
 }

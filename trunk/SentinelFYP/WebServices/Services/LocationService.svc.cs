@@ -39,14 +39,15 @@ namespace WebServices.Services
 
         public void PostGISData(string strGISObject)
         {
-            GISDataContract obj = JsonR.JsonDeserializer<GISDataContract>(strGISObject);
-            GeographicInformation oGIS = new GeographicInformation
+            GeospatialInformationDataContract obj = JsonR.JsonDeserializer<GeospatialInformationDataContract>(strGISObject);
+            GeospatialInformation oGIS = new GeospatialInformation
             {
-                TimeStamp = new DateTime(1970, 1, 1).AddMilliseconds(obj.lngTimeStamp),
+                DriverKey = new Guid(obj.oUserIdentification),
+                TimeStamp = new DateTime(1970, 1, 1).AddMilliseconds(obj.lTimeStamp),
                 Latitude = obj.dLatitude,
                 Longitude = obj.dLongitude,
                 Speed = obj.dSpeed,
-                Orientation = obj.intOrientation
+                Orientation = obj.iOrientation
             };
 
             try
@@ -68,7 +69,7 @@ namespace WebServices.Services
                 client.Headers["Content-Type"] = "application/json";
                 using (var stream = new MemoryStream())
                 {
-                    var data = new DataContractJsonSerializer(typeof(GISDataContract));
+                    var data = new DataContractJsonSerializer(typeof(GeospatialInformationDataContract));
                     data.WriteObject(stream, strGISObject);
                     client.UploadData("http://fyp.daveajrussell.com/Services/NotifierService.svc/GISNotify", "POST", stream.ToArray());
                 }

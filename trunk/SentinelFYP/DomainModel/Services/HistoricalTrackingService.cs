@@ -21,13 +21,13 @@ namespace DomainModel.Services
             _trackingRepository = trackingRepository;
         }
 
-        public IEnumerable<HistoricalGeographicInformation> GetAllHistoricalTrackingDataByDriverKey(Guid oDriverKey)
+        public IEnumerable<HistoricalGeospatialInformation> GetAllHistoricalTrackingDataByDriverKey(Guid oDriverKey)
         {
             return _trackingRepository.GetAllHistoricalTrackingDataByDriverKey(oDriverKey);
         }
 
 
-        public HistoricalGeographicInformation GetFilteredHistoricalDataByDriverKey(Guid oDriverKey, DateTime oRange)
+        public HistoricalGeospatialInformation GetFilteredHistoricalDataByDriverKey(Guid oDriverKey, DateTime oRange)
         {
             return _trackingRepository.GetFilteredHistoricalDataByDriverKey(oDriverKey, oRange);
         }

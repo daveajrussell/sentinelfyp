@@ -6,10 +6,10 @@ using DomainModel.SecurityModels;
 
 namespace DomainModel.Models.GISModels
 {
-    public class HistoricalGeographicInformation
+    public class HistoricalGeospatialInformation
     {
         public Guid DriverKey { get; set; }
         public DateTime Period { get; set; }
-        public IEnumerable<GeographicInformation> PeriodGeographicData { get; set; }
+        public IEnumerable<GeospatialInformation> PeriodGeographicData { get; set; }
     }
 }

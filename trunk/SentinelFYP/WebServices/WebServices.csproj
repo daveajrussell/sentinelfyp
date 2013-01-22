@@ -76,6 +76,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Services" />
+    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System" />
@@ -113,8 +114,8 @@
   <ItemGroup>
     <Compile Include="DataContracts\CredentialsDataContract.cs" />
     <Compile Include="DataContracts\GeoTaggedDeliveryDataContract.cs" />
-    <Compile Include="DataContracts\GISDataContract.cs" />
-    <Compile Include="DataContracts\UserDataContract.cs" />
+    <Compile Include="DataContracts\GeospatialInformationDataContract.cs" />
+    <Compile Include="DataContracts\SessionDataContract.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

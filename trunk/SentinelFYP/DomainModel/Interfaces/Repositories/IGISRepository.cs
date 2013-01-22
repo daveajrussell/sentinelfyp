@@ -9,8 +9,8 @@ namespace DomainModel.Interfaces.Repositories
 {
     public interface IGISRepository
     {
-        GeographicInformation GetGIS();
-        void AddGIS(GeographicInformation oGIS);
-        IEnumerable<GeographicInformation> GetAllGISData();
+        GeospatialInformation GetGIS();
+        void AddGIS(GeospatialInformation oGIS);
+        IEnumerable<GeospatialInformation> GetAllGISData();
     }
 }

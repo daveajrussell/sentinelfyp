@@ -25,7 +25,7 @@ namespace SqlRepositories
             _connectionString = connectionString;
         }
 
-        public GeographicInformation GetGIS()
+        public GeospatialInformation GetGIS()
         {
             using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[GIS].[GET_GIS]"))
             {
@@ -35,7 +35,7 @@ namespace SqlRepositories
         }
 
 
-        public void AddGIS(GeographicInformation oGIS)
+        public void AddGIS(GeospatialInformation oGIS)
         {
             var arrParams = new SqlParameter[] {
                 new SqlParameter("@IP_TIME_STAMP", oGIS.TimeStamp),
@@ -49,7 +49,7 @@ namespace SqlRepositories
         }
 
 
-        public IEnumerable<GeographicInformation> GetAllGISData()
+        public IEnumerable<GeospatialInformation> GetAllGISData()
         {
             using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[GIS].[GET_ALL_GIS_DATA]"))
             {
