@@ -62,11 +62,11 @@ namespace SqlRepositories
                     "GEOSPATIAL_INFORMATION",
                     from item in oGeoInformationSet
                     select new XElement("GEO_ITEM",
-                        new XAttribute("TIMESTAMP", item.SessionID),
-                        new XAttribute("LATITUDE", item.SessionID),
-                        new XAttribute("LONGITUDE", item.SessionID),
-                        new XAttribute("SPEED", item.SessionID),
-                        new XAttribute("ORIENTATION", item.SessionID)))).ToString();
+                        new XAttribute("TIMESTAMP", item.TimeStamp),
+                        new XAttribute("LATITUDE", item.Latitude),
+                        new XAttribute("LONGITUDE", item.Longitude),
+                        new XAttribute("SPEED", item.Speed),
+                        new XAttribute("ORIENTATION", item.Orientation)))).ToString();
         }
 
         /*public GeospatialInformation GetGIS()

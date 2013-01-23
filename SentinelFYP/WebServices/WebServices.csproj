@@ -113,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataContracts\CredentialsDataContract.cs" />
+    <Compile Include="DataContracts\GeospatialInformationSetDataContract.cs" />
     <Compile Include="DataContracts\GeoTaggedDeliveryDataContract.cs" />
     <Compile Include="DataContracts\GeospatialInformationDataContract.cs" />
     <Compile Include="DataContracts\SessionDataContract.cs" />

@@ -38,7 +38,7 @@ namespace WebServices.Services
             {
                 SessionID = oGeoInformationContract.iSessionID,
                 DriverKey = new Guid(oGeoInformationContract.oUserIdentification),
-                TimeStamp = new DateTime(oGeoInformationContract.lTimeStamp),//new DateTime(1970, 1, 1).AddMilliseconds(oGeoInformationContract.lTimeStamp),
+                TimeStamp = new DateTime(1970, 1, 1).AddMilliseconds(oGeoInformationContract.lTimeStamp),
                 Latitude = oGeoInformationContract.dLatitude,
                 Longitude = oGeoInformationContract.dLongitude,
                 Speed = oGeoInformationContract.dSpeed,
@@ -52,7 +52,20 @@ namespace WebServices.Services
 
         public void PostBufferedGeospatialDataSet(string strBufferedGeospatialDataSetJsonString)
         {
-            throw new NotImplementedException();
+            GeospatialInformationSetDataContract oGeoInformationSetContract = JsonR.JsonDeserializer<GeospatialInformationSetDataContract>(strBufferedGeospatialDataSetJsonString);
+            var data = from geoInfo in oGeoInformationSetContract.BufferedData
+                       select new GeospatialInformation()
+                       {
+                           SessionID = geoInfo.iSessionID,
+                           DriverKey = new Guid(geoInfo.oUserIdentification),
+                           TimeStamp = new DateTime(1970, 1, 1).AddMilliseconds(geoInfo.lTimeStamp),
+                           Latitude = geoInfo.dLatitude,
+                           Longitude = geoInfo.dLongitude,
+                           Speed = geoInfo.dSpeed,
+                           Orientation = geoInfo.iOrientation
+                       };
+
+            _gisService.AddGeospatialInformationSet(data);
         }
 
         private void Notify(string strGISObject)
@@ -64,8 +77,8 @@ namespace WebServices.Services
                 {
                     var data = new DataContractJsonSerializer(typeof(GeospatialInformationDataContract));
                     data.WriteObject(stream, strGISObject);
-                    //client.UploadData("http://fyp.daveajrussell.com/Services/NotifierService.svc/GISNotify", "POST", stream.ToArray());
-                    client.UploadData("http://localhost/Sentinel/Services/NotifierService.svc/GISNotify", "POST", stream.ToArray());
+                    client.UploadData("http://fyp.daveajrussell.com/Services/NotifierService.svc/GISNotify", "POST", stream.ToArray());
+                    //client.UploadData("http://localhost/Sentinel/Services/NotifierService.svc/GISNotify", "POST", stream.ToArray());
                 }
             }
         }
