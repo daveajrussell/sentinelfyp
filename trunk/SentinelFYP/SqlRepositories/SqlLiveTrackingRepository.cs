@@ -29,7 +29,6 @@ namespace SqlRepositories
             }
         }
 
-
         public GeospatialInformation GetLiveUpdate(Guid oUserKey, int iSessionID)
         {
             var arrParams = new SqlParameter[]
