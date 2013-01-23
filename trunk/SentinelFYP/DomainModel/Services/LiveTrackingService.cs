@@ -25,12 +25,12 @@ namespace DomainModel.Services
 
         public GeospatialInformation GetLiveUpdate(Guid oUserKey, int iSessionID)
         {
-            throw new NotImplementedException();
+            return _liveTrackingRepository.GetLiveUpdate(oUserKey, iSessionID);
         }
 
         public IEnumerable<GeospatialInformation> GetLiveElapsedRoute(Guid oUserKey, int iSessionID)
         {
-            throw new NotImplementedException();
+            return _liveTrackingRepository.GetLiveElapsedRoute(oUserKey, iSessionID);
         }
     }
 }

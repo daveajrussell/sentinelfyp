@@ -11,7 +11,7 @@ namespace DomainModel.Test.Tests
 {
     public class GISServiceTests
     {
-        private Mock<IGISRepository> _repository;
+        /*private Mock<IGISRepository> _repository;
 
         public GISServiceTests()
         {
@@ -61,6 +61,6 @@ namespace DomainModel.Test.Tests
             var service = new GISService(_repository.Object);
             
             service.AddGIS(new GeospatialInformation(DateTime.Now, 1, 2, 0, 270));
-        }
+        }*/
     }
 }

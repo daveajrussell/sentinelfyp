@@ -104,9 +104,11 @@ namespace SqlRepositories
             }
         }
 
-        public void Logout(int iSessionID)
+        public void Logout(Guid oUserKey, int iSessionID)
         {
-            var arrParams = new SqlParameter[] {
+            var arrParams = new SqlParameter[] 
+            {
+                new SqlParameter("@IP_USER_KEY", oUserKey),
                 new SqlParameter("@IP_SESSION_ID", iSessionID),
                 new SqlParameter("@IP_EXPIRY_REASON", "LOGOUT")
             };

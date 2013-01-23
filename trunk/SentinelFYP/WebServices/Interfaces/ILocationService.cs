@@ -11,7 +11,11 @@ namespace WebServices.Interfaces
     public interface ILocationService
     {
         [OperationContract]
-        [WebInvoke(Method = "POST", UriTemplate = "/PostGISData", RequestFormat = WebMessageFormat.Json)]
-        void PostGISData(string strGISObject);
+        [WebInvoke(Method = "POST", UriTemplate = "/PostGeospatialData", RequestFormat = WebMessageFormat.Json)]
+        void PostGeospatialData(string strGeospatialDataJsonString);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "/PostBufferedGeospatialDataSet", RequestFormat = WebMessageFormat.Json)]
+        void PostBufferedGeospatialDataSet(string strBufferedGeospatialDataSetJsonString);
     }
 }

@@ -30,7 +30,7 @@ namespace SqlRepositories
 
             using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT * FROM [daveajru].[GIS].[HISTORICAL_GEOSPATIAL_INFORMATION]", sqlParam))
             {
-                return oSet.ToGeographicInformationSet();
+                return oSet.ToHistoricGeospatialInformationSet();
             }
         }
 
@@ -48,7 +48,7 @@ namespace SqlRepositories
 
             using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT * FROM [daveajru].[GIS].[HISTORICAL_GEOSPATIAL_INFORMATION] WHERE TIMESTAMP BETWEEN @IP_DATE_RANGE_FROM AND @IP_DATE_RANGE_TO", arrParams))
             {
-                return oSet.ToGeographicInformation();
+                return oSet.ToHistoricGeospatialInformation();
             }
         }
 

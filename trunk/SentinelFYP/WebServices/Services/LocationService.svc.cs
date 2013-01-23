@@ -21,45 +21,38 @@ namespace WebServices.Services
 {
     public class LocationService : ILocationService
     {
-        private IPointService _pointService;
         private IGISService _gisService;
 
-        public LocationService(IPointService pointService, IGISService gisService)
+        public LocationService(IGISService gisService)
         {
-            if (pointService == null)
-                throw new ArgumentNullException("point service");
-
-            _pointService = pointService;
-
             if (gisService == null)
                 throw new ArgumentNullException("gis service");
 
             _gisService = gisService;
         }
 
-        public void PostGISData(string strGISObject)
+        public void PostGeospatialData(string strGeospatialDataJsonString)
         {
-            GeospatialInformationDataContract obj = JsonR.JsonDeserializer<GeospatialInformationDataContract>(strGISObject);
-            GeospatialInformation oGIS = new GeospatialInformation
+            GeospatialInformationDataContract oGeoInformationContract = JsonR.JsonDeserializer<GeospatialInformationDataContract>(strGeospatialDataJsonString);
+            GeospatialInformation oGeoInformation = new GeospatialInformation
             {
-                DriverKey = new Guid(obj.oUserIdentification),
-                TimeStamp = new DateTime(1970, 1, 1).AddMilliseconds(obj.lTimeStamp),
-                Latitude = obj.dLatitude,
-                Longitude = obj.dLongitude,
-                Speed = obj.dSpeed,
-                Orientation = obj.iOrientation
+                SessionID = oGeoInformationContract.iSessionID,
+                DriverKey = new Guid(oGeoInformationContract.oUserIdentification),
+                TimeStamp = new DateTime(oGeoInformationContract.lTimeStamp),//new DateTime(1970, 1, 1).AddMilliseconds(oGeoInformationContract.lTimeStamp),
+                Latitude = oGeoInformationContract.dLatitude,
+                Longitude = oGeoInformationContract.dLongitude,
+                Speed = oGeoInformationContract.dSpeed,
+                Orientation = oGeoInformationContract.iOrientation
             };
 
-            try
-            {
-                _gisService.AddGIS(oGIS);
-            }
-            catch (Exception e)
-            {
-                // log
-            }
+            _gisService.AddGeospatialInformation(oGeoInformation);
 
-            Notify(strGISObject);
+            Notify(strGeospatialDataJsonString);
+        }
+
+        public void PostBufferedGeospatialDataSet(string strBufferedGeospatialDataSetJsonString)
+        {
+            throw new NotImplementedException();
         }
 
         private void Notify(string strGISObject)
@@ -71,7 +64,8 @@ namespace WebServices.Services
                 {
                     var data = new DataContractJsonSerializer(typeof(GeospatialInformationDataContract));
                     data.WriteObject(stream, strGISObject);
-                    client.UploadData("http://fyp.daveajrussell.com/Services/NotifierService.svc/GISNotify", "POST", stream.ToArray());
+                    //client.UploadData("http://fyp.daveajrussell.com/Services/NotifierService.svc/GISNotify", "POST", stream.ToArray());
+                    client.UploadData("http://localhost/Sentinel/Services/NotifierService.svc/GISNotify", "POST", stream.ToArray());
                 }
             }
         }

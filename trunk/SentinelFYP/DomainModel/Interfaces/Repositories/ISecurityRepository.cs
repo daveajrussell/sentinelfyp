@@ -11,6 +11,6 @@ namespace DomainModel.Interfaces.Repositories
     {
         //string AuthenticateDriver(string strUsername, string strPassword);
         void LogIn(string strUsername, string strPassword, out User oUser, out Session oSession);
-        void Logout(int iSessionID);
+        void Logout(Guid oUserKey, int iSessionID);
     }
 }

@@ -10,6 +10,8 @@ namespace WebServices.DataContracts
     public class GeospatialInformationDataContract
     {
         [DataMember]
+        public int iSessionID { get; set; }
+        [DataMember]
         public string oUserIdentification { get; set; }
         [DataMember]
         public long lTimeStamp { get; set; }

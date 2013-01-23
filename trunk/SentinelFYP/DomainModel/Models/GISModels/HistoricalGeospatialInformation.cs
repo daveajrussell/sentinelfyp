@@ -8,6 +8,7 @@ namespace DomainModel.Models.GISModels
 {
     public class HistoricalGeospatialInformation
     {
+        public int HistoricalSessionID { get; set; }
         public Guid DriverKey { get; set; }
         public DateTime Period { get; set; }
         public IEnumerable<GeospatialInformation> PeriodGeographicData { get; set; }

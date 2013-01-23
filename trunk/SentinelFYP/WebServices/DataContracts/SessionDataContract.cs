@@ -10,8 +10,8 @@ namespace WebServices.DataContracts
     public class SessionDataContract
     {
         [DataMember]
-        public int iSessionID { get; set; }
+        public string strUserKey { get; set; }
         [DataMember]
-        public long lSessionBeginDateTime { get; set; }
+        public int iSessionID { get; set; }
     }
 }
