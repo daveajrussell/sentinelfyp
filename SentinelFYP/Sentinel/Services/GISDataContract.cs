@@ -7,19 +7,21 @@ using System.Runtime.Serialization;
 namespace Sentinel.Services
 {
     [DataContract]
-    public class GISDataContract
+    public class GeospatialInformationDataContract
     {
         [DataMember]
-        public long lngTimeStamp { get; set; }
+        public int iSessionID { get; set; }
         [DataMember]
         public string oUserIdentification { get; set; }
+        [DataMember]
+        public long lTimeStamp { get; set; }
         [DataMember]
         public decimal dLatitude { get; set; }
         [DataMember]
         public decimal dLongitude { get; set; }
         [DataMember]
-        public int intOrientation { get; set; }
-        [DataMember]
         public decimal dSpeed { get; set; }
+        [DataMember]
+        public int iOrientation { get; set; }
     }
 }

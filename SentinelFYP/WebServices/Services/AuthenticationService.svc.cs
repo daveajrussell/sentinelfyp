@@ -42,7 +42,8 @@ namespace WebServices.Services
         public void Logout(string strSessionInformation)
         {
             SessionDataContract oSessionContract = JsonR.JsonDeserializer<SessionDataContract>(strSessionInformation);
-            _securityRepostiory.Logout(oSessionContract.iSessionID);
+            var oUserKey = new Guid(oSessionContract.strUserKey);
+            _securityRepostiory.Logout(oUserKey, oSessionContract.iSessionID);
         }
     }
 }

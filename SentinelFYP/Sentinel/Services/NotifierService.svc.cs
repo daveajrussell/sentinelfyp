@@ -17,22 +17,31 @@ namespace Sentinel.Services
     {
         public void GISNotify(string message)
         {
-            GISDataContract obj = JsonR.JsonDeserializer<GISDataContract>(message);
-            GeospatialInformation oGIS = new GeospatialInformation { TimeStamp = new DateTime(1970, 1, 1).AddMilliseconds(obj.lngTimeStamp), Latitude = obj.dLatitude, Longitude = obj.dLongitude, Speed = obj.dSpeed, Orientation = obj.intOrientation };
+            GeospatialInformationDataContract oGeoInformationContract = JsonR.JsonDeserializer<GeospatialInformationDataContract>(message);
+            GeospatialInformation oGeoInformation = new GeospatialInformation
+            {
+                SessionID = oGeoInformationContract.iSessionID,
+                DriverKey = new Guid(oGeoInformationContract.oUserIdentification),
+                TimeStamp = new DateTime(oGeoInformationContract.lTimeStamp),//new DateTime(1970, 1, 1).AddMilliseconds(oGeoInformationContract.lTimeStamp),
+                Latitude = oGeoInformationContract.dLatitude,
+                Longitude = oGeoInformationContract.dLongitude,
+                Speed = oGeoInformationContract.dSpeed,
+                Orientation = oGeoInformationContract.iOrientation
+            };
 
             string strSeverity;
 
-            if (oGIS.Speed <= 0)
+            if (oGeoInformation.Speed <= 0)
                 strSeverity = "caution";
-            else if (oGIS.Orientation != 1)
+            else if (oGeoInformation.Orientation != 1)
                 strSeverity = "severe";
             else
                 strSeverity = "normal";
 
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SentinelHub>();
-            context.Clients.Group("00000000-0000-0000-0000-000000000000", null).getGISMessage(oGIS.TimeStamp.ToShortDateString(), oGIS.Latitude, oGIS.Longitude, oGIS.Speed, oGIS.Orientation, strSeverity);
-            context.Clients.Group("00000000-0000-0000-0000-000000000000", null).getUpdatedMap();
-            //context.Clients.All.getGISMessage(oGIS.TimeStamp.ToShortDateString(), oGIS.Latitude, oGIS.Longitude, oGIS.Speed, oGIS.Orientation, strSeverity);
+            context.Clients.Group(oGeoInformation.DriverKey.ToString(), null).getGISMessage(oGeoInformation.DriverKey.ToString(), oGeoInformation.TimeStamp.ToShortDateString(), oGeoInformation.Latitude, oGeoInformation.Longitude, oGeoInformation.Speed, oGeoInformation.Orientation, strSeverity);
+            context.Clients.Group(oGeoInformation.DriverKey.ToString(), null).getUpdatedMap();
+            context.Clients.All.allLocationUpdates(oGeoInformation.DriverKey.ToString(), oGeoInformation.TimeStamp.ToShortDateString(), oGeoInformation.Latitude, oGeoInformation.Longitude, oGeoInformation.Speed, oGeoInformation.Orientation, strSeverity);
         }
     }
 }

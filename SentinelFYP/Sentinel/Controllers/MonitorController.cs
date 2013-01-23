@@ -10,7 +10,7 @@ namespace Sentinel.Controllers
 {
     public class MonitorController : Controller
     {
-        private readonly IPointService _pointService;
+        /*private readonly IPointService _pointService;
         private readonly IGHeatService _gheatService;
         private readonly IGISService _gisService;
         private List<PointLatLng> _points;
@@ -54,6 +54,6 @@ namespace Sentinel.Controllers
         {
             var data = _gisService.GetAllGISData();
             return PartialView("PolylineMapPartial", data);
-        }
+        }*/
     }
 }

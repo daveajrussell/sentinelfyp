@@ -7,6 +7,7 @@ namespace DomainModel.Models.GISModels
 {
     public class GeospatialInformation
     {
+        public int SessionID { get; set; }
         public Guid DriverKey { get; set; }
         public DateTime TimeStamp { get; set; }
         public decimal Latitude { get; set; }

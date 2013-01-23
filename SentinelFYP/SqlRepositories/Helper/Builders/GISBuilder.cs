@@ -11,23 +11,14 @@ namespace SqlRepositories.Helper.Builders
 {
     public static class GISBuilder
     {
-        public static GeospatialInformation ToGeographicInformation(this DataRow oRow)
-        {
-            DateTime _timestamp = oRow.Field<DateTime>("UPDATE_DATE_TIME");
-            decimal _latitude = oRow.Field<decimal>("LATITUDE");
-            decimal _longitude = oRow.Field<decimal>("LONGITUDE");
-            decimal _speed = oRow.Field<decimal>("SPEED");
-            int _orientation = oRow.Field<int>("ORIENTATION");
-            return new GeospatialInformation(_timestamp, _latitude, _longitude, _speed, _orientation);
-        }
-
-        public static IEnumerable<HistoricalGeospatialInformation> ToGeographicInformationSet(this DataSet oSet)
+        public static IEnumerable<HistoricalGeospatialInformation> ToHistoricGeospatialInformationSet(this DataSet oSet)
         {
             return from item in oSet.FirstDataTableAsEnumerable()
                    orderby item.Field<DateTime>("TIMESTAMP") descending
-                   group item by new { Period = item.Field<DateTime>("TIMESTAMP").Date, DriverKey = item.Field<Guid>("USER_KEY") } into g
+                   group item by new { HistoricalSessionID = item.Field<int>("HISTORICAL_SESSION_ID"), Period = item.Field<DateTime>("TIMESTAMP").Date, DriverKey = item.Field<Guid>("USER_KEY") } into g
                    select new HistoricalGeospatialInformation()
                    {
+                       HistoricalSessionID = g.Key.HistoricalSessionID,
                        DriverKey = g.Key.DriverKey,
                        Period = g.Key.Period,
                        PeriodGeographicData = from item in g
@@ -43,25 +34,57 @@ namespace SqlRepositories.Helper.Builders
 
         }
 
-        public static HistoricalGeospatialInformation ToGeographicInformation(this DataSet oSet)
+        public static HistoricalGeospatialInformation ToHistoricGeospatialInformation(this DataSet oSet)
         {
             return (from item in oSet.FirstDataTableAsEnumerable()
-                   orderby item.Field<DateTime>("TIMESTAMP") descending
-                   group item by new { Period = item.Field<DateTime>("TIMESTAMP").Date, DriverKey = item.Field<Guid>("USER_KEY") } into g
-                   select new HistoricalGeospatialInformation()
-                   {
-                       DriverKey = g.Key.DriverKey,
-                       Period = g.Key.Period,
-                       PeriodGeographicData = from item in g
-                                              select new GeospatialInformation()
-                                              {
-                                                  TimeStamp = item.Field<DateTime>("TIMESTAMP"),
-                                                  Latitude = item.Field<decimal>("LATITUDE"),
-                                                  Longitude = item.Field<decimal>("LONGITUDE"),
-                                                  Speed = item.Field<decimal>("SPEED"),
-                                                  Orientation = item.Field<int>("ORIENTATION")
-                                              }
-                   }).First();
+                    orderby item.Field<DateTime>("TIMESTAMP") descending
+                    group item by new { HistoricalSessionID = item.Field<int>("HISTORICAL_SESSION_ID"), Period = item.Field<DateTime>("TIMESTAMP").Date, DriverKey = item.Field<Guid>("USER_KEY") } into g
+                    select new HistoricalGeospatialInformation()
+                    {
+                        HistoricalSessionID = g.Key.HistoricalSessionID,
+                        DriverKey = g.Key.DriverKey,
+                        Period = g.Key.Period,
+                        PeriodGeographicData = from item in g
+                                               select new GeospatialInformation()
+                                               {
+                                                   TimeStamp = item.Field<DateTime>("TIMESTAMP"),
+                                                   Latitude = item.Field<decimal>("LATITUDE"),
+                                                   Longitude = item.Field<decimal>("LONGITUDE"),
+                                                   Speed = item.Field<decimal>("SPEED"),
+                                                   Orientation = item.Field<int>("ORIENTATION")
+                                               }
+                    }).First();
         }
+
+        public static IEnumerable<GeospatialInformation> ToGeospatialInformationSet(this DataSet oSet)
+        {
+            return from item in oSet.FirstDataTableAsEnumerable()
+                   select new GeospatialInformation()
+                   {
+                       SessionID = item.Field<int>("SESSION_ID"),
+                       DriverKey = item.Field<Guid>("USER_KEY"),
+                       TimeStamp = item.Field<DateTime>("TIMESTAMP"),
+                       Latitude = item.Field<decimal>("LATITUDE"),
+                       Longitude = item.Field<decimal>("LONGITUDE"),
+                       Speed = item.Field<decimal>("SPEED"),
+                       Orientation = item.Field<int>("ORIENTATION")
+                   };
+        }
+
+        public static GeospatialInformation ToGeospatialInformation(this DataSet oSet)
+        {
+            return (from item in oSet.FirstDataTableAsEnumerable()
+                    select new GeospatialInformation()
+                    {
+                        SessionID = item.Field<int>("SESSION_ID"),
+                        DriverKey = item.Field<Guid>("USER_KEY"),
+                        TimeStamp = item.Field<DateTime>("TIMESTAMP"),
+                        Latitude = item.Field<decimal>("LATITUDE"),
+                        Longitude = item.Field<decimal>("LONGITUDE"),
+                        Speed = item.Field<decimal>("SPEED"),
+                        Orientation = item.Field<int>("ORIENTATION")
+                    }).First();
+        }
+
     }
 }
