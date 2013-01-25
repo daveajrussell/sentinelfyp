@@ -12,11 +12,7 @@ namespace WebServices.Interfaces
     public interface IDeliveryService
     {
         [OperationContract]
-        [WebInvoke(Method = "Post", UriTemplate = "/SubmitGeoTaggedDelivery", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        void SubmitGeoTaggedDelivery(string strGeoTaggedDeliveryObject);
-
-        [OperationContract]
-        [WebInvoke(Method = "Get", UriTemplate = "/GetDeliveryInformation", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        string GetDeliveryInformation(string strItemID);
+        [WebInvoke(Method = "POST", UriTemplate = "/GeoTagDelivery", RequestFormat = WebMessageFormat.Json)]
+        void GeoTagDelivery(string strGeoTaggedDeliveryObject);
     }
 }

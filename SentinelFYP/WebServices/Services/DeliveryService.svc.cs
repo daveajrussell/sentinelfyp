@@ -4,25 +4,43 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using DomainModel.Abstracts;
+using DomainModel.Interfaces.Services;
+using DomainModel.Models.AssetModels;
+using Ninject;
+using WebServices.DataContracts;
 using WebServices.Interfaces;
 
 namespace WebServices.Services
 {
     public class DeliveryService : IDeliveryService
     {
-        public void SubmitGeoTaggedDelivery(string strGeoTaggedDeliveryObject)
+        private IGeoTaggedDeliveryService _service;
+
+        public DeliveryService(IGeoTaggedDeliveryService service)
         {
-            if (string.IsNullOrEmpty(strGeoTaggedDeliveryObject))
-                throw new ArgumentNullException("Delivery Object");
+            if (service == null)
+                throw new ArgumentNullException("service");
+
+            _service = service;
         }
 
-
-        public string GetDeliveryInformation(string strItemID)
+        public void GeoTagDelivery(string strGeoTaggedDeliveryObject)
         {
-            if (string.IsNullOrEmpty(strItemID))
-                throw new ArgumentNullException("Item ID");
+            GeotaggedAssetDataContract oGeotaggedAssetContract = JsonR.JsonDeserializer<GeotaggedAssetDataContract>(strGeoTaggedDeliveryObject);
+            GeoTaggedDeliveryItem oItem = new GeoTaggedDeliveryItem()
+            {
+                AssetKey = new Guid(oGeotaggedAssetContract.oAssetKey),
+                DriverKey = new Guid(oGeotaggedAssetContract.oUserIdentification),
+                SessionID = oGeotaggedAssetContract.iSessionID,
+                TimeStamp = new DateTime(1970, 1, 1).AddMilliseconds(oGeotaggedAssetContract.lTimeStamp),
+                Latitude = oGeotaggedAssetContract.dLatitude,
+                Longitude = oGeotaggedAssetContract.dLongitude,
+                Speed = oGeotaggedAssetContract.dSpeed,
+                Orientation = oGeotaggedAssetContract.iOrientation
+            };
 
-            return "{\"TestData\": \"Test\"}";
+            _service.SubmitGeoTaggedDeliveryItem(oItem);
         }
     }
 }

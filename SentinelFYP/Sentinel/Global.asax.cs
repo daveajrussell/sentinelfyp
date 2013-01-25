@@ -78,6 +78,7 @@ namespace Sentinel
             kernel.Bind<IDeliveryItemManagementService>().To<DeliveryItemManagementService>();
             kernel.Bind<IHistoricalTrackingService>().To<HistoricalTrackingService>();
             kernel.Bind<ILiveTrackingService>().To<LiveTrackingService>();
+            kernel.Bind<IGeoTaggedDeliveryService>().To<GeoTaggedDeliveryService>();
 
             kernel.Bind<ISettingsRepository>().To<SettingsRepository>().WithConstructorArgument("baseDirectory", baseDirectory);
             kernel.Bind<IGHeatRepository>().To<GHeatRepository>();
@@ -89,6 +90,7 @@ namespace Sentinel
             kernel.Bind<IDeliveryItemManagementRepository>().To<SqlDeliveryItemManagementRepository>().WithConstructorArgument("connectionString", _connectionString);
             kernel.Bind<IHistoricalTrackingRepository>().To<SqlHistoricalTrackingRepository>().WithConstructorArgument("connectionString", _connectionString);
             kernel.Bind<ILiveTrackingRepository>().To<SqlLiveTrackingRepository>().WithConstructorArgument("connectionString", _connectionString);
+            kernel.Bind<IGeoTaggedDeliveryRepository>().To<SqlGeoTaggedDeliveryRepository>().WithConstructorArgument("connectionString", _connectionString);
             
             kernel.Inject(Membership.Provider);
             kernel.Inject(Roles.Provider);

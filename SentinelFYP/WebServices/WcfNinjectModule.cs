@@ -21,11 +21,13 @@ namespace WebServices
             Bind<IPointService>().To<PointService>();
             Bind<IGISService>().To<GISService>();
             Bind<ISecurityService>().To<SecurityService>();
+            Bind<IGeoTaggedDeliveryService>().To<GeoTaggedDeliveryService>();
 
             /* REPOSITORIES */
             Bind<IPointRepository>().To<SqlPointRepository>().WithConstructorArgument("connectionString", _connectionString);
             Bind<IGISRepository>().To<SqlGISRepository>().WithConstructorArgument("connectionString", _connectionString);
             Bind<ISecurityRepository>().To<SqlSecurityRepository>().WithConstructorArgument("connectionString", _connectionString);
+            Bind<IGeoTaggedDeliveryRepository>().To<SqlGeoTaggedDeliveryRepository>().WithConstructorArgument("connectionString", _connectionString);
         }
     }
 }

@@ -74,6 +74,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlConsignmentManagementRepository.cs" />
     <Compile Include="SqlDeliveryItemManagementRepository.cs" />
+    <Compile Include="SqlGeoTaggedDeliveryRepository.cs" />
     <Compile Include="SqlGISRepository.cs" />
     <Compile Include="SqlHistoricalTrackingRepository.cs" />
     <Compile Include="SqlLiveTrackingRepository.cs" />
