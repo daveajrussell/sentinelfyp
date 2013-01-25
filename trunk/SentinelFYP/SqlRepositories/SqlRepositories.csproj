@@ -87,6 +87,10 @@
       <Project>{5D3F52F5-A1D0-4401-A177-04C2631B69A9}</Project>
       <Name>DomainModel %28DomainModel\DomainModel%29</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SentinelExceptionManagement\SentinelExceptionManagement.csproj">
+      <Project>{20976744-59ec-4daa-96be-c139686db27d}</Project>
+      <Name>SentinelExceptionManagement %28SentinelExceptionManagement\SentinelExceptionManagement%29</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SqlDataAccess\SqlDataAccess\SqlDataAccess.csproj">
       <Project>{A3901CF8-A301-44EC-A7AA-6855CE8283C5}</Project>
       <Name>SqlDataAccess %28DAL\SqlDataAccess\SqlDataAccess%29</Name>

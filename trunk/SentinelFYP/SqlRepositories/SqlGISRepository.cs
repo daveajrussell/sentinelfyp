@@ -12,6 +12,7 @@ using SqlRepositories.Helper.Extensions;
 using SqlRepositories.Helper.Builders;
 using DomainModel.Models.GISModels;
 using System.Xml.Linq;
+using SentinelExceptionManagement;
 
 namespace SqlRepositories
 {
@@ -44,15 +45,22 @@ namespace SqlRepositories
 
         public void AddGeospatialInformationSet(IEnumerable<GeospatialInformation> oGeoInformationSet)
         {
-            var oXmlString = GetXmlString(oGeoInformationSet);
-            var arrParams = new SqlParameter[]
+            try
+            {
+                var oXmlString = GetXmlString(oGeoInformationSet);
+                var arrParams = new SqlParameter[]
             {
                 new SqlParameter("@IP_SESSION_ID", oGeoInformationSet.First().SessionID),
                 new SqlParameter("@IP_USER_KEY", oGeoInformationSet.First().DriverKey),
                 new SqlParameter("@IP_XML", oXmlString)
             };
 
-            SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "[GIS].[ADD_GEOSPATIAL_INFORMATION_SET]", arrParams);
+                SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "[GIS].[ADD_GEOSPATIAL_INFORMATION_SET]", arrParams);
+            }
+            catch (Exception ex)
+            {
+                ExceptionManager.LogException(ex);
+            }
         }
 
         private string GetXmlString(IEnumerable<GeospatialInformation> oGeoInformationSet)

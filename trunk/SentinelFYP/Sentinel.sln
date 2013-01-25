@@ -52,6 +52,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{DB85A4
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServices.Test", "WebServices.Test\WebServices.Test.csproj", "{C0EBF0F6-406F-42D1-A6DE-DAA13DE92318}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SentinelExceptionManagement", "SentinelExceptionManagement", "{CA17178A-6B43-4583-AB12-3861994E074D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SentinelExceptionManagement", "SentinelExceptionManagement\SentinelExceptionManagement.csproj", "{20976744-59EC-4DAA-96BE-C139686DB27D}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -166,6 +170,16 @@ Global
 		{C0EBF0F6-406F-42D1-A6DE-DAA13DE92318}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{C0EBF0F6-406F-42D1-A6DE-DAA13DE92318}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{C0EBF0F6-406F-42D1-A6DE-DAA13DE92318}.Release|x86.ActiveCfg = Release|Any CPU
+		{20976744-59EC-4DAA-96BE-C139686DB27D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20976744-59EC-4DAA-96BE-C139686DB27D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20976744-59EC-4DAA-96BE-C139686DB27D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{20976744-59EC-4DAA-96BE-C139686DB27D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{20976744-59EC-4DAA-96BE-C139686DB27D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{20976744-59EC-4DAA-96BE-C139686DB27D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20976744-59EC-4DAA-96BE-C139686DB27D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20976744-59EC-4DAA-96BE-C139686DB27D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{20976744-59EC-4DAA-96BE-C139686DB27D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{20976744-59EC-4DAA-96BE-C139686DB27D}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -184,5 +198,6 @@ Global
 		{22DE6170-AF7E-4A47-8589-E84014309312} = {B5665885-ABF6-4AFC-B52C-323167D00943}
 		{C0EBF0F6-406F-42D1-A6DE-DAA13DE92318} = {B5665885-ABF6-4AFC-B52C-323167D00943}
 		{AC133F9A-AE4A-4865-A2C4-7112C2CE33BD} = {798B2909-90F5-4BD2-A39D-33E69501E6A8}
+		{20976744-59EC-4DAA-96BE-C139686DB27D} = {CA17178A-6B43-4583-AB12-3861994E074D}
 	EndGlobalSection
 EndGlobal
