@@ -154,6 +154,10 @@
       <Project>{5d3f52f5-a1d0-4401-a177-04c2631b69a9}</Project>
       <Name>DomainModel %28DomainModel\DomainModel%29</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SentinelExceptionManagement\SentinelExceptionManagement.csproj">
+      <Project>{20976744-59ec-4daa-96be-c139686db27d}</Project>
+      <Name>SentinelExceptionManagement %28SentinelExceptionManagement\SentinelExceptionManagement%29</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SqlRepositories\SqlRepositories.csproj">
       <Project>{06fbb6f7-2efa-4ce0-b7f5-3628e2b0e8ec}</Project>
       <Name>SqlRepositories %28DAL\SqlRepositories\SqlRepositories%29</Name>

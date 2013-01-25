@@ -16,6 +16,7 @@ using DomainModel.Abstracts;
 using WebServices.DataContracts;
 using WebServices.Interfaces;
 using DomainModel.Models.GISModels;
+using SentinelExceptionManagement;
 
 namespace WebServices.Services
 {
@@ -52,20 +53,27 @@ namespace WebServices.Services
 
         public void PostBufferedGeospatialDataSet(string strBufferedGeospatialDataSetJsonString)
         {
-            GeospatialInformationSetDataContract oGeoInformationSetContract = JsonR.JsonDeserializer<GeospatialInformationSetDataContract>(strBufferedGeospatialDataSetJsonString);
-            var data = from geoInfo in oGeoInformationSetContract.BufferedData
-                       select new GeospatialInformation()
-                       {
-                           SessionID = geoInfo.iSessionID,
-                           DriverKey = new Guid(geoInfo.oUserIdentification),
-                           TimeStamp = new DateTime(1970, 1, 1).AddMilliseconds(geoInfo.lTimeStamp),
-                           Latitude = geoInfo.dLatitude,
-                           Longitude = geoInfo.dLongitude,
-                           Speed = geoInfo.dSpeed,
-                           Orientation = geoInfo.iOrientation
-                       };
+            try
+            {
+                GeospatialInformationSetDataContract oGeoInformationSetContract = JsonR.JsonDeserializer<GeospatialInformationSetDataContract>(strBufferedGeospatialDataSetJsonString);
+                var data = from geoInfo in oGeoInformationSetContract.BufferedData
+                           select new GeospatialInformation()
+                           {
+                               SessionID = geoInfo.iSessionID,
+                               DriverKey = new Guid(geoInfo.oUserIdentification),
+                               TimeStamp = new DateTime(1970, 1, 1).AddMilliseconds(geoInfo.lTimeStamp),
+                               Latitude = geoInfo.dLatitude,
+                               Longitude = geoInfo.dLongitude,
+                               Speed = geoInfo.dSpeed,
+                               Orientation = geoInfo.iOrientation
+                           };
 
-            _gisService.AddGeospatialInformationSet(data);
+                _gisService.AddGeospatialInformationSet(data);
+            }
+            catch (Exception ex)
+            {
+                ExceptionManager.LogException(ex);
+            }
         }
 
         private void Notify(string strGISObject)
