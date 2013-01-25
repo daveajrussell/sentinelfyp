@@ -79,6 +79,7 @@
     <Compile Include="DomainRepositories\SettingsRepository.cs" />
     <Compile Include="Interfaces\Repositories\IConsignmentManagementRepository.cs" />
     <Compile Include="Interfaces\Repositories\IDeliveryItemManagementRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IGeoTaggedDeliveryRepository.cs" />
     <Compile Include="Interfaces\Repositories\IGHeatRepository.cs" />
     <Compile Include="Interfaces\Repositories\IGISRepository.cs" />
     <Compile Include="Interfaces\Repositories\IHistoricalTrackingRepository.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Interfaces\Repositories\ISettingsRepository.cs" />
     <Compile Include="Interfaces\Services\IConsignmentManagementService.cs" />
     <Compile Include="Interfaces\Services\IDeliveryItemManagementService.cs" />
+    <Compile Include="Interfaces\Services\IGeoTaggedDeliveryService.cs" />
     <Compile Include="Interfaces\Services\IGISService.cs" />
     <Compile Include="Interfaces\Services\IHistoricalTrackingService.cs" />
     <Compile Include="Interfaces\Services\ILiveTrackingService.cs" />
@@ -96,6 +98,7 @@
     <Compile Include="Models\AssetModels\Consignment.cs" />
     <Compile Include="Models\AssetModels\CompletedConsignment.cs" />
     <Compile Include="Models\AssetModels\DeliveryItem.cs" />
+    <Compile Include="Models\AssetModels\GeoTaggedDeliveryItem.cs" />
     <Compile Include="Models\AssetModels\UnAssignedConsignment.cs" />
     <Compile Include="Models\GISModels\GeospatialInformation.cs" />
     <Compile Include="Models\AuditModels\Session.cs" />
@@ -114,6 +117,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ConsignmentManagementService.cs" />
     <Compile Include="Services\DeliveryItemManagementService.cs" />
+    <Compile Include="Services\GeoTaggedDeliveryService.cs" />
     <Compile Include="Services\GHeatService.cs" />
     <Compile Include="Services\GISService.cs" />
     <Compile Include="Services\HistoricalTrackingService.cs" />
