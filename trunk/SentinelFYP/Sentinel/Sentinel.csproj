@@ -328,6 +328,7 @@
     <Content Include="Views\Tracking\AllDriverHistoricalTrackingPartial.cshtml" />
     <Content Include="Views\Tracking\Dialogs\DriverSelectDialog.cshtml" />
     <Content Include="Views\Tracking\FilteredDriverHistoricalTrackingPartial.cshtml" />
+    <None Include="Properties\PublishProfiles\SENTINEL_APP_FS.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">

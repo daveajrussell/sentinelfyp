@@ -22,7 +22,7 @@ namespace Sentinel.Services
             {
                 SessionID = oGeoInformationContract.iSessionID,
                 DriverKey = new Guid(oGeoInformationContract.oUserIdentification),
-                TimeStamp = new DateTime(oGeoInformationContract.lTimeStamp),//new DateTime(1970, 1, 1).AddMilliseconds(oGeoInformationContract.lTimeStamp),
+                TimeStamp = new DateTime(1970, 1, 1).AddMilliseconds(oGeoInformationContract.lTimeStamp),
                 Latitude = oGeoInformationContract.dLatitude,
                 Longitude = oGeoInformationContract.dLongitude,
                 Speed = oGeoInformationContract.dSpeed,

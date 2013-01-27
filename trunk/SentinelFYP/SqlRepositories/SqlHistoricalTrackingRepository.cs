@@ -28,7 +28,7 @@ namespace SqlRepositories
         {
             var sqlParam = new SqlParameter("@IP_DRIVER_KEY", oDriverKey);
 
-            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT * FROM [daveajru].[GIS].[HISTORICAL_GEOSPATIAL_INFORMATION]", sqlParam))
+            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT * FROM [daveajru].[GIS].[HISTORICAL_GEOSPATIAL_INFORMATION] WHERE [USER_KEY] = @IP_DRIVER_KEY", sqlParam))
             {
                 return oSet.ToHistoricGeospatialInformationSet();
             }
@@ -46,7 +46,7 @@ namespace SqlRepositories
                 new SqlParameter("@IP_DATE_RANGE_TO", dateTo)
             };
 
-            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT * FROM [daveajru].[GIS].[HISTORICAL_GEOSPATIAL_INFORMATION] WHERE TIMESTAMP BETWEEN @IP_DATE_RANGE_FROM AND @IP_DATE_RANGE_TO", arrParams))
+            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT * FROM [daveajru].[GIS].[HISTORICAL_GEOSPATIAL_INFORMATION] WHERE [USER_KEY] = @IP_DRIVER_KEY AND TIMESTAMP BETWEEN @IP_DATE_RANGE_FROM AND @IP_DATE_RANGE_TO", arrParams))
             {
                 return oSet.ToHistoricGeospatialInformation();
             }
