@@ -10,7 +10,7 @@ namespace WebServices.DataContracts
     public class SessionDataContract
     {
         [DataMember]
-        public string strUserKey { get; set; }
+        public string oUserIdentification { get; set; }
         [DataMember]
         public int iSessionID { get; set; }
     }

@@ -49,7 +49,7 @@ namespace WebServices.Services
         public void Logout(string strSessionInformation)
         {
             SessionDataContract oSessionContract = JsonR.JsonDeserializer<SessionDataContract>(strSessionInformation);
-            var oUserKey = new Guid(oSessionContract.strUserKey);
+            var oUserKey = new Guid(oSessionContract.oUserIdentification);
             _securityRepostiory.Logout(oUserKey, oSessionContract.iSessionID);
         }
     }

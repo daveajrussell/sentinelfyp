@@ -15,7 +15,9 @@
                     {
                         text: "Select",
                         click: function () {
-                            var driverKey = $('#driver-select option:selected').val();
+
+                            var driverKey = $(this).find('#driver-select option:selected').val();
+
                             $.post('../Tracking/GetAllHistoricalDataByDriverKey', { strDriverKey: driverKey }, function (data) {
                                 $('#tracking').replaceWith(data);
                                 
