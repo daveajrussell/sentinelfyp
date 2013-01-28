@@ -27,12 +27,9 @@
 
             //Create SignalR object to get communicate with server
             var sentinelHub = $.connection.sentinelHub;
-            $.connection.id = "77777700-0000-0000-0000-777777777777";
-
+            
             // Start the connection with server
-            $.connection.hub.start().done(function () {
-                sentinelHub.server.addGroup($.connection.id);
-            });
+            $.connection.hub.start();
         });
     </script>
 

@@ -10,7 +10,7 @@ namespace DomainModel.Interfaces.Repositories
     public interface ILiveTrackingRepository
     {
         IEnumerable<User> GetLiveDrivers();
-        GeospatialInformation GetLiveUpdate(Guid oUserKey, int iSessionID);
-        IEnumerable<GeospatialInformation> GetLiveElapsedRoute(Guid oUserKey, int iSessionID);
+        GeospatialInformation GetLiveUpdate(Guid oUserKey);
+        IEnumerable<GeospatialInformation> GetLiveElapsedRoute(Guid oUserKey);
     }
 }

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using DomainModel.Interfaces.Services;
 using DomainModel.Models.AuditModels;
+using DomainModel.SecurityModels;
 using Sentinel.Models;
 
 namespace Sentinel.Controllers
@@ -120,24 +121,63 @@ namespace Sentinel.Controllers
         public ActionResult GetAllDriversForLiveTracking()
         {
             var data = _liveTrackingService.GetLiveDrivers();
-            return PartialView("Dialogs/DriverSelectDialog", data);
+            return PartialView("Dialogs/LiveDriverSelectDialog", data);
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult GetLiveUpdateByDriverKey(string strDriverKey, int iSessionID)
+        public ActionResult LiveTrackingDriverFeedPageActions()
         {
-            var oDriverKey = GetKeyFromString(strDriverKey);
-            var data = _liveTrackingService.GetLiveUpdate(oDriverKey, iSessionID);
+            var actions = new List<ActionButtonsViewModel>()
+            {
+                new ActionButtonsViewModel()
+                {
+                    Display = "Back",
+                    Javascript = "navigateBack('Index')"
+                },
+                new ActionButtonsViewModel()
+                { 
+                    Display = "Show Elapsed Route",
+                    Javascript = "showElapsedRoute()"
+                }
+            };
 
-            return PartialView("", data);
+            return PartialView("../ActionButtons/PageActionButtonsPartial", actions);
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult GetLiveElapsedRoute(string strDriverKey, int iSessionID)
+        public ActionResult LiveElapsedTrackingDriverFeedPageActions()
+        {
+            var actions = new List<ActionButtonsViewModel>()
+            {
+                new ActionButtonsViewModel()
+                {
+                    Display = "Back",
+                    Javascript = "navigateBack('Index')"
+                },
+                new ActionButtonsViewModel()
+                { 
+                    Display = "Show Single Marker",
+                    Javascript = "showSingleMarker()"
+                }
+            };
+
+            return PartialView("../ActionButtons/PageActionButtonsPartial", actions);
+        }
+
+        //[AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult GetLiveUpdateByDriverKey(string strDriverKey)
         {
             var oDriverKey = GetKeyFromString(strDriverKey);
+            var data = _liveTrackingService.GetLiveUpdate(oDriverKey);
 
-            return View();
+            return PartialView("LiveTrackingDriverFeed", data);
+        }
+
+        //[AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult GetLiveElapsedRoute(string strDriverKey)
+        {
+            var oDriverKey = GetKeyFromString(strDriverKey);
+            var data = _liveTrackingService.GetLiveElapsedRoute(oDriverKey);
+
+            return PartialView("LiveElapsedTrackingDriverFeed", data);
         }
 
         private Guid GetKeyFromString(string strKey)

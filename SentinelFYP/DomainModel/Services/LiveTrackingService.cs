@@ -20,17 +20,17 @@ namespace DomainModel.Services
 
         public IEnumerable<User> GetLiveDrivers()
         {
-            throw new NotImplementedException();
+            return _liveTrackingRepository.GetLiveDrivers();
         }
 
-        public GeospatialInformation GetLiveUpdate(Guid oUserKey, int iSessionID)
+        public GeospatialInformation GetLiveUpdate(Guid oUserKey)
         {
-            return _liveTrackingRepository.GetLiveUpdate(oUserKey, iSessionID);
+            return _liveTrackingRepository.GetLiveUpdate(oUserKey);
         }
 
-        public IEnumerable<GeospatialInformation> GetLiveElapsedRoute(Guid oUserKey, int iSessionID)
+        public IEnumerable<GeospatialInformation> GetLiveElapsedRoute(Guid oUserKey)
         {
-            return _liveTrackingRepository.GetLiveElapsedRoute(oUserKey, iSessionID);
+            return _liveTrackingRepository.GetLiveElapsedRoute(oUserKey);
         }
     }
 }

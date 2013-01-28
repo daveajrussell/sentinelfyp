@@ -47,10 +47,8 @@ namespace DomainModel.Services
 
         public void Logout()
         {
-            if (State.Session.SessionID <= 0)
-                throw new ArgumentOutOfRangeException("Session ID");
-
-            _securityRepository.Logout(State.User.UserKey, State.Session.SessionID);
+            if (State.Session != null && State.Session.SessionID <= 0)
+                _securityRepository.Logout(State.User.UserKey, State.Session.SessionID);
         }
 
     }

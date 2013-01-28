@@ -23,35 +23,33 @@ namespace SqlRepositories
 
         public IEnumerable<User> GetLiveDrivers()
         {
-            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT * FROM [SECURITY].[USER]"))
+            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT T1.* FROM [SECURITY].[USER] T1 INNER JOIN [AUDIT].[SESSION] T2 ON T1.USER_KEY = T2.USER_KEY"))
             {
                 return oSet.ToUserSet();
             }
         }
 
-        public GeospatialInformation GetLiveUpdate(Guid oUserKey, int iSessionID)
+        public GeospatialInformation GetLiveUpdate(Guid oUserKey)
         {
             var arrParams = new SqlParameter[]
             {
-                new SqlParameter("@IP_USER_KEY", oUserKey),
-                new SqlParameter("@IP_SESSION_ID", iSessionID)
+                new SqlParameter("@IP_USER_KEY", oUserKey)
             };
 
-            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT TOP 1 FROM [AUDIT].[GEOSPATIAL_INFORMATION] ORDER BY [TIMESTAMP] DESC WHERE [SESSION_ID] = @IP_SESSION_ID AND [USER_KEY] = @IP_USER_KEY", arrParams))
+            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT TOP 1 * FROM [GIS].[GEOSPATIAL_INFORMATION] WHERE [USER_KEY] = @IP_USER_KEY ORDER BY [TIMESTAMP] DESC", arrParams))
             {
                 return oSet.ToGeospatialInformation();
             }
         }
 
-        public IEnumerable<GeospatialInformation> GetLiveElapsedRoute(Guid oUserKey, int iSessionID)
+        public IEnumerable<GeospatialInformation> GetLiveElapsedRoute(Guid oUserKey)
         {
             var arrParams = new SqlParameter[]
             {
-                new SqlParameter("@IP_USER_KEY", oUserKey),
-                new SqlParameter("@IP_SESSION_ID", iSessionID)
+                new SqlParameter("@IP_USER_KEY", oUserKey)
             };
 
-            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT * FROM [AUDIT].[GEOSPATIAL_INFORMATION] WHERE [SESSION_ID] = @IP_SESSION_ID AND [USER_KEY] = @IP_USER_KEY", arrParams))
+            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT * FROM [GIS].[GEOSPATIAL_INFORMATION] WHERE [USER_KEY] = @IP_USER_KEY ORDER BY [TIMESTAMP] DESC", arrParams))
             {
                 return oSet.ToGeospatialInformationSet();
             }
