@@ -8,7 +8,7 @@
         //Create SignalR object to get communicate with server
         var sentinelHub = $.connection.sentinelHub;
 
-        sentinelHub.client.allLocationUpdates = function (userKey, timestamp, latitude, longitude, orientation, speed, eventType) {
+        sentinelHub.client.allLocationUpdates = function (userKey, timestamp, latitude, longitude, speed, orientation, eventType) {
             writeEvent('Update from driver: ' + userKey + '<br />Time: ' + timestamp + " Latitude: " + latitude + " Longitude: " + longitude + " Speed: " + speed + " Orientation: " + orientation, eventType);
         };
 
