@@ -1,11 +1,11 @@
 ﻿#updates-window
 {
-    width: 195px;
+    width: 190px;
     min-height: 500px;
-    height: 100%;
     border-left: .2em solid #666;
     background: url(../Content/images/test.png)  repeat-x; 
-    color: #000;
+    color: #EEEEEE;
+    border-radius: 0 0 .5em .5em;
 }
 
 #updates-window-header
@@ -45,6 +45,6 @@
 
 .normal
 {
-    background-color: Green;
-    color: Green;
+    background-color: #CCCCCC;
+    color: #CCCCCC;
 }

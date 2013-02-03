@@ -27,9 +27,9 @@ namespace DomainModel.Services
         }
 
 
-        public HistoricalGeospatialInformation GetFilteredHistoricalDataByDriverKey(Guid oDriverKey, DateTime oRange)
+        public HistoricalGeospatialInformation GetFilteredHistoricalDataByDriverKey(Guid oDriverKey, int iSessionID)
         {
-            return _trackingRepository.GetFilteredHistoricalDataByDriverKey(oDriverKey, oRange);
+            return _trackingRepository.GetFilteredHistoricalDataByDriverKey(oDriverKey, iSessionID);
         }
 
         public IEnumerable<User> GetDrivers()

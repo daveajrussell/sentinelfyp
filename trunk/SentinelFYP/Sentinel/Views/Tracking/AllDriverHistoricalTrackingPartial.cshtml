@@ -34,7 +34,7 @@
             <text>
             var hex = getHex();
 
-            $('#key').append('<span style="background-color:' + hex + ';width:10px;height:10px;display:inline-block"></span> = <a class="btnFilter" href="#" val="@period.Period.ToShortDateString()">@period.Period.ToShortDateString()</a><br />');
+            $('#key').append('<span style="background-color:' + hex + ';width:10px;height:10px;display:inline-block"></span> = <a id="@period.HistoricalSessionID" class="btnFilter" href="#">@period.HistoricalSessionID - @period.Period.ToShortDateString()</a><br />');
 
             // Setup Polylines
             poly = new google.maps.Polyline({
@@ -49,10 +49,10 @@
         }
 
         $('.btnFilter').on('click', function () {
-            var data = $(this).attr('val');
+            var id = $(this).attr('id');
             var key = '@Model.First().DriverKey.ToString()';
 
-            $.post('GetFilteredHistoricalData', { strDriverKey: key, strDateRange: data }, function (data) {
+            $.post('GetFilteredHistoricalData', { strDriverKey: key, iSessionID: id }, function (data) {
                 $('#tracking').replaceWith(data);
             });
         });

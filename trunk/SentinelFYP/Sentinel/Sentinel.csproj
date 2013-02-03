@@ -164,6 +164,7 @@
     <Compile Include="Services\NotifierService.svc.cs">
       <DependentUpon>NotifierService.svc</DependentUpon>
     </Compile>
+    <Compile Include="Services\SeverityHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\ASPRazorWebGrid.css" />
