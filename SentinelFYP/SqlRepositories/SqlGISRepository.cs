@@ -40,7 +40,7 @@ namespace SqlRepositories
                 new SqlParameter("@IP_ORIENTATION", oGeoInformation.Orientation)
             };
 
-            SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, /*"[GIS].[ADD_GIS]"*/ "[GIS].[ADD_GEOSPATIAL_INFORMATION]", arrParams);
+            SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "[GIS].[ADD_GEOSPATIAL_INFORMATION]", arrParams);
         }
 
         public void AddGeospatialInformationSet(IEnumerable<GeospatialInformation> oGeoInformationSet)
@@ -76,36 +76,5 @@ namespace SqlRepositories
                         new XAttribute("SPEED", item.Speed),
                         new XAttribute("ORIENTATION", item.Orientation)))).ToString();
         }
-
-        /*public GeospatialInformation GetGIS()
-        {
-            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[GIS].[GET_GIS]"))
-            {
-                return oSet.ToGeospatialInformation();
-            }
-        }
-
-
-        public void AddGIS(GeospatialInformation oGIS)
-        {
-            var arrParams = new SqlParameter[] {
-                new SqlParameter("@IP_TIME_STAMP", oGIS.TimeStamp),
-                new SqlParameter("@IP_LATITUDE", oGIS.Latitude),
-                new SqlParameter("@IP_LONGITUDE", oGIS.Longitude),
-                new SqlParameter("@IP_ORIENTATION", oGIS.Orientation),
-                new SqlParameter("@IP_SPEED", oGIS.Speed)
-            };
-
-            SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "[GIS].[ADD_GIS]", arrParams);
-        }
-
-
-        public IEnumerable<GeospatialInformation> GetAllGISData()
-        {
-            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[GIS].[GET_ALL_GIS_DATA]"))
-            {
-                return oSet.ToGeospatialInformationSet();
-            }
-        }*/
     }
 }

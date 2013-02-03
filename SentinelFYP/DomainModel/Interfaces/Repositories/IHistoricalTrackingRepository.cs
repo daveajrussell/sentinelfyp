@@ -10,7 +10,7 @@ namespace DomainModel.Interfaces.Repositories
     public interface IHistoricalTrackingRepository
     {
         IEnumerable<HistoricalGeospatialInformation> GetAllHistoricalTrackingDataByDriverKey(Guid oDriverKey);
-        HistoricalGeospatialInformation GetFilteredHistoricalDataByDriverKey(Guid oDriverKey, DateTime oRange);
+        HistoricalGeospatialInformation GetFilteredHistoricalDataByDriverKey(Guid oDriverKey, int iSessionID);
         IEnumerable<User> GetDrivers();
     }
 }

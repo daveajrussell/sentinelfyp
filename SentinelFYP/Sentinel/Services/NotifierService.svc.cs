@@ -29,14 +29,7 @@ namespace Sentinel.Services
                 Orientation = oGeoInformationContract.iOrientation
             };
 
-            string strSeverity;
-
-            if (oGeoInformation.Speed <= 0)
-                strSeverity = "caution";
-            else if (oGeoInformation.Orientation != 1)
-                strSeverity = "severe";
-            else
-                strSeverity = "normal";
+            string strSeverity = SeverityHelper.Severity(oGeoInformation);
 
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SentinelHub>();
             context.Clients.Group(oGeoInformation.DriverKey.ToString(), null).getGISMessage(oGeoInformation.DriverKey.ToString(), oGeoInformation.TimeStamp.ToShortDateString(), oGeoInformation.Latitude, oGeoInformation.Longitude, oGeoInformation.Speed, oGeoInformation.Orientation, strSeverity);

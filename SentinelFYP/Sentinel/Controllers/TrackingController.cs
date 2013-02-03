@@ -64,12 +64,11 @@ namespace Sentinel.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult GetFilteredHistoricalData(string strDriverKey, string strDateRange)
+        public ActionResult GetFilteredHistoricalData(string strDriverKey, int iSessionID)
         {
             var oDriverKey = GetKeyFromString(strDriverKey);
-            var oDateRange = DateTime.Parse(strDateRange);
-
-            var data = _histroicalTrackingService.GetFilteredHistoricalDataByDriverKey(oDriverKey, oDateRange);
+            
+            var data = _histroicalTrackingService.GetFilteredHistoricalDataByDriverKey(oDriverKey, iSessionID);
 
             return PartialView("FilteredDriverHistoricalTrackingPartial", data);
         }

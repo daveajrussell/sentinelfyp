@@ -34,19 +34,15 @@ namespace SqlRepositories
             }
         }
 
-        public HistoricalGeospatialInformation GetFilteredHistoricalDataByDriverKey(Guid oDriverKey, DateTime oRange)
+        public HistoricalGeospatialInformation GetFilteredHistoricalDataByDriverKey(Guid oDriverKey, int iSessionID)
         {
-            var dateFrom = oRange.Date.ToString("yyyy-MM-dd HH:mm:ss");
-            var dateTo = oRange.AddDays(1).Date.ToString("yyyy-MM-dd HH:mm:ss");
-
             var arrParams = new SqlParameter[]
             {
                 new SqlParameter("@IP_DRIVER_KEY", oDriverKey),
-                new SqlParameter("@IP_DATE_RANGE_FROM", dateFrom),
-                new SqlParameter("@IP_DATE_RANGE_TO", dateTo)
+                new SqlParameter("@IP_SESSION_ID", iSessionID)
             };
 
-            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT * FROM [daveajru].[GIS].[HISTORICAL_GEOSPATIAL_INFORMATION] WHERE [USER_KEY] = @IP_DRIVER_KEY AND TIMESTAMP BETWEEN @IP_DATE_RANGE_FROM AND @IP_DATE_RANGE_TO", arrParams))
+            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT * FROM [daveajru].[GIS].[HISTORICAL_GEOSPATIAL_INFORMATION] WHERE [USER_KEY] = @IP_DRIVER_KEY AND HISTORICAL_SESSION_ID = @IP_SESSION_ID ORDER BY TIMESTAMP ASC", arrParams))
             {
                 return oSet.ToHistoricGeospatialInformation();
             }

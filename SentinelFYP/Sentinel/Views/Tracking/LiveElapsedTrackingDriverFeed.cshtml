@@ -25,6 +25,13 @@
                 <text>
                     var latlng = new google.maps.LatLng('@info.Latitude', '@info.Longitude');
                     path.push(latlng);
+
+                    var marker = new google.maps.Marker({
+                        position: position,
+                        map: map,
+                        title: '@info.Latitude, @info.Longitude'
+                    });
+
                 </text>
             }
         }
@@ -43,7 +50,18 @@
         var marker = new google.maps.Marker({
             position: pos,
             map: map,
-            title: "Current Position"
+            title: "Current Position",
+            icons: [{
+                icon: {
+                    path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+                    strokeColor: 'black',
+                    strokeOpacity: 1.0,
+                    strokeWeight: 1.0,
+                    fillColor: 'yellow',
+                    fillOpacity: 1.0,
+                    scale: 4
+                }
+            }]
         });
 
         var gisInfo =

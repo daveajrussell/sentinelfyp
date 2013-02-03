@@ -9,7 +9,7 @@
         var sentinelHub = $.connection.sentinelHub;
 
         sentinelHub.client.allLocationUpdates = function (userKey, timestamp, latitude, longitude, speed, orientation, eventType) {
-            writeEvent('Update from driver: ' + userKey + '<br />Time: ' + timestamp + " Latitude: " + latitude + " Longitude: " + longitude + " Speed: " + speed + " Orientation: " + orientation, eventType);
+            writeEvent('<br />Update from driver: ' + userKey + '<br />Time: ' + timestamp + " Latitude: " + latitude + " Longitude: " + longitude + " Speed: " + speed + " Orientation: " + orientation, eventType);
         };
 
         //Write the event to the monitor
@@ -28,7 +28,9 @@
 <div id="events-list">
     <span class="ui-icon ui-icon-alert event-icon severe"></span><span class="event-msg severe">severe event message!</span>
     <br />
+    <br />
     <span class="ui-icon ui-icon-alert event-icon caution"></span><span class="event-msg caution">cautonary event message!</span>
+    <br />
     <br />
     <span class="ui-icon ui-icon-alert event-icon normal"></span><span class="event-msg normal">normal event message!</span>
 </div>

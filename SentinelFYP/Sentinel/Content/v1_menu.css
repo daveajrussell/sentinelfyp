@@ -28,7 +28,7 @@
     display: block;
     cursor: pointer;
     white-space: nowrap;
-    color: #fff;
+    color: #737A7F;
     background-color: #fff;
     border-radius: .5em .5em 0 0;
     border: .15em solid #666;
@@ -37,6 +37,12 @@
     background-color: #fff;
     padding: .5em .5em 0 .5em;
 }
+
+    .link:hover
+    {
+        color: #CC0033!important;
+        box-shadow: 0 0 1em #FCEFA1;
+    }
 /*
 .link:hover
 {
