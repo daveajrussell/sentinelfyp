@@ -30,7 +30,6 @@ namespace Sentinel.Controllers
             if (_points == null)
                 _points = _pointService.LoadPoints();
 
-            _points.Add(new PointLatLng(30.123866, -92.070673));
         }
 
         public ActionResult Index()

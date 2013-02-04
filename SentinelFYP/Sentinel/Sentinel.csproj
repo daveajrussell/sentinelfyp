@@ -211,7 +211,9 @@
     <Content Include="Content\v1_monitor.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\common.js" />
+    <Content Include="Scripts\jquery-1.8.3.min.js" />
     <Content Include="Scripts\jquery-1.9.0.js" />
+    <Content Include="Scripts\jquery-migrate-1.1.0.min.js" />
     <Content Include="Scripts\jquery-ui-1.10.0.custom.js" />
     <Content Include="Scripts\jquery-ui-1.10.0.custom.min.js" />
     <Content Include="Scripts\jquery.blockUI.js" />
@@ -333,6 +335,7 @@
     <Content Include="Views\Tracking\Dialogs\LiveDriverSelectDialog.cshtml" />
     <Content Include="Views\Tracking\LiveTrackingDriverFeed.cshtml" />
     <Content Include="Views\Tracking\LiveElapsedTrackingDriverFeed.cshtml" />
+    <Content Include="Views\Heatmap\HeatmapPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">

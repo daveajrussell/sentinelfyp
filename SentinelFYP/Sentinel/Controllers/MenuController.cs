@@ -20,6 +20,10 @@ namespace Sentinel.Controllers
                 URL = "~/AssetManagement/Index"
             },
             new MenuViewModel() {
+                Display = "Heatmap",
+                URL = "~/Heatmap/Index"
+            },
+            new MenuViewModel() {
                 Display = "Administration",
                 URL = "~/Home/Index"
             }
