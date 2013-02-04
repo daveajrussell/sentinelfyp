@@ -14,7 +14,7 @@ namespace SqlRepositories.Helper.Builders
         public static IEnumerable<HistoricalGeospatialInformation> ToHistoricGeospatialInformationSet(this DataSet oSet)
         {
             return from item in oSet.FirstDataTableAsEnumerable()
-                   orderby item.Field<int>("HISTORICAL_SESSION_ID") ascending, item.Field<DateTime>("TIMESTAMP") descending 
+                   orderby item.Field<int>("HISTORICAL_SESSION_ID") descending, item.Field<DateTime>("TIMESTAMP") ascending 
                    group item by new { HistoricalSessionID = item.Field<int>("HISTORICAL_SESSION_ID"), Period = item.Field<DateTime>("TIMESTAMP").Date, DriverKey = item.Field<Guid>("USER_KEY") } into g
                    select new HistoricalGeospatialInformation()
                    {
@@ -37,7 +37,7 @@ namespace SqlRepositories.Helper.Builders
         public static HistoricalGeospatialInformation ToHistoricGeospatialInformation(this DataSet oSet)
         {
             return (from item in oSet.FirstDataTableAsEnumerable()
-                    orderby item.Field<int>("HISTORICAL_SESSION_ID") ascending, item.Field<DateTime>("TIMESTAMP") descending
+                    orderby item.Field<int>("HISTORICAL_SESSION_ID") descending, item.Field<DateTime>("TIMESTAMP") ascending
                     group item by new { HistoricalSessionID = item.Field<int>("HISTORICAL_SESSION_ID"), Period = item.Field<DateTime>("TIMESTAMP").Date, DriverKey = item.Field<Guid>("USER_KEY") } into g
                     select new HistoricalGeospatialInformation()
                     {

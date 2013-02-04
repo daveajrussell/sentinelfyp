@@ -4,34 +4,34 @@
 <script src="@Url.Content("~/signalr/hubs")" type="text/javascript"></script>
 
 <script type="text/javascript">
+
     $(function () {
 
         //Create SignalR object to get communicate with server
         var sentinelHub = $.connection.sentinelHub;
-        $.connection.id = "00000000-0000-0000-0000-000000000000";
 
-        sentinelHub.client.getGISMessage = function (timestamp, latitude, longitude, speed, orientation, eventType) {
-            getUpdate();
-            writeEvent('message from server: Time: ' + timestamp + " Latitude: " + latitude + " Longitude: " + longitude + " Speed: " + speed + " Orientation: " + orientation, eventType);
+        sentinelHub.client.allLocationUpdates = function (userKey, timestamp, latitude, longitude, speed, orientation, eventType) {
+            getUpdatedMap();
         };
 
-        // Start the connection with server
-        $.connection.hub.start().done(function () {
-            sentinelHub.server.addGroup($.connection.id);
-        });
-
-        //A function to write events to the page
-        function writeEvent(eventLog, logClass) {
-            var now = new Date();
-            var nowStr = now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
-            $('#events-list').prepend('<span class="' + logClass + '">' + nowStr + ': ' + eventLog + '.</span> <br />');
+        //Write the event to the monitor
+        function getUpdatedMap() {
+            sentinelHub.client.getUpdatedMap = function () {
+                $.ajax({
+                    url: '',
+                    success: function (data) {
+                        $('#tracking').replaceWith(data);
+                    }
+                });
+            };
         }
     });
-
-    Heatmap.Init();
 </script>
 @{
-    ViewBag.Title = "Projects";
+    ViewBag.Title = "Signal Heatmap";
 }
-<div id="map">
-</div>
+
+<section id="tracking" class="heatmap">
+    <div id="map">
+    </div>
+</section>

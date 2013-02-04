@@ -5,10 +5,8 @@
 <script type="text/javascript">
 
     $(function () {
-        // Create a LatLng object to set to the center
         var pos = new google.maps.LatLng('@Model.First().PeriodGeographicData.First().Latitude', '@Model.First().PeriodGeographicData.First().Longitude');
 
-        // Create an array of Map options
         var mapOpts = {
             zoom: 13,
             center: pos,
@@ -36,7 +34,6 @@
 
             $('#key').append('<span style="background-color:' + hex + ';width:10px;height:10px;display:inline-block"></span> = <a id="@period.HistoricalSessionID" class="btnFilter" href="#">@period.HistoricalSessionID - @period.Period.ToShortDateString()</a><br />');
 
-            // Setup Polylines
             poly = new google.maps.Polyline({
                 path: path,
                 strokeColor: hex,

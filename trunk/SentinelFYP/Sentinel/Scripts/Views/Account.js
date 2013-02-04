@@ -75,9 +75,13 @@
 
         var message = $('.validation-summary-errors').html();
 
+        alert(message);
+
         if (message != undefined) {
             $('.validation-summary-errors').hide();
             $('#container').append('<span id="val-error" class="ui-icon ui-icon-alert test"></span>');
+
+            alert($('#container').html());
 
             $('#val-error').qtip({
                 content: message,
