@@ -40,25 +40,25 @@ namespace Sentinel.Tests.Controllers
         [Fact]
         public void InjectingNullPointServiceIntoConstructorShouldThrow()
         {
-            Xunit.Assert.Throws<ArgumentNullException>(() => new HeatmapController(null, _gheatService.Object));
+            Xunit.Assert.Throws<ArgumentNullException>(() => new HeatmapController(null, _gheatService.Object, null));
         }
 
         [Fact]
         public void InjectingNullGHeatServiceIntoConstructorShouldThrow()
         {
-            Xunit.Assert.Throws<ArgumentNullException>(() => new HeatmapController(_pointService.Object, null));
+            Xunit.Assert.Throws<ArgumentNullException>(() => new HeatmapController(_pointService.Object, null, null));
         }
 
         [Fact]
         public void ControllerConstructorShouldNotThrow()
         {
-            Xunit.Assert.DoesNotThrow(() => new HeatmapController(_pointService.Object, _gheatService.Object));
+            Xunit.Assert.DoesNotThrow(() => new HeatmapController(_pointService.Object, _gheatService.Object, null));
         }
 
         [Fact]
         public void IndexReturnsActionResult()
         {
-            var controller = new HeatmapController(_pointService.Object, _gheatService.Object);
+            var controller = new HeatmapController(_pointService.Object, _gheatService.Object, null);
             ActionResult result = null;
 
             Xunit.Assert.DoesNotThrow(() => result = controller.Index());
@@ -70,7 +70,7 @@ namespace Sentinel.Tests.Controllers
         //[TestMethod]
         public void GetTileReturnsTileResult()
         {
-            var controller = new HeatmapController(_pointService.Object, _gheatService.Object);
+            var controller = new HeatmapController(_pointService.Object, _gheatService.Object, null);
             TileResult result = null;
 
             //result = controller.Tile("classic", "5", "12", "12", new Random().Next().ToString());

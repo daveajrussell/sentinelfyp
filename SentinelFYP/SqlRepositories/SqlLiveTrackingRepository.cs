@@ -54,5 +54,13 @@ namespace SqlRepositories
                 return oSet.ToGeospatialInformationSet();
             }
         }
+
+        public IEnumerable<ElapsedGeospatialInformation> GetAllLiveElapsedRoutes()
+        {
+            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT * FROM [GIS].[GEOSPATIAL_INFORMATION] ORDER BY [TIMESTAMP] DESC"))
+            {
+                return oSet.ToEnumerableGeospatialInformationSet();
+            }   
+        }
     }
 }

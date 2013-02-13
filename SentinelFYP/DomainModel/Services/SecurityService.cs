@@ -21,28 +21,14 @@ namespace DomainModel.Services
             _securityRepository = securityRepository;
         }
 
-        public void LogIn(string strUsername, string strPassword)
+        public void LogIn(string strUsername, string strPassword, out User oUser, out Session oSession)
         {
             if (string.IsNullOrEmpty(strUsername))
                 throw new ArgumentNullException("Username");
             if (string.IsNullOrEmpty(strPassword))
                 throw new ArgumentNullException("Password");
 
-            User oUser = null;
-            Session oSession = null;
-
             _securityRepository.LogIn(strUsername, strPassword, out oUser, out oSession);
-
-            BeginSession(oUser, oSession);
-        }
-
-        private void BeginSession(User oUser, Session oSession)
-        {
-            if (oSession != null && oUser != null)
-            {
-                State.Session = oSession;
-                State.User = oUser;
-            }
         }
 
         public void Logout()
@@ -51,5 +37,9 @@ namespace DomainModel.Services
                 _securityRepository.Logout(State.User.UserKey, State.Session.SessionID);
         }
 
+        public User GetUserByUserKey(Guid oUserKey)
+        {
+            return _securityRepository.GetUserByUserKey(oUserKey);
+        }
     }
 }

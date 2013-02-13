@@ -100,6 +100,7 @@
     <Compile Include="Models\AssetModels\DeliveryItem.cs" />
     <Compile Include="Models\AssetModels\GeoTaggedDeliveryItem.cs" />
     <Compile Include="Models\AssetModels\UnAssignedConsignment.cs" />
+    <Compile Include="Models\GISModels\ElapsedGeospatialInformation.cs" />
     <Compile Include="Models\GISModels\GeospatialInformation.cs" />
     <Compile Include="Models\AuditModels\Session.cs" />
     <Compile Include="Models\AuditModels\State.cs" />

@@ -877,12 +877,28 @@ body .ui-tooltip {
 .ui-widget-header .ui-state-highlight a {
 	color: #000000;
 }
-.ui-state-error,
-.ui-widget-content .ui-state-error,
-.ui-widget-header .ui-state-error {
-	border: 1px solid #999999;
-	background: #CC0033 url(images/ui-bg_diagonals-medium_50_CC0033_40x40.png) 50% 50% repeat;
-	color: #FFFFFF;
+.ui-state-error-normal,
+.ui-widget-content .ui-state-error-normal,
+.ui-widget-header .ui-state-error-normal {
+	border: 1px solid #000000;
+	background: #CCCCCC url(images/ui-bg_diagonals-thick_30_299a31_40x40.png) 50% 50% repeat;
+	color: #000000;
+}
+
+.ui-state-error-caution,
+.ui-widget-content .ui-state-error-caution,
+.ui-widget-header .ui-state-error-caution {
+	border: 1px solid #000000;
+	background: #CCCCCC url(images/ui-bg_diagonals-thick_30_fc4c02_40x40.png) 50% 50% repeat;
+	color: #000000;
+}
+
+.ui-state-error-severe,
+.ui-widget-content .ui-state-error-severe,
+.ui-widget-header .ui-state-error-severe {
+	border: 1px solid #000000;
+	background: #CCCCCC url(images/ui-bg_diagonals-thick_30_CC0000_40x40.png) 50% 50% repeat;
+	color: #000000;
 }
 .ui-state-error a,
 .ui-widget-content .ui-state-error a,

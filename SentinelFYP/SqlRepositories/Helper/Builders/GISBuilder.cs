@@ -86,5 +86,25 @@ namespace SqlRepositories.Helper.Builders
                     }).First();
         }
 
+        public static IEnumerable<ElapsedGeospatialInformation> ToEnumerableGeospatialInformationSet(this DataSet oSet)
+        {
+            return from item in oSet.FirstDataTableAsEnumerable()
+                   orderby item.Field<int>("SESSION_ID") descending, item.Field<DateTime>("TIMESTAMP") ascending
+                   group item by new { SessionID = item.Field<int>("SESSION_ID"), DriverKey = item.Field<Guid>("USER_KEY") } into g
+                   select new ElapsedGeospatialInformation()
+                   {
+                       SessionID = g.Key.SessionID,
+                       DriverKey = g.Key.DriverKey,
+                       GeospatialInformation = from item in g
+                                               select new GeospatialInformation()
+                                               {
+                                                   TimeStamp = item.Field<DateTime>("TIMESTAMP"),
+                                                   Latitude = item.Field<decimal>("LATITUDE"),
+                                                   Longitude = item.Field<decimal>("LONGITUDE"),
+                                                   Speed = item.Field<decimal>("SPEED"),
+                                                   Orientation = item.Field<int>("ORIENTATION")
+                                               }
+                   };
+        }
     }
 }

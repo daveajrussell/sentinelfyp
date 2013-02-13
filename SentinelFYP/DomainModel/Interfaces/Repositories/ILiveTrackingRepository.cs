@@ -12,5 +12,6 @@ namespace DomainModel.Interfaces.Repositories
         IEnumerable<User> GetLiveDrivers();
         GeospatialInformation GetLiveUpdate(Guid oUserKey);
         IEnumerable<GeospatialInformation> GetLiveElapsedRoute(Guid oUserKey);
+        IEnumerable<ElapsedGeospatialInformation> GetAllLiveElapsedRoutes();
     }
 }

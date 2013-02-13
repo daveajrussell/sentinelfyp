@@ -18,12 +18,21 @@ namespace Sentinel.Infrastructure
 
         public override bool ValidateUser(string username, string password)
         {
-            _securityService.LogIn(username, password);
+            var user = new User();
+            var session = new Session();
 
-            if (State.User != null && State.Session != null)
+            _securityService.LogIn(username, password, out user, out session);
+
+            if (null != user && null != session)
+            {
+                State.User = user;
+                State.Session = session;
                 return true;
+            }
             else
+            {
                 return false;
+            }
         }
 
         public override string ApplicationName

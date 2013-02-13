@@ -45,22 +45,28 @@ namespace DomainModel.Test.Tests
         public void PassingNullUserNameToLogInShouldThrow()
         {
             var service = new SecurityService(_repository.Object);
-            Xunit.Assert.Throws<ArgumentNullException>(() => service.LogIn(null, "Password"));
+            var user = new User();
+            var session = new Session();
+            Xunit.Assert.Throws<ArgumentNullException>(() => service.LogIn(null, "Password", out user, out session));
         }
 
         [Fact]
         public void PassingNullPasswordToLogInShouldThrow()
         {
             var service = new SecurityService(_repository.Object);
-            Xunit.Assert.Throws<ArgumentNullException>(() => service.LogIn("Username", null));
+            var user = new User();
+            var session = new Session();
+            Xunit.Assert.Throws<ArgumentNullException>(() => service.LogIn("Username", null, out user, out session));
         }
 
         [Fact]
         public void LogInShouldReturnUserObject()
         {
             var service = new SecurityService(_repository.Object);
+            var user = new User();
+            var session = new Session();
 
-            Xunit.Assert.DoesNotThrow(() => service.LogIn("Username", "Password"));
+            Xunit.Assert.DoesNotThrow(() => service.LogIn("Username", "Password", out user, out session));
             Xunit.Assert.NotNull(_user);
         }
     }

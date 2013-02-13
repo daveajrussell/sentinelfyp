@@ -26,40 +26,6 @@ namespace SqlRepositories
 
             _connectionString = connectionString;
         }
-        /*
-        public string AuthenticateDriver(string strUsername, string strPassword)
-        {
-            string strUserKey = null;
-            string strUserSalt;
-            string strUserHash;
-            Guid oUserKey;
-
-            using (SqlDataReader oReader = SqlHelper.ExecuteReader(_connectionString, CommandType.StoredProcedure, "[SECURITY].[ATTEMPT_LOGIN]", new SqlParameter("@IP_USERNAME", strUsername)))
-            {
-                if (oReader.Read())
-                {
-                    strUserSalt = (string)oReader[oReader.GetOrdinal("USER_SALT")];
-                    strUserHash = (string)oReader[oReader.GetOrdinal("USER_HASH")];
-                    oUserKey = (Guid)oReader[oReader.GetOrdinal("USER_KEY")];
-
-                    if (SecurityHelper.ValidatePassword(strPassword, strUserSalt, strUserHash))
-                    {
-                        var arrParams = new SqlParameter[] {
-                            new SqlParameter("@IP_USER_KEY", oUserKey),
-                            new SqlParameter("@IP_SALT", strUserSalt),
-                            new SqlParameter("@IP_HASH", strUserHash)
-                        };
-
-                        using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[SECURITY].[LOGIN_TO_SYSTEM]", arrParams))
-                        {
-                            strUserKey = oSet.FirstDataTableAsEnumerable().Select(s => s.Field<Guid>("USER_KEY")).First().ToString();
-                        }
-                    }
-                }
-            }
-
-            return strUserKey;
-        }*/
 
         public void LogIn(string strUserName, string strPassword, out User oUser, out Session oSession)
         {
@@ -114,6 +80,17 @@ namespace SqlRepositories
             };
 
             SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "[AUDIT].[END_SESSION]", arrParams);
+        }
+
+
+        public User GetUserByUserKey(Guid oUserKey)
+        {
+            var sqlParam = new SqlParameter("@IP_USER_KEY", oUserKey);
+
+            using (var oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT * FROM [SECURITY].[USER] WHERE [USER_KEY] = @IP_USER_KEY", sqlParam))
+            {
+                return oSet.ToUser();
+            }
         }
     }
 }

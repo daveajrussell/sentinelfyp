@@ -32,5 +32,10 @@ namespace DomainModel.Services
         {
             return _liveTrackingRepository.GetLiveElapsedRoute(oUserKey);
         }
+
+        public IEnumerable<ElapsedGeospatialInformation> GetAllLiveElapsedRoutes()
+        {
+            return _liveTrackingRepository.GetAllLiveElapsedRoutes();
+        }
     }
 }
