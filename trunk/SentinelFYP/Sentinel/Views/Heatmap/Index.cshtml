@@ -18,13 +18,17 @@
         function getUpdatedMap() {
             sentinelHub.client.getUpdatedMap = function () {
                 $.ajax({
-                    url: '',
+                    url: 'LiveHeatmapData',
                     success: function (data) {
                         $('#tracking').replaceWith(data);
                     }
                 });
             };
         }
+
+        $.post('LiveHeatmapData', function (data) {
+            $('#tracking').replaceWith(data);
+        });
     });
 </script>
 @{

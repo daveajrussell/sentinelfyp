@@ -1,11 +1,11 @@
-﻿@model IEnumerable<IEnumerable<DomainModel.Models.GISModels.GeospatialInformation>>
-
+﻿@model IEnumerable<DomainModel.Models.GISModels.ElapsedGeospatialInformation>
 <script type="text/javascript">
     $(function () {
+
         var pos = new google.maps.LatLng('52.419173', '-1.511993');
 
         var mapOpts = {
-            zoom: 10,
+            zoom: 7,
             center: pos,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
@@ -15,9 +15,9 @@
         var arrOverlay = new google.maps.ImageMapType({
             getTileUrl: function (tile, zoom) {
 
-                var url = "Heatmap/Tile?colorScheme=classic&zoom=" + zoom + "&x=" + tile.x + "&y=" + tile.y + "&ran=" + Math.random();
+                var url = "../Heatmap/Tile?colorScheme=classic&zoom=" + zoom + "&x=" + tile.x + "&y=" + tile.y + "&ran=" + Math.random();
 
-                $(arrOverlay).trigger("overlay-busy");
+                //$(arrOverlay).trigger("overlay-busy");
                 return url;
             },
             tileSize: new google.maps.Size(256, 256),
@@ -39,80 +39,86 @@
                     opacity: .5,
                     color: '#fff'
                 },
-                message: "<div class='overlay'><img class='overlay-img' src='Content/images/map_loader.gif' /></div>"
+                message: "<div class='overlay'><img class='overlay-img' src='../Content/images/map_loader.gif' /></div>"
             });
         });
 
         google.maps.event.addListener(arrOverlay, 'tilesloaded', function () {
-            $(arrOverlay).trigger("overlay-idle");
+            //$(arrOverlay).trigger("overlay-idle");
         });
 
         map.overlayMapTypes.push(arrOverlay);
 
-        @{
-            foreach (var set in Model)
-            {
-                @:var path = [];
-                foreach (var info in set.AsEnumerable())
+        var count = '@Model.Count()';
+        if (count > 0) {
+            @{
+                foreach (var set in Model)
                 {
-                    <text>
-                        var latlng = new google.maps.LatLng('@info.Latitude', '@info.Longitude');
-                        path.push(latlng);
+                    @:var path = [];
+                    foreach (var info in set.GeospatialInformation)
+                    {
+                        <text>
+                            var latlng = new google.maps.LatLng('@info.Latitude', '@info.Longitude');
+                            path.push(latlng);
 
-                        var marker = new google.maps.Marker({
-                            position: position,
-                            map: map,
-                            title: '@info.Latitude, @info.Longitude'
+                            var marker = new google.maps.Marker({
+                                position: position,
+                                map: map,
+                                title: '@info.Latitude, @info.Longitude'
+                            });
+
+                        </text>
+                    }
+                    
+                    <text>
+                        var hex = getHex();
+
+                        poly = new google.maps.Polyline({
+                            path: path,
+                            strokeColor: hex,
+                            strokeOpacity: 1.0,
+                            strokeWeight: 3
                         });
 
-                    </text>
+                        poly.setMap(map);
+
+                        var marker = new google.maps.Marker({
+                            position: pos,
+                            map: map,
+                            title: "Current Position",
+                            icons: [{
+                                icon: {
+                                    path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+                                    strokeColor: 'black',
+                                    strokeOpacity: 1.0,
+                                    strokeWeight: 1.0,
+                                    fillColor: 'yellow',
+                                    fillOpacity: 1.0,
+                                    scale: 4
+                                }
+                            }]
+                        });
+
+                        var gisInfo =
+                        '<div id="gis-info">' +
+                        '<span>Date: @set.GeospatialInformation.First().TimeStamp.ToShortDateString() </span> <br/>' +
+                            '<span>Time: @set.GeospatialInformation.First().TimeStamp.ToShortTimeString() <br />' +
+                            '<span>Speed: @set.GeospatialInformation.First().Speed </span> <br />' +
+                            '<span>Orientation: @set.GeospatialInformation.First().Orientation <span>' +
+                            '</div>';
+
+                            var infoWindow = new google.maps.InfoWindow({
+                                content: gisInfo
+                            });
+
+                            google.maps.event.addListener(marker, 'click', function () {
+                                infoWindow.open(map, marker);
+                            });
+                        </text>
                 }
-                    <text>
-                    var hex = getHex();
-
-                    poly = new google.maps.Polyline({
-                        path: path,
-                        strokeColor: hex,
-                        strokeOpacity: 1.0,
-                        strokeWeight: 3
-                    });
-
-                    poly.setMap(map);
-
-                    var marker = new google.maps.Marker({
-                        position: pos,
-                        map: map,
-                        title: "Current Position",
-                        icons: [{
-                            icon: {
-                                path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-                                strokeColor: 'black',
-                                strokeOpacity: 1.0,
-                                strokeWeight: 1.0,
-                                fillColor: 'yellow',
-                                fillOpacity: 1.0,
-                                scale: 4
-                            }
-                        }]
-                    });
-
-                    var gisInfo =
-                    '<div id="gis-info">' +
-                    '<span>Date: @set.First().TimeStamp.ToShortDateString() </span> <br/>' +
-                    '<span>Time: @set.First().TimeStamp.ToShortTimeString() <br />' +
-                    '<span>Speed: @set.First().Speed </span> <br />' +
-                    '<span>Orientation: @set.First().Orientation <span>' +
-                    '</div>';
-
-                    var infoWindow = new google.maps.InfoWindow({
-                        content: gisInfo
-                    });
-
-                    google.maps.event.addListener(marker, 'click', function () {
-                        infoWindow.open(map, marker);
-                    });
-                    </text>
-            }
+        }
+        } else {
+            $('#tracking').append('<div>No Data!</div>');
         }
     });
 </script>

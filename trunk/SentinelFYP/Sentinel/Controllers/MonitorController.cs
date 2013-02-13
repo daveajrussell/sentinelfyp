@@ -10,6 +10,20 @@ namespace Sentinel.Controllers
 {
     public class MonitorController : Controller
     {
+        private readonly ISecurityService _securityService;
+
+        public MonitorController(ISecurityService securityService)
+        {
+            _securityService = securityService;
+        }
+
+        public ActionResult GetDriverContactDetailsPartial(string strDriverKey)
+        {
+            Guid oDriverKey = new Guid(strDriverKey);
+            var data = _securityService.GetUserByUserKey(oDriverKey);
+            return PartialView("UserContactDetailsPartial", data);
+        }
+
         /*private readonly IPointService _pointService;
         private readonly IGHeatService _gheatService;
         private readonly IGISService _gisService;

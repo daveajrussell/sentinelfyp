@@ -70,6 +70,8 @@ a, a:visited
 #events-list
 {
     height: 100%;
+    margin: 1em;
+    border-radius: .8em;
 }
 
 #gis-info

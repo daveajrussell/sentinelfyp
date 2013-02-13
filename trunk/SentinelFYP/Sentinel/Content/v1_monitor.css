@@ -15,36 +15,19 @@
     font-weight: bold;
 }
 
-#events-list
+.update
 {
-    margin: 1em;
+    margin: .5em 0;
 }
 
-.event-icon
-{
-    border-radius: 1em;
-}
+    .update p
+    {
+        margin: 1em 0
+    }
 
-.event-msg
-{
-    font-weight: bold;
-    background-color: transparent !important;
-}
-
-.severe
-{
-    background-color: #cc0033;
-    color: #cc0033;
-}
-
-.caution
-{
-    background-color: Yellow;
-    color: Yellow;
-}
-
-.normal
-{
-    background-color: #CCCCCC;
-    color: #CCCCCC;
-}
+        .update p span,
+        .update p a
+        {
+            float:left; 
+            margin-right: .3em
+        }

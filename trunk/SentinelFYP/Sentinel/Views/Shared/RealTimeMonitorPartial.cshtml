@@ -4,21 +4,59 @@
 <script type="text/javascript">
 
     $(function () {
-
         //Create SignalR object to get communicate with server
         var sentinelHub = $.connection.sentinelHub;
 
         sentinelHub.client.allLocationUpdates = function (userKey, timestamp, latitude, longitude, speed, orientation, eventType) {
-            writeEvent('<br />Update from driver: ' + userKey + '<br />Time: ' + timestamp + " Latitude: " + latitude + " Longitude: " + longitude + " Speed: " + speed + " Orientation: " + orientation, eventType);
+            writeEvent('<br />Update from driver: ' + userKey + '<br />Time: ' + timestamp + " Latitude: " + latitude + " Longitude: " + longitude + " Speed: " + speed + " Orientation: " + orientation, eventType, userKey);
         };
 
         //Write the event to the monitor
-        function writeEvent(eventLog, logClass) {
+        function writeEvent(eventLog, logClass, driverKey) {
             var now = new Date();
             var nowStr = now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
-            $('#events-list').prepend('<span class="event-msg ' + logClass + '">' + nowStr + ': ' + eventLog + '.</span> <br />');
-            $('#events-list').prepend('<span class="ui-icon ui-icon-alert event-icon ' + logClass + '"></span>');
+
+            $('#events-list').prepend('<div class="update ui-state-error-' + logClass + ' ui-corner-all"><p><span class="ui-icon ui-icon-alert"></span><a class="contact ui-icon ui-icon-contact" href="#" val=' + driverKey + '></a> ' + eventLog + '</p></div>');
+
+            doAlert(logClass);
         }
+
+        function doAlert(logClass) {
+            if (logClass == 'caution') {
+                for (var i = 0; i < 5; i++) {
+                    flash('#FFFF00');
+                }
+            } else if (logClass == 'severe') {
+                flash('#CC0033');
+            }
+        }
+
+        function flash(colour) {
+            $("#events-list").stop().css("background-color", "transparent").animate({ backgroundColor: colour }, 500, function () {
+                $("#events-list").stop().css("background-color", colour).animate({ backgroundColor: "transparent" }, 500, function () {
+                    $("#events-list").stop().css("background-color", "transparent").animate({ backgroundColor: colour }, 500, function () {
+                        $("#events-list").stop().css("background-color", colour).animate({ backgroundColor: "transparent" }, 500, function () {
+                            $("#events-list").stop().css("background-color", "transparent").animate({ backgroundColor: colour }, 500, function () {
+                                $("#events-list").stop().css("background-color", colour).animate({ backgroundColor: "transparent" }, 500);
+                            });
+                        });
+                    });
+                });
+            });
+        }
+
+        writeEvent("Test Update", "caution", "66FBA0E1-6429-4999-9538-6566DEE70048");
+
+        $('.contact').on('click', function () {
+            var key = $(this).attr('val');
+            $.ajax({
+                url: '../Monitor/GetDriverContactDetailsPartial',
+                data: { strDriverKey: key },
+                success: function (data) {
+                    $('#events-list').append(data);
+                }
+            });
+        });
     });
 </script>
 
@@ -26,11 +64,7 @@
     <span class="span-updates">Real-Time Monitor</span>
 </div>
 <div id="events-list">
-    <span class="ui-icon ui-icon-alert event-icon severe"></span><span class="event-msg severe">severe event message!</span>
-    <br />
-    <br />
-    <span class="ui-icon ui-icon-alert event-icon caution"></span><span class="event-msg caution">cautoniary event message!</span>
-    <br />
-    <br />
-    <span class="ui-icon ui-icon-alert event-icon normal"></span><span class="event-msg normal">normal event message!</span>
+    <div class="update ui-state-error-normal ui-corner-all"><p><span class="ui-icon ui-icon-alert"></span><a class="ui-icon ui-icon-contact" href="#"></a>Normal Event</p></div>
+    <div class="update ui-state-error-caution ui-corner-all"><p><span class="ui-icon ui-icon-alert"></span><a class="ui-icon ui-icon-contact" href="#"></a>Cautionary Event</p></div>
+    <div class="update ui-state-error-severe ui-corner-all"><p><span class="ui-icon ui-icon-alert"></span><a class="ui-icon ui-icon-contact" href="#"></a>Severe Event</p></div>
 </div>

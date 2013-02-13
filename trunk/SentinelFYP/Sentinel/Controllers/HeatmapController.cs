@@ -13,9 +13,10 @@ namespace Sentinel.Controllers
     {
         private readonly IPointService _pointService;
         private readonly IGHeatService _gheatService;
+        private readonly ILiveTrackingService _trackingService;
         private List<PointLatLng> _points;
 
-        public HeatmapController(IPointService pointService, IGHeatService gheatService)
+        public HeatmapController(IPointService pointService, IGHeatService gheatService, ILiveTrackingService trackingService)
         {
             if (pointService == null)
                 throw new ArgumentNullException("Point Service");
@@ -27,6 +28,11 @@ namespace Sentinel.Controllers
 
             _gheatService = gheatService;
 
+            if (trackingService == null)
+                throw new ArgumentNullException("Tracking Service");
+
+            _trackingService = trackingService;
+
             if (_points == null)
                 _points = _pointService.LoadPoints();
 
@@ -35,6 +41,13 @@ namespace Sentinel.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult LiveHeatmapData()
+        {
+            var data = _trackingService.GetAllLiveElapsedRoutes();
+            return PartialView("HeatmapPartial", data);
         }
 
         public TileResult Tile(string colorScheme, string zoom, string x, string y, string rand)

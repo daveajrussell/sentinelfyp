@@ -180,9 +180,11 @@
     <Content Include="Content\images\map_loader.gif" />
     <Content Include="Content\images\test.png" />
     <Content Include="Content\images\ui-bg_diagonals-medium_50_999999_40x40.png" />
-    <Content Include="Content\images\ui-bg_diagonals-medium_50_CC0033_40x40.png" />
     <Content Include="Content\images\ui-bg_diagonals-medium_50_fdf5ce_40x40.png" />
     <Content Include="Content\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="Content\images\ui-bg_diagonals-thick_30_299a31_40x40.png" />
+    <Content Include="Content\images\ui-bg_diagonals-thick_30_CC0000_40x40.png" />
+    <Content Include="Content\images\ui-bg_diagonals-thick_30_fc4c02_40x40.png" />
     <Content Include="Content\images\ui-bg_flat_10_000000_40x100.png" />
     <Content Include="Content\images\ui-bg_glass_100_EBF5FA_1x400.png" />
     <Content Include="Content\images\ui-bg_glass_100_fdf5ce_1x400.png" />
@@ -306,9 +308,6 @@
     <Content Include="Views\Header\HeaderPartial.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Heatmap\Index.cshtml" />
-    <Content Include="Views\Monitor\Index.cshtml" />
-    <Content Include="Views\Monitor\MapPartial.cshtml" />
-    <Content Include="Views\Monitor\PolylineMapPartial.cshtml" />
     <None Include="Properties\PublishProfiles\SENTINEL_APP.pubxml" />
     <Content Include="Views\AssetManagement\AssignConsignmentPartial.cshtml" />
     <Content Include="Views\AssetManagement\ReAssignConsignmentPartial.cshtml" />
@@ -336,6 +335,7 @@
     <Content Include="Views\Tracking\LiveTrackingDriverFeed.cshtml" />
     <Content Include="Views\Tracking\LiveElapsedTrackingDriverFeed.cshtml" />
     <Content Include="Views\Heatmap\HeatmapPartial.cshtml" />
+    <Content Include="Views\Monitor\UserContactDetailsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">
