@@ -4,13 +4,11 @@ using DomainModel.Models.AssetModels;
 using DomainModel.SecurityModels;
 using DomainModel.Services;
 using DomainModel.Test.TestHelpers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Xunit;
 
 namespace DomainModel.Test.Tests
 {
-    [TestClass]
     public class ConsignmentManagementServiceTest
     {
         private Mock<IConsignmentManagementRepository> _repository;
@@ -34,7 +32,7 @@ namespace DomainModel.Test.Tests
         [Fact]
         public void InjectingNullIntoConstructorShouldThrow()
         {
-            Xunit.Assert.Throws<ArgumentNullException>(() => new ConsignmentManagementService(null));
+            Assert.Throws<ArgumentNullException>(() => new ConsignmentManagementService(null));
         }
 
         [Fact]
@@ -43,27 +41,27 @@ namespace DomainModel.Test.Tests
             var service = new ConsignmentManagementService(_repository.Object);
             UnAssignedConsignment result = null;
 
-            Xunit.Assert.DoesNotThrow(() => result = service.CreateConsignment(DateTime.Today));
+            Assert.DoesNotThrow(() => result = service.CreateConsignment(DateTime.Today));
 
-            Xunit.Assert.NotNull(result);
-            Xunit.Assert.IsAssignableFrom<AssignedConsignment>(result);
+            Assert.NotNull(result);
+            Assert.IsAssignableFrom<UnAssignedConsignment>(result);
 
-            Xunit.Assert.NotNull(result.ConsignmentKey);
-            Xunit.Assert.IsAssignableFrom<Guid>(result.ConsignmentKey);
+            Assert.NotNull(result.ConsignmentKey);
+            Assert.IsAssignableFrom<Guid>(result.ConsignmentKey);
         }
 
         [Fact]
         public void PassingEmptyConsignmentGuidToAssignDriverShouldThrow()
         {
             var service = new ConsignmentManagementService(_repository.Object);
-            Xunit.Assert.Throws<ArgumentOutOfRangeException>(() => service.AssignConsignmentToDriver(Guid.Empty, new Guid()));
+            Assert.Throws<ArgumentOutOfRangeException>(() => service.AssignConsignmentToDriver(Guid.Empty, new Guid()));
         }
 
         [Fact]
         public void PassingEmptyDriverGuidToAssignDriverShouldThrow()
         {
             var service = new ConsignmentManagementService(_repository.Object);
-            Xunit.Assert.Throws<ArgumentOutOfRangeException>(() => service.AssignConsignmentToDriver(new Guid(), Guid.Empty));
+            Assert.Throws<ArgumentOutOfRangeException>(() => service.AssignConsignmentToDriver(new Guid(), Guid.Empty));
         }
 
         [Fact]
@@ -75,31 +73,31 @@ namespace DomainModel.Test.Tests
             AssignedConsignment updatedConsignment = null;
             User user = new User() { UserKey = Guid.NewGuid() };
             
-            Xunit.Assert.DoesNotThrow(() => updatedConsignment = service.AssignConsignmentToDriver(consignment.ConsignmentKey, user.UserKey));
+            Assert.DoesNotThrow(() => updatedConsignment = service.AssignConsignmentToDriver(consignment.ConsignmentKey, user.UserKey));
 
-            Xunit.Assert.NotNull(updatedConsignment);
-            Xunit.Assert.Equal(consignment.ConsignmentDateTime, updatedConsignment.ConsignmentDateTime);
+            Assert.NotNull(updatedConsignment);
+            Assert.Equal(consignment.ConsignmentDateTime, updatedConsignment.ConsignmentDateTime);
         }
 
         [Fact]
         public void PassingEmptyConsignmentGuidToReAssignConsignmentShouldThrow()
         {
             var service = new ConsignmentManagementService(_repository.Object);
-            Xunit.Assert.Throws<ArgumentOutOfRangeException>(() => service.ReAssignConsignment(Guid.Empty, Guid.NewGuid(), Guid.NewGuid()));
+            Assert.Throws<ArgumentOutOfRangeException>(() => service.ReAssignConsignment(Guid.Empty, Guid.NewGuid(), Guid.NewGuid()));
         }
 
         [Fact]
         public void PassingEmptyPreviousDriverGuidToReAssignConsignmentShouldThrow()
         {
             var service = new ConsignmentManagementService(_repository.Object);
-            Xunit.Assert.Throws<ArgumentOutOfRangeException>(() => service.ReAssignConsignment(Guid.NewGuid(), Guid.Empty, Guid.NewGuid()));
+            Assert.Throws<ArgumentOutOfRangeException>(() => service.ReAssignConsignment(Guid.NewGuid(), Guid.Empty, Guid.NewGuid()));
         }
 
         [Fact]
         public void PassingEmptyNewDriverGuidToReAssignConsignmentShouldThrow()
         {
             var service = new ConsignmentManagementService(_repository.Object);
-            Xunit.Assert.Throws<ArgumentOutOfRangeException>(() => service.ReAssignConsignment(Guid.NewGuid(), Guid.NewGuid(), Guid.Empty));
+            Assert.Throws<ArgumentOutOfRangeException>(() => service.ReAssignConsignment(Guid.NewGuid(), Guid.NewGuid(), Guid.Empty));
         }
 
         [Fact]
@@ -114,23 +112,23 @@ namespace DomainModel.Test.Tests
 
             reassignedConsignment = service.AssignConsignmentToDriver(consignment.ConsignmentKey, driverOne.UserKey);
 
-            Xunit.Assert.NotSame(Guid.Empty, reassignedConsignment.AssignedDriverKey);
+            Assert.NotSame(Guid.Empty, reassignedConsignment.AssignedDriverKey);
 
-            Xunit.Assert.DoesNotThrow(() => reassignedConsignment = service.ReAssignConsignment(consignment.ConsignmentKey, driverOne.UserKey, driverTwo.UserKey));
+            Assert.DoesNotThrow(() => reassignedConsignment = service.ReAssignConsignment(consignment.ConsignmentKey, driverOne.UserKey, driverTwo.UserKey));
         }
 
         [Fact]
         public void PassingEmptyConsignmentGuidToUnAssignConsignmentShouldThrow()
         {
             var service = new ConsignmentManagementService(_repository.Object);
-            Xunit.Assert.Throws<ArgumentOutOfRangeException>(() => service.UnAssignConsignment(Guid.Empty, new Guid()));
+            Assert.Throws<ArgumentOutOfRangeException>(() => service.UnAssignConsignment(Guid.Empty, new Guid()));
         }
 
         [Fact]
         public void PassingEmptyDriverGuidToUnAssignConsignmentShouldThrow()
         {
             var service = new ConsignmentManagementService(_repository.Object);
-            Xunit.Assert.Throws<ArgumentOutOfRangeException>(() => service.UnAssignConsignment(new Guid(), Guid.Empty));
+            Assert.Throws<ArgumentOutOfRangeException>(() => service.UnAssignConsignment(new Guid(), Guid.Empty));
         }
 
         [Fact]
@@ -144,9 +142,9 @@ namespace DomainModel.Test.Tests
             User driver = new User() { UserKey = Guid.NewGuid() };
 
             oAssignedConsignment = service.AssignConsignmentToDriver(oUnAssignedConsignment.ConsignmentKey, driver.UserKey);
-            Xunit.Assert.NotSame(Guid.Empty, oAssignedConsignment.AssignedDriverKey);
+            Assert.NotSame(Guid.Empty, oAssignedConsignment.AssignedDriverKey);
 
-            Xunit.Assert.DoesNotThrow(() => service.UnAssignConsignment(oUnAssignedConsignment.ConsignmentKey, driver.UserKey));
+            Assert.DoesNotThrow(() => service.UnAssignConsignment(oUnAssignedConsignment.ConsignmentKey, driver.UserKey));
         }
     }
 }
