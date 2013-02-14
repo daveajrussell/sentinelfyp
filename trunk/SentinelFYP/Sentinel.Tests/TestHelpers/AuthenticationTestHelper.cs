@@ -25,6 +25,12 @@ namespace Sentinel.Tests.TestHelpers
             }
         }
 
+        public static void MockClearAuthentication(out User oUser, out Session oSession)
+        {
+            oUser = null;
+            oSession = null;
+        }
+
         public static void LogIn(string strUsername, string strPassword)
         {
             State.Session = new Session(1, DateTime.Now);
