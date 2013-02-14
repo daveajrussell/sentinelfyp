@@ -29,6 +29,9 @@ namespace Sentinel.Tests.Controllers
 
             _mockAuthProvider.Setup(m => m.Authenticate(It.IsAny<string>(), It.IsAny<string>()))
                 .Returns<string, string>((username, password) => AuthenticationTestHelper.MockAuthenticate(username, password, out _mockUser, out _mockSession));
+
+            _mockAuthProvider.Setup(m => m.ClearAuthentication())
+                .Callback(() => AuthenticationTestHelper.MockClearAuthentication(out _mockUser, out _mockSession));
         }
 
         [Fact]
@@ -41,6 +44,14 @@ namespace Sentinel.Tests.Controllers
         public void TestInjectingNullAuthProviderReferenceShouldThrow()
         {
             Assert.Throws<ArgumentNullException>(() => new AccountController(_mockSercurityService.Object, null));
+        }
+
+        [Fact]
+        public void ConstructorShouldNotThrow()
+        {
+            var controller = new AccountController(_mockSercurityService.Object, _mockAuthProvider.Object);
+            Assert.NotNull(controller);
+            Assert.IsAssignableFrom<AccountController>(controller);
         }
 
         [Fact]
@@ -64,9 +75,32 @@ namespace Sentinel.Tests.Controllers
             var model = new LogonUserViewModel() { Username = username, Password = password };
 
             var result = controller.Login(model);
+
             Assert.NotNull(result);
-            //Assert.IsAssignableFrom<ActionResult>(result);
-            //Assert.IsAssignableFrom<RedirectToRouteResult>(result);
+            Assert.NotNull(_mockSession);
+            Assert.NotNull(_mockUser);
+
+            Assert.Same(username, _mockUser.UserName);
+
+            Assert.IsAssignableFrom<RedirectToRouteResult>(result);
+        }
+
+        [Fact]
+        public void TestInvalidCredentials()
+        {
+            var controller = new AccountController(_mockSercurityService.Object, _mockAuthProvider.Object);
+
+            var username = "WRONG";
+            var password = "BAD";
+            var model = new LogonUserViewModel() { Username = username, Password = password };
+
+            var result = controller.Login(model);
+
+            Assert.NotNull(result);
+            Assert.Null(_mockSession);
+            Assert.Null(_mockUser);
+
+            Assert.False(((ViewResult)result).ViewData.ModelState.IsValid);
         }
 
         [Fact]
@@ -77,6 +111,9 @@ namespace Sentinel.Tests.Controllers
 
             Assert.NotNull(target);
             Assert.IsAssignableFrom<ActionResult>(target);
+
+            Assert.Null(_mockUser);
+            Assert.Null(_mockSession);
         }
     }
 }
