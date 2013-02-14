@@ -76,7 +76,7 @@
     <Compile Include="Controllers\AccountControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestHelpers\AuthenticationTestHelper.cs" />
-    <Compile Include="TestHelpers\SentinelTestHelper.cs" />
+    <Compile Include="TestHelpers\TrackingTestHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
