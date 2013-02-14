@@ -9,6 +9,6 @@ namespace Sentinel.Infrastructure
     public interface ISentinelAuthProvider
     {
         bool Authenticate(string strUsername, string strPassword);
-        void ClearAuthentication(Controller oContext);
+        void ClearAuthentication();
     }
 }

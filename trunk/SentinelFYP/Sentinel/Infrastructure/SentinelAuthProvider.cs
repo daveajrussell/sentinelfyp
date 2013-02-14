@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using DomainModel.Models.AuditModels;
 using DomainModel.SecurityModels;  
 
 namespace Sentinel.Infrastructure
@@ -20,11 +21,11 @@ namespace Sentinel.Infrastructure
             return blnResult;
         }
 
-        public void ClearAuthentication(Controller oContext)
+        public void ClearAuthentication()
         {
             FormsAuthentication.SignOut();
-            oContext.Session.Clear();
-            oContext.Session.Abandon();
+            HttpContext.Current.Session.Clear();
+            HttpContext.Current.Session.Abandon();
         }
     }
 }

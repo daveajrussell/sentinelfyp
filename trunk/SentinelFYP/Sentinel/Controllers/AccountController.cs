@@ -10,6 +10,7 @@ using Sentinel.Models;
 using System.Web.Security;
 using System.Net;
 using Sentinel.Infrastructure;
+using DomainModel.Models.AuditModels;
 
 namespace Sentinel.Controllers
 {
@@ -60,7 +61,7 @@ namespace Sentinel.Controllers
         public ActionResult Logout()
         {
             _securityService.Logout();
-            _authProvider.ClearAuthentication(this);
+            _authProvider.ClearAuthentication();
             return RedirectToAction("Login", "Account");
         }
     }
