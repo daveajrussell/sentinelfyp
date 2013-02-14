@@ -67,8 +67,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Proxies\AuthenticationService.cs" />
     <Compile Include="Proxies\DeliveryService.cs" />
     <Compile Include="Proxies\LocationService.cs" />
+    <Compile Include="Tests\AuthenticationServiceTest.cs" />
     <Compile Include="Tests\LocationServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\DeliveryServiceTests.cs" />
