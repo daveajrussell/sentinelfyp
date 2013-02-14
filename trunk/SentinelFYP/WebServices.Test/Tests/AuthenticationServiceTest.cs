@@ -55,7 +55,7 @@ namespace WebServices.Test.Tests
             Assert.Throws<MessageSecurityException>(() => strResult = client.Authenticate(strCredentials));
             Assert.Null(strResult);
         }
-
+        
         [Fact]
         public void TestAuthenticateCorruptJsonString()
         {
