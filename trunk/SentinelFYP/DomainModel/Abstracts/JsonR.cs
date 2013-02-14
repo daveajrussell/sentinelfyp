@@ -13,17 +13,31 @@ namespace DomainModel.Abstracts
     {
         public static string JsonSerializer(object obj)
         {
-            JavaScriptSerializer oS = new JavaScriptSerializer();
-            return oS.Serialize(obj);
+            try
+            {
+                JavaScriptSerializer oS = new JavaScriptSerializer();
+                return oS.Serialize(obj);
+            }
+            catch (Exception ex)
+            {
+                throw new FormatException(ex.Message, ex.InnerException);
+            }
         }
 
         public static T JsonDeserializer<T>(string strJsonString)
         {
-            var data = JsonConvert.DeserializeObject<Dictionary<string, object>>(strJsonString);
-            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(T));
-            MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(strJsonString));
-            T obj = (T)ser.ReadObject(ms);
-            return obj;
+            try
+            {
+                var data = JsonConvert.DeserializeObject<Dictionary<string, object>>(strJsonString);
+                DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(T));
+                MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(strJsonString));
+                T obj = (T)ser.ReadObject(ms);
+                return obj;
+            }
+            catch (Exception ex)
+            {
+                throw new FormatException(ex.Message, ex.InnerException);
+            }
         }
     }
 }
