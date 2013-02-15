@@ -12,8 +12,6 @@ namespace WebServices.DataContracts
         [DataMember]
         public string oAssetKey { get; set; }
         [DataMember]
-        public int iSessionID { get; set; }
-        [DataMember]
         public string oUserIdentification { get; set; }
         [DataMember]
         public long lTimeStamp { get; set; }
@@ -21,9 +19,5 @@ namespace WebServices.DataContracts
         public decimal dLatitude { get; set; }
         [DataMember]
         public decimal dLongitude { get; set; }
-        [DataMember]
-        public decimal dSpeed { get; set; }
-        [DataMember]
-        public int iOrientation { get; set; }
     }
 }
