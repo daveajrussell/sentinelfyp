@@ -37,17 +37,14 @@ namespace WebServices.Test.Tests
             var oAsset = new GeotaggedAssetDataContract()
             {
                 oAssetKey = Guid.NewGuid().ToString(),
-                iSessionID = new Random().Next(),
                 oUserIdentification = Guid.NewGuid().ToString(),
                 lTimeStamp = DateTime.Now.Millisecond,
                 dLatitude = 52.800000M,
                 dLongitude = -2.000000M,
-                dSpeed = 0,
-                iOrientation = 1
             };
             string strInvalidDeliveryItemJson = JsonR.JsonSerializer(oAsset);
 
-            
+            Assert.DoesNotThrow(() => client.GeoTagDelivery(strInvalidDeliveryItemJson));
         }
         
         /*
