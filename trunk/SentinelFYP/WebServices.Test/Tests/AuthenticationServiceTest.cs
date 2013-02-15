@@ -52,7 +52,7 @@ namespace WebServices.Test.Tests
             string strResult = null;
             string strCredentials = "{\"strUsername\":\"WRONG\",\"strPassword\":\"BAD\"}";
 
-            Assert.Throws<MessageSecurityException>(() => strResult = client.Authenticate(strCredentials));
+            Assert.Throws<MessageSecurityException>(() => strResult = client.Authenticate(strCredentials)); // why
             Assert.Null(strResult);
         }
         
