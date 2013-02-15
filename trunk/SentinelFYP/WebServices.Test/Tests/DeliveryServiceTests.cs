@@ -44,6 +44,57 @@ namespace WebServices.Test.Tests
             };
             string strInvalidDeliveryItemJson = JsonR.JsonSerializer(oAsset);
 
+            Assert.Throws<ProtocolException>(() => client.GeoTagDelivery(strInvalidDeliveryItemJson));
+        }
+
+        [Fact]
+        public void TestSubmittingUnAssignedDeliveryItemShouldThrow()
+        {
+            var oAsset = new GeotaggedAssetDataContract()
+            {
+                oAssetKey = "051CD6B1-DE50-465A-8427-04EA267ED442",
+                oUserIdentification = Guid.NewGuid().ToString(),
+                lTimeStamp = DateTime.Now.Millisecond,
+                dLatitude = 52.800000M,
+                dLongitude = -2.000000M,
+            };
+
+            string strInvalidDeliveryItemJson = JsonR.JsonSerializer(oAsset);
+
+            Assert.Throws<ProtocolException>(() => client.GeoTagDelivery(strInvalidDeliveryItemJson));
+        }
+
+        [Fact]
+        public void TestSubmittingValidDeliveryItemFromInvalidDriver()
+        {
+            var oAsset = new GeotaggedAssetDataContract()
+            {
+                oAssetKey = "1CBC383E-7FA6-492C-9B50-851CEC0983CD",
+                oUserIdentification = Guid.NewGuid().ToString(),
+                lTimeStamp = DateTime.Now.Millisecond,
+                dLatitude = 52.800000M,
+                dLongitude = -2.000000M,
+            };
+
+            string strInvalidDeliveryItemJson = JsonR.JsonSerializer(oAsset);
+
+            Assert.Throws<ProtocolException>(() => client.GeoTagDelivery(strInvalidDeliveryItemJson));
+        }
+
+        [Fact]
+        public void TestSubmittingValidDeliveryItem()
+        {
+            var oAsset = new GeotaggedAssetDataContract()
+            {
+                oAssetKey = "1CBC383E-7FA6-492C-9B50-851CEC0983CD",
+                oUserIdentification = "66FBA0E1-6429-4999-9538-6566DEE70048",
+                lTimeStamp = DateTime.Now.Ticks,
+                dLatitude = 52.800000M,
+                dLongitude = -2.000000M,
+            };
+
+            string strInvalidDeliveryItemJson = JsonR.JsonSerializer(oAsset);
+
             Assert.DoesNotThrow(() => client.GeoTagDelivery(strInvalidDeliveryItemJson));
         }
         

@@ -32,12 +32,9 @@ namespace WebServices.Services
             {
                 AssetKey = new Guid(oGeotaggedAssetContract.oAssetKey),
                 DriverKey = new Guid(oGeotaggedAssetContract.oUserIdentification),
-                SessionID = oGeotaggedAssetContract.iSessionID,
                 TimeStamp = new DateTime(1970, 1, 1).AddMilliseconds(oGeotaggedAssetContract.lTimeStamp),
                 Latitude = oGeotaggedAssetContract.dLatitude,
                 Longitude = oGeotaggedAssetContract.dLongitude,
-                Speed = oGeotaggedAssetContract.dSpeed,
-                Orientation = oGeotaggedAssetContract.iOrientation
             };
 
             _service.SubmitGeoTaggedDeliveryItem(oItem);
