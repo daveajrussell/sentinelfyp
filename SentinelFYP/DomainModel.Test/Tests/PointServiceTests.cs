@@ -8,7 +8,6 @@ using DomainModel.Models.GISModels;
 using DomainModel.Services;
 using DomainModel.Test.TestHelpers;
 using GMap.NET;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Xunit;
 
@@ -40,13 +39,13 @@ namespace DomainModel.Test.Tests
         [Fact]
         public void InjectingNullReferenceIntoConstructorShouldThrow()
         {
-            Xunit.Assert.Throws<ArgumentNullException>(() => new PointService(null));
+            Assert.Throws<ArgumentNullException>(() => new PointService(null));
         }
 
         [Fact]
         public void InjectingInterfaceIntoConsructorShouldWork()
         {
-            Xunit.Assert.DoesNotThrow(() => new PointService(_pointRepository.Object));
+            Assert.DoesNotThrow(() => new PointService(_pointRepository.Object));
         }
 
         [Fact]
@@ -55,21 +54,21 @@ namespace DomainModel.Test.Tests
             var pointService = new PointService(_pointRepository.Object);
             var points = pointService.LoadPoints();
 
-            Xunit.Assert.NotNull(points);
+            Assert.NotNull(points);
         }
 
         [Fact]
         public void AddNullLocationShouldThrow()
         {
             var pointService = new PointService(_pointRepository.Object);
-            Xunit.Assert.Throws<ArgumentNullException>(() => pointService.AddLocation(null));
+            Assert.Throws<ArgumentNullException>(() => pointService.AddLocation(null));
         }
 
         [Fact]
         public void AddLocationShouldNotThrow()
         {
             var pointService = new PointService(_pointRepository.Object);
-            Xunit.Assert.DoesNotThrow(() => pointService.AddLocation(new GeospatialInformation()));
+            Assert.DoesNotThrow(() => pointService.AddLocation(new GeospatialInformation()));
         }
 
         [Fact]
@@ -78,29 +77,29 @@ namespace DomainModel.Test.Tests
             var pointService = new PointService(_pointRepository.Object);
             var result = pointService.AdjustMapPixelsToTilePixels(new GMap.NET.Point(1, 1), new GMap.NET.Point(1, 2));
 
-            Xunit.Assert.NotEqual(0, result.X);
-            Xunit.Assert.NotEqual(0, result.Y);
+            Assert.NotEqual(0, result.X);
+            Assert.NotEqual(0, result.Y);
         }
 
         [Fact]
         public void GetPointsForTileShouldThrowWhenPassedNullCoordinates()
         {
             var pointService = new PointService(_pointRepository.Object);
-            Xunit.Assert.Throws<ArgumentNullException>(() => pointService.GetPointsForTile(0, 1, null, 0, null));
+            Assert.Throws<ArgumentNullException>(() => pointService.GetPointsForTile(0, 1, null, 0, null));
         }
 
         [Fact]
         public void GetPointsForTileShouldThrowWhenPassedNullBitmap()
         {
             var pointService = new PointService(_pointRepository.Object);
-            Xunit.Assert.Throws<ArgumentNullException>(() => pointService.GetPointsForTile(12, 13, null, 2, null));
+            Assert.Throws<ArgumentNullException>(() => pointService.GetPointsForTile(12, 13, null, 2, null));
         }
 
         [Fact]
         public void GetPointsForTileShouldThrowWhenPassedNullList()
         {
             var pointService = new PointService(_pointRepository.Object);
-            Xunit.Assert.Throws<ArgumentNullException>(() => pointService.GetPointsForTile(12, 13, new Bitmap(1, 1), 2, null));
+            Assert.Throws<ArgumentNullException>(() => pointService.GetPointsForTile(12, 13, new Bitmap(1, 1), 2, null));
         }
 
         [Fact]
@@ -109,7 +108,7 @@ namespace DomainModel.Test.Tests
             var pointService = new PointService(_pointRepository.Object);
             var result = pointService.GetPointsForTile(12, 13, new Bitmap(1, 1), 2, new List<PointLatLng>());
 
-            Xunit.Assert.NotEmpty(result);
+            Assert.NotEmpty(result);
         }
     }
 }
