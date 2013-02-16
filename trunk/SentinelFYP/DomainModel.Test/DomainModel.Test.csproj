@@ -76,8 +76,10 @@
     <Compile Include="TestHelpers\GHeatServiceTestHelper.cs" />
     <Compile Include="TestHelpers\PointServiceTestHelper.cs" />
     <Compile Include="TestHelpers\SecurityTestHelper.cs" />
+    <Compile Include="Tests\DeliveryItemManagementServiceTest.cs" />
     <Compile Include="Tests\GHeatServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\HistoricalTrackingServiceTest.cs" />
     <Compile Include="Tests\LiveTrackingServiceTest.cs" />
     <Compile Include="Tests\PointServiceTests.cs" />
     <Compile Include="Tests\GISServiceTests.cs" />
