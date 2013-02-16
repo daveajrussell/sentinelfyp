@@ -11,8 +11,8 @@ namespace SentinelExceptionManagement
     {
         public static void LogException(Exception ex)
         {
-            var fromAddress = new MailAddress("dave@daveajrussell.com", "Error Notifier");
-            var toAddress = new MailAddress("dave@daveajrussell.com", "Admin");
+            var fromAddress = new MailAddress("admin@fyp.daveajrussell.com", "Error Notifier");
+            var toAddress = new MailAddress("admin@fyp.daveajrussell.com", "Admin");
             const string fromPassword = "randomness";
             const string subject = "Error in Sentinel";
 
