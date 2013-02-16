@@ -45,22 +45,15 @@ namespace SqlRepositories
 
         public void AddGeospatialInformationSet(IEnumerable<GeospatialInformation> oGeoInformationSet)
         {
-            try
-            {
-                var oXmlString = GetXmlString(oGeoInformationSet);
-                var arrParams = new SqlParameter[]
+            var oXmlString = GetXmlString(oGeoInformationSet);
+            var arrParams = new SqlParameter[]
             {
                 new SqlParameter("@IP_SESSION_ID", oGeoInformationSet.First().SessionID),
                 new SqlParameter("@IP_USER_KEY", oGeoInformationSet.First().DriverKey),
                 new SqlParameter("@IP_XML", oXmlString)
             };
 
-                SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "[GIS].[ADD_GEOSPATIAL_INFORMATION_SET]", arrParams);
-            }
-            catch (Exception ex)
-            {
-                ExceptionManager.LogException(ex);
-            }
+            SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "[GIS].[ADD_GEOSPATIAL_INFORMATION_SET]", arrParams);
         }
 
         private string GetXmlString(IEnumerable<GeospatialInformation> oGeoInformationSet)

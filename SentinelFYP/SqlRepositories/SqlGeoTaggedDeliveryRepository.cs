@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using DomainModel.Interfaces.Repositories;
+using DomainModel.Models.AssetModels;
 using Sentinel.SqlDataAccess;
 
 namespace SqlRepositories
@@ -18,7 +19,7 @@ namespace SqlRepositories
             _connectionString = connectionString;
         }
 
-        public void SubmitGeoTaggedDeliveryItem(DomainModel.Models.AssetModels.GeoTaggedDeliveryItem oItem)
+        public void SubmitGeoTaggedDeliveryItem(GeoTaggedDeliveryItem oItem)
         {
             var arrParams = new SqlParameter[]
             {
@@ -30,6 +31,13 @@ namespace SqlRepositories
             };
 
             SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "[ASSET].[GEOTAG_DELIVERY]", arrParams);
+        }
+
+        public void UnTagDelivery(Guid oAssetKey)
+        {
+            var sqlParam = new SqlParameter("@IP_DELIVERY_ITEM_KEY", oAssetKey);
+
+            SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "[ASSET].[REMOVE_GEOTAGGED_DELIVERY]", sqlParam);
         }
     }
 }
