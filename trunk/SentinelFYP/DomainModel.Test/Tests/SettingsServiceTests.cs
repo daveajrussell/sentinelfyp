@@ -21,17 +21,17 @@ namespace DomainModel.Test.Tests
         [Fact]
         public void InjectingNullReferenceIntoConstructorShouldThrow()
         {
-            Xunit.Assert.Throws<ArgumentNullException>(() => new SettingsService(null));
+            Assert.Throws<ArgumentNullException>(() => new SettingsService(null));
         }
 
         [Fact]
         public void InjectingRepositoryReferenceIntoConstructorShouldNotThrow()
         {
-            Xunit.Assert.DoesNotThrow(() => new SettingsService(_repository.Object));
+            Assert.DoesNotThrow(() => new SettingsService(_repository.Object));
 
             SettingsService service = new SettingsService(_repository.Object);
-            Xunit.Assert.NotNull(service);
-            Xunit.Assert.IsAssignableFrom<SettingsService>(service);
+            Assert.NotNull(service);
+            Assert.IsAssignableFrom<SettingsService>(service);
         }
 
         [Fact]
@@ -40,9 +40,9 @@ namespace DomainModel.Test.Tests
             var service = new SettingsService(_repository.Object);
             var result = service.BaseDirectory;
 
-            Xunit.Assert.NotNull(result);
-            Xunit.Assert.IsAssignableFrom<string>(result);
-            Xunit.Assert.Equal(Environment.CurrentDirectory, result);
+            Assert.NotNull(result);
+            Assert.IsAssignableFrom<string>(result);
+            Assert.Equal(Environment.CurrentDirectory, result);
         }
     }
 }

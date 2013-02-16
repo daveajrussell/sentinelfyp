@@ -21,24 +21,26 @@ namespace DomainModel.Test.Tests
 
             _repository.Setup(m => m.LogIn(It.IsAny<string>(), It.IsAny<string>(), out _user, out _session))
                 .Callback(() => SecurityTestHelper.MockLogin("Username", "Password", out _user, out _session));
-            //   .Returns(new User(Guid.NewGuid(), "Test User", "Test", "User", "Test@User.com", DateTime.Now, DateTime.Now, DateTime.Now));
+
+            _repository.Setup(m => m.GetUserByUserKey(It.IsAny<Guid>()))
+                .Returns<Guid>((userKey) => new User() { UserKey = userKey });
         }
 
         [Fact]
         public void InjectingNullIntoConstructorShouldThrow()
         {
-            Xunit.Assert.Throws<ArgumentNullException>(() => new SecurityService(null));
+            Assert.Throws<ArgumentNullException>(() => new SecurityService(null));
         }
 
         [Fact]
         public void InjectingInterfaceIntoConstructorShouldNotThrow()
         {
-            Xunit.Assert.DoesNotThrow(() => new SecurityService(_repository.Object));
+            Assert.DoesNotThrow(() => new SecurityService(_repository.Object));
             
             var service = new SecurityService(_repository.Object);
 
-            Xunit.Assert.NotNull(service);
-            Xunit.Assert.IsAssignableFrom<SecurityService>(service);
+            Assert.NotNull(service);
+            Assert.IsAssignableFrom<SecurityService>(service);
         }
 
         [Fact]
@@ -47,7 +49,7 @@ namespace DomainModel.Test.Tests
             var service = new SecurityService(_repository.Object);
             var user = new User();
             var session = new Session();
-            Xunit.Assert.Throws<ArgumentNullException>(() => service.LogIn(null, "Password", out user, out session));
+            Assert.Throws<ArgumentNullException>(() => service.LogIn(null, "Password", out user, out session));
         }
 
         [Fact]
@@ -56,7 +58,7 @@ namespace DomainModel.Test.Tests
             var service = new SecurityService(_repository.Object);
             var user = new User();
             var session = new Session();
-            Xunit.Assert.Throws<ArgumentNullException>(() => service.LogIn("Username", null, out user, out session));
+            Assert.Throws<ArgumentNullException>(() => service.LogIn("Username", null, out user, out session));
         }
 
         [Fact]
@@ -66,8 +68,22 @@ namespace DomainModel.Test.Tests
             var user = new User();
             var session = new Session();
 
-            Xunit.Assert.DoesNotThrow(() => service.LogIn("Username", "Password", out user, out session));
-            Xunit.Assert.NotNull(_user);
+            Assert.DoesNotThrow(() => service.LogIn("Username", "Password", out user, out session));
+            Assert.NotNull(_user);
+        }
+
+        [Fact]
+        public void TestGetUserByUserKey()
+        {
+            var key = Guid.NewGuid();
+            var service = new SecurityService(_repository.Object);
+
+            var user = service.GetUserByUserKey(key);
+
+            Assert.NotNull(user);
+            Assert.IsAssignableFrom<User>(user);
+
+            Assert.Equal(key, user.UserKey);
         }
     }
 }
