@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using System.ServiceModel;
 using DomainModel.Abstracts;
+using Moq;
 using WebServices.DataContracts;
 using Xunit;
 
@@ -10,7 +12,7 @@ namespace WebServices.Test.Tests
     {
 
         private DeliveryServiceClient client;
-
+        
         public DeliveryServiceTests()
         {
             client = new DeliveryServiceClient();
@@ -88,55 +90,21 @@ namespace WebServices.Test.Tests
             {
                 oAssetKey = "1CBC383E-7FA6-492C-9B50-851CEC0983CD",
                 oUserIdentification = "66FBA0E1-6429-4999-9538-6566DEE70048",
-                lTimeStamp = DateTime.Now.Ticks,
+                lTimeStamp = 6000000,
                 dLatitude = 52.800000M,
                 dLongitude = -2.000000M,
             };
 
-            string strInvalidDeliveryItemJson = JsonR.JsonSerializer(oAsset);
+            var oUnTagAsset = new AssetKeyDataContract()
+            {
+                oAssetKey = "1CBC383E-7FA6-492C-9B50-851CEC0983CD"
+            };
 
-            Assert.DoesNotThrow(() => client.GeoTagDelivery(strInvalidDeliveryItemJson));
-        }
-        
-        /*
-        [Fact]
-        public void SubmittingNullDeliveryInformationShouldThrow()
-        {
-            Assert.Throws<FaultException<ExceptionDetail>>(() => client.SubmitGeoTaggedDelivery(null));
-        }
+            string strAssetKey = JsonR.JsonSerializer(oUnTagAsset);
+            client.UnTagDelivery(strAssetKey);
 
-        [Fact]
-        public void SubmittingNullLocationReferenceShouldThrow()
-        {
-            Assert.Throws<FaultException<ExceptionDetail>>(() => client.SubmitGeoTaggedDelivery(null));
+            string strValidDeliveryItemJson = JsonR.JsonSerializer(oAsset);
+            Assert.DoesNotThrow(() => client.GeoTagDelivery(strValidDeliveryItemJson));
         }
-
-        [Fact]
-        public void SubmittingValidJSONStringShouldNotThrow()
-        {
-            Assert.DoesNotThrow(() => client.SubmitGeoTaggedDelivery("{\"TestData\": \"Test\"}"));
-        }
-
-        [Fact]
-        public void SubmittingNullDeliveryItemIDShouldThrow()
-        {
-            Assert.Throws<FaultException<ExceptionDetail>>(() => client.GetDeliveryInformation(null));
-        }
-
-        [Fact]
-        public void SubmittingValidDeliveryItemIDShouldNotThrow()
-        {
-            Assert.DoesNotThrow(() => client.GetDeliveryInformation("{\"TestData\": \"Test\"}"));
-        }
-
-        [Fact]
-        public void GetDeliveryInformationReturnsInformationJSONString()
-        {
-            var result = client.GetDeliveryInformation("{\"TestData\": \"Test\"}");
-
-            Assert.NotNull(result);
-            Assert.IsAssignableFrom<string>(result);
-        }
-        */ 
     }
 }

@@ -112,6 +112,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataContracts\AssetKeyDataContract.cs" />
     <Compile Include="DataContracts\CredentialsDataContract.cs" />
     <Compile Include="DataContracts\GeospatialInformationSetDataContract.cs" />
     <Compile Include="DataContracts\GeotaggedAssetDataContract.cs" />

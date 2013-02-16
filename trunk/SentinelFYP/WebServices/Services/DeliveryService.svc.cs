@@ -39,5 +39,11 @@ namespace WebServices.Services
 
             _service.SubmitGeoTaggedDeliveryItem(oItem);
         }
+
+        public void UnTagDelivery(string strAssetKey)
+        {
+            AssetKeyDataContract oAssetKey = JsonR.JsonDeserializer<AssetKeyDataContract>(strAssetKey);
+            _service.UnTagDelivery(Guid.Parse(oAssetKey.oAssetKey));
+        }
     }
 }
