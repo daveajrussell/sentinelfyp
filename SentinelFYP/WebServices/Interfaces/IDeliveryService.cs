@@ -14,5 +14,9 @@ namespace WebServices.Interfaces
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "/GeoTagDelivery", RequestFormat = WebMessageFormat.Json)]
         void GeoTagDelivery(string strGeoTaggedDeliveryObject);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "/UnTagDelivery", RequestFormat = WebMessageFormat.Json)]
+        void UnTagDelivery(string strAssetKey);
     }
 }

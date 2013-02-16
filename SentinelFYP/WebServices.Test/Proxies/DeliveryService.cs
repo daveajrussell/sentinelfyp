@@ -20,6 +20,12 @@ public interface IDeliveryService
     
     [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDeliveryService/GeoTagDelivery", ReplyAction="http://tempuri.org/IDeliveryService/GeoTagDeliveryResponse")]
     System.Threading.Tasks.Task GeoTagDeliveryAsync(string strGeoTaggedDeliveryObject);
+    
+    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDeliveryService/UnTagDelivery", ReplyAction="http://tempuri.org/IDeliveryService/UnTagDeliveryResponse")]
+    void UnTagDelivery(string strAssetKey);
+    
+    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDeliveryService/UnTagDelivery", ReplyAction="http://tempuri.org/IDeliveryService/UnTagDeliveryResponse")]
+    System.Threading.Tasks.Task UnTagDeliveryAsync(string strAssetKey);
 }
 
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -64,5 +70,15 @@ public partial class DeliveryServiceClient : System.ServiceModel.ClientBase<IDel
     public System.Threading.Tasks.Task GeoTagDeliveryAsync(string strGeoTaggedDeliveryObject)
     {
         return base.Channel.GeoTagDeliveryAsync(strGeoTaggedDeliveryObject);
+    }
+    
+    public void UnTagDelivery(string strAssetKey)
+    {
+        base.Channel.UnTagDelivery(strAssetKey);
+    }
+    
+    public System.Threading.Tasks.Task UnTagDeliveryAsync(string strAssetKey)
+    {
+        return base.Channel.UnTagDeliveryAsync(strAssetKey);
     }
 }

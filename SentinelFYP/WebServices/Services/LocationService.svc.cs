@@ -34,21 +34,29 @@ namespace WebServices.Services
 
         public void PostGeospatialData(string strGeospatialDataJsonString)
         {
-            GeospatialInformationDataContract oGeoInformationContract = JsonR.JsonDeserializer<GeospatialInformationDataContract>(strGeospatialDataJsonString);
-            GeospatialInformation oGeoInformation = new GeospatialInformation
+            try
             {
-                SessionID = oGeoInformationContract.iSessionID,
-                DriverKey = new Guid(oGeoInformationContract.oUserIdentification),
-                TimeStamp = new DateTime(1970, 1, 1).AddMilliseconds(oGeoInformationContract.lTimeStamp),
-                Latitude = oGeoInformationContract.dLatitude,
-                Longitude = oGeoInformationContract.dLongitude,
-                Speed = oGeoInformationContract.dSpeed,
-                Orientation = oGeoInformationContract.iOrientation
-            };
+                GeospatialInformationDataContract oGeoInformationContract = JsonR.JsonDeserializer<GeospatialInformationDataContract>(strGeospatialDataJsonString);
+                GeospatialInformation oGeoInformation = new GeospatialInformation
+                {
+                    SessionID = oGeoInformationContract.iSessionID,
+                    DriverKey = new Guid(oGeoInformationContract.oUserIdentification),
+                    TimeStamp = new DateTime(1970, 1, 1).AddMilliseconds(oGeoInformationContract.lTimeStamp),
+                    Latitude = oGeoInformationContract.dLatitude,
+                    Longitude = oGeoInformationContract.dLongitude,
+                    Speed = oGeoInformationContract.dSpeed,
+                    Orientation = oGeoInformationContract.iOrientation
+                };
 
-            _gisService.AddGeospatialInformation(oGeoInformation);
+                _gisService.AddGeospatialInformation(oGeoInformation);
 
-            Notify(strGeospatialDataJsonString);
+                Notify(strGeospatialDataJsonString);
+            }
+            catch (Exception ex)
+            {
+                ExceptionManager.LogException(ex);
+                throw ex;
+            }
         }
 
         public void PostBufferedGeospatialDataSet(string strBufferedGeospatialDataSetJsonString)
@@ -73,6 +81,7 @@ namespace WebServices.Services
             catch (Exception ex)
             {
                 ExceptionManager.LogException(ex);
+                throw ex;
             }
         }
 
