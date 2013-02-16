@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace DomainModel.Abstracts
 {
-    public static class JsonR
+    public abstract class JsonR
     {
         public static string JsonSerializer(object obj)
         {
