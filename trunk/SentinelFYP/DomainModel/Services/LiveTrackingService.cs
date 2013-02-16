@@ -15,6 +15,9 @@ namespace DomainModel.Services
 
         public LiveTrackingService(ILiveTrackingRepository liveTrackingRepository)
         {
+            if (null == liveTrackingRepository)
+                throw new ArgumentNullException("tracking repository");
+
             _liveTrackingRepository = liveTrackingRepository;
         }
 
