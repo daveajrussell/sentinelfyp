@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DomainModel.Interfaces.Repositories;
 using DomainModel.Interfaces.Services;
+using DomainModel.Models.AssetModels;
 
 namespace DomainModel.Services
 {
@@ -16,9 +17,14 @@ namespace DomainModel.Services
             _repository = repository;
         }
 
-        public void SubmitGeoTaggedDeliveryItem(Models.AssetModels.GeoTaggedDeliveryItem oItem)
+        public void SubmitGeoTaggedDeliveryItem(GeoTaggedDeliveryItem oItem)
         {
             _repository.SubmitGeoTaggedDeliveryItem(oItem);
+        }
+
+        public void UnTagDelivery(Guid oAssetKey)
+        {
+            _repository.UnTagDelivery(oAssetKey);
         }
     }
 }

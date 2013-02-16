@@ -9,5 +9,6 @@ namespace DomainModel.Interfaces.Services
     public interface IGeoTaggedDeliveryService
     {
         void SubmitGeoTaggedDeliveryItem(GeoTaggedDeliveryItem oItem);
+        void UnTagDelivery(Guid oAssetKey);
     }
 }
