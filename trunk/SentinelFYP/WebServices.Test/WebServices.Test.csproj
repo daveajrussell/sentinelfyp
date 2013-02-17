@@ -73,7 +73,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="CodedUITest1.cs" />
     <Compile Include="Proxies\AuthenticationService.cs" />
     <Compile Include="Proxies\DeliveryService.cs" />
     <Compile Include="Proxies\LocationService.cs" />
@@ -81,12 +80,6 @@
     <Compile Include="Tests\LocationServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\DeliveryServiceTests.cs" />
-    <Compile Include="UIMap.cs">
-      <DependentUpon>UIMap.uitest</DependentUpon>
-    </Compile>
-    <Compile Include="UIMap.Designer.cs">
-      <DependentUpon>UIMap.uitest</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -102,7 +95,6 @@
     <None Include="Tests\WebTest1.webtest">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="UIMap.uitest" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">
