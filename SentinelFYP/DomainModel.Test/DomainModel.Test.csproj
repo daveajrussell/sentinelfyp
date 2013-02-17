@@ -82,7 +82,7 @@
     <Compile Include="Tests\HistoricalTrackingServiceTest.cs" />
     <Compile Include="Tests\LiveTrackingServiceTest.cs" />
     <Compile Include="Tests\PointServiceTests.cs" />
-    <Compile Include="Tests\GISServiceTests.cs" />
+    <Compile Include="Tests\RoleServiceTest.cs" />
     <Compile Include="Tests\SecurityServiceTests.cs" />
     <Compile Include="Tests\SettingsServiceTests.cs" />
     <Compile Include="Tests\ConsignmentManagementServiceTest.cs" />
