@@ -14,6 +14,9 @@ namespace Sentinel.Controllers
 
         public MonitorController(ISecurityService securityService)
         {
+            if (null == securityService)
+                throw new ArgumentNullException();
+
             _securityService = securityService;
         }
 

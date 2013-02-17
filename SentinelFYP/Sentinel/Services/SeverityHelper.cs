@@ -8,9 +8,9 @@ namespace Sentinel.Services
 {
     public static class SeverityHelper
     {
-        private static string SEVERE = "severe";
-        private static string CAUTION = "caution";
-        private static string NORMAL = "normal";
+        public static string SEVERE = "severe";
+        public static string CAUTION = "caution";
+        public static string NORMAL = "normal";
 
         public static string Severity(GeospatialInformation oInformation)
         {
