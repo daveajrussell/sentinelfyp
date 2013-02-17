@@ -17,12 +17,12 @@ namespace Sentinel.Controllers
 
         public TrackingController(IHistoricalTrackingService historicalTrackingService, ILiveTrackingService liveTrackingService)
         {
-            if (historicalTrackingService == null)
+            if (null == historicalTrackingService)
                 throw new ArgumentNullException("historical tracking service");
 
             _histroicalTrackingService = historicalTrackingService;
 
-            if (liveTrackingService == null)
+            if (null == liveTrackingService)
                 throw new ArgumentNullException("live tracking service");
 
             _liveTrackingService = liveTrackingService;
@@ -161,7 +161,6 @@ namespace Sentinel.Controllers
             return PartialView("../ActionButtons/PageActionButtonsPartial", actions);
         }
 
-        //[AcceptVerbs(HttpVerbs.Post)]
         public ActionResult GetLiveUpdateByDriverKey(string strDriverKey)
         {
             var oDriverKey = GetKeyFromString(strDriverKey);
@@ -170,7 +169,6 @@ namespace Sentinel.Controllers
             return PartialView("LiveTrackingDriverFeed", data);
         }
 
-        //[AcceptVerbs(HttpVerbs.Post)]
         public ActionResult GetLiveElapsedRoute(string strDriverKey)
         {
             var oDriverKey = GetKeyFromString(strDriverKey);
