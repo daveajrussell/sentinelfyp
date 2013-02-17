@@ -15,9 +15,7 @@ namespace Sentinel.Controllers
     {
         public ActionResult Index()
         {
-            var user = State.User;
-
-            if (user == null)
+            if(null == State.User)
                 return RedirectToAction("Index", "Account");
             else
                 return PartialView("HeaderPartial", State.User.ToViewModel());
