@@ -30,23 +30,5 @@ namespace DomainModel.Services
         {
             _gisRepository.AddGeospatialInformationSet(oGeoInformationSet);
         }
-
-        /*public void AddGIS(GeospatialInformation oGIS)
-        {
-            if (oGIS == null)
-                throw new ArgumentNullException("Geo Data");
-
-            _gisRepository.AddGIS(oGIS);
-        }
-
-        public GeospatialInformation GetGIS()
-        {
-            return _gisRepository.GetGIS();
-        }
-
-        public IEnumerable<GeospatialInformation> GetAllGISData()
-        {
-            return _gisRepository.GetAllGISData();
-        }*/
     }
 }
