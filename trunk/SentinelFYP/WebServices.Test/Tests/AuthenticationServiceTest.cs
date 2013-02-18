@@ -68,7 +68,7 @@ namespace WebServices.Test.Tests
 
             Xunit.Assert.Throws<MessageSecurityException>(() => strResult = client.Authenticate(strCredentials));
             Xunit.Assert.Null(strResult);
-        }
+        } 
         
         [Fact]
         [TestMethod]
