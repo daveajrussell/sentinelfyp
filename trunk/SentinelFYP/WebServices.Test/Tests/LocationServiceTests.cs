@@ -5,6 +5,7 @@ using System.ServiceModel;
 using DomainModel.Abstracts;
 using DomainModel.Interfaces.Services;
 using DomainModel.Models;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using WebServices.DataContracts;
 using WebServices.Services;
@@ -12,6 +13,7 @@ using Xunit;
 
 namespace WebServices.Test.Tests
 {
+    [TestClass]
     public class LocationServiceTests
     {
         LocationServiceClient client;
@@ -22,14 +24,16 @@ namespace WebServices.Test.Tests
         }
 
         [Fact]
+        [TestMethod]
         public void TestClient()
         {
-            Assert.NotNull(client);
-            Assert.IsAssignableFrom<LocationServiceClient>(client);
-            Assert.NotNull(client.Endpoint);
+            Xunit.Assert.NotNull(client);
+            Xunit.Assert.IsAssignableFrom<LocationServiceClient>(client);
+            Xunit.Assert.NotNull(client.Endpoint);
         }
 
         [Fact]
+        [TestMethod]
         public void TestPostGeospatialData()
         {
             var Location = new GeospatialInformationDataContract()
@@ -44,10 +48,11 @@ namespace WebServices.Test.Tests
             };
 
             string strLocation = JsonR.JsonSerializer(Location);
-            Assert.DoesNotThrow(() => client.PostGeospatialData(strLocation));
+            Xunit.Assert.DoesNotThrow(() => client.PostGeospatialData(strLocation));
         }
 
         [Fact]
+        [TestMethod]
         public void TestPostInvalidGeospatialData()
         {
             var InvalidLocation = new GeospatialInformationDataContract()
@@ -62,17 +67,19 @@ namespace WebServices.Test.Tests
             };
 
             string strLocation = JsonR.JsonSerializer(InvalidLocation);
-            Assert.Throws<ProtocolException>(() => client.PostGeospatialData(strLocation));
+            Xunit.Assert.Throws<ProtocolException>(() => client.PostGeospatialData(strLocation));
         }
 
         [Fact]
+        [TestMethod]
         public void TestPostMalformedGeospatialData()
         {
             string strLocation = "{\"iSe\":63ssionID0,\"\":\"66oUserIdentificationfba0e1-6429-4999--6566dee70048\",\"l9538Tim1359309623997eStamp\"dLatitude:,\"\":54,\"\":34,dLongitude\"dSpeed\":0,\"iOrientation\":1}";
-            Assert.Throws<ProtocolException>(() => client.PostGeospatialData(strLocation));
+            Xunit.Assert.Throws<ProtocolException>(() => client.PostGeospatialData(strLocation));
         }
 
         [Fact]
+        [TestMethod]
         public void TestPostBufferedGeospatialDataSet()
         {
             var LocationSet = new GeospatialInformationSetDataContract()
@@ -113,10 +120,11 @@ namespace WebServices.Test.Tests
             };
 
             string strLocation = JsonR.JsonSerializer(LocationSet);
-            Assert.DoesNotThrow(() => client.PostBufferedGeospatialDataSet(strLocation));
+            Xunit.Assert.DoesNotThrow(() => client.PostBufferedGeospatialDataSet(strLocation));
         }
 
         [Fact]
+        [TestMethod]
         public void TestPostInvalidBufferedGeospatialDataSet()
         {
             var InvalidLocationSet = new GeospatialInformationSetDataContract()
@@ -157,14 +165,15 @@ namespace WebServices.Test.Tests
             };
 
             string strLocation = JsonR.JsonSerializer(InvalidLocationSet);
-            Assert.Throws<ProtocolException>(() => client.PostBufferedGeospatialDataSet(strLocation));
+            Xunit.Assert.Throws<ProtocolException>(() => client.PostBufferedGeospatialDataSet(strLocation));
         }
 
         [Fact]
+        [TestMethod]
         public void TestPostMalformedBufferedGeospatialDataSet()
         {
             string strLocation = "{\"\":[{\"dBufferedDataSpeed\":0,\"\":\"66FBA0E1-64oUserIdentificat6566DEE70048ion29-4999-9538-\",\"iOrien6566DEE70dLongitude04iSessionID8tation\":1,\"\":89,\"lTimeiSessionIDStamp\":1359154975409,\"iSessionID\":916,\"dLatitude\":76},{\"dSpeed\":0,\"\":\"66FBA0E1-oUserIdentification6429-4999-9538-\",\"\":1,\"dLoiOrientationngitude\":89,\"\":1359lTimeStamp154975409,\"\":916,\"dLatitude\":76},{\"dSpeed\":0,\"oUserIdentification\":\"66FBA0E1-6429-4999-9538-6566DEE70048\",\"iOrientation\":1,\"dLongitude\":89,\"lTimeS1359154975409tamp\":,\"\":916,\"dLatitude\":76}]}";
-            Assert.Throws<ProtocolException>(() => client.PostBufferedGeospatialDataSet(strLocation));
+            Xunit.Assert.Throws<ProtocolException>(() => client.PostBufferedGeospatialDataSet(strLocation));
         }
     }
 }
