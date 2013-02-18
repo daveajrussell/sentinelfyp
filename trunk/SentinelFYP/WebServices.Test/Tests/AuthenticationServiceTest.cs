@@ -49,14 +49,14 @@ namespace WebServices.Test.Tests
             Xunit.Assert.Equal(Guid.Parse("66fba0e1-6429-4999-9538-6566dee70048"), oResult.UserKey);
             Xunit.Assert.True(oResult.SessionID > 0);
 
-            /*SessionDataContract oContract = new SessionDataContract()
+            SessionDataContract oContract = new SessionDataContract()
             {
                 oUserIdentification = oResult.UserKey.ToString(),
                 iSessionID = oResult.SessionID
             };
 
             string strLogoutCredentials = JsonR.JsonSerializer(oContract);
-            Xunit.Assert.DoesNotThrow(() => client.Logout(strLogoutCredentials));*/
+            Xunit.Assert.DoesNotThrow(() => client.Logout(strLogoutCredentials));
         }
 
         [Fact]
