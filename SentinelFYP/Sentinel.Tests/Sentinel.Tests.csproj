@@ -74,6 +74,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AssetManagementControllerTest.cs" />
     <Compile Include="Controllers\HeaderControllerTest.cs" />
     <Compile Include="Controllers\HeatmapControllerTest.cs" />
     <Compile Include="Controllers\AccountControllerTest.cs" />

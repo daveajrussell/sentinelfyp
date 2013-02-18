@@ -89,10 +89,7 @@
     <None Include="Tests\AuthenticationServiceLoadTest.loadtest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\LoadTest1.loadtest">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Tests\LocationServiceStressTest.loadtest">
+    <None Include="Tests\LocationServiceLoadTest2.loadtest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Tests\LocationServiceLoadTest.loadtest">
