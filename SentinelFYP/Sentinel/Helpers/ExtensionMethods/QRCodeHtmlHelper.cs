@@ -10,14 +10,23 @@ namespace Sentinel.Helpers.ExtensionMethods
     {
         public static MvcHtmlString QRCode(this HtmlHelper htmlHelper, string data)
         {
-            var qrString = "http://webservices.daveajrussell.com/Services/DeliveryService.svc/GetDeliveryInformation/";
+            Guid guid;
 
-            var url = string.Format("http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl={0}", HttpUtility.UrlEncode(qrString + data));
+            if (Guid.TryParse(data, out guid))
+            {
+                var qrString = "http://webservices.daveajrussell.com/Services/DeliveryService.svc/GetDeliveryInformation/";
 
-            var tag = new TagBuilder("img");
-            tag.Attributes.Add("src", url);
+                var url = string.Format("http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl={0}", HttpUtility.UrlEncode(qrString + guid.ToString()));
 
-            return new MvcHtmlString(tag.ToString(TagRenderMode.SelfClosing));
+                var tag = new TagBuilder("img");
+                tag.Attributes.Add("src", url);
+
+                return new MvcHtmlString(tag.ToString(TagRenderMode.SelfClosing));
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

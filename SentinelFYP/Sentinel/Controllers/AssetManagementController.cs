@@ -210,10 +210,7 @@ namespace Sentinel.Controllers
 
             _itemService.AssignDeliveryItemsToConsignment(keys, oConsignmentKey);
 
-            var data = _itemService.GetConsignmentDeliveryItems(oConsignmentKey);
-            ViewBag.GridRecordCount = data.Count();
-
-            return PartialView("DeliveryItemGridPartial", data);
+            return GetDeliveryItems(oConsignmentKey);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
