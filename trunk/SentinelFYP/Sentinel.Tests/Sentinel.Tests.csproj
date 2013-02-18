@@ -80,6 +80,10 @@
     <Compile Include="Controllers\AccountControllerTest.cs" />
     <Compile Include="Controllers\MonitorControllerTest.cs" />
     <Compile Include="Controllers\TrackingControllerTest.cs" />
+    <Compile Include="ExtensionMethodTests\PDFResultTest.cs" />
+    <Compile Include="ExtensionMethodTests\QRCodeHtmlHelperTest.cs" />
+    <Compile Include="ExtensionMethodTests\TileResultViewModel.cs" />
+    <Compile Include="ExtensionMethodTests\ToViewModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proxies\NotifierService.cs" />
     <Compile Include="Services\NotifierServiceTest.cs" />
@@ -107,9 +111,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UI Test\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
