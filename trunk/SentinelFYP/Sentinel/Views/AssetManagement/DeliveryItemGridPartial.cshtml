@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<DomainModel.Models.AssetModels.AssignedDeliveryItem>
-@using Sentinel.Grid;
+@using Sentinel.Grid.UI;
 @using Sentinel.Helpers.ExtensionMethods;
 
 @{
-    var grid = new ASPRazorWebGrid(source: Model);
+    var grid = new SentinelRazorWebGrid(source: Model);
     grid.UsePostBack = false;
 }
 
@@ -33,7 +33,7 @@
 </script>
 
 <section id="items-grid">
-    @grid.GetHtml(columns: new ASPRazorWebGridColumn[]
+    @grid.GetHtml(columns: new SentinelRazorWebGridColumn[]
                         {
                             grid.CreateColumn(width: "13px", itemHorizontalAlignment: "center", dataFieldFormat: @<text> <input class="keys" type="checkbox" value="@item.DeliveryItemKey" /> </text>),
                             grid.CreateColumn(headerText: "Recipient Name", headerHorizontalAlignment: "center", dataFieldFormat: @<text> @item.RecipientFirstName @item.RecipientLastName </text>),

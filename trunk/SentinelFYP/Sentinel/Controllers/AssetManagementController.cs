@@ -5,11 +5,10 @@ using System.Web;
 using System.Web.Mvc;
 using System.Windows.Media.Imaging;
 using DomainModel.Interfaces.Services;
-using ASPRazorWebGrid;
+using Sentinel.Grid.UI;
 using Sentinel.Helpers;
 using Sentinel.Helpers.ExtensionMethods;
 using Sentinel.Models;
-using ASPRazorWebGrid.UI;
 
 namespace Sentinel.Controllers
 {

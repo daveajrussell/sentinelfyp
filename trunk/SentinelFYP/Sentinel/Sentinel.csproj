@@ -53,9 +53,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ASPRazorWebGrid">
-      <HintPath>..\..\..\..\..\ASPRazorWebGrid\ASPRazorWebGridSample\bin\ASPRazorWebGrid.dll</HintPath>
-    </Reference>
     <Reference Include="Gma.QrCodeNet.Encoding">
       <HintPath>..\ProjectDependancies\Gma.QrCodeNet.Encoding.dll</HintPath>
     </Reference>
@@ -103,6 +100,9 @@
       <HintPath>..\ProjectDependancies\PdfSharp.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
+    <Reference Include="SentinelRazorWebGrid">
+      <HintPath>..\..\..\..\..\ASPRazorWebGrid\SentinelRazorWebGrid\bin\SentinelRazorWebGrid.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Services" />
     <Reference Include="System.Runtime.Serialization" />
@@ -168,7 +168,7 @@
     <Compile Include="Services\SeverityHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\ASPRazorWebGrid.css" />
+    <Content Include="Content\SentinelRazorWebGrid.css" />
     <Content Include="Content\etc\color-schemes\classic.png" />
     <Content Include="Content\etc\color-schemes\fire.png" />
     <Content Include="Content\etc\color-schemes\omg.png" />
@@ -295,7 +295,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Grid\" />
     <Folder Include="Scripts\Views\PartialScripts\" />
   </ItemGroup>
   <ItemGroup>
