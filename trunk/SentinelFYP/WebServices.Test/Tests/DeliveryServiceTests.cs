@@ -106,5 +106,29 @@ namespace WebServices.Test.Tests
             string strValidDeliveryItemJson = JsonR.JsonSerializer(oAsset);
             Assert.DoesNotThrow(() => client.GeoTagDelivery(strValidDeliveryItemJson));
         }
+
+        [Fact]
+        public void TestSubmittingValidDeliveryItemAsync()
+        {
+            var oAsset = new GeotaggedAssetDataContract()
+            {
+                oAssetKey = "1CBC383E-7FA6-492C-9B50-851CEC0983CD",
+                oUserIdentification = "66FBA0E1-6429-4999-9538-6566DEE70048",
+                lTimeStamp = 6000000,
+                dLatitude = 52.800000M,
+                dLongitude = -2.000000M,
+            };
+
+            var oUnTagAsset = new AssetKeyDataContract()
+            {
+                oAssetKey = "1CBC383E-7FA6-492C-9B50-851CEC0983CD"
+            };
+
+            string strAssetKey = JsonR.JsonSerializer(oUnTagAsset);
+            client.UnTagDelivery(strAssetKey);
+
+            string strValidDeliveryItemJson = JsonR.JsonSerializer(oAsset);
+            Assert.DoesNotThrow(() => client.GeoTagDeliveryAsync(strValidDeliveryItemJson));
+        }
     }
 }
