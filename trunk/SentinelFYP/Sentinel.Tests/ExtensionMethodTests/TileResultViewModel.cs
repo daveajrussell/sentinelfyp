@@ -22,7 +22,7 @@ namespace Sentinel.Tests.ExtensionMethodTests
         [Fact]
         public void TestTileResult()
         {
-            var result = new TileResult(null);
+            //var result = new TileResult(null);
         }
     }
 }
