@@ -77,7 +77,9 @@
     <Compile Include="Interfaces\Repositories\IDeliveryItemManagementRepository.cs" />
     <Compile Include="Interfaces\Repositories\IGeoTaggedDeliveryRepository.cs" />
     <Compile Include="Interfaces\Repositories\IGHeatRepository.cs" />
-    <Compile Include="Interfaces\Repositories\IGISRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IGISRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Interfaces\Repositories\IHistoricalTrackingRepository.cs" />
     <Compile Include="Interfaces\Repositories\ILiveTrackingRepository.cs" />
     <Compile Include="Interfaces\Repositories\IRoleRepository.cs" />
@@ -85,7 +87,9 @@
     <Compile Include="Interfaces\Services\IConsignmentManagementService.cs" />
     <Compile Include="Interfaces\Services\IDeliveryItemManagementService.cs" />
     <Compile Include="Interfaces\Services\IGeoTaggedDeliveryService.cs" />
-    <Compile Include="Interfaces\Services\IGISService.cs" />
+    <Compile Include="Interfaces\Services\IGISService.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Interfaces\Services\IHistoricalTrackingService.cs" />
     <Compile Include="Interfaces\Services\ILiveTrackingService.cs" />
     <Compile Include="Interfaces\Services\IRoleService.cs" />
@@ -116,7 +120,9 @@
     <Compile Include="Services\DeliveryItemManagementService.cs" />
     <Compile Include="Services\GeoTaggedDeliveryService.cs" />
     <Compile Include="Services\GHeatService.cs" />
-    <Compile Include="Services\GISService.cs" />
+    <Compile Include="Services\GISService.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Services\HistoricalTrackingService.cs" />
     <Compile Include="Services\KVImageBlender.cs" />
     <Compile Include="Services\LiveTrackingService.cs" />

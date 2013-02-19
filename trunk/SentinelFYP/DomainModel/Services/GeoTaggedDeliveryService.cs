@@ -14,6 +14,9 @@ namespace DomainModel.Services
 
         public GeoTaggedDeliveryService(IGeoTaggedDeliveryRepository repository)
         {
+            if (null == repository)
+                throw new ArgumentNullException("Repository");
+
             _repository = repository;
         }
 
