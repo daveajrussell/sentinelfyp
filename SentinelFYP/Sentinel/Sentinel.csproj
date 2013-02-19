@@ -53,6 +53,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ASPRazorWebGrid">
+      <HintPath>..\..\..\..\..\ASPRazorWebGrid\ASPRazorWebGridSample\bin\ASPRazorWebGrid.dll</HintPath>
+    </Reference>
     <Reference Include="Gma.QrCodeNet.Encoding">
       <HintPath>..\ProjectDependancies\Gma.QrCodeNet.Encoding.dll</HintPath>
     </Reference>
@@ -100,9 +103,6 @@
       <HintPath>..\ProjectDependancies\PdfSharp.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
-    <Reference Include="SentinelRazorWebGrid">
-      <HintPath>..\..\..\..\..\ASPRazorWebGrid\SentinelRazorWebGrid\bin\SentinelRazorWebGrid.dll</HintPath>
-    </Reference>
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Services" />
     <Reference Include="System.Runtime.Serialization" />
