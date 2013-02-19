@@ -42,7 +42,7 @@ public partial class LocationServiceClient : System.ServiceModel.ClientBase<ILoc
     {
     }
     
-    public LocationServiceClient(string endpointConfigurationName) : 
+    /*public LocationServiceClient(string endpointConfigurationName) : 
             base(endpointConfigurationName)
     {
     }
@@ -60,7 +60,7 @@ public partial class LocationServiceClient : System.ServiceModel.ClientBase<ILoc
     public LocationServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
             base(binding, remoteAddress)
     {
-    }
+    }*/
     
     public void PostGeospatialData(string strGeospatialDataJsonString)
     {
