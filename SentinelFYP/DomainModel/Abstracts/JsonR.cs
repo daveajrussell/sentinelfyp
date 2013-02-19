@@ -13,6 +13,9 @@ namespace DomainModel.Abstracts
     {
         public static string JsonSerializer(object obj)
         {
+            if (null == obj)
+                throw new ArgumentNullException("object");
+            
             try
             {
                 JavaScriptSerializer oS = new JavaScriptSerializer();

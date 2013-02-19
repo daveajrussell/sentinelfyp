@@ -90,6 +90,7 @@
     <Compile Include="Tests\SecurityServiceTests.cs" />
     <Compile Include="Tests\SettingsServiceTests.cs" />
     <Compile Include="Tests\ConsignmentManagementServiceTest.cs" />
+    <Compile Include="Tests\JsonRTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
