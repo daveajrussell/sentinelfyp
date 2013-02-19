@@ -1,54 +1,32 @@
 ﻿#updates-window
 {
-    position: absolute;
-    top: 5.1em;
-    left: 75.8%;
-    width: 24%;
-    height: 100%;
+    width: 190px;
+    min-height: 500px;
     border-left: .2em solid #666;
-    background: url(../Content/images/ui-bg_monitor.png) repeat; 
+    background: url(../Content/images/test.png)  repeat-x; 
+    color: #EEEEEE;
+    border-radius: 0 0 .5em .5em;
 }
 
 #updates-window-header
 {
-    position: relative;
-    top: 0;
-    margin-top: 1em;
-    margin-left: 35%;
-    height: 1em;
+    
+    text-align:center;
     font-weight: bold;
 }
 
-#events-list
+.update
 {
-    margin: 1em;
+    margin: .5em 0;
 }
 
-.event-icon
-{
-    border-radius: 1em;
-}
+    .update p
+    {
+        margin: 1em 0
+    }
 
-.event-msg
-{
-    font-weight: bold;
-    background-color: transparent !important;
-}
-
-.severe
-{
-    background-color: #cc0033;
-    color: #cc0033;
-}
-
-.caution
-{
-    background-color: Yellow;
-    color: Yellow;
-}
-
-.normal
-{
-    background-color: Green;
-    color: Green;
-}
+        .update p span, a
+        {
+            float:left; 
+            margin-right: .3em
+        }
