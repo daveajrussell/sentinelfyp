@@ -141,7 +141,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Grid\ASPRazorWebGrid.cs" />
-    <Compile Include="Grid\Dynamic.cs" />
     <Compile Include="Helpers\ExtensionMethods\QRCodeHtmlHelper.cs" />
     <Compile Include="Helpers\ExtensionMethods\TileResult.cs" />
     <Compile Include="Helpers\ExtensionMethods\ToViewModel.cs" />
