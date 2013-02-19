@@ -8,14 +8,17 @@
 #tbl-menu
 {
     width:100%;
+    padding-top:.5em;
 }
 
 #td-menu-left
 {
+    padding-left: 1em;
     text-align: left;
 }
 
 #td-menu-right
 {
+    padding-right: 1em;
     text-align:right;
 }

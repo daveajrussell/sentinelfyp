@@ -1,45 +1,65 @@
 ﻿<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <title>@ViewBag.Title</title>
-        <script src="http://code.jquery.com/jquery-1.8.2.min.js" type="text/javascript"></script>
-        <script src="@Url.Content("~/Scripts/jquery-ui-1.9.0.custom.js")" type="text/javascript"></script>
-        <script src="@Url.Content("~/Scripts/jquery.blockUI.js")" type="text/javascript"></script>
-        <script src="@Url.Content("~/Scripts/Views/Heatmap.js")" type="text/javascript"></script>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <script src="@Url.Content("~/Scripts/jquery-1.9.0.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.10.0.custom.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.blockUI.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/common.js")" type="text/javascript"></script>
 
-        <link href="@Url.Content("~/Content/jquery-ui-1.9.0.custom.min.css")" rel="stylesheet" type="text/css"/>
-        <link href="@Url.Content("~/Content/v1_master.css")" rel="stylesheet" type="text/css" />
-        <link href="@Url.Content("~/Content/v1_menu.css")" rel="stylesheet" type="text/css" />
-        <link href="@Url.Content("~/Content/v1_header.css")" rel="stylesheet" type="text/css" />
-        <link href="@Url.Content("~/Content/v1_monitor.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/jquery-ui-1.10.0.custom.css")" rel="stylesheet" type="text/css"/>
+    <link href="@Url.Content("~/Content/v1_master.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/v1_menu.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/v1_header.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/v1_monitor.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/v1_grid.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/v1_actions.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/v1_management.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/ASPRazorWebGrid.css")" rel="stylesheet" type="text/css" />
 
+    <script src="@Url.Content("~/Scripts/jquery.signalR-1.0.0-rc1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/signalr/hubs")" type="text/javascript"></script>
 
-    </head>
-    <body>
-        <section id="top">
-            @Html.Action("Index", "Header")
-        </section>
+    <script type="text/javascript">
+
+        $(function () {
+
+            //Create SignalR object to get communicate with server
+            var sentinelHub = $.connection.sentinelHub;
+            
+            // Start the connection with server
+            $.connection.hub.start();
+        });
+    </script>
+
+</head>
+<body>
+    <section id="top">
+        @Html.Action("Index", "Header")
+    </section>
+
+    <section id="content">
 
         <section id="menu">
             @Html.Action("Index", "Menu")
         </section>
-            
-        <section id="main">
-            @RenderBody()
-        </section>
 
-        <section id="updates-window">
-            <div id="updates-window-header">
-                <span class="span-updates">Real-Time Monitor</span>
-            </div>
-            <div id="events-list">
-                <span class="ui-icon ui-icon-alert event-icon severe"></span> <span class="event-msg severe"> sever event message!</span>
-                <br />
-                <span class="ui-icon ui-icon-alert event-icon caution"></span> <span class="event-msg caution"> cautonary event message!</span>
-                <br />
-                <span class="ui-icon ui-icon-alert event-icon normal"></span> <span class="event-msg normal"> normal event message!</span>
-            </div>
-        </section>
-    </body>
+        <table>
+            <tr>
+                <td style="vertical-align: top">
+                    <section id="main">
+                        @RenderBody()
+                    </section>
+                </td>
+                <td style="vertical-align: top">
+                    <section id="updates-window">
+                        @Html.Partial("RealTimeMonitorPartial")
+                    </section>
+                </td>
+            </tr>
+        </table>
+
+    </section>
+</body>
 </html>

@@ -1,11 +1,23 @@
 ﻿body
 {
     margin: auto;
-    width: 100%;
     font: bold .7em Verdana;
     color: #fff;
-    background-color: #50748C;
+    background-color: #CBCDC9;
 }
+
+#content
+{
+    margin: auto;
+    width: 1000px;
+    height: 100%;
+    background-color: #373C40;
+        border-radius: .5em;
+}
+
+    #content table td
+    {
+    }
 
 a, a:visited
 {
@@ -16,9 +28,9 @@ a, a:visited
 
 #main
 {
-    width: 75%;
-    height: 100%;
-    background-color: #50748C;
+    width: 800px;
+    min-height: 500px;
+    background-color: #373C40;
 }
 
 #map
@@ -26,7 +38,6 @@ a, a:visited
     width: 99%;
     height: 50em;
     border: 2px solid #000;
-    margin: 1em;
 }
 
 #map-controls
@@ -43,7 +54,7 @@ a, a:visited
 
 .overlay-img
 {
-    margin:1em;
+    margin: 1em;
 }
 
 #container
@@ -59,6 +70,8 @@ a, a:visited
 #events-list
 {
     height: 100%;
+    margin: 1em;
+    border-radius: .8em;
 }
 
 #gis-info

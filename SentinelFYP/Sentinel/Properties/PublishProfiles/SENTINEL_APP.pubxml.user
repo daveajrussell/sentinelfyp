@@ -5,217 +5,275 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LastUsedBuildConfiguration>Debug</LastUsedBuildConfiguration>
+    <LastUsedBuildConfiguration>Release</LastUsedBuildConfiguration>
     <LastUsedPlatform>Any CPU</LastUsedPlatform>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA3/OP2nbYAEOeMO2CS9tqJAAAAAACAAAAAAAQZgAAAAEAACAAAABsqcvjoScPAHtGmaxAHXItlT6DhzhX23iYlYqBSa3LmwAAAAAOgAAAAAIAACAAAACOi7lOTHJhGuNI0DRHR6u5CAk6tl/3NTUn+7DM/K+cUSAAAAAlMpx3a//7Bj31bVzf0d1Krx94923mZemnD37XS6tVdUAAAACj+vdZEmndfw765E1ScAWyUqgN33/ux+dG8V/jVvAErNMK8sG6Nd8HBGHo7pn2cVI1YOSykVjFRkeaufeiVcXI</EncryptedPassword>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/DomainModel.dll">
-      <publishTime>12/14/2012 11:28:27</publishTime>
+      <publishTime>02/05/2013 21:15:37</publishTime>
     </File>
     <File Include="bin/DomainModel.pdb">
-      <publishTime>12/14/2012 11:28:27</publishTime>
+      <publishTime>01/25/2013 00:20:40</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>12/14/2012 10:43:20</publishTime>
     </File>
+    <File Include="bin/Gma.QrCodeNet.Encoding.dll">
+      <publishTime>01/30/2012 16:11:36</publishTime>
+    </File>
     <File Include="bin/GMap.NET.Core.dll">
-      <publishTime>12/14/2012 10:40:49</publishTime>
+      <publishTime>01/15/2013 17:15:06</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.SignalR.Core.dll">
-      <publishTime>12/14/2012 10:45:45</publishTime>
+      <publishTime>01/15/2013 17:15:59</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.SignalR.Owin.dll">
-      <publishTime>12/14/2012 10:45:45</publishTime>
+      <publishTime>01/15/2013 17:15:21</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.SignalR.SystemWeb.dll">
-      <publishTime>12/14/2012 10:45:45</publishTime>
+      <publishTime>01/15/2013 17:15:51</publishTime>
     </File>
     <File Include="bin/Microsoft.Owin.Host.SystemWeb.dll">
-      <publishTime>12/14/2012 10:45:45</publishTime>
+      <publishTime>01/15/2013 17:15:53</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
-      <publishTime>12/14/2012 10:45:45</publishTime>
+      <publishTime>01/15/2013 17:15:50</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>12/14/2012 10:44:24</publishTime>
+      <publishTime>01/15/2013 17:16:24</publishTime>
     </File>
     <File Include="bin/Ninject.dll">
-      <publishTime>12/14/2012 10:46:51</publishTime>
+      <publishTime>01/15/2013 17:17:09</publishTime>
     </File>
     <File Include="bin/Ninject.Extensions.Wcf.dll">
-      <publishTime>12/14/2012 10:47:42</publishTime>
+      <publishTime>01/15/2013 17:16:29</publishTime>
     </File>
     <File Include="bin/Ninject.Extensions.Wcf.pdb">
-      <publishTime>12/14/2012 10:47:42</publishTime>
+      <publishTime>01/15/2013 17:16:29</publishTime>
     </File>
     <File Include="bin/Ninject.pdb">
-      <publishTime>12/14/2012 10:46:51</publishTime>
+      <publishTime>01/15/2013 17:17:09</publishTime>
     </File>
     <File Include="bin/Ninject.Web.Common.dll">
-      <publishTime>12/14/2012 10:46:52</publishTime>
+      <publishTime>01/15/2013 17:15:55</publishTime>
     </File>
     <File Include="bin/Ninject.Web.Common.pdb">
-      <publishTime>12/14/2012 10:46:52</publishTime>
+      <publishTime>01/15/2013 17:15:55</publishTime>
     </File>
     <File Include="bin/Ninject.Web.Mvc.dll">
-      <publishTime>12/14/2012 10:46:52</publishTime>
+      <publishTime>01/15/2013 17:16:01</publishTime>
     </File>
     <File Include="bin/Ninject.Web.Mvc.pdb">
-      <publishTime>12/14/2012 10:46:52</publishTime>
+      <publishTime>01/15/2013 17:16:01</publishTime>
     </File>
     <File Include="bin/NinjectResolver.dll">
-      <publishTime>12/14/2012 11:28:27</publishTime>
+      <publishTime>01/27/2013 16:52:29</publishTime>
     </File>
     <File Include="bin/NinjectResolver.pdb">
-      <publishTime>12/14/2012 11:28:27</publishTime>
+      <publishTime>01/22/2013 14:36:42</publishTime>
     </File>
     <File Include="bin/Owin.dll">
-      <publishTime>12/14/2012 10:45:45</publishTime>
+      <publishTime>01/15/2013 17:17:38</publishTime>
+    </File>
+    <File Include="bin/PdfSharp.dll">
+      <publishTime>01/19/2013 14:45:40</publishTime>
     </File>
     <File Include="bin/Sentinel.dll">
-      <publishTime>12/14/2012 12:45:02</publishTime>
+      <publishTime>02/05/2013 21:15:39</publishTime>
     </File>
     <File Include="bin/Sentinel.pdb">
-      <publishTime>12/14/2012 12:45:02</publishTime>
+      <publishTime>01/25/2013 23:13:09</publishTime>
+    </File>
+    <File Include="bin/SentinelExceptionManagement.dll">
+      <publishTime>01/25/2013 23:01:09</publishTime>
+    </File>
+    <File Include="bin/SentinelExceptionManagement.pdb">
+      <publishTime>01/25/2013 23:13:07</publishTime>
     </File>
     <File Include="bin/SqlDataAccess.dll">
-      <publishTime>12/14/2012 11:28:26</publishTime>
+      <publishTime>01/25/2013 23:01:09</publishTime>
     </File>
     <File Include="bin/SqlDataAccess.pdb">
-      <publishTime>12/14/2012 11:28:26</publishTime>
+      <publishTime>01/25/2013 20:46:56</publishTime>
     </File>
     <File Include="bin/SqlRepositories.dll">
-      <publishTime>12/14/2012 11:28:27</publishTime>
+      <publishTime>02/05/2013 21:15:38</publishTime>
     </File>
     <File Include="bin/SqlRepositories.pdb">
-      <publishTime>12/14/2012 11:28:27</publishTime>
+      <publishTime>01/25/2013 23:13:08</publishTime>
+    </File>
+    <File Include="Content/ASPRazorWebGrid.css">
+      <publishTime>01/20/2013 17:56:01</publishTime>
     </File>
     <File Include="Content/etc/color-schemes/classic.png">
-      <publishTime>12/14/2012 10:40:37</publishTime>
+      <publishTime>01/15/2013 17:13:51</publishTime>
     </File>
     <File Include="Content/etc/color-schemes/fire.png">
-      <publishTime>12/14/2012 10:40:37</publishTime>
+      <publishTime>01/15/2013 17:13:51</publishTime>
     </File>
     <File Include="Content/etc/color-schemes/omg.png">
-      <publishTime>12/14/2012 10:40:37</publishTime>
+      <publishTime>01/15/2013 17:13:51</publishTime>
     </File>
     <File Include="Content/etc/color-schemes/pbj.png">
-      <publishTime>12/14/2012 10:40:37</publishTime>
+      <publishTime>01/15/2013 17:13:51</publishTime>
     </File>
     <File Include="Content/etc/color-schemes/pgaitch.png">
-      <publishTime>12/14/2012 10:40:37</publishTime>
+      <publishTime>01/15/2013 17:13:51</publishTime>
     </File>
     <File Include="Content/etc/dots/dot0.png">
-      <publishTime>12/14/2012 10:40:38</publishTime>
+      <publishTime>01/15/2013 17:13:52</publishTime>
     </File>
     <File Include="Content/etc/dots/dot1.png">
-      <publishTime>12/14/2012 10:40:38</publishTime>
+      <publishTime>01/15/2013 17:13:52</publishTime>
     </File>
     <File Include="Content/etc/dots/dot10.png">
-      <publishTime>12/14/2012 10:40:38</publishTime>
+      <publishTime>01/15/2013 17:13:52</publishTime>
     </File>
     <File Include="Content/etc/dots/dot11.png">
-      <publishTime>12/14/2012 10:40:38</publishTime>
+      <publishTime>01/15/2013 17:13:52</publishTime>
     </File>
     <File Include="Content/etc/dots/dot12.png">
-      <publishTime>12/14/2012 10:40:38</publishTime>
+      <publishTime>01/15/2013 17:13:52</publishTime>
     </File>
     <File Include="Content/etc/dots/dot13.png">
-      <publishTime>12/14/2012 10:40:38</publishTime>
+      <publishTime>01/15/2013 17:13:52</publishTime>
     </File>
     <File Include="Content/etc/dots/dot14.png">
-      <publishTime>12/14/2012 10:40:38</publishTime>
+      <publishTime>01/15/2013 17:13:52</publishTime>
     </File>
     <File Include="Content/etc/dots/dot15.png">
-      <publishTime>12/14/2012 10:40:38</publishTime>
+      <publishTime>01/15/2013 17:13:52</publishTime>
     </File>
     <File Include="Content/etc/dots/dot16.png">
-      <publishTime>12/14/2012 10:40:38</publishTime>
+      <publishTime>01/15/2013 17:13:52</publishTime>
     </File>
     <File Include="Content/etc/dots/dot17.png">
-      <publishTime>12/14/2012 10:40:38</publishTime>
+      <publishTime>01/15/2013 17:13:52</publishTime>
     </File>
     <File Include="Content/etc/dots/dot18.png">
-      <publishTime>12/14/2012 10:40:38</publishTime>
+      <publishTime>01/15/2013 17:13:52</publishTime>
     </File>
     <File Include="Content/etc/dots/dot19.png">
-      <publishTime>12/14/2012 10:40:38</publishTime>
+      <publishTime>01/15/2013 17:13:52</publishTime>
     </File>
     <File Include="Content/etc/dots/dot2.png">
-      <publishTime>12/14/2012 10:40:38</publishTime>
+      <publishTime>01/15/2013 17:13:52</publishTime>
     </File>
     <File Include="Content/etc/dots/dot20.png">
-      <publishTime>12/14/2012 10:40:39</publishTime>
+      <publishTime>01/15/2013 17:13:52</publishTime>
     </File>
     <File Include="Content/etc/dots/dot21.png">
-      <publishTime>12/14/2012 10:40:39</publishTime>
+      <publishTime>01/15/2013 17:13:52</publishTime>
     </File>
     <File Include="Content/etc/dots/dot22.png">
-      <publishTime>12/14/2012 10:40:39</publishTime>
+      <publishTime>01/15/2013 17:13:52</publishTime>
     </File>
     <File Include="Content/etc/dots/dot23.png">
-      <publishTime>12/14/2012 10:40:39</publishTime>
+      <publishTime>01/15/2013 17:13:52</publishTime>
     </File>
     <File Include="Content/etc/dots/dot24.png">
-      <publishTime>12/14/2012 10:40:38</publishTime>
+      <publishTime>01/15/2013 17:13:52</publishTime>
     </File>
     <File Include="Content/etc/dots/dot25.png">
-      <publishTime>12/14/2012 10:40:38</publishTime>
+      <publishTime>01/15/2013 17:13:52</publishTime>
     </File>
     <File Include="Content/etc/dots/dot26.png">
-      <publishTime>12/14/2012 10:40:38</publishTime>
+      <publishTime>01/15/2013 17:13:52</publishTime>
     </File>
     <File Include="Content/etc/dots/dot27.png">
-      <publishTime>12/14/2012 10:40:38</publishTime>
+      <publishTime>01/15/2013 17:13:52</publishTime>
     </File>
     <File Include="Content/etc/dots/dot28.png">
-      <publishTime>12/14/2012 10:40:38</publishTime>
+      <publishTime>01/15/2013 17:13:52</publishTime>
     </File>
     <File Include="Content/etc/dots/dot29.png">
-      <publishTime>12/14/2012 10:40:38</publishTime>
+      <publishTime>01/15/2013 17:13:52</publishTime>
     </File>
     <File Include="Content/etc/dots/dot3.png">
-      <publishTime>12/14/2012 10:40:38</publishTime>
+      <publishTime>01/15/2013 17:13:52</publishTime>
     </File>
     <File Include="Content/etc/dots/dot30.png">
-      <publishTime>12/14/2012 10:40:38</publishTime>
+      <publishTime>01/15/2013 17:13:52</publishTime>
     </File>
     <File Include="Content/etc/dots/dot4.png">
-      <publishTime>12/14/2012 10:40:38</publishTime>
+      <publishTime>01/15/2013 17:13:52</publishTime>
     </File>
     <File Include="Content/etc/dots/dot5.png">
-      <publishTime>12/14/2012 10:40:38</publishTime>
+      <publishTime>01/15/2013 17:13:52</publishTime>
     </File>
     <File Include="Content/etc/dots/dot6.png">
-      <publishTime>12/14/2012 10:40:39</publishTime>
+      <publishTime>01/15/2013 17:13:52</publishTime>
     </File>
     <File Include="Content/etc/dots/dot7.png">
-      <publishTime>12/14/2012 10:40:39</publishTime>
+      <publishTime>01/15/2013 17:13:52</publishTime>
     </File>
     <File Include="Content/etc/dots/dot8.png">
-      <publishTime>12/14/2012 10:40:39</publishTime>
+      <publishTime>01/15/2013 17:13:52</publishTime>
     </File>
     <File Include="Content/etc/dots/dot9.png">
-      <publishTime>12/14/2012 10:40:39</publishTime>
+      <publishTime>01/15/2013 17:13:52</publishTime>
+    </File>
+    <File Include="Content/images/asc.gif">
+      <publishTime>01/16/2013 19:31:33</publishTime>
+    </File>
+    <File Include="Content/images/bgs/management-img.png">
+      <publishTime>01/20/2013 14:15:32</publishTime>
+    </File>
+    <File Include="Content/images/desc.gif">
+      <publishTime>01/16/2013 19:31:33</publishTime>
     </File>
     <File Include="Content/images/FYP-Diagram.png">
-      <publishTime>12/14/2012 10:40:37</publishTime>
+      <publishTime>01/15/2013 17:13:51</publishTime>
     </File>
     <File Include="Content/images/map_loader.gif">
-      <publishTime>12/14/2012 10:40:37</publishTime>
+      <publishTime>01/15/2013 17:13:51</publishTime>
+    </File>
+    <File Include="Content/images/test.png">
+      <publishTime>01/19/2013 13:26:59</publishTime>
+    </File>
+    <File Include="Content/images/ui-bg_diagonals-medium_50_999999_40x40.png">
+      <publishTime>01/19/2013 05:13:24</publishTime>
+    </File>
+    <File Include="Content/images/ui-bg_diagonals-medium_50_CC0033_40x40.png">
+      <publishTime>01/19/2013 05:08:58</publishTime>
+    </File>
+    <File Include="Content/images/ui-bg_diagonals-medium_50_fdf5ce_40x40.png">
+      <publishTime>01/19/2013 05:08:58</publishTime>
+    </File>
+    <File Include="Content/images/ui-bg_diagonals-thick_20_666666_40x40.png">
+      <publishTime>01/19/2013 05:08:58</publishTime>
+    </File>
+    <File Include="Content/images/ui-bg_diagonals-thick_30_299a31_40x40.png">
+      <publishTime>02/05/2013 20:41:38</publishTime>
+    </File>
+    <File Include="Content/images/ui-bg_diagonals-thick_30_CC0000_40x40.png">
+      <publishTime>02/05/2013 20:41:38</publishTime>
+    </File>
+    <File Include="Content/images/ui-bg_diagonals-thick_30_fc4c02_40x40.png">
+      <publishTime>02/05/2013 20:41:38</publishTime>
     </File>
     <File Include="Content/images/ui-bg_flat_0_aaaaaa_40x100.png">
       <publishTime>12/14/2012 10:40:37</publishTime>
     </File>
+    <File Include="Content/images/ui-bg_flat_10_000000_40x100.png">
+      <publishTime>01/19/2013 05:08:58</publishTime>
+    </File>
     <File Include="Content/images/ui-bg_flat_75_ffffff_40x100.png">
       <publishTime>12/14/2012 10:40:37</publishTime>
+    </File>
+    <File Include="Content/images/ui-bg_glass_100_EBF5FA_1x400.png">
+      <publishTime>01/19/2013 05:08:58</publishTime>
+    </File>
+    <File Include="Content/images/ui-bg_glass_100_fdf5ce_1x400.png">
+      <publishTime>01/19/2013 05:08:58</publishTime>
     </File>
     <File Include="Content/images/ui-bg_glass_55_fbf9ee_1x400.png">
       <publishTime>12/14/2012 10:40:37</publishTime>
     </File>
     <File Include="Content/images/ui-bg_glass_65_ffffff_1x400.png">
-      <publishTime>12/14/2012 10:40:37</publishTime>
+      <publishTime>01/19/2013 05:08:58</publishTime>
     </File>
     <File Include="Content/images/ui-bg_glass_75_dadada_1x400.png">
       <publishTime>12/14/2012 10:40:37</publishTime>
@@ -226,11 +284,32 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/images/ui-bg_glass_95_fef1ec_1x400.png">
       <publishTime>12/14/2012 10:40:37</publishTime>
     </File>
+    <File Include="Content/images/ui-bg_gloss-wave_35_EBF5FA_500x100.png">
+      <publishTime>01/19/2013 05:08:58</publishTime>
+    </File>
+    <File Include="Content/images/ui-bg_highlight-soft_100_FFFFFF_1x100.png">
+      <publishTime>01/19/2013 05:08:58</publishTime>
+    </File>
     <File Include="Content/images/ui-bg_highlight-soft_75_cccccc_1x100.png">
       <publishTime>12/14/2012 10:40:37</publishTime>
     </File>
     <File Include="Content/images/ui-bg_monitor.png">
-      <publishTime>12/14/2012 10:40:37</publishTime>
+      <publishTime>01/15/2013 17:13:51</publishTime>
+    </File>
+    <File Include="Content/images/ui-icon-minus_8E8F8F_13x13.png">
+      <publishTime>01/19/2013 20:04:58</publishTime>
+    </File>
+    <File Include="Content/images/ui-icon-minus_hover_5586A3_13x13.png">
+      <publishTime>01/19/2013 20:05:39</publishTime>
+    </File>
+    <File Include="Content/images/ui-icon-plus_8E8F8F_13x13.png">
+      <publishTime>01/19/2013 19:47:00</publishTime>
+    </File>
+    <File Include="Content/images/ui-icon-plus_hover_5586A3_13x13.png">
+      <publishTime>01/19/2013 19:47:41</publishTime>
+    </File>
+    <File Include="Content/images/ui-icons_000000_256x240.png">
+      <publishTime>01/19/2013 05:08:58</publishTime>
     </File>
     <File Include="Content/images/ui-icons_222222_256x240.png">
       <publishTime>12/14/2012 10:40:37</publishTime>
@@ -241,14 +320,26 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/images/ui-icons_454545_256x240.png">
       <publishTime>12/14/2012 10:40:37</publishTime>
     </File>
+    <File Include="Content/images/ui-icons_50748C_256x240.png">
+      <publishTime>01/19/2013 05:08:58</publishTime>
+    </File>
     <File Include="Content/images/ui-icons_888888_256x240.png">
       <publishTime>12/14/2012 10:40:37</publishTime>
     </File>
     <File Include="Content/images/ui-icons_cd0a0a_256x240.png">
       <publishTime>12/14/2012 10:40:37</publishTime>
     </File>
+    <File Include="Content/images/ui-icons_FFFFFF_256x240.png">
+      <publishTime>01/19/2013 05:08:58</publishTime>
+    </File>
     <File Include="Content/images/ui-login_dark.png">
-      <publishTime>12/14/2012 10:40:37</publishTime>
+      <publishTime>01/15/2013 17:13:51</publishTime>
+    </File>
+    <File Include="Content/jquery-ui-1.10.0.custom.css">
+      <publishTime>02/05/2013 20:54:23</publishTime>
+    </File>
+    <File Include="Content/jquery-ui-1.10.0.custom.min.css">
+      <publishTime>01/19/2013 05:08:58</publishTime>
     </File>
     <File Include="Content/jquery-ui-1.9.0.custom.css">
       <publishTime>12/14/2012 10:40:39</publishTime>
@@ -256,26 +347,41 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/jquery-ui-1.9.0.custom.min.css">
       <publishTime>12/14/2012 10:40:37</publishTime>
     </File>
+    <File Include="Content/jquery.qtip.min.css">
+      <publishTime>01/15/2013 17:13:51</publishTime>
+    </File>
+    <File Include="Content/v1_actions.css">
+      <publishTime>01/20/2013 17:42:58</publishTime>
+    </File>
+    <File Include="Content/v1_grid.css">
+      <publishTime>01/19/2013 20:37:16</publishTime>
+    </File>
     <File Include="Content/v1_header.css">
-      <publishTime>12/14/2012 10:40:37</publishTime>
+      <publishTime>01/20/2013 14:30:23</publishTime>
     </File>
     <File Include="Content/v1_login.css">
-      <publishTime>12/14/2012 10:40:37</publishTime>
+      <publishTime>01/15/2013 17:13:51</publishTime>
+    </File>
+    <File Include="Content/v1_management.css">
+      <publishTime>01/20/2013 15:25:32</publishTime>
     </File>
     <File Include="Content/v1_master.css">
-      <publishTime>12/14/2012 10:40:37</publishTime>
+      <publishTime>02/05/2013 19:42:27</publishTime>
     </File>
     <File Include="Content/v1_menu.css">
-      <publishTime>12/14/2012 10:40:37</publishTime>
+      <publishTime>02/02/2013 22:39:44</publishTime>
     </File>
     <File Include="Content/v1_monitor.css">
-      <publishTime>12/14/2012 10:40:37</publishTime>
+      <publishTime>02/05/2013 20:58:24</publishTime>
     </File>
     <File Include="Global.asax">
-      <publishTime>12/14/2012 10:40:36</publishTime>
+      <publishTime>01/15/2013 17:13:50</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>12/14/2012 10:47:44</publishTime>
+      <publishTime>01/15/2013 17:13:37</publishTime>
+    </File>
+    <File Include="Scripts/common.js">
+      <publishTime>01/21/2013 23:00:03</publishTime>
     </File>
     <File Include="Scripts/jquery-1.6.4.js">
       <publishTime>12/14/2012 10:40:35</publishTime>
@@ -286,6 +392,21 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/jquery-1.8.2.js">
       <publishTime>12/14/2012 10:40:35</publishTime>
     </File>
+    <File Include="Scripts/jquery-1.8.3.min.js">
+      <publishTime>02/04/2013 22:18:38</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.9.0.js">
+      <publishTime>01/18/2013 04:44:42</publishTime>
+    </File>
+    <File Include="Scripts/jquery-migrate-1.1.0.min.js">
+      <publishTime>02/04/2013 22:15:39</publishTime>
+    </File>
+    <File Include="Scripts/jquery-ui-1.10.0.custom.js">
+      <publishTime>01/18/2013 04:44:42</publishTime>
+    </File>
+    <File Include="Scripts/jquery-ui-1.10.0.custom.min.js">
+      <publishTime>01/18/2013 04:44:42</publishTime>
+    </File>
     <File Include="Scripts/jquery-ui-1.9.0.custom.js">
       <publishTime>12/14/2012 10:40:29</publishTime>
     </File>
@@ -293,109 +414,217 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/14/2012 10:40:35</publishTime>
     </File>
     <File Include="Scripts/jquery.blockUI.js">
-      <publishTime>12/14/2012 10:40:29</publishTime>
+      <publishTime>02/05/2013 13:29:21</publishTime>
+    </File>
+    <File Include="Scripts/jquery.qtip.min.js">
+      <publishTime>02/04/2013 22:12:54</publishTime>
     </File>
     <File Include="Scripts/jquery.signalR-1.0.0-rc1.js">
-      <publishTime>12/14/2012 10:40:35</publishTime>
+      <publishTime>01/15/2013 17:13:50</publishTime>
     </File>
     <File Include="Scripts/jquery.signalR-1.0.0-rc1.min.js">
-      <publishTime>12/14/2012 10:40:29</publishTime>
+      <publishTime>01/15/2013 17:13:41</publishTime>
     </File>
     <File Include="Scripts/jquery.unobtrusive-ajax.js">
-      <publishTime>12/14/2012 10:40:35</publishTime>
+      <publishTime>01/15/2013 17:13:50</publishTime>
     </File>
     <File Include="Scripts/jquery.unobtrusive-ajax.min.js">
-      <publishTime>12/14/2012 10:40:29</publishTime>
+      <publishTime>01/15/2013 17:13:41</publishTime>
     </File>
     <File Include="Scripts/jquery.validate-vsdoc.js">
-      <publishTime>12/14/2012 10:40:35</publishTime>
+      <publishTime>01/15/2013 17:13:50</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.js">
-      <publishTime>12/14/2012 10:40:29</publishTime>
+      <publishTime>01/15/2013 17:13:41</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.min.js">
-      <publishTime>12/14/2012 10:40:35</publishTime>
+      <publishTime>01/15/2013 17:13:50</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.unobtrusive.js">
-      <publishTime>12/14/2012 10:40:36</publishTime>
+      <publishTime>01/15/2013 17:13:50</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.unobtrusive.min.js">
-      <publishTime>12/14/2012 10:40:30</publishTime>
+      <publishTime>01/15/2013 17:13:41</publishTime>
     </File>
     <File Include="Scripts/jquery.watermark.min.js">
-      <publishTime>12/14/2012 10:40:36</publishTime>
+      <publishTime>01/15/2013 17:13:50</publishTime>
     </File>
     <File Include="Scripts/MicrosoftAjax.debug.js">
-      <publishTime>12/14/2012 10:40:36</publishTime>
+      <publishTime>01/15/2013 17:13:50</publishTime>
     </File>
     <File Include="Scripts/MicrosoftAjax.js">
-      <publishTime>12/14/2012 10:40:29</publishTime>
+      <publishTime>01/15/2013 17:13:41</publishTime>
     </File>
     <File Include="Scripts/MicrosoftMvcAjax.debug.js">
-      <publishTime>12/14/2012 10:40:29</publishTime>
+      <publishTime>01/15/2013 17:13:41</publishTime>
     </File>
     <File Include="Scripts/MicrosoftMvcAjax.js">
-      <publishTime>12/14/2012 10:40:30</publishTime>
+      <publishTime>01/15/2013 17:13:41</publishTime>
     </File>
     <File Include="Scripts/MicrosoftMvcValidation.debug.js">
-      <publishTime>12/14/2012 10:40:29</publishTime>
+      <publishTime>01/15/2013 17:13:41</publishTime>
     </File>
     <File Include="Scripts/MicrosoftMvcValidation.js">
-      <publishTime>12/14/2012 10:40:35</publishTime>
+      <publishTime>01/15/2013 17:13:50</publishTime>
     </File>
     <File Include="Scripts/Views/Account.js">
-      <publishTime>12/14/2012 10:40:30</publishTime>
+      <publishTime>02/05/2013 13:33:16</publishTime>
     </File>
     <File Include="Scripts/Views/Heatmap.js">
-      <publishTime>12/14/2012 10:40:30</publishTime>
+      <publishTime>01/15/2013 17:13:41</publishTime>
+    </File>
+    <File Include="Scripts/Views/HistoricalTracking.js">
+      <publishTime>01/21/2013 16:23:23</publishTime>
+    </File>
+    <File Include="Scripts/Views/Management.js">
+      <publishTime>01/20/2013 20:22:36</publishTime>
     </File>
     <File Include="Scripts/Views/Monitor.js">
-      <publishTime>12/14/2012 10:40:30</publishTime>
+      <publishTime>01/15/2013 17:13:41</publishTime>
     </File>
     <File Include="Scripts/Views/RealTimeMessageMonitor.js">
-      <publishTime>12/14/2012 10:40:30</publishTime>
+      <publishTime>01/15/2013 17:13:41</publishTime>
     </File>
     <File Include="Services/NotifierService.svc">
-      <publishTime>12/14/2012 10:40:28</publishTime>
+      <publishTime>01/15/2013 17:13:37</publishTime>
     </File>
     <File Include="Views/Account/Index.cshtml">
       <publishTime>12/14/2012 10:40:36</publishTime>
     </File>
+    <File Include="Views/Account/Login.cshtml">
+      <publishTime>02/04/2013 22:18:48</publishTime>
+    </File>
+    <File Include="Views/ActionButtons/GridActionButtonsPartial.cshtml">
+      <publishTime>01/20/2013 20:21:24</publishTime>
+    </File>
+    <File Include="Views/ActionButtons/PageActionButtonsPartial.cshtml">
+      <publishTime>01/21/2013 22:52:44</publishTime>
+    </File>
+    <File Include="Views/AssetManagement/AssignConsignmentPartial.cshtml">
+      <publishTime>01/18/2013 13:09:51</publishTime>
+    </File>
+    <File Include="Views/AssetManagement/AssignDeliveryItemPartial.cshtml">
+      <publishTime>01/21/2013 15:43:01</publishTime>
+    </File>
+    <File Include="Views/AssetManagement/AssignedConsignmentsPartial.cshtml">
+      <publishTime>01/21/2013 16:07:10</publishTime>
+    </File>
+    <File Include="Views/AssetManagement/AssignedDeliveryItemsPartial.cshtml">
+      <publishTime>01/18/2013 13:14:53</publishTime>
+    </File>
+    <File Include="Views/AssetManagement/ConsignmentManagement.cshtml">
+      <publishTime>01/20/2013 15:22:40</publishTime>
+    </File>
+    <File Include="Views/AssetManagement/ConsignmentManagement/Assigned.cshtml">
+      <publishTime>01/21/2013 16:07:10</publishTime>
+    </File>
+    <File Include="Views/AssetManagement/ConsignmentManagement/UnAssigned.cshtml">
+      <publishTime>01/21/2013 16:07:00</publishTime>
+    </File>
+    <File Include="Views/AssetManagement/DeliveryItemGridPartial.cshtml">
+      <publishTime>01/21/2013 16:06:52</publishTime>
+    </File>
+    <File Include="Views/AssetManagement/DeliveryItemManagement.cshtml">
+      <publishTime>01/19/2013 21:49:39</publishTime>
+    </File>
+    <File Include="Views/AssetManagement/DriverManagement.cshtml">
+      <publishTime>01/19/2013 21:49:35</publishTime>
+    </File>
+    <File Include="Views/AssetManagement/Index.cshtml">
+      <publishTime>01/20/2013 14:48:23</publishTime>
+    </File>
+    <File Include="Views/AssetManagement/ReAssignConsignmentPartial.cshtml">
+      <publishTime>01/18/2013 13:09:46</publishTime>
+    </File>
+    <File Include="Views/AssetManagement/ReAssignDeliveryItemPartial.cshtml">
+      <publishTime>01/18/2013 13:16:00</publishTime>
+    </File>
+    <File Include="Views/AssetManagement/UnAssignDeliveryItemPartial.cshtml">
+      <publishTime>01/21/2013 09:40:58</publishTime>
+    </File>
+    <File Include="Views/ConsignmentManagement/Index.cshtml">
+      <publishTime>01/16/2013 09:46:36</publishTime>
+    </File>
     <File Include="Views/Header/HeaderPartial.cshtml">
-      <publishTime>12/14/2012 10:40:36</publishTime>
+      <publishTime>01/15/2013 17:12:52</publishTime>
+    </File>
+    <File Include="Views/Heatmap/HeatmapPartial.cshtml">
+      <publishTime>02/05/2013 19:44:46</publishTime>
     </File>
     <File Include="Views/Heatmap/Index.cshtml">
-      <publishTime>12/14/2012 10:40:36</publishTime>
+      <publishTime>02/05/2013 12:46:48</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>12/14/2012 10:40:36</publishTime>
+      <publishTime>01/15/2013 17:12:52</publishTime>
     </File>
     <File Include="Views/Menu/MenuPartial.cshtml">
-      <publishTime>12/14/2012 10:40:36</publishTime>
+      <publishTime>01/15/2013 17:12:52</publishTime>
     </File>
     <File Include="Views/Monitor/Index.cshtml">
-      <publishTime>12/14/2012 10:40:36</publishTime>
+      <publishTime>01/15/2013 17:12:52</publishTime>
     </File>
     <File Include="Views/Monitor/MapPartial.cshtml">
-      <publishTime>12/14/2012 10:40:36</publishTime>
+      <publishTime>01/15/2013 17:12:52</publishTime>
     </File>
     <File Include="Views/Monitor/PolylineMapPartial.cshtml">
-      <publishTime>12/14/2012 10:40:36</publishTime>
+      <publishTime>01/15/2013 17:12:52</publishTime>
+    </File>
+    <File Include="Views/Shared/CautionaryUpdatePartial.cshtml">
+      <publishTime>02/05/2013 21:01:13</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
-      <publishTime>12/14/2012 10:40:36</publishTime>
+      <publishTime>01/27/2013 16:40:10</publishTime>
+    </File>
+    <File Include="Views/Shared/ErrorDialogPartial.cshtml">
+      <publishTime>01/21/2013 16:03:18</publishTime>
+    </File>
+    <File Include="Views/Shared/NormalUpdatePartial.cshtml">
+      <publishTime>02/05/2013 21:00:52</publishTime>
+    </File>
+    <File Include="Views/Shared/RealTimeMonitorPartial.cshtml">
+      <publishTime>02/05/2013 21:13:18</publishTime>
+    </File>
+    <File Include="Views/Shared/SevereUpdatePartial.cshtml">
+      <publishTime>02/05/2013 21:01:25</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>12/14/2012 12:15:44</publishTime>
+      <publishTime>02/05/2013 20:46:00</publishTime>
+    </File>
+    <File Include="Views/Tracking/AllDriverHistoricalTrackingPartial.cshtml">
+      <publishTime>02/04/2013 15:36:36</publishTime>
+    </File>
+    <File Include="Views/Tracking/Dialogs/DriverSelectDialog.cshtml">
+      <publishTime>01/27/2013 19:57:54</publishTime>
+    </File>
+    <File Include="Views/Tracking/Dialogs/LiveDriverSelectDialog.cshtml">
+      <publishTime>01/28/2013 17:48:56</publishTime>
+    </File>
+    <File Include="Views/Tracking/FilteredDriverHistoricalTrackingPartial.cshtml">
+      <publishTime>02/02/2013 22:15:46</publishTime>
+    </File>
+    <File Include="Views/Tracking/HistoricalTracking.cshtml">
+      <publishTime>01/21/2013 22:26:43</publishTime>
+    </File>
+    <File Include="Views/Tracking/Index.cshtml">
+      <publishTime>01/21/2013 20:48:33</publishTime>
+    </File>
+    <File Include="Views/Tracking/LiveElapsedTrackingDriverFeed.cshtml">
+      <publishTime>02/02/2013 20:50:06</publishTime>
+    </File>
+    <File Include="Views/Tracking/LiveTracking.cshtml">
+      <publishTime>01/28/2013 16:47:56</publishTime>
+    </File>
+    <File Include="Views/Tracking/LiveTrackingDriverFeed.cshtml">
+      <publishTime>02/02/2013 17:17:59</publishTime>
     </File>
     <File Include="Views/Web.config">
-      <publishTime>12/14/2012 10:40:36</publishTime>
+      <publishTime>01/15/2013 17:12:52</publishTime>
     </File>
     <File Include="Views/_ViewStart.cshtml">
-      <publishTime>12/14/2012 10:40:36</publishTime>
+      <publishTime>01/15/2013 17:12:52</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>12/15/2012 09:41:24</publishTime>
+      <publishTime>02/05/2013 21:15:45</publishTime>
     </File>
   </ItemGroup>
 </Project>
