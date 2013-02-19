@@ -15,6 +15,9 @@ namespace Sentinel.Helpers.ExtensionMethods
 
         public TileResult(Image tile)
         {
+            if (null == tile)
+                throw new ArgumentNullException("tile");
+
             _tile = new Bitmap(tile);
         }
 
