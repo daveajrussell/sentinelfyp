@@ -42,7 +42,7 @@ public partial class AuthenticationServiceClient : System.ServiceModel.ClientBas
     {
     }
     
-    public AuthenticationServiceClient(string endpointConfigurationName) : 
+    /*public AuthenticationServiceClient(string endpointConfigurationName) : 
             base(endpointConfigurationName)
     {
     }
@@ -60,7 +60,7 @@ public partial class AuthenticationServiceClient : System.ServiceModel.ClientBas
     public AuthenticationServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
             base(binding, remoteAddress)
     {
-    }
+    }*/
     
     public string Authenticate(string strCredentials)
     {

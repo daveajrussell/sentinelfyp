@@ -42,7 +42,7 @@ public partial class DeliveryServiceClient : System.ServiceModel.ClientBase<IDel
     {
     }
     
-    public DeliveryServiceClient(string endpointConfigurationName) : 
+    /*public DeliveryServiceClient(string endpointConfigurationName) : 
             base(endpointConfigurationName)
     {
     }
@@ -60,7 +60,7 @@ public partial class DeliveryServiceClient : System.ServiceModel.ClientBase<IDel
     public DeliveryServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
             base(binding, remoteAddress)
     {
-    }
+    }*/
     
     public void GeoTagDelivery(string strGeoTaggedDeliveryObject)
     {
