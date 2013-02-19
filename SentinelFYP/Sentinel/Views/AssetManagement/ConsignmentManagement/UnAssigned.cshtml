@@ -1,12 +1,12 @@
 ﻿@model IEnumerable<DomainModel.Models.AssetModels.UnAssignedConsignment>
-@using Sentinel.Grid;
+@using Sentinel.Grid.UI;
 
 @{
     ViewBag.Title = "Unassigned Consignments";
 }
 
 @{
-    var grid = new ASPRazorWebGrid(source: Model);
+    var grid = new SentinelRazorWebGrid(source: Model);
 }
 
 <script type="text/javascript">
@@ -39,7 +39,7 @@
 </script>
 
 <section>
-    @grid.GetHtml(columns: new ASPRazorWebGridColumn[]{
+    @grid.GetHtml(columns: new SentinelRazorWebGridColumn[]{
                             grid.CreateColumn(itemHorizontalAlignment: "center", width: "13px", dataFieldFormat: @<text> <a key="@item.ConsignmentKey" class="show-item ui-plus"></a></text>),
                             grid.CreateColumn(width: "13px", itemHorizontalAlignment: "center", dataFieldFormat: @<text> <input type="checkbox" value="@item.ConsignmentKey" /> </text>),
                             grid.CreateColumn(dataField: "ConsignmentKey", headerText: "Consignment Key", headerHorizontalAlignment: "center"),

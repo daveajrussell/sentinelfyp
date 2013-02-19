@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<DomainModel.Models.AssetModels.AssignedConsignment>
-@using Sentinel.Grid;
+@using Sentinel.Grid.UI;
 
 @{
-    var grid = new ASPRazorWebGrid(source: Model);
+    var grid = new SentinelRazorWebGrid(source: Model);
     grid.UsePostBack = false;
 }
 
 <section class="consignment-grid">
-    @grid.GetHtml(columns: new ASPRazorWebGridColumn[]{
+    @grid.GetHtml(columns: new SentinelRazorWebGridColumn[]{
                             grid.CreateColumn(headerHorizontalAlignment: "center", headerText: "Items", dataFieldFormat: @<text> <a value="@item.ConsignmentKey" class="show-items ui-icon ui-icon-plus"></a> </text>),
                             grid.CreateColumn(dataField: "ConsignmentKey", headerText: "Consignment Key", headerHorizontalAlignment: "center"),
                             grid.CreateColumn(dataField: "AssignedDriverKey", headerText: "Assigned Driver Key", headerHorizontalAlignment: "center"),
