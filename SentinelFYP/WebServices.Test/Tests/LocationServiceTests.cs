@@ -52,6 +52,24 @@ namespace WebServices.Test.Tests
         }
 
         [Fact]
+        public void TestPostGeospatialDataAsync()
+        {
+            var Location = new GeospatialInformationDataContract()
+            {
+                oUserIdentification = "E5C89B81-F095-4F10-8FCC-72173BC294A1",
+                iSessionID = 1693,
+                lTimeStamp = 1359309623997,
+                dLatitude = 54,
+                dLongitude = -2,
+                iOrientation = 1,
+                dSpeed = 0
+            };
+
+            string strLocation = JsonR.JsonSerializer(Location);
+            Xunit.Assert.DoesNotThrow(() => client.PostGeospatialData(strLocation));
+        }
+
+        [Fact]
         [TestMethod]
         public void TestPostInvalidGeospatialData()
         {
@@ -121,6 +139,51 @@ namespace WebServices.Test.Tests
 
             string strLocation = JsonR.JsonSerializer(LocationSet);
             Xunit.Assert.DoesNotThrow(() => client.PostBufferedGeospatialDataSet(strLocation));
+        }
+
+        [Fact]
+        [TestMethod]
+        public void TestPostBufferedGeospatialDataSetAsync()
+        {
+            var LocationSet = new GeospatialInformationSetDataContract()
+            {
+                BufferedData = new List<GeospatialInformationDataContract>()
+                {
+                    new GeospatialInformationDataContract()
+                    {
+                        oUserIdentification = "E5C89B81-F095-4F10-8FCC-72173BC294A1",
+                        iSessionID = 1693,
+                        lTimeStamp = 1359309623997,
+                        dLatitude = 54,
+                        dLongitude = -2,
+                        iOrientation = 1,
+                        dSpeed = 0
+                    },
+                    new GeospatialInformationDataContract()
+                    {
+                        oUserIdentification = "E5C89B81-F095-4F10-8FCC-72173BC294A1",
+                        iSessionID = 1693,
+                        lTimeStamp = 1359309624000,
+                        dLatitude = 55,
+                        dLongitude = -2,
+                        iOrientation = 1,
+                        dSpeed = 0
+                    },
+                    new GeospatialInformationDataContract()
+                    {
+                        oUserIdentification = "E5C89B81-F095-4F10-8FCC-72173BC294A1",
+                        iSessionID = 1693,
+                        lTimeStamp = 1359309625000,
+                        dLatitude = 56,
+                        dLongitude = -2,
+                        iOrientation = 1,
+                        dSpeed = 0
+                    }
+                }
+            };
+
+            string strLocation = JsonR.JsonSerializer(LocationSet);
+            Xunit.Assert.DoesNotThrow(() => client.PostBufferedGeospatialDataSetAsync(strLocation));
         }
 
         [Fact]
