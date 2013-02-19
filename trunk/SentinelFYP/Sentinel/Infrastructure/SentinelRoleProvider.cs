@@ -13,6 +13,14 @@ namespace Sentinel.Infrastructure
         [Inject]
         public IRoleService _roleService { get; set; }
 
+        public SentinelRoleProvider(IRoleService roleService)
+        {
+            if (null == roleService)
+                throw new ArgumentNullException("service");
+
+            _roleService = roleService;
+        }
+
         public override string[] GetRolesForUser(string username)
         {
             return _roleService.GetRolesForUser(username);
