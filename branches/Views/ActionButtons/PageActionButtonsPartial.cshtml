@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Sentinel.Models.ActionButtonsViewModel>
+
+<script type="text/javascript">
+
+    $(function () {
+        $('#page-actions .action').each(function () {
+            $(this).button();
+        });
+    });
+
+</script>
+
+<section id="page-actions">
+
+    <table>
+        <tr>
+            <td class="left">
+                @foreach (var item in Model.Take(1))
+                {
+                    <a class="action back" onclick="@item.Javascript">@item.Display</a>   
+                }
+            </td>
+            <td class="right">
+                @foreach (var item in Model.Skip(1))
+                {
+                    <a class="action" onclick="@item.Javascript">@item.Display</a>
+                }
+            </td>
+        </tr>
+    </table>
+
+</section>
+

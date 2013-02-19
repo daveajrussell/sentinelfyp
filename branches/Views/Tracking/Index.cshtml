@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Tracking";
+}
+
+<h2>Tracking</h2>
+
+<section id="tracking" class="index">
+
+</section>
+
+<section id="section-actions">
+    <ul id="actions">
+    @foreach (var item in Model)
+    {
+        <li class="action">
+            <a class="action-item action-link" href="@Url.Content(@item.URL)">
+                @item.Display
+                <br />
+                <span class="action-description">@item.Description</span>
+            </a>
+        </li>
+    }
+    </ul>
+</section>

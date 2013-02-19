@@ -1,0 +1,33 @@
+﻿#updates-window
+{
+    width: 190px;
+    min-height: 500px;
+    border-left: .2em solid #666;
+    background: url(../Content/images/test.png)  repeat-x; 
+    color: #EEEEEE;
+    border-radius: 0 0 .5em .5em;
+}
+
+#updates-window-header
+{
+    
+    text-align:center;
+    font-weight: bold;
+}
+
+.update
+{
+    margin: .5em 0;
+}
+
+    .update p
+    {
+        margin: 1em 0
+    }
+
+        .update p span,
+        .update p a
+        {
+            float:left; 
+            margin-right: .3em
+        }

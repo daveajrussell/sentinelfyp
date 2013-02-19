@@ -1,0 +1,56 @@
+﻿@model  IEnumerable<DomainModel.Models.AssetModels.AssignedDeliveryItem>
+<script type="text/javascript">
+    
+    $(function () {
+        var keys = new Array();
+        var consignmentKey = '@Model.First().ConsignmentKey';
+
+        @foreach (var item in Model)
+        {
+            @:keys.push('@item.DeliveryItemKey')
+        }
+
+        $('#unassign-dialog').dialog({
+            autoOpen:
+                true,
+            resizable:
+                false,
+            draggable:
+                false,
+            modal:
+                true,
+            title:
+                "Unassign Delivery Items",
+            buttons:
+                [
+                    {
+                        text: "Yes",
+                        click: function () {
+                            var self = this;
+
+                            $.post('../AssetManagement/UnAssignDeliveryItems', { strConsignmentKey: consignmentKey, strDeliveryItemKeys: keys.toString() }, function (data) {
+                                $(self).dialog("close");
+                                $('#items-grid').replaceWith(data);
+                            });
+                        }
+                    },
+                    {
+                        text: "No",
+                        click: function () {
+                            $(this).dialog("destroy");
+                        }
+                    }
+                ]
+        });
+    });
+</script>
+
+<div id="unassign-dialog" style="display: none">
+    <span>Are you sure you wish to unassign these items?</span>
+    <br />
+    @foreach (var item in Model)
+    {
+        <span>@item.DeliveryItemKey</span>
+        <br />
+    }
+</div>

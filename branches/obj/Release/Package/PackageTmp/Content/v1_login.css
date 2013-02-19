@@ -1,0 +1,64 @@
+﻿body
+{
+    width: 100%;
+    font: normal 1em Verdana;
+    margin: auto;
+    background-color: #50748C;
+}
+
+#top
+{
+    height: 5em;
+    border-bottom: 2px solid #fff;
+    background-color: #373C40;
+}
+
+#main
+{
+    height: 80%;
+    background-color: #50748C;
+}
+
+.login-box
+{
+    position: relative;
+    width: 40em;
+    left: 50%;
+    margin-left: -20em;
+    padding-top: 20em;
+}
+
+#container
+{
+    margin-left: 12.5em;
+}
+
+.field-validation-error
+{
+    color: #fff;
+}
+
+.editor-field
+{
+    height: 3.5em;
+}
+
+.editor-field input
+{
+    width: 16em;
+    height: 2em;
+    font-size: 1em;
+    border-radius: 4px;
+}
+
+.input-error
+{
+    border: 2px solid #cc0033;
+}
+
+#btn-submit
+{
+    margin-left: .1em;
+    text-align: left;
+}
+

@@ -1,0 +1,28 @@
+﻿#asset-management
+{
+    width: 795px;
+    height: 395px;
+    display: block;
+    border-radius: .5em;
+    border: .1em solid #999;
+}
+
+    #asset-management.index
+    {
+        background-image: url(images/bgs/management-img.png);
+    }
+
+    #asset-management.consignment-management
+    {
+        background-image: url(images/bgs/management-img.png);
+    }
+
+    #asset-management.driver-management
+    {
+        background-image: url(images/bgs/management-img.png);
+    }
+
+    #asset-management.delivery-item-management
+    {
+        background-image: url(images/bgs/management-img.png);
+    }

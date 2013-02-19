@@ -1,0 +1,28 @@
+﻿.show-item
+{
+    text-align:center;
+    cursor: pointer;
+    width: 13px;
+    height: 13px;
+    display: block;
+}
+
+    .show-item.ui-plus
+    {
+        background-image: url(images/ui-icon-plus_8E8F8F_13x13.png);
+    }
+
+        .show-item.ui-plus:hover
+        {
+            background-image: url(images/ui-icon-plus_hover_5586A3_13x13.png);
+        }
+
+    .show-item.ui-minus
+    {
+        background-image: url(images/ui-icon-minus_8E8F8F_13x13.png);
+    }
+
+        .show-item.ui-minus:hover
+        {
+            background-image: url(images/ui-icon-minus_hover_5586A3_13x13.png);
+        }
