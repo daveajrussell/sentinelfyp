@@ -1,9 +1,0 @@
-C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\SqlDataAccess\SqlDataAccess\bin\Debug\SqlDataAccess.dll.config
-C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\SqlDataAccess\SqlDataAccess\bin\Debug\SqlDataAccess.dll
-C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\SqlDataAccess\SqlDataAccess\bin\Debug\SqlDataAccess.pdb
-C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\SqlDataAccess\SqlDataAccess\obj\Debug\SqlDataAccess.dll
-C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\SqlDataAccess\SqlDataAccess\obj\Debug\SqlDataAccess.pdb
-C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\SqlDataAccess\SqlDataAccess\bin\Debug\EntityFramework.dll
-C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\SqlDataAccess\SqlDataAccess\bin\Debug\EntityFramework.xml
-C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\SqlDataAccess\SqlDataAccess\bin\Debug\SqlDataAccess.dll.CodeAnalysisLog.xml
-C:\Work\FYP\SentinelFYP\trunk\SentinelFYP\SqlDataAccess\SqlDataAccess\bin\Debug\SqlDataAccess.dll.lastcodeanalysissucceeded
