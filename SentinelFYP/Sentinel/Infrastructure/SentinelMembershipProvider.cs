@@ -16,6 +16,14 @@ namespace Sentinel.Infrastructure
         [Inject]
         public ISecurityService _securityService { get; set; }
 
+        public SentinelMembershipProvider(ISecurityService securityService)
+        {
+            if (securityService == null)
+                throw new ArgumentNullException();
+
+            _securityService = securityService;
+        }
+
         public override bool ValidateUser(string username, string password)
         {
             var user = new User();
