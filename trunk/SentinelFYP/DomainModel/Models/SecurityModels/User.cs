@@ -33,17 +33,5 @@ namespace DomainModel.SecurityModels
             LastName = strLastName;
             Email = strEmail;
         }
-
-        public User(Guid oUserKey, string strUserName, string strFirstName, string strLastName, string strEmail, DateTime dtUserAccountCreatedOn, DateTime dtUserLastLogon, DateTime dtUserAccountExpires)
-        {
-            UserKey = oUserKey;
-            UserName = strUserName;
-            FirstName = strFirstName;
-            LastName = strLastName;
-            Email = strEmail;
-            UserAccountCreatedOn = dtUserAccountCreatedOn;
-            UserLastLogon = dtUserLastLogon;
-            UserAccountExpires = dtUserAccountExpires;
-        }
     }
 }
