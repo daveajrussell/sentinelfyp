@@ -18,7 +18,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProjectDependencies", "Proj
 		ProjectDependancies\Moq.dll = ProjectDependancies\Moq.dll
 		ProjectDependancies\Ninject.dll = ProjectDependancies\Ninject.dll
 		ProjectDependancies\PdfSharp.dll = ProjectDependancies\PdfSharp.dll
-		Sentinel\bin\SentinelRazorWebGrid.dll = Sentinel\bin\SentinelRazorWebGrid.dll
 		ProjectDependancies\xunit.dll = ProjectDependancies\xunit.dll
 	EndProjectSection
 EndProject
