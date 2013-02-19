@@ -53,6 +53,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ASPRazorWebGrid">
+      <HintPath>..\..\..\..\..\ASPRazorWebGrid\ASPRazorWebGridSample\bin\ASPRazorWebGrid.dll</HintPath>
+    </Reference>
     <Reference Include="Gma.QrCodeNet.Encoding">
       <HintPath>..\ProjectDependancies\Gma.QrCodeNet.Encoding.dll</HintPath>
     </Reference>
@@ -140,8 +143,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Grid\ASPRazorWebGrid.cs" />
-    <Compile Include="Grid\Dynamic.cs" />
     <Compile Include="Helpers\ExtensionMethods\QRCodeHtmlHelper.cs" />
     <Compile Include="Helpers\ExtensionMethods\TileResult.cs" />
     <Compile Include="Helpers\ExtensionMethods\ToViewModel.cs" />
@@ -294,6 +295,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Grid\" />
     <Folder Include="Scripts\Views\PartialScripts\" />
   </ItemGroup>
   <ItemGroup>
