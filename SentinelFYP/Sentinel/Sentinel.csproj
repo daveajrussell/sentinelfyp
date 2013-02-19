@@ -49,6 +49,10 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ASPRazorWebGrid, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\ASPRazorWebGrid\ASPRazorWebGridSample\bin\ASPRazorWebGrid.dll</HintPath>
+    </Reference>
     <Reference Include="Gma.QrCodeNet.Encoding">
       <HintPath>..\ProjectDependancies\Gma.QrCodeNet.Encoding.dll</HintPath>
     </Reference>
@@ -157,9 +161,6 @@
     <Compile Include="Hubs\SentinelHub.cs" />
     <Compile Include="Services\GISDataContract.cs" />
     <Compile Include="Services\INotifierService.cs" />
-    <Compile Include="Services\NotifierService.svc.cs">
-      <DependentUpon>NotifierService.svc</DependentUpon>
-    </Compile>
     <Compile Include="Services\NotifierService.svc.cs">
       <DependentUpon>NotifierService.svc</DependentUpon>
     </Compile>

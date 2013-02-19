@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Windows.Media.Imaging;
 using DomainModel.Interfaces.Services;
-using Sentinel.Grid.UI;
+using Sentinel.Grid;
 using Sentinel.Helpers;
 using Sentinel.Helpers.ExtensionMethods;
 using Sentinel.Models;
