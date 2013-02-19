@@ -80,6 +80,8 @@
     <Compile Include="ExtensionMethodTests\QRCodeHtmlHelperTest.cs" />
     <Compile Include="ExtensionMethodTests\TileResultViewModel.cs" />
     <Compile Include="ExtensionMethodTests\ToViewModelTest.cs" />
+    <Compile Include="InfrastructureTests\SentinelMembershipProviderTests.cs" />
+    <Compile Include="InfrastructureTests\SentinelRoleProviderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proxies\NotifierService.cs" />
     <Compile Include="Services\NotifierServiceTest.cs" />
