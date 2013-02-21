@@ -9,6 +9,9 @@ using DomainModel.Abstracts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WebServices.DataContracts;
 using Xunit;
+using Moq;
+using DomainModel.SecurityModels;
+using DomainModel.Models.AuditModels;
 
 namespace WebServices.Test.Tests
 {
@@ -20,6 +23,7 @@ namespace WebServices.Test.Tests
         public AuthenticationServiceTest()
         {
             client = new AuthenticationServiceClient();
+
         }
 
         [Fact]
@@ -51,7 +55,7 @@ namespace WebServices.Test.Tests
 
             SessionDataContract oContract = new SessionDataContract()
             {
-                oUserIdentification = oResult.UserKey.ToString(),
+                oUserIdentification = Guid.NewGuid().ToString(),//oResult.UserKey.ToString(),
                 iSessionID = oResult.SessionID
             };
 
@@ -107,19 +111,6 @@ namespace WebServices.Test.Tests
             Xunit.Assert.NotEqual<int>(oResultOne.SessionID, oResultTwo.SessionID);
         }
         */
-        [Fact]
-        [TestMethod]
-        public void TestLogoutInvalidCredentials()
-        {
-            SessionDataContract oContract = new SessionDataContract()
-            {
-                oUserIdentification = Guid.NewGuid().ToString(),
-                iSessionID = new Random().Next()
-            };
-
-            string strBadLogoutCredentials = JsonR.JsonSerializer(oContract);
-            Xunit.Assert.Throws<ProtocolException>(() => client.Logout(strBadLogoutCredentials));
-        }
 
         [Fact]
         [TestMethod]

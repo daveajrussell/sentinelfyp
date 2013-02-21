@@ -37,17 +37,17 @@ namespace DomainModel.Test.Tests
         public void TestConstructor()
         {
             LiveTrackingService target = null;
-            Assert.DoesNotThrow(() => target = new LiveTrackingService(_liveTrackingRepository.Object));
-            Assert.NotNull(target);
-            Assert.IsAssignableFrom<LiveTrackingService>(target);
+            Xunit.Assert.DoesNotThrow(() => target = new LiveTrackingService(_liveTrackingRepository.Object));
+            Xunit.Assert.NotNull(target);
+            Xunit.Assert.IsAssignableFrom<LiveTrackingService>(target);
         }
 
         [Fact]
         public void TestConstructorShouldThrow()
         {
             LiveTrackingService target = null;
-            Assert.Throws<ArgumentNullException>(() => target = new LiveTrackingService(null));
-            Assert.Null(target);
+            Xunit.Assert.Throws<ArgumentNullException>(() => target = new LiveTrackingService(null));
+            Xunit.Assert.Null(target);
         }
 
         [Fact]
@@ -56,8 +56,8 @@ namespace DomainModel.Test.Tests
             var target = new LiveTrackingService(_liveTrackingRepository.Object);
             var liveDrivers = target.GetLiveDrivers();
 
-            Assert.NotEmpty(liveDrivers);
-            Assert.IsAssignableFrom<IEnumerable<User>>(liveDrivers);
+            Xunit.Assert.NotEmpty(liveDrivers);
+            Xunit.Assert.IsAssignableFrom<IEnumerable<User>>(liveDrivers);
         }
 
         [Fact]
@@ -66,11 +66,11 @@ namespace DomainModel.Test.Tests
             var target = new LiveTrackingService(_liveTrackingRepository.Object);
             var liveUpdate = target.GetLiveUpdate(Guid.NewGuid());
 
-            Assert.NotNull(liveUpdate);
-            Assert.IsAssignableFrom<GeospatialInformation>(liveUpdate);
+            Xunit.Assert.NotNull(liveUpdate);
+            Xunit.Assert.IsAssignableFrom<GeospatialInformation>(liveUpdate);
 
-            Assert.Equal(52, liveUpdate.Latitude);
-            Assert.Equal(-2, liveUpdate.Longitude);
+            Xunit.Assert.Equal(52, liveUpdate.Latitude);
+            Xunit.Assert.Equal(-2, liveUpdate.Longitude);
         }
 
         [Fact]
@@ -79,11 +79,11 @@ namespace DomainModel.Test.Tests
             var target = new LiveTrackingService(_liveTrackingRepository.Object);
             var liveElapsedRoute = target.GetLiveElapsedRoute(Guid.NewGuid());
 
-            Assert.NotNull(liveElapsedRoute);
-            Assert.NotEmpty(liveElapsedRoute);
-            Assert.True(liveElapsedRoute.Count() > 0);
+            Xunit.Assert.NotNull(liveElapsedRoute);
+            Xunit.Assert.NotEmpty(liveElapsedRoute);
+            Xunit.Assert.True(liveElapsedRoute.Count() > 0);
 
-            Assert.IsAssignableFrom<IEnumerable<GeospatialInformation>>(liveElapsedRoute);
+            Xunit.Assert.IsAssignableFrom<IEnumerable<GeospatialInformation>>(liveElapsedRoute);
         }
 
         [Fact]
@@ -92,11 +92,11 @@ namespace DomainModel.Test.Tests
             var target = new LiveTrackingService(_liveTrackingRepository.Object);
             var allLiveElapsedRoutes = target.GetAllLiveElapsedRoutes();
 
-            Assert.NotNull(allLiveElapsedRoutes);
-            Assert.NotEmpty(allLiveElapsedRoutes);
-            Assert.True(allLiveElapsedRoutes.Count() > 0);
+            Xunit.Assert.NotNull(allLiveElapsedRoutes);
+            Xunit.Assert.NotEmpty(allLiveElapsedRoutes);
+            Xunit.Assert.True(allLiveElapsedRoutes.Count() > 0);
 
-            Assert.IsAssignableFrom<IEnumerable<ElapsedGeospatialInformation>>(allLiveElapsedRoutes);
+            Xunit.Assert.IsAssignableFrom<IEnumerable<ElapsedGeospatialInformation>>(allLiveElapsedRoutes);
         }
     }
 }

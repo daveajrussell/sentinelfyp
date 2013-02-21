@@ -14,9 +14,9 @@ namespace DomainModel.Test.Tests
             User user = new User() { UserName = "Test" };
             string json = "";
             
-            Assert.DoesNotThrow(() => json = JsonR.JsonSerializer(user));
-            Assert.NotNull(json);
-            Assert.True(json.Contains("Test"));
+            Xunit.Assert.DoesNotThrow(() => json = JsonR.JsonSerializer(user));
+            Xunit.Assert.NotNull(json);
+            Xunit.Assert.True(json.Contains("Test"));
         }
 
         [Fact]
@@ -26,20 +26,20 @@ namespace DomainModel.Test.Tests
 
             string json = JsonR.JsonSerializer(geodata);
 
-            Assert.NotNull(json);
+            Xunit.Assert.NotNull(json);
 
-            Assert.DoesNotThrow(() => JsonR.JsonDeserializer<GeospatialInformation>(json));
+            Xunit.Assert.DoesNotThrow(() => JsonR.JsonDeserializer<GeospatialInformation>(json));
 
             var deserializedGeodata = JsonR.JsonDeserializer<GeospatialInformation>(json);
 
-            Assert.NotNull(deserializedGeodata);
-            Assert.IsAssignableFrom<GeospatialInformation>(deserializedGeodata);
+            Xunit.Assert.NotNull(deserializedGeodata);
+            Xunit.Assert.IsAssignableFrom<GeospatialInformation>(deserializedGeodata);
             
-            Assert.Equal(geodata.DriverKey, deserializedGeodata.DriverKey);
-            Assert.Equal(geodata.SessionID, deserializedGeodata.SessionID);
-            Assert.Equal(geodata.Latitude, deserializedGeodata.Latitude);
-            Assert.Equal(geodata.Longitude, deserializedGeodata.Longitude);
-            Assert.Equal(geodata.Speed, deserializedGeodata.Speed);
+            Xunit.Assert.Equal(geodata.DriverKey, deserializedGeodata.DriverKey);
+            Xunit.Assert.Equal(geodata.SessionID, deserializedGeodata.SessionID);
+            Xunit.Assert.Equal(geodata.Latitude, deserializedGeodata.Latitude);
+            Xunit.Assert.Equal(geodata.Longitude, deserializedGeodata.Longitude);
+            Xunit.Assert.Equal(geodata.Speed, deserializedGeodata.Speed);
         }
 
         [Fact]
@@ -48,13 +48,13 @@ namespace DomainModel.Test.Tests
             User nullUser = new User();
             string json = JsonR.JsonSerializer(nullUser);
 
-            Assert.Throws<FormatException>(() => JsonR.JsonDeserializer<User>(json));
+            Xunit.Assert.Throws<FormatException>(() => JsonR.JsonDeserializer<User>(json));
         }
 
         [Fact]
         public void TestJsonSerializerThrowsIfPassedNull()
         {
-            Assert.Throws<ArgumentNullException>(() => JsonR.JsonSerializer(null));
+            Xunit.Assert.Throws<ArgumentNullException>(() => JsonR.JsonSerializer(null));
         }
     }
 }

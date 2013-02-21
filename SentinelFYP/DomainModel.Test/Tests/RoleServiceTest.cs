@@ -39,17 +39,17 @@ namespace DomainModel.Test.Tests
         public void TestConstructor()
         {
             RoleService target = null;
-            Assert.DoesNotThrow(() => target = new RoleService(_repository.Object));
-            Assert.NotNull(target);
-            Assert.IsAssignableFrom<RoleService>(target);
+            Xunit.Assert.DoesNotThrow(() => target = new RoleService(_repository.Object));
+            Xunit.Assert.NotNull(target);
+            Xunit.Assert.IsAssignableFrom<RoleService>(target);
         }
 
         [Fact]
         public void TestConstructorShouldThrow()
         {
             RoleService target = null;
-            Assert.Throws<ArgumentNullException>(() => target = new RoleService(null));
-            Assert.Null(target);
+            Xunit.Assert.Throws<ArgumentNullException>(() => target = new RoleService(null));
+            Xunit.Assert.Null(target);
         }
 
         [Fact]
@@ -60,11 +60,11 @@ namespace DomainModel.Test.Tests
             foreach (var user in _users)
             {
                 var data = target.GetRolesForUser(user.UserName);
-                Assert.NotEmpty(data);
+                Xunit.Assert.NotEmpty(data);
 
                 foreach (var item in data)
                 {
-                    Assert.True(_roles.Contains(item));
+                    Xunit.Assert.True(_roles.Contains(item));
                 }
             }
         }
@@ -79,16 +79,16 @@ namespace DomainModel.Test.Tests
                 switch (user.UserName)
                 {
                     case "Test User One":
-                        Assert.True(target.IsUserInRole(user.UserName, "Administrator"));
-                        Assert.False(target.IsUserInRole(user.UserName, "Auditor"));
+                        Xunit.Assert.True(target.IsUserInRole(user.UserName, "Administrator"));
+                        Xunit.Assert.False(target.IsUserInRole(user.UserName, "Auditor"));
                         break;
                     case "Test User Two":
-                        Assert.True(target.IsUserInRole(user.UserName, "Auditor"));
-                        Assert.False(target.IsUserInRole(user.UserName, "Driver"));
+                        Xunit.Assert.True(target.IsUserInRole(user.UserName, "Auditor"));
+                        Xunit.Assert.False(target.IsUserInRole(user.UserName, "Driver"));
                         break;
                     case "Test User Three":
-                        Assert.True(target.IsUserInRole(user.UserName, "Driver"));
-                        Assert.False(target.IsUserInRole(user.UserName, "Administrator"));
+                        Xunit.Assert.True(target.IsUserInRole(user.UserName, "Driver"));
+                        Xunit.Assert.False(target.IsUserInRole(user.UserName, "Administrator"));
                         break;
                 }
             }

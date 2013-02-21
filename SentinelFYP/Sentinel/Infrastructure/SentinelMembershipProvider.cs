@@ -16,6 +16,11 @@ namespace Sentinel.Infrastructure
         [Inject]
         public ISecurityService _securityService { get; set; }
 
+        public SentinelMembershipProvider()
+        {
+
+        }
+
         public SentinelMembershipProvider(ISecurityService securityService)
         {
             if (securityService == null)
