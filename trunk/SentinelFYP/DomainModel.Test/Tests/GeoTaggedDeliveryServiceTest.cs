@@ -39,8 +39,8 @@ namespace DomainModel.Test.Tests
         {
             GeoTaggedDeliveryService service = null;
 
-            Assert.Throws<ArgumentNullException>(() => service = new GeoTaggedDeliveryService(null));
-            Assert.Null(service);
+            Xunit.Assert.Throws<ArgumentNullException>(() => service = new GeoTaggedDeliveryService(null));
+            Xunit.Assert.Null(service);
         }
 
         [Fact]
@@ -48,9 +48,9 @@ namespace DomainModel.Test.Tests
         {
             GeoTaggedDeliveryService service = null;
 
-            Assert.DoesNotThrow(() => service = new GeoTaggedDeliveryService(_repository.Object));
-            Assert.NotNull(service);
-            Assert.IsAssignableFrom<GeoTaggedDeliveryService>(service);
+            Xunit.Assert.DoesNotThrow(() => service = new GeoTaggedDeliveryService(_repository.Object));
+            Xunit.Assert.NotNull(service);
+            Xunit.Assert.IsAssignableFrom<GeoTaggedDeliveryService>(service);
         }
 
         [Fact]
@@ -58,10 +58,10 @@ namespace DomainModel.Test.Tests
         {
             var service = new GeoTaggedDeliveryService(_repository.Object);
 
-            Assert.Empty(_items);
-            Assert.DoesNotThrow(() => service.SubmitGeoTaggedDeliveryItem(itemOne));
-            Assert.NotEmpty(_items);
-            Assert.Contains(itemOne, _items);
+            Xunit.Assert.Empty(_items);
+            Xunit.Assert.DoesNotThrow(() => service.SubmitGeoTaggedDeliveryItem(itemOne));
+            Xunit.Assert.NotEmpty(_items);
+            Xunit.Assert.Contains(itemOne, _items);
         }
 
         [Fact]
@@ -71,10 +71,10 @@ namespace DomainModel.Test.Tests
 
             service.SubmitGeoTaggedDeliveryItem(itemOne);
 
-            Assert.NotEmpty(_items);
-            Assert.DoesNotThrow(() => service.UnTagDelivery(itemOne.AssetKey));
-            Assert.DoesNotContain(itemOne, _items);
-            Assert.Empty(_items);
+            Xunit.Assert.NotEmpty(_items);
+            Xunit.Assert.DoesNotThrow(() => service.UnTagDelivery(itemOne.AssetKey));
+            Xunit.Assert.DoesNotContain(itemOne, _items);
+            Xunit.Assert.Empty(_items);
         }
     }
 }

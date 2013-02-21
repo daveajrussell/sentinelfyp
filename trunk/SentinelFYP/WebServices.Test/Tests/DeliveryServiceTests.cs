@@ -5,9 +5,11 @@ using DomainModel.Abstracts;
 using Moq;
 using WebServices.DataContracts;
 using Xunit;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace WebServices.Test.Tests
 {
+    [TestClass]
     public class DeliveryServiceTests
     {
 
@@ -21,16 +23,16 @@ namespace WebServices.Test.Tests
         [Fact]
         public void TestAuthenticationServiceClientIsNotNull()
         {
-            Assert.NotNull(client);
-            Assert.IsAssignableFrom<DeliveryServiceClient>(client);
-            Assert.NotNull(client.Endpoint);
+            Xunit.Assert.NotNull(client);
+            Xunit.Assert.IsAssignableFrom<DeliveryServiceClient>(client);
+            Xunit.Assert.NotNull(client.Endpoint);
         }
 
         [Fact]
         public void TestSubmittingMalformedJsonShouldThrow()
         {
             string strMalformedJson = "{\"RUBBSIH\"}";
-            Assert.Throws<ProtocolException>(() => client.GeoTagDelivery(strMalformedJson));
+            Xunit.Assert.Throws<ProtocolException>(() => client.GeoTagDelivery(strMalformedJson));
         }
 
         [Fact]
@@ -46,7 +48,7 @@ namespace WebServices.Test.Tests
             };
             string strInvalidDeliveryItemJson = JsonR.JsonSerializer(oAsset);
 
-            Assert.Throws<ProtocolException>(() => client.GeoTagDelivery(strInvalidDeliveryItemJson));
+            Xunit.Assert.Throws<ProtocolException>(() => client.GeoTagDelivery(strInvalidDeliveryItemJson));
         }
 
         [Fact]
@@ -63,7 +65,7 @@ namespace WebServices.Test.Tests
 
             string strInvalidDeliveryItemJson = JsonR.JsonSerializer(oAsset);
 
-            Assert.Throws<ProtocolException>(() => client.GeoTagDelivery(strInvalidDeliveryItemJson));
+            Xunit.Assert.Throws<ProtocolException>(() => client.GeoTagDelivery(strInvalidDeliveryItemJson));
         }
 
         [Fact]
@@ -80,10 +82,11 @@ namespace WebServices.Test.Tests
 
             string strInvalidDeliveryItemJson = JsonR.JsonSerializer(oAsset);
 
-            Assert.Throws<ProtocolException>(() => client.GeoTagDelivery(strInvalidDeliveryItemJson));
+            Xunit.Assert.Throws<ProtocolException>(() => client.GeoTagDelivery(strInvalidDeliveryItemJson));
         }
 
         [Fact]
+        [TestMethod]
         public void TestSubmittingValidDeliveryItem()
         {
             var oAsset = new GeotaggedAssetDataContract()
@@ -104,15 +107,17 @@ namespace WebServices.Test.Tests
             client.UnTagDelivery(strAssetKey);
 
             string strValidDeliveryItemJson = JsonR.JsonSerializer(oAsset);
-            Assert.DoesNotThrow(() => client.GeoTagDelivery(strValidDeliveryItemJson));
+            Xunit.Assert.DoesNotThrow(() => client.GeoTagDelivery(strValidDeliveryItemJson));
         }
 
-        [Fact]
-        public void TestSubmittingValidDeliveryItemAsync()
+        //[TestMethod]
+        public void TestSubmitRandomDeliveryItemLoadTest()
         {
+            var key = Guid.NewGuid().ToString();
+
             var oAsset = new GeotaggedAssetDataContract()
             {
-                oAssetKey = "1CBC383E-7FA6-492C-9B50-851CEC0983CD",
+                oAssetKey = key,
                 oUserIdentification = "66FBA0E1-6429-4999-9538-6566DEE70048",
                 lTimeStamp = 6000000,
                 dLatitude = 52.800000M,
@@ -121,14 +126,14 @@ namespace WebServices.Test.Tests
 
             var oUnTagAsset = new AssetKeyDataContract()
             {
-                oAssetKey = "1CBC383E-7FA6-492C-9B50-851CEC0983CD"
+                oAssetKey = key
             };
-
-            string strAssetKey = JsonR.JsonSerializer(oUnTagAsset);
-            client.UnTagDelivery(strAssetKey);
-
+            
             string strValidDeliveryItemJson = JsonR.JsonSerializer(oAsset);
-            Assert.DoesNotThrow(() => client.GeoTagDeliveryAsync(strValidDeliveryItemJson));
+            string strAssetKey = JsonR.JsonSerializer(oUnTagAsset);
+
+            Xunit.Assert.DoesNotThrow(() => client.GeoTagDelivery(strValidDeliveryItemJson));
+            client.UnTagDelivery(strAssetKey);
         }
     }
 }

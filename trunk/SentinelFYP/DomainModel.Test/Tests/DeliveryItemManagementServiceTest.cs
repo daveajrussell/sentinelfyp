@@ -55,17 +55,17 @@ namespace DomainModel.Test.Tests
         public void TestConstructor()
         {
             DeliveryItemManagementService target = null;
-            Assert.Throws<ArgumentNullException>(() => target = new DeliveryItemManagementService(null));
-            Assert.Null(target);
+            Xunit.Assert.Throws<ArgumentNullException>(() => target = new DeliveryItemManagementService(null));
+            Xunit.Assert.Null(target);
         }
 
         [Fact]
         public void TestConstructorShouldThrowWhenSuppliedNullArguments()
         {
             DeliveryItemManagementService target = null;
-            Assert.DoesNotThrow(() => target = new DeliveryItemManagementService(_repository.Object));
-            Assert.NotNull(target);
-            Assert.IsAssignableFrom<DeliveryItemManagementService>(target);
+            Xunit.Assert.DoesNotThrow(() => target = new DeliveryItemManagementService(_repository.Object));
+            Xunit.Assert.NotNull(target);
+            Xunit.Assert.IsAssignableFrom<DeliveryItemManagementService>(target);
         }
 
         [Fact]
@@ -81,8 +81,8 @@ namespace DomainModel.Test.Tests
 
             target.AssignDeliveryItemsToConsignment(keys, consignmentKey);
 
-            Assert.Equal(1, _unassignedDeliveryItems.Count);
-            Assert.Equal(5, _assignedDeliveryItems.Count);
+            Xunit.Assert.Equal(1, _unassignedDeliveryItems.Count);
+            Xunit.Assert.Equal(5, _assignedDeliveryItems.Count);
 
             ResetCollections();
         }
@@ -100,8 +100,8 @@ namespace DomainModel.Test.Tests
 
             target.UnAssignDeliveryItems(consignmentKey, keys);
 
-            Assert.Equal(5, _unassignedDeliveryItems.Count);
-            Assert.Equal(1, _assignedDeliveryItems.Count);
+            Xunit.Assert.Equal(5, _unassignedDeliveryItems.Count);
+            Xunit.Assert.Equal(1, _assignedDeliveryItems.Count);
 
             ResetCollections();
         }
@@ -116,8 +116,8 @@ namespace DomainModel.Test.Tests
 
             var assignedDeliveryItems = target.GetDeliveryItemsByKey(assignedKeys);
 
-            Assert.NotEmpty(assignedDeliveryItems);
-            Assert.Equal(3, assignedDeliveryItems.Count());
+            Xunit.Assert.NotEmpty(assignedDeliveryItems);
+            Xunit.Assert.Equal(3, assignedDeliveryItems.Count());
 
             ResetCollections();
         }
@@ -128,12 +128,12 @@ namespace DomainModel.Test.Tests
             var target = new DeliveryItemManagementService(_repository.Object);
             var assignedItems = target.GetAllAssignedDeliveryItems();
 
-            Assert.NotEmpty(assignedItems);
+            Xunit.Assert.NotEmpty(assignedItems);
 
             foreach (var item in assignedItems)
             {
-                Assert.NotNull(item.ConsignmentKey);
-                Assert.IsAssignableFrom<AssignedDeliveryItem>(item);
+                Xunit.Assert.NotNull(item.ConsignmentKey);
+                Xunit.Assert.IsAssignableFrom<AssignedDeliveryItem>(item);
             }
 
             ResetCollections();
@@ -145,11 +145,11 @@ namespace DomainModel.Test.Tests
             var target = new DeliveryItemManagementService(_repository.Object);
             var unassignedItems = target.GetAllUnassignedDeliveryItems();
 
-            Assert.NotEmpty(unassignedItems);
+            Xunit.Assert.NotEmpty(unassignedItems);
 
             foreach (var item in unassignedItems)
             {
-                Assert.IsAssignableFrom<DeliveryItem>(item);
+                Xunit.Assert.IsAssignableFrom<DeliveryItem>(item);
             }
 
             ResetCollections();
@@ -163,14 +163,14 @@ namespace DomainModel.Test.Tests
 
             var consignmentItems = target.GetConsignmentDeliveryItems(key.ConsignmentKey);
 
-            Assert.NotEmpty(consignmentItems);
-            Assert.IsAssignableFrom<IEnumerable<AssignedDeliveryItem>>(consignmentItems);
+            Xunit.Assert.NotEmpty(consignmentItems);
+            Xunit.Assert.IsAssignableFrom<IEnumerable<AssignedDeliveryItem>>(consignmentItems);
 
             foreach (var item in consignmentItems)
             {
-                Assert.NotNull(item);
-                Assert.IsAssignableFrom<AssignedDeliveryItem>(item);
-                Assert.Equal(key.ConsignmentKey, item.ConsignmentKey);
+                Xunit.Assert.NotNull(item);
+                Xunit.Assert.IsAssignableFrom<AssignedDeliveryItem>(item);
+                Xunit.Assert.Equal(key.ConsignmentKey, item.ConsignmentKey);
             }
 
             ResetCollections();
@@ -198,13 +198,13 @@ namespace DomainModel.Test.Tests
                                              where item.ConsignmentKey == reassignedConsignment.ConsignmentKey
                                              select item;
 
-            Assert.NotEqual(previousConsignmentItems.Count(), reassignedConsignmentItems.Count());
-            Assert.Empty(previousConsignmentItems);
-            Assert.NotEmpty(reassignedConsignmentItems);
+            Xunit.Assert.NotEqual(previousConsignmentItems.Count(), reassignedConsignmentItems.Count());
+            Xunit.Assert.Empty(previousConsignmentItems);
+            Xunit.Assert.NotEmpty(reassignedConsignmentItems);
 
             foreach (var item in reassignedConsignmentItems)
             {
-                Assert.Equal(item.ConsignmentKey, reassignedConsignment.ConsignmentKey);
+                Xunit.Assert.Equal(item.ConsignmentKey, reassignedConsignment.ConsignmentKey);
             }
 
             ResetCollections();

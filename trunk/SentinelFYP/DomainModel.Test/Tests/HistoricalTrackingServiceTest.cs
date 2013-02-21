@@ -67,18 +67,18 @@ namespace DomainModel.Test.Tests
         public void TestConstructor()
         {
             HistoricalTrackingService target = null;
-            Assert.DoesNotThrow(() => target = new HistoricalTrackingService(_repository.Object));
+            Xunit.Assert.DoesNotThrow(() => target = new HistoricalTrackingService(_repository.Object));
 
-            Assert.NotNull(target);
-            Assert.IsAssignableFrom<HistoricalTrackingService>(target);
+            Xunit.Assert.NotNull(target);
+            Xunit.Assert.IsAssignableFrom<HistoricalTrackingService>(target);
         }
 
         [Fact]
         public void TestConstructorShouldThrow()
         {
             HistoricalTrackingService target = null;
-            Assert.Throws<ArgumentNullException>(() => target = new HistoricalTrackingService(null));
-            Assert.Null(target);
+            Xunit.Assert.Throws<ArgumentNullException>(() => target = new HistoricalTrackingService(null));
+            Xunit.Assert.Null(target);
         }
 
         [Fact]
@@ -87,19 +87,19 @@ namespace DomainModel.Test.Tests
             var target = new HistoricalTrackingService(_repository.Object);
             var data = target.GetAllHistoricalTrackingDataByDriverKey(Guid.NewGuid());
 
-            Assert.IsAssignableFrom<IEnumerable<HistoricalGeospatialInformation>>(data);
-            Assert.NotEmpty(data);
-            Assert.True(data.Count() > 0);
+            Xunit.Assert.IsAssignableFrom<IEnumerable<HistoricalGeospatialInformation>>(data);
+            Xunit.Assert.NotEmpty(data);
+            Xunit.Assert.True(data.Count() > 0);
 
             foreach (var item in data)
             {
-		        Assert.NotNull(item);
-                Assert.NotEmpty(item.PeriodGeographicData);
+		        Xunit.Assert.NotNull(item);
+                Xunit.Assert.NotEmpty(item.PeriodGeographicData);
 
                 foreach (var geographicData in item.PeriodGeographicData)
 	            {
-                    Assert.IsAssignableFrom<GeospatialInformation>(geographicData);
-                    Assert.NotNull(geographicData);
+                    Xunit.Assert.IsAssignableFrom<GeospatialInformation>(geographicData);
+                    Xunit.Assert.NotNull(geographicData);
 	            }
             }
         }
@@ -110,16 +110,16 @@ namespace DomainModel.Test.Tests
             var target = new HistoricalTrackingService(_repository.Object);
             var data = target.GetFilteredHistoricalDataByDriverKey(Guid.NewGuid(), new Random().Next());
 
-            Assert.IsAssignableFrom<HistoricalGeospatialInformation>(data);
-            Assert.NotNull(data);
+            Xunit.Assert.IsAssignableFrom<HistoricalGeospatialInformation>(data);
+            Xunit.Assert.NotNull(data);
 
-            Assert.NotEmpty(data.PeriodGeographicData);
-            Assert.True(data.PeriodGeographicData.Count() > 0);
+            Xunit.Assert.NotEmpty(data.PeriodGeographicData);
+            Xunit.Assert.True(data.PeriodGeographicData.Count() > 0);
 
             foreach (var item in data.PeriodGeographicData)
             {
-                Assert.IsAssignableFrom<GeospatialInformation>(item);
-                Assert.NotNull(item);
+                Xunit.Assert.IsAssignableFrom<GeospatialInformation>(item);
+                Xunit.Assert.NotNull(item);
             }
         }
 
@@ -129,9 +129,9 @@ namespace DomainModel.Test.Tests
             var target = new HistoricalTrackingService(_repository.Object);
             var data = target.GetDrivers();
 
-            Assert.IsAssignableFrom<IEnumerable<User>>(data);
-            Assert.NotEmpty(data);
-            Assert.True(data.Count() > 0);
+            Xunit.Assert.IsAssignableFrom<IEnumerable<User>>(data);
+            Xunit.Assert.NotEmpty(data);
+            Xunit.Assert.True(data.Count() > 0);
         }
     }
 }
