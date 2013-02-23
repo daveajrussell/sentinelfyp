@@ -101,6 +101,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="Tests\HeatmapRequest.loadtest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\SecurityServiceLoadTest.loadtest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

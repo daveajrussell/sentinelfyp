@@ -10,9 +10,11 @@ using DomainModel.Test.TestHelpers;
 using GMap.NET;
 using Moq;
 using Xunit;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DomainModel.Test.Tests
 {
+    [TestClass]
     public class PointServiceTests
     {
         private Mock<IPointRepository> _pointRepository;
@@ -72,6 +74,7 @@ namespace DomainModel.Test.Tests
         }
 
         [Fact]
+        [TestMethod]
         public void AdjustMapPixelsToTilePixelsShouldNotReturnNullPoint()
         {
             var pointService = new PointService(_pointRepository.Object);
@@ -103,6 +106,7 @@ namespace DomainModel.Test.Tests
         }
 
         [Fact]
+        [TestMethod]
         public void GetPointsForTileShouldReturnArrayOfPoints()
         {
             var pointService = new PointService(_pointRepository.Object);

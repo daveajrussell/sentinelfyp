@@ -1,12 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<LoadTest Name="LoadTest1" Description="" Owner="" storage="c:\work\fyp\sentinelfyp\trunk\sentinelfyp\webservices.test\tests\loadtest1.loadtest" Priority="2147483647" Enabled="true" CssProjectStructure="" CssIteration="" DeploymentItemsEditable="" WorkItemIds="" TraceLevel="None" CurrentRunConfig="Run Settings1" Id="afc52288-84a1-4df2-9b77-a4ecdd4eba09" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+<LoadTest Name="AuthenticationService" Description="" Owner="" storage="c:\work\fyp\sentinelfyp\trunk\sentinelfyp\webservices.test\tests\authenticationservice.loadtest" Priority="2147483647" Enabled="true" CssProjectStructure="" CssIteration="" DeploymentItemsEditable="" WorkItemIds="" TraceLevel="None" CurrentRunConfig="Run Settings1" Id="afc52288-84a1-4df2-9b77-a4ecdd4eba09" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
   <Scenarios>
     <Scenario Name="AuthenticateAndLogout" DelayBetweenIterations="0" PercentNewUsers="0" IPSwitching="true" TestMixType="PercentageOfTestsStarted" ApplyDistributionToPacingDelay="true" MaxTestIterations="0" DisableDuringWarmup="false" DelayStartTime="0" AllowedAgents="">
       <ThinkProfile Value="0.2" Pattern="NormalDistribution" />
       <LoadProfile Pattern="Constant" InitialUsers="25" />
       <TestMix>
-        <TestProfile Name="TestAuthenticateAndLogout" Path="..\bin\debug\webservices.test.dll" Id="3f2b47e0-18eb-06e7-d67b-2c5b6e38967c" Percentage="100" Type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+        <TestProfile Name="TestAuthenticate" Path="..\bin\debug\webservices.test.dll" Id="d2bf2bf4-feb6-6b37-6e3d-52b976503140" Percentage="100" Type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
       </TestMix>
+      <BrowserMix>
+        <BrowserProfile Percentage="100">
+          <Browser Name="Smartphone" MaxConnections="2">
+            <Headers>
+              <Header Name="User-Agent" Value="Mozilla/2.0 (compatible; MSIE 3.02; Windows CE; Smartphone; JavaScript; *)" />
+              <Header Name="Accept" Value="image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, */*" />
+              <Header Name="Accept-Language" Value="{{$IEAcceptLanguage}}" />
+            </Headers>
+          </Browser>
+        </BrowserProfile>
+      </BrowserMix>
       <NetworkMix>
         <NetworkProfile Percentage="100">
           <Network Name="3G" BandwidthInKbps="NaN" NetworkProfileConfigurationXml="&lt;Emulation xmlns=&quot;http://microsoft.com/schemas/VisualStudio/TeamTest/2010&quot;&gt;&lt;VirtualChannel name=&quot;ThreeG-Channel1&quot;&gt;&lt;FilterList /&gt;&lt;VirtualLink instances=&quot;1&quot; name=&quot;link1&quot;&gt;&lt;LinkRule dir=&quot;upstream&quot;&gt;&lt;Bandwidth&gt;&lt;Speed unit=&quot;kbps&quot;&gt;512&lt;/Speed&gt;&lt;QueueManagement&gt;&lt;NormalQueue&gt;&lt;Size&gt;100&lt;/Size&gt;&lt;QueueMode&gt;packet&lt;/QueueMode&gt;&lt;DropType&gt;DropTail&lt;/DropType&gt;&lt;/NormalQueue&gt;&lt;/QueueManagement&gt;&lt;/Bandwidth&gt;&lt;Latency&gt;&lt;Fixed&gt;&lt;Time unit=&quot;msec&quot;&gt;150&lt;/Time&gt;&lt;/Fixed&gt;&lt;/Latency&gt;&lt;Loss&gt;&lt;Random&gt;&lt;Rate&gt;0.0025&lt;/Rate&gt;&lt;/Random&gt;&lt;/Loss&gt;&lt;/LinkRule&gt;&lt;LinkRule dir=&quot;downstream&quot;&gt;&lt;Bandwidth&gt;&lt;Speed unit=&quot;kbps&quot;&gt;64&lt;/Speed&gt;&lt;QueueManagement&gt;&lt;NormalQueue&gt;&lt;Size&gt;100&lt;/Size&gt;&lt;QueueMode&gt;packet&lt;/QueueMode&gt;&lt;DropType&gt;DropTail&lt;/DropType&gt;&lt;/NormalQueue&gt;&lt;/QueueManagement&gt;&lt;/Bandwidth&gt;&lt;Latency&gt;&lt;Fixed&gt;&lt;Time unit=&quot;msec&quot;&gt;150&lt;/Time&gt;&lt;/Fixed&gt;&lt;/Latency&gt;&lt;Loss&gt;&lt;Random&gt;&lt;Rate&gt;0.0025&lt;/Rate&gt;&lt;/Random&gt;&lt;/Loss&gt;&lt;/LinkRule&gt;&lt;/VirtualLink&gt;&lt;/VirtualChannel&gt;&lt;/Emulation&gt;" />

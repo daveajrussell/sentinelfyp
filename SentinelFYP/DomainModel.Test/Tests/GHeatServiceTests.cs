@@ -12,6 +12,7 @@ using Xunit;
 
 namespace DomainModel.Test.Tests
 {
+    [TestClass]
     public class GHeatServiceTests
     {
         private Mock<IGHeatRepository> _repository;
@@ -40,6 +41,7 @@ namespace DomainModel.Test.Tests
         }
 
         [Fact]
+        [TestMethod]
         public void InjectingInterfaceIntoConstructorShouldWork()
         {
             var service = new GHeatService(_repository.Object);
@@ -49,6 +51,7 @@ namespace DomainModel.Test.Tests
         }
 
         [Fact]
+        [TestMethod]
         public void AvailableColourSchemesReturnsListOfColourSchemes()
         {
             var service = new GHeatService(_repository.Object);
@@ -68,6 +71,7 @@ namespace DomainModel.Test.Tests
         }
 
         [Fact]
+        [TestMethod]
         public void GetColourSchemeReturnsBitmap()
         {
             var service = new GHeatService(_repository.Object);
@@ -86,6 +90,7 @@ namespace DomainModel.Test.Tests
         }
 
         [Fact]
+        [TestMethod]
         public void GetDotReturnsBitmap()
         {
             var service = new GHeatService(_repository.Object);
@@ -113,6 +118,7 @@ namespace DomainModel.Test.Tests
         }
 
         [Fact]
+        [TestMethod]
         public void GetTileShouldReturnATileObject()
         {
             var _points = GHeatServiceTestHelper.GetListOfMockPointLatLng();

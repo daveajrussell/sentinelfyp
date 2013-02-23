@@ -76,9 +76,7 @@
     <Compile Include="Controllers\AccountControllerTest.cs" />
     <Compile Include="Controllers\MonitorControllerTest.cs" />
     <Compile Include="Controllers\TrackingControllerTest.cs" />
-    <Compile Include="ExtensionMethodTests\PDFResultTest.cs" />
     <Compile Include="ExtensionMethodTests\QRCodeHtmlHelperTest.cs" />
-    <Compile Include="ExtensionMethodTests\TileResultViewModel.cs" />
     <Compile Include="ExtensionMethodTests\ToViewModelTest.cs" />
     <Compile Include="InfrastructureTests\SentinelMembershipProviderTests.cs" />
     <Compile Include="InfrastructureTests\SentinelRoleProviderTests.cs" />
