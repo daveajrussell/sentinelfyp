@@ -37,7 +37,7 @@ namespace WebServices.Test.Tests
 
         [Fact]
         [TestMethod]
-        public void TestAuthenticateAndLogout()
+        public void TestAuthenticate()
         {
             string strResult = null;
             string strCredentials = "{\"strUsername\":\"DR_DRIVER\",\"strPassword\":\"password\"}";
@@ -52,15 +52,6 @@ namespace WebServices.Test.Tests
 
             Xunit.Assert.Equal(Guid.Parse("66fba0e1-6429-4999-9538-6566dee70048"), oResult.UserKey);
             Xunit.Assert.True(oResult.SessionID > 0);
-
-            SessionDataContract oContract = new SessionDataContract()
-            {
-                oUserIdentification = Guid.NewGuid().ToString(),//oResult.UserKey.ToString(),
-                iSessionID = oResult.SessionID
-            };
-
-            string strLogoutCredentials = JsonR.JsonSerializer(oContract);
-            Xunit.Assert.DoesNotThrow(() => client.Logout(strLogoutCredentials));
         }
 
         [Fact]
@@ -85,7 +76,6 @@ namespace WebServices.Test.Tests
             Xunit.Assert.Null(strResult);
         }
 
-        /*
         [Fact]
         [TestMethod]
         public void TestLogout()
@@ -110,7 +100,6 @@ namespace WebServices.Test.Tests
             Xunit.Assert.Equal(oResultOne.UserKey, oResultTwo.UserKey);
             Xunit.Assert.NotEqual<int>(oResultOne.SessionID, oResultTwo.SessionID);
         }
-        */
 
         [Fact]
         [TestMethod]
