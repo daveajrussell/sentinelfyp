@@ -17,7 +17,7 @@ namespace Sentinel.Services
             if (oInformation.Speed <= 0)
                 return CAUTION;
 
-            if (oInformation.Orientation != 1 || oInformation.Speed >= 60)
+            if (oInformation.Orientation != 1 && oInformation.Speed <= 0 || oInformation.Speed >= 60)
                 return SEVERE;
 
             else
