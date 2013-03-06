@@ -48,6 +48,7 @@
         writeEvent("Test Update", "caution", "66FBA0E1-6429-4999-9538-6566DEE70048");
 
         $('.contact').on('click', function () {
+            
             var key = $(this).attr('val');
             $.ajax({
                 url: '../Monitor/GetDriverContactDetailsPartial',

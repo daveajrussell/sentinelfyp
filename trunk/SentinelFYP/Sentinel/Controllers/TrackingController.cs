@@ -32,6 +32,12 @@ namespace Sentinel.Controllers
         {
             new MenuViewModel()
             {
+                Display = "All Active Drivers",
+                URL = "~/Tracking/AllDriverLiveTracking",
+                Description = "View All Live Active Drivers"
+            },
+            new MenuViewModel()
+            {
                 Display = "Historical Tracking",
                 URL = "~/Tracking/HistoricalTracking",
                 Description = "View Historical Tracking Data"
@@ -47,6 +53,12 @@ namespace Sentinel.Controllers
         public ActionResult Index()
         {
             return View(menuItems);
+        }
+
+        public ActionResult AllDriverLiveTracking()
+        {
+            var data = _liveTrackingService.GetAllLiveElapsedRoutes();
+            return View(data);
         }
 
         public ActionResult HistoricalTracking()

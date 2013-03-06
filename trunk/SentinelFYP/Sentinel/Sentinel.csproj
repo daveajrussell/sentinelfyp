@@ -335,6 +335,7 @@
     <Content Include="Views\Tracking\LiveElapsedTrackingDriverFeed.cshtml" />
     <Content Include="Views\Heatmap\HeatmapPartial.cshtml" />
     <Content Include="Views\Monitor\UserContactDetailsPartial.cshtml" />
+    <Content Include="Views\Tracking\AllDriverLiveTracking.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">
