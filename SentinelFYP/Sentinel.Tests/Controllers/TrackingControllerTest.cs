@@ -86,8 +86,8 @@ namespace Sentinel.Tests.Controllers
             Assert.NotNull(result);
             Assert.IsAssignableFrom<ViewResult>(result);
             
-            var itemOne = (new List<MenuViewModel>(((List<MenuViewModel>)(((ViewResultBase)(result)).Model))))[0];
-            var itemTwo = (new List<MenuViewModel>(((List<MenuViewModel>)(((ViewResultBase)(result)).Model))))[1];
+            var itemOne = (new List<MenuViewModel>(((List<MenuViewModel>)(((ViewResultBase)(result)).Model))))[1];
+            var itemTwo = (new List<MenuViewModel>(((List<MenuViewModel>)(((ViewResultBase)(result)).Model))))[2];
 
             Assert.NotNull(itemOne);
             Assert.IsAssignableFrom<MenuViewModel>(itemOne);

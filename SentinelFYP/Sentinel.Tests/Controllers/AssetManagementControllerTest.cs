@@ -42,7 +42,7 @@ namespace Sentinel.Tests.Controllers
             _itemService = new Mock<IDeliveryItemManagementService>();
 
             _consignmentService.Setup(m => m.GetAssignedConsignments())
-                .Returns(() => new List<AssignedConsignment>() { new AssignedConsignment(Guid.NewGuid(), Guid.NewGuid(), "", "", 0, DateTime.Now) });
+                .Returns(() => new List<AssignedConsignment>() { new AssignedConsignment(Guid.NewGuid(), Guid.NewGuid(), "", "", "", DateTime.Now) });
 
             _consignmentService.Setup(m => m.GetUnAssignedConsignments())
                 .Returns(() => new List<UnAssignedConsignment>() { new UnAssignedConsignment(Guid.NewGuid(), DateTime.Now), new UnAssignedConsignment(Guid.NewGuid(), DateTime.Now) });

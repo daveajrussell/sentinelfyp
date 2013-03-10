@@ -23,10 +23,7 @@ namespace DomainModel.Test.Tests
             _repository.Setup(m => m.AssignConsignmentToDriver(It.IsAny<Guid>(), It.IsAny<Guid>()))
                 .Returns<Guid, Guid>((oConsignmentKey, oDriverKey) => ConsignmentManagementTestHelper.AssignConsignmentToDriverMock(oConsignmentKey, oDriverKey));
 
-            _repository.Setup(m => m.ReAssignConsignment(It.IsAny<Guid>(), It.IsAny<Guid>(), It.IsAny<Guid>()))
-                .Returns<Guid, Guid, Guid>((oConsignmentKey, oPreviousDriverKey, oReAssignedDriverKey) => ConsignmentManagementTestHelper.ReAssignConsignmentMock(oConsignmentKey, oPreviousDriverKey, oReAssignedDriverKey));
-
-            _repository.Setup(m => m.UnAssignConsignment(It.IsAny<Guid>(), It.IsAny<Guid>()));
+            _repository.Setup(m => m.UnAssignConsignment(It.IsAny<Guid>()));
         }
 
         [Fact]
@@ -80,58 +77,6 @@ namespace DomainModel.Test.Tests
         }
 
         [Fact]
-        public void PassingEmptyConsignmentGuidToReAssignConsignmentShouldThrow()
-        {
-            var service = new ConsignmentManagementService(_repository.Object);
-            Xunit.Assert.Throws<ArgumentOutOfRangeException>(() => service.ReAssignConsignment(Guid.Empty, Guid.NewGuid(), Guid.NewGuid()));
-        }
-
-        [Fact]
-        public void PassingEmptyPreviousDriverGuidToReAssignConsignmentShouldThrow()
-        {
-            var service = new ConsignmentManagementService(_repository.Object);
-            Xunit.Assert.Throws<ArgumentOutOfRangeException>(() => service.ReAssignConsignment(Guid.NewGuid(), Guid.Empty, Guid.NewGuid()));
-        }
-
-        [Fact]
-        public void PassingEmptyNewDriverGuidToReAssignConsignmentShouldThrow()
-        {
-            var service = new ConsignmentManagementService(_repository.Object);
-            Xunit.Assert.Throws<ArgumentOutOfRangeException>(() => service.ReAssignConsignment(Guid.NewGuid(), Guid.NewGuid(), Guid.Empty));
-        }
-
-        [Fact]
-        public void ReAssignConsignmentShouldChangeAssignedDriverKey()
-        {
-            var service = new ConsignmentManagementService(_repository.Object);
-            
-            UnAssignedConsignment consignment = service.CreateConsignment(DateTime.Today);
-            AssignedConsignment reassignedConsignment = null;
-            User driverOne = new User() { UserKey = Guid.NewGuid() };
-            User driverTwo = new User() { UserKey = Guid.NewGuid() };
-
-            reassignedConsignment = service.AssignConsignmentToDriver(consignment.ConsignmentKey, driverOne.UserKey);
-
-            Xunit.Assert.NotSame(Guid.Empty, reassignedConsignment.AssignedDriverKey);
-
-            Xunit.Assert.DoesNotThrow(() => reassignedConsignment = service.ReAssignConsignment(consignment.ConsignmentKey, driverOne.UserKey, driverTwo.UserKey));
-        }
-
-        [Fact]
-        public void PassingEmptyConsignmentGuidToUnAssignConsignmentShouldThrow()
-        {
-            var service = new ConsignmentManagementService(_repository.Object);
-            Xunit.Assert.Throws<ArgumentOutOfRangeException>(() => service.UnAssignConsignment(Guid.Empty, new Guid()));
-        }
-
-        [Fact]
-        public void PassingEmptyDriverGuidToUnAssignConsignmentShouldThrow()
-        {
-            var service = new ConsignmentManagementService(_repository.Object);
-            Xunit.Assert.Throws<ArgumentOutOfRangeException>(() => service.UnAssignConsignment(new Guid(), Guid.Empty));
-        }
-
-        [Fact]
         public void UnAssignConsignmentShouldRemoveAssignedDriver()
         {
             var service = new ConsignmentManagementService(_repository.Object);
@@ -144,7 +89,7 @@ namespace DomainModel.Test.Tests
             oAssignedConsignment = service.AssignConsignmentToDriver(oUnAssignedConsignment.ConsignmentKey, driver.UserKey);
             Xunit.Assert.NotSame(Guid.Empty, oAssignedConsignment.AssignedDriverKey);
 
-            Xunit.Assert.DoesNotThrow(() => service.UnAssignConsignment(oUnAssignedConsignment.ConsignmentKey, driver.UserKey));
+            Xunit.Assert.DoesNotThrow(() => service.UnAssignConsignment(oUnAssignedConsignment.ConsignmentKey));
         }
     }
 }

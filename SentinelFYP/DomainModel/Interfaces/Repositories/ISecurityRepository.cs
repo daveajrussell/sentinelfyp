@@ -12,5 +12,6 @@ namespace DomainModel.Interfaces.Repositories
         void LogIn(string strUsername, string strPassword, out User oUser, out Session oSession);
         void Logout(Guid oUserKey, int iSessionID);
         User GetUserByUserKey(Guid oUserKey);
+        IEnumerable<User> GetUsers();
     }
 }

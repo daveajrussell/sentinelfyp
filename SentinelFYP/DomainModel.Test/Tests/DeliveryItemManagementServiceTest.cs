@@ -275,9 +275,9 @@ namespace DomainModel.Test.Tests
         {
             _assignedConsignments = new List<AssignedConsignment>()
             {
-                new AssignedConsignment(Guid.NewGuid(), Guid.NewGuid(), "", "", 0, DateTime.Now),
-                new AssignedConsignment(Guid.NewGuid(), Guid.NewGuid(), "", "", 0, DateTime.Now),
-                new AssignedConsignment(Guid.NewGuid(), Guid.NewGuid(), "", "", 0, DateTime.Now)
+                new AssignedConsignment(Guid.NewGuid(), Guid.NewGuid(), "", "", "", DateTime.Now),
+                new AssignedConsignment(Guid.NewGuid(), Guid.NewGuid(), "", "", "", DateTime.Now),
+                new AssignedConsignment(Guid.NewGuid(), Guid.NewGuid(), "", "", "", DateTime.Now)
             };
 
             _unassignedDeliveryItems = new List<DeliveryItem>()

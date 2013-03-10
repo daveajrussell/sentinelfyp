@@ -44,31 +44,31 @@ namespace Sentinel.Tests.Controllers
         [Fact]
         public void InjectingNullPointServiceIntoConstructorShouldThrow()
         {
-            Assert.Throws<ArgumentNullException>(() => new HeatmapController(null, null, null));
+            Assert.Throws<ArgumentNullException>(() => new HeatmappingController(null, null, null));
         }
 
         [Fact]
         public void InjectingNullGHeatServiceIntoConstructorShouldThrow()
         {
-            Assert.Throws<ArgumentNullException>(() => new HeatmapController(_pointService.Object, null, null));
+            Assert.Throws<ArgumentNullException>(() => new HeatmappingController(_pointService.Object, null, null));
         }
 
         [Fact]
         public void InjectingNullTrackingServiceShouldThrow()
         {
-            Assert.Throws<ArgumentNullException>(() => new HeatmapController(_pointService.Object, _gheatService.Object, null));
+            Assert.Throws<ArgumentNullException>(() => new HeatmappingController(_pointService.Object, _gheatService.Object, null));
         }
 
         [Fact]
         public void ControllerConstructorShouldNotThrow()
         {
-            Assert.DoesNotThrow(() => new HeatmapController(_pointService.Object, _gheatService.Object, _trackingService.Object));
+            Assert.DoesNotThrow(() => new HeatmappingController(_pointService.Object, _gheatService.Object, _trackingService.Object));
         }
 
         [Fact]
         public void IndexReturnsActionResult()
         {
-            var controller = new HeatmapController(_pointService.Object, _gheatService.Object, _trackingService.Object);
+            var controller = new HeatmappingController(_pointService.Object, _gheatService.Object, _trackingService.Object);
             ActionResult result = null;
 
             Assert.DoesNotThrow(() => result = controller.Index());
@@ -79,7 +79,7 @@ namespace Sentinel.Tests.Controllers
         [Fact]
         public void GetTileReturnsTileResult()
         {
-            var controller = new HeatmapController(_pointService.Object, _gheatService.Object, _trackingService.Object);
+            var controller = new HeatmappingController(_pointService.Object, _gheatService.Object, _trackingService.Object);
             TileResult result = null;
 
             Assert.DoesNotThrow(() => result = controller.Tile("classic", "5", "12", "12", new Random().Next().ToString()));
@@ -90,7 +90,7 @@ namespace Sentinel.Tests.Controllers
         [Fact]
         public void TestGetAllLiveElapsedRoutes()
         {
-            var controller = new HeatmapController(_pointService.Object, _gheatService.Object, _trackingService.Object);
+            var controller = new HeatmappingController(_pointService.Object, _gheatService.Object, _trackingService.Object);
             ActionResult result = null;
 
             Assert.DoesNotThrow(() => result = controller.LiveHeatmapData());
