@@ -6,9 +6,10 @@
     grid.UsePostBack = false;
 }
 
-<section class="consignment-grid">
+<section>
     @grid.GetHtml(columns: new SentinelRazorWebGridColumn[]{
-                            grid.CreateColumn(headerHorizontalAlignment: "center", headerText: "Items", dataFieldFormat: @<text> <a value="@item.ConsignmentKey" class="show-items ui-icon ui-icon-plus"></a> </text>),
+                            grid.CreateColumn(itemHorizontalAlignment: "center", width: "13px", dataFieldFormat: @<text> <a key="@item.ConsignmentKey" class="show-item ui-plus"></a></text>),
+                            grid.CreateColumn(width: "13px", itemHorizontalAlignment: "center", dataFieldFormat: @<text> <input type="checkbox" class="consignment-keys" value="@item.ConsignmentKey" /> </text>),
                             grid.CreateColumn(dataField: "ConsignmentKey", headerText: "Consignment Key", headerHorizontalAlignment: "center"),
                             grid.CreateColumn(dataField: "AssignedDriverKey", headerText: "Assigned Driver Key", headerHorizontalAlignment: "center"),
                             grid.CreateColumn(dataField: "AssignedDriverFirstName", headerText: "Driver First Name", headerHorizontalAlignment: "center"),
