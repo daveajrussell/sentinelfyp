@@ -23,7 +23,10 @@
             <td class="right">
                 @foreach (var item in Model.Skip(1))
                 {
-                    <a class="action" onclick="@item.Javascript">@item.Display</a>
+                    if(null != item.Permission && User.IsInRole(item.Permission))
+                    {
+                        <a id="@item.ID" class="action" onclick="@item.Javascript">@item.Display</a>
+                    }
                 }
             </td>
         </tr>

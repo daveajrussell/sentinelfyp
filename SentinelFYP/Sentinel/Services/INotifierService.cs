@@ -14,5 +14,9 @@ namespace Sentinel.Services
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "/GISNotify", RequestFormat = WebMessageFormat.Json)]
         void GISNotify(string message);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "/DeliveryNotify", RequestFormat = WebMessageFormat.Json)]
+        void DeliveryNotify(string message);
     }
 }
