@@ -1,0 +1,52 @@
+﻿@model IEnumerable<DomainModel.SecurityModels.User>
+
+<script type="text/javascript">
+
+    $(function () {
+
+        $('#dialog').dialog({
+            autoOpen: true,
+            resizable: false,
+            draggable: false,
+            modal: true,
+            title: "Select Driver",
+            buttons:
+                [
+                    {
+                        text: "Select",
+                        click: function () {
+
+                            var self = this;
+                            var driverKey = $(this).find('#driver-select option:selected').val();
+                           
+                            var consignmentKey = $('.consignment-keys:checked').val();
+
+                            $.ajax({
+                                url: '../AssetManagement/AssignConsignmentToDriver',
+                                data: { strDriverKey: driverKey, strConsignmentKey: consignmentKey },
+                                success: function () {
+                                    $(self).dialog("destroy");
+                                    window.location.href = 'AssignedConsignments';
+                                }
+                            });
+                        }
+                    }
+                ],
+            close: function () {
+                $(self).dialog("destroy");
+            }
+        });
+    });
+
+</script>
+
+<div id="dialog" style="display:none">
+    <span>Select a driver to assign the consignment to: </span><br />
+    <select id="driver-select">
+        @foreach (var user in Model)
+        {
+            <option value="@user.UserKey">@user.FirstName @user.LastName</option>
+        }
+    </select>
+</div>
+
