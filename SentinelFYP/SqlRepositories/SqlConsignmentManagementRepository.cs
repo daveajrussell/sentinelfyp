@@ -8,6 +8,7 @@ using DomainModel.Interfaces.Repositories;
 using DomainModel.Models.AssetModels;
 using Sentinel.SqlDataAccess;
 using SqlRepositories.Helper.Builders;
+using DomainModel.SecurityModels;
 
 namespace SqlRepositories
 {
@@ -62,12 +63,11 @@ namespace SqlRepositories
             }
         }
 
-        public void UnAssignConsignment(Guid oConsignmentKey, Guid oAssignedDriverKey)
+        public void UnAssignConsignment(Guid oConsignmentKey)
         {
             var arrParams = new SqlParameter[]
             {
-                new SqlParameter("@IP_CONSIGNMENT_KEY", oConsignmentKey),
-                new SqlParameter("@IP_ASSIGNED_DRIVER_KEY", oAssignedDriverKey)
+                new SqlParameter("@IP_CONSIGNMENT_KEY", oConsignmentKey)
             };
 
             SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "[ASSET].[UNASSIGN_CONSIGNMENT]", arrParams);
@@ -104,6 +104,14 @@ namespace SqlRepositories
             using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[ASSET].[GET_COMPLETED_CONSIGNMENTS]"))
             {
                 return oSet.ToCompletedConsignmentSet();
+            }
+        }
+
+        public IEnumerable<User> GetUsersForConsignmentAssigning()
+        {
+            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[ASSET].[GET_DRIVERS_FOR_ASSIGNING_CONSIGNMENT]"))
+            {
+                return oSet.ToUserSet();
             }
         }
     }

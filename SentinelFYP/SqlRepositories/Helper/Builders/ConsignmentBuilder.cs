@@ -17,8 +17,8 @@ namespace SqlRepositories.Helper.Builders
                         consignment.Field<Guid>("CONSIGNMENT_KEY"),
                         consignment.Field<Guid>("CONSIGNMENT_ASSIGNED_DRIVER_KEY"),
                         consignment.Field<string>("USER_FIRST_NAME"),
-                        consignment.Field<string>("USER_FIRST_NAME"),
-                        consignment.Field<long>("USER_CONTACT_NUMBER"),
+                        consignment.Field<string>("USER_LAST_NAME"),
+                        consignment.Field<string>("USER_CONTACT_NUMBER"),
                         consignment.Field<DateTime>("CONSIGNMENT_DATE_TIME")
                     )).First();
         }
@@ -30,8 +30,8 @@ namespace SqlRepositories.Helper.Builders
                         consignment.Field<Guid>("CONSIGNMENT_KEY"),
                         consignment.Field<Guid>("CONSIGNMENT_ASSIGNED_DRIVER_KEY"),
                         consignment.Field<string>("USER_FIRST_NAME"),
-                        consignment.Field<string>("USER_FIRST_NAME"),
-                        consignment.Field<long>("USER_CONTACT_NUMBER"),
+                        consignment.Field<string>("USER_LAST_NAME"),
+                        consignment.Field<string>("USER_CONTACT_NUMBER"),
                         consignment.Field<DateTime>("CONSIGNMENT_DATE_TIME")
                     ));
         }

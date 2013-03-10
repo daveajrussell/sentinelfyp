@@ -30,6 +30,7 @@ namespace SqlRepositories
 
         public void AddGeospatialInformation(GeospatialInformation oGeoInformation)
         {
+            /*
             var arrParams = new SqlParameter[] {
                 new SqlParameter("@IP_SESSION_ID", oGeoInformation.SessionID),
                 new SqlParameter("@IP_USER_KEY", oGeoInformation.DriverKey),
@@ -38,22 +39,49 @@ namespace SqlRepositories
                 new SqlParameter("@IP_LONGITUDE", oGeoInformation.Longitude),
                 new SqlParameter("@IP_SPEED", oGeoInformation.Speed),
                 new SqlParameter("@IP_ORIENTATION", oGeoInformation.Orientation)
-            };
+            };*/
 
-            SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "[GIS].[ADD_GEOSPATIAL_INFORMATION]", arrParams);
+            var oXmlString = GetXmlString(oGeoInformation);
+            var sqlParam = new SqlParameter("@IP_XML", oXmlString);
+
+            SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "[GIS].[ADD_GEOSPATIAL_INFORMATION]", sqlParam);
         }
 
         public void AddGeospatialInformationSet(IEnumerable<GeospatialInformation> oGeoInformationSet)
         {
-            var oXmlString = GetXmlString(oGeoInformationSet);
-            var arrParams = new SqlParameter[]
+            /*var arrParams = new SqlParameter[]
             {
                 new SqlParameter("@IP_SESSION_ID", oGeoInformationSet.First().SessionID),
                 new SqlParameter("@IP_USER_KEY", oGeoInformationSet.First().DriverKey),
                 new SqlParameter("@IP_XML", oXmlString)
-            };
+            };*/
 
-            SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "[GIS].[ADD_GEOSPATIAL_INFORMATION_SET]", arrParams);
+            var oXmlString = GetXmlString(oGeoInformationSet);
+            var sqlParam = new SqlParameter("@IP_XML", oXmlString);
+
+            SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "[GIS].[ADD_GEOSPATIAL_INFORMATION_SET]", sqlParam);
+        }
+
+        public void AddHistoricalGeospatialInformationSet(IEnumerable<GeospatialInformation> oHistoricalGeoInformationSet)
+        {
+            var oXmlString = GetXmlString(oHistoricalGeoInformationSet);
+            var sqlParam = new SqlParameter("@IP_XML", oXmlString);
+
+            SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "[GIS].[ADD_HISTORICAL_GEOSPATIAL_INFORMATION]", sqlParam);
+        }
+
+        private string GetXmlString(GeospatialInformation oGeoInformation)
+        {
+            return new XDocument(
+                new XElement("GEOSPATIAL_INFORMATION",
+                    new XElement("GEO_ITEM",
+                        new XAttribute("SESSION_ID", oGeoInformation.SessionID),
+                        new XAttribute("DRIVER_KEY", oGeoInformation.DriverKey),
+                        new XAttribute("TIMESTAMP", oGeoInformation.TimeStamp),
+                        new XAttribute("LATITUDE", oGeoInformation.Latitude),
+                        new XAttribute("LONGITUDE", oGeoInformation.Longitude),
+                        new XAttribute("SPEED", oGeoInformation.Speed),
+                        new XAttribute("ORIENTATION", oGeoInformation.Orientation)))).ToString();
         }
 
         private string GetXmlString(IEnumerable<GeospatialInformation> oGeoInformationSet)
@@ -63,6 +91,8 @@ namespace SqlRepositories
                     "GEOSPATIAL_INFORMATION",
                     from item in oGeoInformationSet
                     select new XElement("GEO_ITEM",
+                        new XAttribute("SESSION_ID", item.SessionID),
+                        new XAttribute("DRIVER_KEY", item.DriverKey),
                         new XAttribute("TIMESTAMP", item.TimeStamp),
                         new XAttribute("LATITUDE", item.Latitude),
                         new XAttribute("LONGITUDE", item.Longitude),

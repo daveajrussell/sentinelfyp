@@ -17,5 +17,9 @@ namespace WebServices.Interfaces
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "/PostBufferedGeospatialDataSet", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         void PostBufferedGeospatialDataSet(string strBufferedGeospatialDataSetJsonString);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "/PostBufferedHistoricalData", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        void PostBufferedHistoricalData(string strBufferedHistoricalDataJsonString);
     }
 }

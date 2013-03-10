@@ -11,6 +11,7 @@ using SqlRepositories;
 using Ninject;
 using Ninject.Extensions.Wcf;
 using Ninject.Web.Common;
+using SentinelExceptionManagement;
 
 namespace WebServices
 {
@@ -19,6 +20,12 @@ namespace WebServices
         protected override IKernel CreateKernel()
         {
             return new StandardKernel(new WcfNinjectModule());
+        }
+
+        protected void Application_Error()
+        {
+            var exception = Server.GetLastError();
+            ExceptionManager.LogException(exception);
         }
     }
 }
