@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DomainModel.Models.AuditModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +11,10 @@ namespace Sentinel.Controllers
     {
         public ActionResult Error(Exception exception)
         {
-            return View(exception);
+            if (null == State.Session)
+                return RedirectToAction("Index", "Account");
+            else
+                return View(exception);
         }
     }
 }

@@ -9,18 +9,3 @@
 </section>
 
 @Html.Action("ConsignmentManagementPageActions")
-
-<section id="section-actions">
-    <ul id="actions">
-    @foreach (var item in Model)
-    {
-        <li class="action">
-            <a class="action-item action-link" href="@Url.Action(item.ID)">
-                @item.Display
-                <br />
-                <span class="action-description">@item.Description</span>
-            </a>
-        </li>
-    }
-    </ul>
-</section>
