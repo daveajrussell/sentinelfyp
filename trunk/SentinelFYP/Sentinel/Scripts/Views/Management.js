@@ -1,4 +1,4 @@
-﻿var Account = {
+﻿var Management = {
 
     Init: function () {
         var self = this;
@@ -11,7 +11,7 @@
             $('#GetUnAssignedConsignments').on('click', function () {
                 self.GetUnAssignedConsignments();
             });*/
-
+            
             $('.btn-unassign').on('click', function () {
                 var itemKey = $(this).attr('value');
                 self.GetUnAssignedDeliveryItems(itemKey);
@@ -59,4 +59,4 @@
     }
 };
 
-Account.Init();
+Management.Init();
