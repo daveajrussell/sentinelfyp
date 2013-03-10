@@ -11,6 +11,7 @@ namespace DomainModel.Interfaces.Services
     {
         void AddGeospatialInformation(GeospatialInformation oGeoInformation);
         void AddGeospatialInformationSet(IEnumerable<GeospatialInformation> oGeoInformationSet);
+        void AddHistoricalGeospatialInformationSet(IEnumerable<GeospatialInformation> oHistoricalGeoInformationSet);
 
         /*GeospatialInformation GetGIS();
         void AddGIS(GeospatialInformation oGIS);

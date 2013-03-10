@@ -5,6 +5,7 @@ using System.Text;
 using DomainModel.Interfaces.Repositories;
 using DomainModel.Interfaces.Services;
 using DomainModel.Models.AssetModels;
+using DomainModel.SecurityModels;
 
 namespace DomainModel.Services
 {
@@ -36,29 +37,12 @@ namespace DomainModel.Services
             return _consignmentManagementRepository.AssignConsignmentToDriver(oConsignmentKey, oDriverKey);
         }
 
-        public AssignedConsignment ReAssignConsignment(Guid oConsignmentKey, Guid oPreviousDriverKey, Guid oReAssignedDriverKey)
+        public void UnAssignConsignment(Guid oConsignmentKey)
         {
             if (oConsignmentKey == Guid.Empty)
                 throw new ArgumentOutOfRangeException("Consignment Key");
 
-            if (oPreviousDriverKey == Guid.Empty)
-                throw new ArgumentOutOfRangeException("Driver Key");
-
-            if (oReAssignedDriverKey == Guid.Empty)
-                throw new ArgumentOutOfRangeException("Driver Key");
-
-            return _consignmentManagementRepository.ReAssignConsignment(oConsignmentKey, oPreviousDriverKey, oReAssignedDriverKey);
-        }
-
-        public void UnAssignConsignment(Guid oConsignmentKey, Guid oAssignedDriverKey)
-        {
-            if (oConsignmentKey == Guid.Empty)
-                throw new ArgumentOutOfRangeException("Consignment Key");
-
-            if (oAssignedDriverKey == Guid.Empty)
-                throw new ArgumentOutOfRangeException("Driver Key");
-
-            _consignmentManagementRepository.UnAssignConsignment(oConsignmentKey, oAssignedDriverKey);
+            _consignmentManagementRepository.UnAssignConsignment(oConsignmentKey);
         }
 
         public IEnumerable<AssignedConsignment> GetAssignedConsignments()
@@ -82,6 +66,12 @@ namespace DomainModel.Services
         public IEnumerable<CompletedConsignment> GetCompletedConsignments()
         {
             return _consignmentManagementRepository.GetCompletedConsignments();
+        }
+
+
+        public IEnumerable<User> GetUsersForConsignmentAssigning()
+        {
+            return _consignmentManagementRepository.GetUsersForConsignmentAssigning();
         }
     }
 }

@@ -11,9 +11,18 @@ namespace Sentinel.Tests.Services
     public class SeverityHelperTest
     {
         [Fact]
-        public void TestUpdateShouldBeSevereFromOrientation()
+        public void TestUpdateShouldBeCautionaryFromOrientation()
         {
             var data = new GeospatialInformation() { DriverKey = Guid.NewGuid(), Speed = 25, Orientation = 0 };
+            var result = SeverityHelper.Severity(data);
+
+            Assert.Equal(SeverityHelper.CAUTION, result);
+        }
+
+        [Fact]
+        public void TestUpdateShouldBeSevereFromOrientationAndSpeed()
+        {
+            var data = new GeospatialInformation() { DriverKey = Guid.NewGuid(), Speed = 0, Orientation = 2 };
             var result = SeverityHelper.Severity(data);
 
             Assert.Equal(SeverityHelper.SEVERE, result);

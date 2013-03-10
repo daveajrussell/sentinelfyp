@@ -17,12 +17,12 @@ namespace DomainModel.Test.TestHelpers
         {
             UnAssignedConsignment oUnAssignedConsignment = CreateConsignment();
 
-            return new AssignedConsignment(oUnAssignedConsignment.ConsignmentKey, oDriverKey, "Test", "User", 0141242123, oUnAssignedConsignment.ConsignmentDateTime);
+            return new AssignedConsignment(oUnAssignedConsignment.ConsignmentKey, oDriverKey, "Test", "User", "+440141242123", oUnAssignedConsignment.ConsignmentDateTime);
         }
 
         public static AssignedConsignment ReAssignConsignmentMock(Guid oConsignmentKey, Guid oPreviousDriverKey, Guid oReAssignedDriverKey)
         {
-            return new AssignedConsignment(oConsignmentKey, oReAssignedDriverKey, "Test", "User", 0141242123, DateTime.Today);
+            return new AssignedConsignment(oConsignmentKey, oReAssignedDriverKey, "Test", "User", "+440141242123", DateTime.Today);
         }
 
         public static UnAssignedConsignment UnAssignConsignmentMock(Guid oConsignmentKey, Guid oAssignedDriverKey)

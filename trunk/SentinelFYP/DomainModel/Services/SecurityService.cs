@@ -41,5 +41,10 @@ namespace DomainModel.Services
         {
             return _securityRepository.GetUserByUserKey(oUserKey);
         }
+
+        public IEnumerable<User> GetUsers()
+        {
+            return _securityRepository.GetUsers();
+        }
     }
 }
