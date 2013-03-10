@@ -4,7 +4,9 @@
     <table id="tbl-menu">
         <tr>
             <td id="td-menu-left">
-                Logo
+                <a href="@Url.Action("Index", "Home")">
+                    <img src="@Url.Content("~/Content/images/img-logo.png")" />
+                </a>
             </td>
             <td id="td-menu-right">
                 @(Model != null ? "Welcome: " + Model.UserName : "You are not logged in")

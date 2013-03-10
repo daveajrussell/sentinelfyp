@@ -4,11 +4,14 @@
     <ul id="site-selection">
     @foreach (var item in Model)
     {
-        <li class="site-selection-item">
-            <a class="link" href="@Url.Content(@item.URL)">
-                @item.Display
-            </a>
-        </li>
+        if(null != item.Permission && User.IsInRole(item.Permission))
+        {
+            <li class="site-selection-item">
+                <a class="link" href="@Url.Content(@item.URL)">
+                    @item.Display
+                </a>
+            </li>
+        }
     }
     </ul>
 </div>
