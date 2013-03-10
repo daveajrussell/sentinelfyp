@@ -54,6 +54,20 @@ namespace Sentinel.Controllers
             }
         };
 
+        List<ActionButtonsViewModel> pageItems = new List<ActionButtonsViewModel>()
+        {
+            new ActionButtonsViewModel()
+            {
+                Display = "Back",
+                Javascript = "navigateBack('Index')"
+            }
+        };
+
+        public ActionResult TrackingPageActionButtons()
+        {
+            return PartialView("../ActionButtons/PageActionButtonsPartial", pageItems);
+        }
+
         public ActionResult Index()
         {
             return View(menuItems);

@@ -13,5 +13,6 @@ namespace DomainModel.Interfaces.Repositories
         void Logout(Guid oUserKey, int iSessionID);
         User GetUserByUserKey(Guid oUserKey);
         IEnumerable<User> GetUsers();
+        bool ResetPassword(Guid oUserKey, string strSalt, string strHash);
     }
 }

@@ -339,7 +339,7 @@
     <Content Include="Views\Tracking\Dialogs\LiveDriverSelectDialog.cshtml" />
     <Content Include="Views\Tracking\LiveTrackingDriverFeed.cshtml" />
     <Content Include="Views\Tracking\LiveElapsedTrackingDriverFeed.cshtml" />
-    <Content Include="Views\Heatmapping\HeatmapPartial.cshtml" />
+    <Content Include="Views\Heatmapping\SignalHeatmapPartial.cshtml" />
     <Content Include="Views\Monitor\UserContactDetailsPartial.cshtml" />
     <Content Include="Views\Tracking\AllDriverLiveTracking.cshtml" />
     <Content Include="Views\Administration\Index.cshtml" />
@@ -351,6 +351,8 @@
     <Content Include="Views\Administration\UserAdministration.cshtml" />
     <Content Include="Views\Administration\ResetPassword.cshtml" />
     <Content Include="Views\Administration\ResetPasswordPartial.cshtml" />
+    <Content Include="Views\Administration\Dialogs\ResetPasswordConfirmDialogPartial.cshtml" />
+    <Content Include="Views\Heatmapping\ActivityHeatmapPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">

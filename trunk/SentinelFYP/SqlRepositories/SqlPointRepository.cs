@@ -17,8 +17,8 @@ namespace SqlRepositories
     public class SqlPointRepository : IPointRepository
     {
         private readonly string _connectionString;
-        private const int SIZE = 256; // # size of (square) tile; NB: changing this will break gmerc calls!
-        private const int MAX_ZOOM = 31; // # this depends on Google API; 0 is furthest out as of recent ver.#
+        private const int SIZE = 256; 
+        private const int MAX_ZOOM = 31;
 
         private readonly MercatorProjection _projection;
 
@@ -32,9 +32,18 @@ namespace SqlRepositories
             _projection = new MercatorProjection();
         }
 
-        public List<PointLatLng> LoadPoints()
+        public List<PointLatLng> LoadSignalBlackspotPoints()
         {
             using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT * FROM [GIS].[SIGNAL_BLACKSPOT]"))
+            {
+                return (from row in oSet.FirstDataTableAsEnumerable()
+                        select row.ToPointLatLng()).ToList();
+            }
+        }
+
+        public List<PointLatLng> LoadActivityPoints()
+        {
+            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT * FROM [GIS].[GEOSPATIAL_INFORMATION]"))
             {
                 return (from row in oSet.FirstDataTableAsEnumerable()
                         select row.ToPointLatLng()).ToList();
@@ -110,17 +119,6 @@ namespace SqlRepositories
         public GMap.NET.Point AdjustMapPixelsToTilePixels(GMap.NET.Point tileXYPoint, GMap.NET.Point mapPixelPoint)
         {
             return new GMap.NET.Point(mapPixelPoint.X - (tileXYPoint.X * SIZE), mapPixelPoint.Y - (tileXYPoint.Y * SIZE));
-        }
-
-        public void AddLocation(decimal latitude, decimal longitude)
-        {
-            var arrParams = new SqlParameter[]
-            {
-                new SqlParameter("@IP_LATITUDE", latitude),
-                new SqlParameter("@IP_LONGITUDE", longitude)
-            };
-
-            SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "dbo.INSERT_LOCATION", arrParams);
         }
     }
 }

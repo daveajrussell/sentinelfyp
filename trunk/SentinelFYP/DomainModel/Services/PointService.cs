@@ -25,9 +25,14 @@ namespace DomainModel.Services
             _pointRepository = pointRepository;
         }
 
-        public List<PointLatLng> LoadPoints()
+        public List<PointLatLng> LoadSignalBlackspotPoints()
         {
-            return _pointRepository.LoadPoints();
+            return _pointRepository.LoadSignalBlackspotPoints();
+        }
+
+        public List<PointLatLng> LoadActivityPoints()
+        {
+            return _pointRepository.LoadActivityPoints();
         }
 
         public GMap.NET.Point AdjustMapPixelsToTilePixels(GMap.NET.Point tileXYPoint, GMap.NET.Point mapPixelPoint)
@@ -49,14 +54,6 @@ namespace DomainModel.Services
                 throw new ArgumentNullException("Points");
 
             return _pointRepository.GetPointsForTile(x, y, dot, zoom, _points);
-        }
-
-        public void AddLocation(GeospatialInformation location)
-        {
-            if (location == null)
-                throw new ArgumentNullException("Location");
-
-            _pointRepository.AddLocation(location.Latitude, location.Longitude);
         }
     }
 }

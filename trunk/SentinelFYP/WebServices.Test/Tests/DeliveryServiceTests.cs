@@ -85,7 +85,7 @@ namespace WebServices.Test.Tests
             Xunit.Assert.Throws<ProtocolException>(() => client.GeoTagDelivery(strInvalidDeliveryItemJson));
         }
 
-        [Fact]
+        /*[Fact]
         [TestMethod]
         public void TestSubmittingValidDeliveryItem()
         {
@@ -108,7 +108,7 @@ namespace WebServices.Test.Tests
 
             string strValidDeliveryItemJson = JsonR.JsonSerializer(oAsset);
             Xunit.Assert.DoesNotThrow(() => client.GeoTagDelivery(strValidDeliveryItemJson));
-        }
+        }*/
 
         //[TestMethod]
         public void TestSubmitRandomDeliveryItemLoadTest()

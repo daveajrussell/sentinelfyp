@@ -77,44 +77,6 @@ namespace Sentinel.Tests.Controllers
 
         [Fact]
         [TestMethod]
-        public void TestIndex()
-        {
-            var target = new AssetManagementController(_consignmentService.Object, _itemService.Object);
-
-            var result = target.Index();
-            var item = (new List<MenuViewModel>(((List<MenuViewModel>)(((ViewResultBase)(result)).Model))))[0];
-
-            Xunit.Assert.NotNull(result);
-            Xunit.Assert.IsAssignableFrom<ViewResult>(result);
-
-            Xunit.Assert.NotNull(item);
-            Xunit.Assert.IsAssignableFrom<MenuViewModel>(item);
-            Xunit.Assert.Equal("Consignment Management", item.Display);
-            Xunit.Assert.Equal("~/AssetManagement/ConsignmentManagement", item.URL);
-            Xunit.Assert.Equal("Do Consignment Stuff", item.Description);
-        }
-
-        [Fact]
-        [TestMethod]
-        public void TestConsignmentManagement()
-        {
-            var target = new AssetManagementController(_consignmentService.Object, _itemService.Object);
-
-            var result = target.ConsignmentManagement();
-            var item = (new List<MenuViewModel>(((List<MenuViewModel>)(((ViewResultBase)(result)).Model))))[0];
-
-            Xunit.Assert.NotNull(result);
-            Xunit.Assert.IsAssignableFrom<ViewResult>(result);
-
-            Xunit.Assert.NotNull(item);
-            Xunit.Assert.IsAssignableFrom<MenuViewModel>(item);
-            Xunit.Assert.Equal("AssignedConsignments", item.ID);
-            Xunit.Assert.Equal("Assigned Consignments", item.Display);
-            Xunit.Assert.Equal("Display all consignments that have been assigned to a driver", item.Description);
-        }
-
-        [Fact]
-        [TestMethod]
         public void TestAssignedConsignments()
         {
             var target = new AssetManagementController(_consignmentService.Object, _itemService.Object);
@@ -145,7 +107,7 @@ namespace Sentinel.Tests.Controllers
             Xunit.Assert.NotNull(item);
             Xunit.Assert.IsAssignableFrom<ActionButtonsViewModel>(item);
             Xunit.Assert.Equal("Back", item.Display);
-            Xunit.Assert.Equal("javascript:history.back(1)", item.Javascript);
+            Xunit.Assert.Equal("navigateBack('Index')", item.Javascript);
         }
 
         [Fact]
@@ -182,7 +144,7 @@ namespace Sentinel.Tests.Controllers
             Xunit.Assert.NotNull(itemOne);
             Xunit.Assert.IsAssignableFrom<ActionButtonsViewModel>(itemOne);
             Xunit.Assert.Equal("Back", itemOne.Display);
-            Xunit.Assert.Equal("javascript:history.back(1)", itemOne.Javascript);
+            Xunit.Assert.Equal("navigateBack('Index')", itemOne.Javascript);
 
             Xunit.Assert.NotNull(itemTwo);
             Xunit.Assert.IsAssignableFrom<ActionButtonsViewModel>(itemTwo);

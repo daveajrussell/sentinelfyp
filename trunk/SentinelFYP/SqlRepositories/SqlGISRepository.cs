@@ -30,17 +30,6 @@ namespace SqlRepositories
 
         public void AddGeospatialInformation(GeospatialInformation oGeoInformation)
         {
-            /*
-            var arrParams = new SqlParameter[] {
-                new SqlParameter("@IP_SESSION_ID", oGeoInformation.SessionID),
-                new SqlParameter("@IP_USER_KEY", oGeoInformation.DriverKey),
-                new SqlParameter("@IP_TIME_STAMP", oGeoInformation.TimeStamp),
-                new SqlParameter("@IP_LATITUDE", oGeoInformation.Latitude),
-                new SqlParameter("@IP_LONGITUDE", oGeoInformation.Longitude),
-                new SqlParameter("@IP_SPEED", oGeoInformation.Speed),
-                new SqlParameter("@IP_ORIENTATION", oGeoInformation.Orientation)
-            };*/
-
             var oXmlString = GetXmlString(oGeoInformation);
             var sqlParam = new SqlParameter("@IP_XML", oXmlString);
 
@@ -49,13 +38,6 @@ namespace SqlRepositories
 
         public void AddGeospatialInformationSet(IEnumerable<GeospatialInformation> oGeoInformationSet)
         {
-            /*var arrParams = new SqlParameter[]
-            {
-                new SqlParameter("@IP_SESSION_ID", oGeoInformationSet.First().SessionID),
-                new SqlParameter("@IP_USER_KEY", oGeoInformationSet.First().DriverKey),
-                new SqlParameter("@IP_XML", oXmlString)
-            };*/
-
             var oXmlString = GetXmlString(oGeoInformationSet);
             var sqlParam = new SqlParameter("@IP_XML", oXmlString);
 
