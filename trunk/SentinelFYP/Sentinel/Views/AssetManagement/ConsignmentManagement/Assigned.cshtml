@@ -11,10 +11,64 @@
     grid.UsePostBack = false;
 }
 
+<script type="text/javascript">
+
+    $(function () {
+        $('.show-item').on('click', function () {
+
+            $('.child-grid').each(function () {
+                $(this).remove().slideUp();
+            });
+
+            var consignmentKey = $(this).attr('key');
+
+            if ($(this).hasClass('ui-plus')) {
+
+                $(this).removeClass('ui-plus').addClass('ui-minus');
+
+                var self = $(this);
+
+                $.post('../AssetManagement/GetConsignmentDeliveryItem', { strConsignmentKey: consignmentKey }, function (data) {
+                    self.parents('tr:first').after('<tr class="child-grid"><td colspan="8">' + data + '</td></tr>').slideDown();
+                });
+
+            } else {
+                $(this).removeClass('ui-minus').addClass('ui-plus');
+            }
+        });
+
+        $('#btnUnAssignSelectedConsignments').on('click', function () {
+            var keys = new Array();
+            $('.consignment-keys:checked').each(function () {
+                keys.push($(this).val());
+            });
+
+            $.ajax({
+                url: '../AssetManagement/UnAssignConsignments',
+                data: { strConsignmentKeys: keys.toString() },
+                success: function () {
+                    window.location.href = 'UnAssignedConsignments';
+                }
+            });
+        });
+
+        $('#btnPrintDeliveryLabels').on('click', function () {
+            var keys = new Array();
+            $('.consignment-keys:checked').each(function () {
+                keys.push($(this).val());
+            });
+
+            var strKeys = keys.toString();
+            window.location.href = '@Url.Action("PrintDeliveryItemLabel")?strConsignmentKeys=' + strKeys;
+        });
+    });
+
+</script>
+
 <section>
     @grid.GetHtml(columns: new SentinelRazorWebGridColumn[]{
-                            grid.CreateColumn(headerHorizontalAlignment: "center", headerText: "Items", dataFieldFormat: @<text> <a value="@item.ConsignmentKey" class="show-items ui-icon ui-icon-plus"></a> </text>),
-                            
+                            grid.CreateColumn(itemHorizontalAlignment: "center", width: "13px", dataFieldFormat: @<text> <a key="@item.ConsignmentKey" class="show-item ui-plus"></a></text>),
+                            grid.CreateColumn(width: "13px", itemHorizontalAlignment: "center", dataFieldFormat: @<text> <input type="checkbox" class="consignment-keys" value="@item.ConsignmentKey" /> </text>),
                             grid.CreateColumn(dataField: "ConsignmentKey", headerText: "Consignment Key", headerHorizontalAlignment: "center"),
                             grid.CreateColumn(dataField: "AssignedDriverKey", headerText: "Assigned Driver Key", headerHorizontalAlignment: "center"),
                             grid.CreateColumn(dataField: "AssignedDriverFirstName", headerText: "Driver First Name", headerHorizontalAlignment: "center"),
@@ -22,7 +76,7 @@
                             grid.CreateColumn(dataField: "AssignedDriverContactNumber", headerText: "Driver Contact Number", headerHorizontalAlignment: "center"), 
                             grid.CreateColumn(dataField: "ConsignmentDateTime", headerText: "Consignment Created", headerHorizontalAlignment: "center")
                         },
-                  pager: new Pager { Alignment = PagerAlign.Center, TotalRows = ViewBag.GridRecordCount, RowsPerPage  = 20, CssClass = "pager" },
+                  pager: new Pager { Alignment = PagerAlign.Center, TotalRows = ViewBag.GridRecordCount, RowsPerPage = 20, CssClass = "pager" },
                   tableStyle: "table",
                   headerStyle: "head",
                   alternatingRowStyle: "alt")
