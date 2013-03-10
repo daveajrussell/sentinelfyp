@@ -100,6 +100,10 @@
       <HintPath>..\ProjectDependancies\PdfSharp.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
+    <Reference Include="SentinelExceptionManagement, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SentinelExceptionManagement\bin\Debug\SentinelExceptionManagement.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Services" />
     <Reference Include="System.Runtime.Serialization" />
@@ -129,10 +133,12 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AdministrationController.cs" />
     <Compile Include="Controllers\AssetManagementController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HeaderController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\HeatmapController.cs" />
+    <Compile Include="Controllers\HeatmappingController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MonitorController.cs" />
@@ -158,7 +164,8 @@
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Hubs\SentinelHub.cs" />
-    <Compile Include="Services\GISDataContract.cs" />
+    <Compile Include="Services\DataContracts\GeospatialInformationDataContract.cs" />
+    <Compile Include="Services\DataContracts\GeotaggedAssetDataContract.cs" />
     <Compile Include="Services\INotifierService.cs" />
     <Compile Include="Services\NotifierService.svc.cs">
       <DependentUpon>NotifierService.svc</DependentUpon>
@@ -173,9 +180,14 @@
     <Content Include="Content\etc\color-schemes\pbj.png" />
     <Content Include="Content\etc\color-schemes\pgaitch.png" />
     <Content Include="Content\images\asc.gif" />
+    <Content Include="Content\images\bgs\bg-img-admin.png" />
+    <Content Include="Content\images\bgs\bg-img-heatmapping.png" />
+    <Content Include="Content\images\bgs\bg-img-home.png" />
+    <Content Include="Content\images\bgs\bg-img-tracking.png" />
     <Content Include="Content\images\bgs\management-img.png" />
     <Content Include="Content\images\desc.gif" />
     <Content Include="Content\images\FYP-Diagram.png" />
+    <Content Include="Content\images\img-logo.png" />
     <Content Include="Content\images\map_loader.gif" />
     <Content Include="Content\images\test.png" />
     <Content Include="Content\images\ui-bg_diagonals-medium_50_999999_40x40.png" />
@@ -200,7 +212,6 @@
     <Content Include="Content\images\ui-icons_FFFFFF_256x240.png" />
     <Content Include="Content\images\ui-login_dark.png" />
     <Content Include="Content\jquery-ui-1.10.0.custom.css" />
-    <Content Include="Content\jquery-ui-1.10.0.custom.min.css" />
     <Content Include="Content\jquery.qtip.min.css" />
     <Content Include="Content\v1_actions.css" />
     <Content Include="Content\v1_grid.css" />
@@ -210,6 +221,7 @@
     <Content Include="Content\v1_master.css" />
     <Content Include="Content\v1_menu.css" />
     <Content Include="Content\v1_monitor.css" />
+    <Content Include="Content\v1_sections.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\common.js" />
     <Content Include="Scripts\jquery-1.8.3.min.js" />
@@ -286,7 +298,6 @@
     <Content Include="Content\etc\dots\dot7.png" />
     <Content Include="Content\etc\dots\dot8.png" />
     <Content Include="Content\etc\dots\dot9.png" />
-    <Content Include="Views\ConsignmentManagement\Index.cshtml" />
     <Content Include="Views\Shared\RealTimeMonitorPartial.cshtml" />
     <Content Include="Views\AssetManagement\AssignedConsignmentsPartial.cshtml" />
     <Content Include="Views\AssetManagement\DeliveryItemGridPartial.cshtml" />
@@ -301,22 +312,17 @@
   <ItemGroup>
     <None Include="Content\etc\color-schemes\master.psd" />
     <None Include="Content\etc\dots\master.psd" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <Content Include="Views\Menu\MenuPartial.cshtml" />
     <Content Include="Views\Header\HeaderPartial.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Heatmap\Index.cshtml" />
+    <Content Include="Views\Heatmapping\Index.cshtml" />
     <None Include="Properties\PublishProfiles\SENTINEL_APP.pubxml" />
-    <Content Include="Views\AssetManagement\AssignConsignmentPartial.cshtml" />
-    <Content Include="Views\AssetManagement\ReAssignConsignmentPartial.cshtml" />
     <Content Include="Views\AssetManagement\AssignedDeliveryItemsPartial.cshtml" />
-    <Content Include="Views\AssetManagement\ReAssignDeliveryItemPartial.cshtml" />
     <Content Include="Views\AssetManagement\UnAssignDeliveryItemPartial.cshtml" />
     <Content Include="Views\AssetManagement\AssignDeliveryItemPartial.cshtml" />
     <Content Include="Views\AssetManagement\Index.cshtml" />
     <Content Include="Views\AssetManagement\DeliveryItemManagement.cshtml" />
-    <Content Include="Views\AssetManagement\DriverManagement.cshtml" />
     <Content Include="Views\AssetManagement\ConsignmentManagement.cshtml" />
     <Content Include="Views\AssetManagement\ConsignmentManagement\Assigned.cshtml" />
     <Content Include="Views\AssetManagement\ConsignmentManagement\UnAssigned.cshtml" />
@@ -333,9 +339,18 @@
     <Content Include="Views\Tracking\Dialogs\LiveDriverSelectDialog.cshtml" />
     <Content Include="Views\Tracking\LiveTrackingDriverFeed.cshtml" />
     <Content Include="Views\Tracking\LiveElapsedTrackingDriverFeed.cshtml" />
-    <Content Include="Views\Heatmap\HeatmapPartial.cshtml" />
+    <Content Include="Views\Heatmapping\HeatmapPartial.cshtml" />
     <Content Include="Views\Monitor\UserContactDetailsPartial.cshtml" />
     <Content Include="Views\Tracking\AllDriverLiveTracking.cshtml" />
+    <Content Include="Views\Administration\Index.cshtml" />
+    <Content Include="Views\Heatmapping\ActivityMap.cshtml" />
+    <Content Include="Views\Heatmapping\SignalMap.cshtml" />
+    <Content Include="Views\AssetManagement\Dialogs\DriverSelectDialog.cshtml" />
+    <Content Include="Views\Error\Error.cshtml" />
+    <Content Include="Views\ActionButtons\PageActionButtonsLargePartial.cshtml" />
+    <Content Include="Views\Administration\UserAdministration.cshtml" />
+    <Content Include="Views\Administration\ResetPassword.cshtml" />
+    <Content Include="Views\Administration\ResetPasswordPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">
