@@ -47,14 +47,14 @@ namespace Sentinel.Controllers
         {
             new MenuViewModel()
             {
-                ID = "AssignedConsignments",
+                URL = "~/AssetManagement/AssignedConsignments",
                 Display = "Assigned Consignments",
                 Description = "Display all consignments that have been assigned to a driver",
                 Permission = "AUDITOR"
             },
             new MenuViewModel()
             {
-                ID = "UnAssignedConsignments",
+                URL = "~/AssetManagement/UnAssignedConsignments",
                 Display = "Unassigned Consignments",
                 Description = "Display all consignents that have not yet been assigned",
                 Permission = "AUDITOR"
