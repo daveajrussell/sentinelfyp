@@ -32,13 +32,13 @@ namespace Sentinel.Tests.InfrastructureTests
             _service.Setup(m => m.LogIn(It.IsAny<string>(), It.IsAny<string>(), out user, out session));
         }
 
-        [Fact]
+        /*[Fact]
         public void TestValidateUser()
         {
             var provider = new SentinelMembershipProvider(_service.Object);
 
             var result = provider.ValidateUser("", "");
-        }
+        }*/
 
         [Fact]
         public void TestChangePassword()

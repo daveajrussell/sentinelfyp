@@ -15,9 +15,9 @@
         var arrOverlay = new google.maps.ImageMapType({
             getTileUrl: function (tile, zoom) {
 
-                var url = "../Heatmap/Tile?colorScheme=classic&zoom=" + zoom + "&x=" + tile.x + "&y=" + tile.y + "&ran=" + Math.random();
+                var url = "../Heatmapping/ActivityTile?zoom=" + zoom + "&x=" + tile.x + "&y=" + tile.y;
 
-                //$(arrOverlay).trigger("overlay-busy");
+                $(arrOverlay).trigger("overlay-busy");
                 return url;
             },
             tileSize: new google.maps.Size(256, 256),
@@ -44,7 +44,7 @@
         });
 
         google.maps.event.addListener(arrOverlay, 'tilesloaded', function () {
-            //$(arrOverlay).trigger("overlay-idle");
+            $(arrOverlay).trigger("overlay-idle");
         });
 
         map.overlayMapTypes.push(arrOverlay);
@@ -100,11 +100,11 @@
                         });
 
                         var gisInfo =
-                        '<div id="gis-info">' +
-                        '<span>Date: @set.GeospatialInformation.First().TimeStamp.ToShortDateString() </span> <br/>' +
-                            '<span>Time: @set.GeospatialInformation.First().TimeStamp.ToShortTimeString() <br />' +
-                            '<span>Speed: @set.GeospatialInformation.First().Speed </span> <br />' +
-                            '<span>Orientation: @set.GeospatialInformation.First().Orientation <span>' +
+                            '<div id="gis-info">' +
+                                '<span>Date: @set.GeospatialInformation.First().TimeStamp.ToShortDateString() </span> <br/>' +
+                                '<span>Time: @set.GeospatialInformation.First().TimeStamp.ToShortTimeString() <br />' +
+                                '<span>Speed: @set.GeospatialInformation.First().Speed </span> <br />' +
+                                '<span>Orientation: @set.GeospatialInformation.First().Orientation <span>' +
                             '</div>';
 
                             var infoWindow = new google.maps.InfoWindow({

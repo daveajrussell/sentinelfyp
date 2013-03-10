@@ -23,11 +23,8 @@ namespace DomainModel.Test.Tests
         {
             _pointRepository = new Mock<IPointRepository>();
 
-            _pointRepository.Setup(m => m.LoadPoints())
+            _pointRepository.Setup(m => m.LoadSignalBlackspotPoints())
                 .Returns(PointServiceTestHelper.MockPointLatLngList())
-                .Verifiable();
-
-            _pointRepository.Setup(m => m.AddLocation(It.IsAny<decimal>(), It.IsAny<decimal>()))
                 .Verifiable();
 
             _pointRepository.Setup(m => m.AdjustMapPixelsToTilePixels(It.IsAny<GMap.NET.Point>(), It.IsAny<GMap.NET.Point>()))
@@ -54,23 +51,9 @@ namespace DomainModel.Test.Tests
         public void LoadPointsShouldNotReturnNull()
         {
             var pointService = new PointService(_pointRepository.Object);
-            var points = pointService.LoadPoints();
+            var points = pointService.LoadSignalBlackspotPoints();
 
             Xunit.Assert.NotNull(points);
-        }
-
-        [Fact]
-        public void AddNullLocationShouldThrow()
-        {
-            var pointService = new PointService(_pointRepository.Object);
-            Xunit.Assert.Throws<ArgumentNullException>(() => pointService.AddLocation(null));
-        }
-
-        [Fact]
-        public void AddLocationShouldNotThrow()
-        {
-            var pointService = new PointService(_pointRepository.Object);
-            Xunit.Assert.DoesNotThrow(() => pointService.AddLocation(new GeospatialInformation()));
         }
 
         [Fact]

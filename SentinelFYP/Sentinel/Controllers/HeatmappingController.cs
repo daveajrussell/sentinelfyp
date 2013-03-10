@@ -16,7 +16,8 @@ namespace Sentinel.Controllers
         private readonly IPointService _pointService;
         private readonly IGHeatService _gheatService;
         private readonly ILiveTrackingService _trackingService;
-        private List<PointLatLng> _points;
+        private List<PointLatLng> _signalBlackspotPoints;
+        private List<PointLatLng> _activityPoints;
 
         List<MenuViewModel> menuItems = new List<MenuViewModel>()
         {
@@ -24,13 +25,24 @@ namespace Sentinel.Controllers
             {
                 Display = "Activity Heatmap",
                 URL = "~/Heatmapping/ActivityMap",
-                Description = "View a heatmap of your fleet's activity."
+                Description = "View a heatmap of your fleet's activity.",
+                Permission = "AUDITOR"
             },
             new MenuViewModel()
             {
                 Display = "Signal Heatmap",
                 URL = "~/Heatmapping/SignalMap",
-                Description = "View a heatmap of signal blackspots."
+                Description = "View a heatmap of signal blackspots.",
+                Permission = "AUDITOR"
+            }
+        };
+
+        List<ActionButtonsViewModel> pageItems = new List<ActionButtonsViewModel>()
+        {
+            new ActionButtonsViewModel()
+            {
+                Display = "Back",
+                Javascript = "navigateBack('Index')"
             }
         };
 
@@ -51,18 +63,28 @@ namespace Sentinel.Controllers
 
             _trackingService = trackingService;
 
-            if (_points == null)
-                _points = _pointService.LoadPoints();
+            _activityPoints = _pointService.LoadActivityPoints();
 
+            _signalBlackspotPoints = _pointService.LoadSignalBlackspotPoints();
+        }
+
+        public ActionResult ActivityMonitoringPageActions()
+        {
+            return PartialView("../ActionButtons/PageActionButtonsLargePartial", menuItems);
+        }
+
+        public ActionResult HeatmapPageActionButtons()
+        {
+            return PartialView("../ActionButtons/PageActionButtonsPartial", pageItems);
         }
 
         public ActionResult Index()
         {
-            return View(menuItems);
+            return View();
         }
 
         public ActionResult ActivityMap()
-        {
+        {   
             return View();
         }
 
@@ -72,15 +94,30 @@ namespace Sentinel.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult LiveHeatmapData()
+        public ActionResult LiveActivityHeatmapData()
         {
             var data = _trackingService.GetAllLiveElapsedRoutes();
-            return PartialView("HeatmapPartial", data);
+            return PartialView("ActivityHeatmapPartial", data);
         }
 
-        public TileResult Tile(string colorScheme, string zoom, string x, string y, string rand)
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult LiveSignalHeatmapData()
         {
-            using (var tile = _gheatService.GetTile(_points, "classic", int.Parse(zoom), int.Parse(x), int.Parse(y)))
+            var data = _trackingService.GetAllLiveElapsedRoutes();
+            return PartialView("SignalHeatmapPartial", data);
+        }
+
+        public TileResult ActivityTile(string zoom, string x, string y)
+        {
+            using (var tile = _gheatService.GetTile(_activityPoints, "classic", int.Parse(zoom), int.Parse(x), int.Parse(y)))
+            {
+                return new TileResult(tile);
+            }
+        }
+
+        public TileResult BlackSpotTile(string zoom, string x, string y)
+        {
+            using (var tile = _gheatService.GetTile(_signalBlackspotPoints, "pgaitch", int.Parse(zoom), int.Parse(x), int.Parse(y)))
             {
                 return new TileResult(tile);
             }

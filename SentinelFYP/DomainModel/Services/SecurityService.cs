@@ -6,6 +6,7 @@ using DomainModel.Interfaces.Services;
 using DomainModel.Interfaces.Repositories;
 using DomainModel.SecurityModels;
 using DomainModel.Models.AuditModels;
+using DomainModel.Security;
 
 namespace DomainModel.Services
 {
@@ -45,6 +46,17 @@ namespace DomainModel.Services
         public IEnumerable<User> GetUsers()
         {
             return _securityRepository.GetUsers();
+        }
+
+
+        public bool ResetPassword(Guid oUserKey, string strPassword)
+        {
+            string strSalt;
+            string strHash;
+
+            SaltedHashGenerator.CreateSaltAndHashFromPassword(strPassword, out strSalt, out strHash);
+
+            return _securityRepository.ResetPassword(oUserKey, strSalt, strHash);
         }
     }
 }

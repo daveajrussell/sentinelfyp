@@ -1,10 +1,12 @@
 ﻿using DomainModel.Interfaces.Services;
+using Sentinel.Infrastructure;
 using Sentinel.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace Sentinel.Controllers
 {
@@ -112,6 +114,17 @@ namespace Sentinel.Controllers
             var user = _securityService.GetUserByUserKey(oUserKey);
 
             return PartialView("ResetPasswordPartial", user);
+        }
+
+        public ActionResult ResetUsersPassword(string strUserKey, string strPassword)
+        {
+            var oUserKey = Guid.Parse(strUserKey);
+            bool result = _securityService.ResetPassword(oUserKey, strPassword);
+
+            if (result)
+                return PartialView("Dialogs/ResetPasswordConfirmDialogPartial", "Password Reset Successfully");
+            else
+                return PartialView("Dialogs/ResetPasswordConfirmDialogPartial", "Password Reset Failed");
         }
     }
 }

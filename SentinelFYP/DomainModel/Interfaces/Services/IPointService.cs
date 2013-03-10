@@ -11,9 +11,9 @@ namespace DomainModel.Interfaces.Services
 {
     public interface IPointService
     {
-        List<PointLatLng> LoadPoints();
+        List<PointLatLng> LoadSignalBlackspotPoints();
+        List<PointLatLng> LoadActivityPoints();
         GMap.NET.Point[] GetPointsForTile(int x, int y, Bitmap bitmap, int zoom, List<PointLatLng> _points);
         GMap.NET.Point AdjustMapPixelsToTilePixels(GMap.NET.Point tileXYPoint, GMap.NET.Point mapPixelPoint);
-        void AddLocation(GeospatialInformation location);
     }
 }

@@ -99,5 +99,26 @@ namespace SqlRepositories
                 return oSet.ToUserSet();
             }
         }
+
+
+        public bool ResetPassword(Guid oUserKey, string strSalt, string strHash)
+        {
+            var arrParams = new SqlParameter[]
+            {
+                new SqlParameter("@IP_USER_KEY", oUserKey),
+                new SqlParameter("@IP_NEW_SALT", strSalt),
+                new SqlParameter("@IP_NEW_HASH", strHash)
+            };
+
+            try
+            {
+                SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "[SECURITY].[RESET_USER_PASSWORD]", arrParams);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

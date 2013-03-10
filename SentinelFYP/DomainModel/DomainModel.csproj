@@ -116,6 +116,7 @@
     <Compile Include="Models\GISModels\Tile.cs" />
     <Compile Include="Models\SecurityModels\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\SaltedHashGenerator.cs" />
     <Compile Include="Services\ConsignmentManagementService.cs" />
     <Compile Include="Services\DeliveryItemManagementService.cs" />
     <Compile Include="Services\GeoTaggedDeliveryService.cs" />
@@ -137,7 +138,6 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />

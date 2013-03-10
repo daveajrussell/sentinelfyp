@@ -38,12 +38,12 @@ namespace Sentinel.Tests.Services
         }
 
         [Fact]
-        public void TestUpdateShouldBeCautionary()
+        public void TestUpdateShouldBeSevere()
         {
             var data = new GeospatialInformation() { DriverKey = Guid.NewGuid(), Speed = 0 };
             var result = SeverityHelper.Severity(data);
 
-            Assert.Equal(SeverityHelper.CAUTION, result);
+            Assert.Equal(SeverityHelper.SEVERE, result);
         }
 
         [Fact]
