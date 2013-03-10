@@ -34,14 +34,23 @@
                 $(this).removeClass('ui-minus').addClass('ui-plus');
             }
         });
+
+        $('#btnAssignSelectedConsignments').on('click', function () {
+            $.ajax({
+                url: '../AssetManagement/GetDriverPartialForAssigningConsignment',
+                success: function (data) {
+                    $('.consignment-management').after(data);
+                }
+            });
+        });
     });
 
 </script>
 
-<section>
+<section class="consignment-management">
     @grid.GetHtml(columns: new AspRazorWebGridColumn[]{
                             grid.CreateColumn(itemHorizontalAlignment: "center", width: "13px", dataFieldFormat: @<text> <a key="@item.ConsignmentKey" class="show-item ui-plus"></a></text>),
-                            grid.CreateColumn(width: "13px", itemHorizontalAlignment: "center", dataFieldFormat: @<text> <input type="checkbox" value="@item.ConsignmentKey" /> </text>),
+                            grid.CreateColumn(width: "13px", itemHorizontalAlignment: "center", dataFieldFormat: @<text> <input type="radio" name="consignment-keys" class="consignment-keys" value="@item.ConsignmentKey" /> </text>),
                             grid.CreateColumn(dataField: "ConsignmentKey", headerText: "Consignment Key", headerHorizontalAlignment: "center"),
                             grid.CreateColumn(dataField: "ConsignmentDateTime", headerText: "Consignment Created", headerHorizontalAlignment: "center"),
                         },
