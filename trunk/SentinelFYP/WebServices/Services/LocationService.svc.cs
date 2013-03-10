@@ -85,6 +85,32 @@ namespace WebServices.Services
             }
         }
 
+        public void PostBufferedHistoricalData(string strBufferedHistoricalDataJsonString)
+        {
+            try
+            {
+                GeospatialInformationSetDataContract oGeoInformationSetContract = JsonR.JsonDeserializer<GeospatialInformationSetDataContract>(strBufferedHistoricalDataJsonString);
+                var data = from geoInfo in oGeoInformationSetContract.BufferedData
+                           select new GeospatialInformation()
+                           {
+                               SessionID = geoInfo.iSessionID,
+                               DriverKey = new Guid(geoInfo.oUserIdentification),
+                               TimeStamp = new DateTime(1970, 1, 1).AddMilliseconds(geoInfo.lTimeStamp),
+                               Latitude = geoInfo.dLatitude,
+                               Longitude = geoInfo.dLongitude,
+                               Speed = geoInfo.dSpeed,
+                               Orientation = geoInfo.iOrientation
+                           };
+
+                _gisService.AddHistoricalGeospatialInformationSet(data);
+            }
+            catch (Exception ex)
+            {
+                ExceptionManager.LogException(ex);
+                throw ex;
+            }
+        }
+
         private void Notify(string strGISObject)
         {
             using (var client = new WebClient())

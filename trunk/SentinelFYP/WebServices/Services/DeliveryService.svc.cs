@@ -10,6 +10,9 @@ using DomainModel.Models.AssetModels;
 using Ninject;
 using WebServices.DataContracts;
 using WebServices.Interfaces;
+using System.Net;
+using System.IO;
+using System.Runtime.Serialization.Json;
 
 namespace WebServices.Services
 {
@@ -44,6 +47,21 @@ namespace WebServices.Services
         {
             AssetKeyDataContract oAssetKey = JsonR.JsonDeserializer<AssetKeyDataContract>(strAssetKey);
             _service.UnTagDelivery(Guid.Parse(oAssetKey.oAssetKey));
+        }
+
+        private void Notify(string strGeoTaggedDeliveryObject)
+        {
+            using (var client = new WebClient())
+            {
+                client.Headers["Content-Type"] = "application/json";
+                using (var stream = new MemoryStream())
+                {
+                    var data = new DataContractJsonSerializer(typeof(GeotaggedAssetDataContract));
+                    data.WriteObject(stream, strGeoTaggedDeliveryObject);
+                    client.UploadData("http://fyp.daveajrussell.com/Services/NotifierService.svc/DeliveryNotify", "POST", stream.ToArray());
+                    //client.UploadData("http://localhost/Sentinel/Services/NotifierService.svc/DeliveryNotify", "POST", stream.ToArray());
+                }
+            }
         }
     }
 }

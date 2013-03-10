@@ -82,7 +82,6 @@ namespace SqlRepositories
             SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "[AUDIT].[END_SESSION]", arrParams);
         }
 
-
         public User GetUserByUserKey(Guid oUserKey)
         {
             var sqlParam = new SqlParameter("@IP_USER_KEY", oUserKey);
@@ -90,6 +89,14 @@ namespace SqlRepositories
             using (var oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT * FROM [SECURITY].[USER] WHERE [USER_KEY] = @IP_USER_KEY", sqlParam))
             {
                 return oSet.ToUser();
+            }
+        }
+
+        public IEnumerable<User> GetUsers()
+        {
+            using (var oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT * FROM [SECURITY].[USER]"))
+            {
+                return oSet.ToUserSet();
             }
         }
     }

@@ -11,6 +11,10 @@
             writeEvent('<br />Update from driver: ' + userKey + '<br />Time: ' + timestamp + " Latitude: " + latitude + " Longitude: " + longitude + " Speed: " + speed + " Orientation: " + orientation, eventType, userKey);
         };
 
+        sentinelHub.client.deliveryUpdate = function (userKey, timestamp, eventType) {
+            writeEvent('<br />Driver: ' + userKey + 'made a delivery at: ' + timestamp, eventType, userKey)
+        };
+
         //Write the event to the monitor
         function writeEvent(eventLog, logClass, driverKey) {
             var now = new Date();
@@ -44,8 +48,6 @@
                 });
             });
         }
-
-        writeEvent("Test Update", "caution", "66FBA0E1-6429-4999-9538-6566DEE70048");
 
         $('.contact').on('click', function () {
             
