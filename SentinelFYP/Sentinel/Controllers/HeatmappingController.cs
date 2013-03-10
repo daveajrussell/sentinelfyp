@@ -6,17 +6,35 @@ using System.Web.Mvc;
 using DomainModel.Interfaces.Services;
 using GMap.NET;
 using Sentinel.Helpers.ExtensionMethods;
+using Sentinel.Models;
 
 namespace Sentinel.Controllers
 {
-    public class HeatmapController : Controller
+    [Authorize(Roles = "AUDITOR")]
+    public class HeatmappingController : Controller
     {
         private readonly IPointService _pointService;
         private readonly IGHeatService _gheatService;
         private readonly ILiveTrackingService _trackingService;
         private List<PointLatLng> _points;
 
-        public HeatmapController(IPointService pointService, IGHeatService gheatService, ILiveTrackingService trackingService)
+        List<MenuViewModel> menuItems = new List<MenuViewModel>()
+        {
+            new MenuViewModel()
+            {
+                Display = "Activity Heatmap",
+                URL = "~/Heatmapping/ActivityMap",
+                Description = "View a heatmap of your fleet's activity."
+            },
+            new MenuViewModel()
+            {
+                Display = "Signal Heatmap",
+                URL = "~/Heatmapping/SignalMap",
+                Description = "View a heatmap of signal blackspots."
+            }
+        };
+
+        public HeatmappingController(IPointService pointService, IGHeatService gheatService, ILiveTrackingService trackingService)
         {
             if (pointService == null)
                 throw new ArgumentNullException("Point Service");
@@ -39,6 +57,16 @@ namespace Sentinel.Controllers
         }
 
         public ActionResult Index()
+        {
+            return View(menuItems);
+        }
+
+        public ActionResult ActivityMap()
+        {
+            return View();
+        }
+
+        public ActionResult SignalMap()
         {
             return View();
         }

@@ -40,12 +40,6 @@ namespace Sentinel.Helpers.ExtensionMethods
             document.Info.Author = State.User.UserName;
             document.Info.CreationDate = DateTime.Now;
 
-            // Create an empty page
-            PdfPage page = document.AddPage();
-
-            // Get an XGraphics object for drawing
-            XGraphics gfx = XGraphics.FromPdfPage(page);
-
             // Create a font
             XFont font = new XFont("Verdana", 12, XFontStyle.Bold);
 
@@ -54,18 +48,34 @@ namespace Sentinel.Helpers.ExtensionMethods
             QrCode qrCode = new QrCode();
             Renderer renderer = new Renderer(2, Brushes.Black, Brushes.White);
 
+            // Create an empty page
+            PdfPage page = document.AddPage();
+
+            // Get an XGraphics object for drawing
+            XGraphics gfx = XGraphics.FromPdfPage(page);
+
             int _Y = 15;
+            int count = 0;
 
             // Draw the text
             foreach (var item in _items)
             {
-                gfx.DrawString(item.RecipientFirstName, font, XBrushes.Black, new XRect(10, _Y += 15, page.Width, page.Height), XStringFormats.Center);
-                gfx.DrawString(item.RecipientLastName, font, XBrushes.Black, new XRect(10, _Y += 15, page.Width, page.Height), XStringFormats.Center);
-                gfx.DrawString(item.RecipientAddress, font, XBrushes.Black, new XRect(10, _Y += 15, page.Width, page.Height), XStringFormats.Center);
-                gfx.DrawString(item.RecipientTown, font, XBrushes.Black, new XRect(10, _Y += 15, page.Width, page.Height), XStringFormats.Center);
-                gfx.DrawString(item.RecipientPostCode, font, XBrushes.Black, new XRect(10, _Y += 15, page.Width, page.Height), XStringFormats.Center);
+                count++;
 
-                var qrString = "http://webservices.daveajrussell.com/Services/DeliveryService.svc/GetDeliveryInformation/" + item.DeliveryItemKey;
+                if ((count % 10) == 0)
+                {
+                    page = document.AddPage();
+                    gfx = XGraphics.FromPdfPage(page);
+                    _Y = 15;
+                }
+
+                gfx.DrawString(item.RecipientFirstName, font, XBrushes.Black, new XRect(10, _Y += 15, page.Width, page.Height), XStringFormats.TopLeft);
+                gfx.DrawString(item.RecipientLastName, font, XBrushes.Black, new XRect(10, _Y += 15, page.Width, page.Height), XStringFormats.TopLeft);
+                gfx.DrawString(item.RecipientAddress, font, XBrushes.Black, new XRect(10, _Y += 15, page.Width, page.Height), XStringFormats.TopLeft);
+                gfx.DrawString(item.RecipientTown, font, XBrushes.Black, new XRect(10, _Y += 15, page.Width, page.Height), XStringFormats.TopLeft);
+                gfx.DrawString(item.RecipientPostCode, font, XBrushes.Black, new XRect(10, _Y += 15, page.Width, page.Height), XStringFormats.TopLeft);
+
+                var qrString = item.DeliveryItemKey.ToString();
 
                 Image qrImage;
                 qrEncoder.TryEncode(qrString, out qrCode);
@@ -76,9 +86,11 @@ namespace Sentinel.Helpers.ExtensionMethods
                     qrImage = Bitmap.FromStream(oStream);
                 }
 
-                gfx.DrawImage(XImage.FromGdiPlusImage(qrImage), new XPoint(300, (_Y - 65)));
+                gfx.DrawImage(XImage.FromGdiPlusImage(qrImage), new XPoint(300, (_Y - 55)));
                 
                 qrImage.Dispose();
+
+                _Y += 15;
             }
 
             // Send PDF to browser

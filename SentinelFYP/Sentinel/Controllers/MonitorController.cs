@@ -8,6 +8,7 @@ using GMap.NET;
 
 namespace Sentinel.Controllers
 {
+    [Authorize(Roles = "AUDITOR")]
     public class MonitorController : Controller
     {
         private readonly ISecurityService _securityService;

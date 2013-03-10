@@ -10,6 +10,7 @@ using Sentinel.Models;
 
 namespace Sentinel.Controllers
 {
+    [Authorize(Roles = "AUDITOR")]
     public class TrackingController : Controller
     {
         private IHistoricalTrackingService _histroicalTrackingService;
@@ -34,19 +35,22 @@ namespace Sentinel.Controllers
             {
                 Display = "All Active Drivers",
                 URL = "~/Tracking/AllDriverLiveTracking",
-                Description = "View All Live Active Drivers"
+                Description = "View All Live Active Drivers",
+                Permission = "AUDITOR"
             },
             new MenuViewModel()
             {
                 Display = "Historical Tracking",
                 URL = "~/Tracking/HistoricalTracking",
-                Description = "View Historical Tracking Data"
+                Description = "View Historical Tracking Data",
+                Permission = "AUDITOR"
             },
             new MenuViewModel()
             {
                 Display = "Live Tracking",
                 URL = "~/Tracking/LiveTracking",
-                Description = "View Live Tracking Data"
+                Description = "View Live Tracking Data",
+                Permission = "AUDITOR"
             }
         };
 
@@ -178,7 +182,10 @@ namespace Sentinel.Controllers
             var oDriverKey = GetKeyFromString(strDriverKey);
             var data = _liveTrackingService.GetLiveUpdate(oDriverKey);
 
-            return PartialView("LiveTrackingDriverFeed", data);
+            if (null != data)
+                return PartialView("LiveTrackingDriverFeed", data);
+            else
+                return PartialView("ErrorDialogPartial", "No live data is available for this driver.");
         }
 
         public ActionResult GetLiveElapsedRoute(string strDriverKey)
@@ -186,36 +193,15 @@ namespace Sentinel.Controllers
             var oDriverKey = GetKeyFromString(strDriverKey);
             var data = _liveTrackingService.GetLiveElapsedRoute(oDriverKey);
 
-            return PartialView("LiveElapsedTrackingDriverFeed", data);
+            if (null != data)
+                return PartialView("LiveElapsedTrackingDriverFeed", data);
+            else
+                return PartialView("ErrorDialogPartial", "No elapsed live data is available for this driver.");
         }
 
         private Guid GetKeyFromString(string strKey)
         {
             return new Guid(strKey);
         }
-
-        
-        /*
-        public ActionResult LiveTracking()
-        {
-            return View();
-        }
-        
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult LiveTracking(string strDriverKey)
-        {
-            // get driver live tracking data
-            var oDriverKey = GetKeyFromString(strDriverKey);
-            return View();
-        }
-
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult LiveTrackingLocationUpdate(string strDriverKey)
-        {
-            // get an updated location for a driver, return a map partial
-            var oDriverKey = GetKeyFromString(strDriverKey);
-            return View();
-        }
-        */
     }
 }
