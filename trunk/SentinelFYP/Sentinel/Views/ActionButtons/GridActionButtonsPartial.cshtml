@@ -19,7 +19,10 @@
             <td class="right">
                 @foreach (var item in Model)
                 {
-                    <a id="@item.ID" class="action">@item.Display</a>
+                    if(null != item.Permission && User.IsInRole(item.Permission))
+                    {
+                        <a id="@item.ID" class="action">@item.Display</a>
+                    }
                 }
             </td>
         </tr>

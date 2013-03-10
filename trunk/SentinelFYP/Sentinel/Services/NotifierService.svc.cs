@@ -10,6 +10,8 @@ using Microsoft.AspNet.SignalR.Hubs;
 using Microsoft.AspNet.SignalR;
 using Sentinel.Hubs;
 using DomainModel.Models.GISModels;
+using Sentinel.Services.DataContracts;
+using DomainModel.Models.AssetModels;
 
 namespace Sentinel.Services
 {
@@ -36,5 +38,21 @@ namespace Sentinel.Services
             context.Clients.Group(oGeoInformation.DriverKey.ToString(), null).getUpdatedMap();
             context.Clients.All.allLocationUpdates(oGeoInformation.DriverKey.ToString(), oGeoInformation.TimeStamp.ToShortDateString(), oGeoInformation.Latitude, oGeoInformation.Longitude, oGeoInformation.Speed, oGeoInformation.Orientation, strSeverity);
         }
-    }
+
+        public void DeliveryNotify(string message)
+        {
+            GeotaggedAssetDataContract oGeotaggedAssetContract = JsonR.JsonDeserializer<GeotaggedAssetDataContract>(message);
+            GeoTaggedDeliveryItem oItem = new GeoTaggedDeliveryItem()
+            {
+                AssetKey = new Guid(oGeotaggedAssetContract.oAssetKey),
+                DriverKey = new Guid(oGeotaggedAssetContract.oUserIdentification),
+                TimeStamp = new DateTime(1970, 1, 1).AddMilliseconds(oGeotaggedAssetContract.lTimeStamp),
+                Latitude = oGeotaggedAssetContract.dLatitude,
+                Longitude = oGeotaggedAssetContract.dLongitude,
+            };
+
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SentinelHub>();
+            context.Clients.All.deliveryUpdate(oItem.DriverKey, oItem.TimeStamp.ToShortDateString(), SeverityHelper.NORMAL);
+        }
+}
 }
