@@ -1,0 +1,40 @@
+﻿#site-section {
+    width: 795px;
+    height: 395px;
+    display: block;
+    border-radius: .5em;
+    border: .1em solid #999;
+    background-color: #444;
+}
+
+    #site-section.management-index {
+        background-image: url(images/bgs/management-img.png);
+    }
+
+    #site-section.consignment-management {
+        background-image: url(images/bgs/management-img.png);
+    }
+
+    #site-section.driver-management {
+        background-image: url(images/bgs/management-img.png);
+    }
+
+    #site-section.delivery-item-management {
+        background-image: url(images/bgs/management-img.png);
+    }
+
+    #site-section.home-index {
+        background-image: url(images/bgs/bg-img-home.png);
+    }
+
+    #site-section.administration-index {
+        background-image: url(images/bgs/bg-img-admin.png);
+    }
+
+    #site-section.tracking-index {
+        background-image: url(images/bgs/bg-img-tracking.png);
+    }
+
+    #site-section.heatmapping-index {
+        background-image: url(images/bgs/bg-img-heatmapping.png);
+    }

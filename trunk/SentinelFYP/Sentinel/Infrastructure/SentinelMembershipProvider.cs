@@ -23,10 +23,7 @@ namespace Sentinel.Infrastructure
 
         public SentinelMembershipProvider(ISecurityService securityService)
         {
-            if (securityService == null)
-                throw new ArgumentNullException();
 
-            _securityService = securityService;
         }
 
         public override bool ValidateUser(string username, string password)
@@ -48,6 +45,21 @@ namespace Sentinel.Infrastructure
             }
         }
 
+        public override bool ChangePassword(string username, string oldPassword, string newPassword)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override MembershipUser CreateUser(string username, string password, string email, string passwordQuestion, string passwordAnswer, bool isApproved, object providerUserKey, out MembershipCreateStatus status)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool DeleteUser(string username, bool deleteAllRelatedData)
+        {
+            throw new NotImplementedException();
+        }
+
         public override string ApplicationName
         {
             get
@@ -60,22 +72,7 @@ namespace Sentinel.Infrastructure
             }
         }
 
-        public override bool ChangePassword(string username, string oldPassword, string newPassword)
-        {
-            throw new NotImplementedException();
-        }
-
         public override bool ChangePasswordQuestionAndAnswer(string username, string password, string newPasswordQuestion, string newPasswordAnswer)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override MembershipUser CreateUser(string username, string password, string email, string passwordQuestion, string passwordAnswer, bool isApproved, object providerUserKey, out MembershipCreateStatus status)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override bool DeleteUser(string username, bool deleteAllRelatedData)
         {
             throw new NotImplementedException();
         }

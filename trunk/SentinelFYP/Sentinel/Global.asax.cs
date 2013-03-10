@@ -16,6 +16,8 @@ using Sentinel.Helpers;
 using Microsoft.AspNet.SignalR;
 using Sentinel.Infrastructure;
 using System.Web.Security;
+using SentinelExceptionManagement;
+using Sentinel.Controllers;
 
 namespace Sentinel
 {
@@ -26,7 +28,7 @@ namespace Sentinel
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new HandleErrorAttribute());
+            //filters.Add(new HandleErrorAttribute());
         }
 
         public static void RegisterRoutes(RouteCollection routes)
@@ -39,6 +41,25 @@ namespace Sentinel
                 new { controller = "Account", action = "Login", id = UrlParameter.Optional } // Parameter defaults
             );
 
+        }
+
+        protected void Application_Error()
+        {
+            var exception = Server.GetLastError();
+            ExceptionManager.LogException(exception);
+
+            Response.Clear();
+            Server.ClearError();
+            
+            var routeData = new RouteData();
+            routeData.Values["controller"] = "Error";
+            routeData.Values["action"] = "Error";
+            routeData.Values["exception"] = exception;
+            Response.StatusCode = 500;
+
+            IController errorsController = new ErrorController();
+            var rc = new RequestContext(new HttpContextWrapper(Context), routeData);
+            errorsController.Execute(rc);
         }
 
         protected void Application_Start()

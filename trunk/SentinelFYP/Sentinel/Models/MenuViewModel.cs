@@ -11,5 +11,6 @@ namespace Sentinel.Models
         public string URL { get; set; }
         public string Display { get; set; }
         public string Description { get; set; }
+        public string Permission { get; set; }
     }
 }

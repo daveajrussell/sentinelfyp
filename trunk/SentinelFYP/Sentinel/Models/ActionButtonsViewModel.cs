@@ -11,5 +11,6 @@ namespace Sentinel.Models
         public string Action { get; set; }
         public string Display { get; set; }
         public string Javascript { get; set; }
+        public string Permission { get; set; }
     }
 }

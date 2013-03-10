@@ -1,80 +1,81 @@
-﻿body
-{
+﻿body {
     margin: auto;
     font: bold .7em Verdana;
     color: #fff;
     background-color: #CBCDC9;
 }
 
-#content
-{
+#content {
     margin: auto;
     width: 1000px;
     height: 100%;
     background-color: #373C40;
-        border-radius: .5em;
+    border-radius: .5em;
 }
 
-    #content table td
-    {
+    #content table td {
     }
 
-a, a:visited
-{
+a, a:visited {
     font: bold 1em Verdana;
     color: #737A7F;
     text-decoration: none;
 }
 
-#main
-{
+#main {
     width: 800px;
     min-height: 500px;
     background-color: #373C40;
 }
 
-#map
-{
+#error-body {
+    color: #cc0000;
+    text-align: center;
+    padding-top: 150px;
+}
+
+    #error-body span {
+        font-size: 2em!important;
+    }
+
+#map {
     width: 99%;
     height: 50em;
     border: 2px solid #000;
 }
 
-#map-controls
-{
+#map-controls {
     margin: 2em;
 }
 
-.overlay
-{
+.overlay {
     -webkit-border-radius: .5em;
     border-radius: .5em;
     background-color: #fff;
 }
 
-.overlay-img
-{
+.overlay-img {
     margin: 1em;
 }
 
-#container
-{
+#container {
     height: 100%;
 }
 
-#div-updates
-{
+#div-updates {
     height: 10em;
 }
 
-#events-list
-{
+#events-list {
     height: 100%;
     margin: 1em;
     border-radius: .8em;
 }
 
-#gis-info
-{
+#gis-info {
     color: #666;
+}
+
+.input-error {
+    border: 2px solid #cc0033;
 }

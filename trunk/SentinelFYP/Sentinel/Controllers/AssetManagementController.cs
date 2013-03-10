@@ -9,9 +9,11 @@ using Sentinel.Grid;
 using Sentinel.Helpers;
 using Sentinel.Helpers.ExtensionMethods;
 using Sentinel.Models;
+using DomainModel.Models.AssetModels;
 
 namespace Sentinel.Controllers
 {
+    [Authorize(Roles = "AUDITOR")]
     public class AssetManagementController : Controller
     {
         private IConsignmentManagementService _consignmentService;
@@ -19,23 +21,25 @@ namespace Sentinel.Controllers
 
         List<MenuViewModel> menuItems = new List<MenuViewModel>()
         {
+            /*new MenuViewModel()
+            {
+                Display = "Delivery Item Management",
+                URL = "~/AssetManagement/DeliveryItemManagement",
+                Description = "Manage and assign delivery items to consignments."
+            },*/
             new MenuViewModel()
             {
                 Display = "Consignment Management",
                 URL = "~/AssetManagement/ConsignmentManagement",
-                Description = "Do Consignment Stuff"
-            },
-            new MenuViewModel()
-            {
-                Display = "Delivery Item Management",
-                URL = "~/AssetManagement/DeliveryItemManagement",
-                Description = "Do Delivery Item Stuff"
+                Description = "Manage and assign consignments to drivers.",
+                Permission = "AUDITOR"
             },
             new MenuViewModel()
             {
                 Display = "Driver Management",
                 URL = "~/AssetManagement/DriverManagement",
-                Description = "Do Driver Stuff"
+                Description = "Manage and assign vehicles to drivers.",
+                Permission = "AUDITOR"
             }
         };
 
@@ -45,13 +49,15 @@ namespace Sentinel.Controllers
             {
                 ID = "AssignedConsignments",
                 Display = "Assigned Consignments",
-                Description = "Display all consignments that have been assigned to a driver"
+                Description = "Display all consignments that have been assigned to a driver",
+                Permission = "AUDITOR"
             },
             new MenuViewModel()
             {
                 ID = "UnAssignedConsignments",
                 Display = "Unassigned Consignments",
-                Description = "Display all consignents that have not yet been assigned"
+                Description = "Display all consignents that have not yet been assigned",
+                Permission = "AUDITOR"
             }
         };
 
@@ -60,12 +66,14 @@ namespace Sentinel.Controllers
             new ActionButtonsViewModel()
             {
                 ID = "btnUnassignItems",
-                Display = "Unassign Selected Items"
+                Display = "Unassign Selected Items",
+                Permission = "ADMINISTRATOR"
             },
             new ActionButtonsViewModel()
             {
                 ID = "btnAssignItems",
-                Display = "Assign New Items"
+                Display = "Assign New Items",
+                Permission = "ADMINISTRATOR"
             }
         };
 
@@ -74,19 +82,19 @@ namespace Sentinel.Controllers
             new ActionButtonsViewModel()
             {
                 Display = "Back",
-                Javascript = "javascript:history.back(1)"
+                Javascript = "navigateBack('Index')"
             },
             new ActionButtonsViewModel()
             {
-                Display = "Unassign Selected Consignments"
+                ID = "btnUnAssignSelectedConsignments",
+                Display = "Unassign Selected Consignments",
+                Permission = "ADMINISTRATOR"
             },
             new ActionButtonsViewModel()
             {
-                Display = "Reassign Selected Consignments"
-            },
-            new ActionButtonsViewModel()
-            {
-                Display = "Print Labels For Selected Consignments"
+                ID = "btnPrintDeliveryLabels",
+                Display = "Print Labels For Selected Consignments",
+                Permission = "ADMINISTRATOR"
             }
         };
 
@@ -95,11 +103,13 @@ namespace Sentinel.Controllers
             new ActionButtonsViewModel()
             {
                 Display = "Back",
-                Javascript = "javascript:history.back(1)"
+                Javascript = "navigateBack('Index')"
             },
            new ActionButtonsViewModel()
             {
-                Display = "Assign Selected Consignments"
+                ID = "btnAssignSelectedConsignments",
+                Display = "Assign Selected Consignments",
+                Permission = "AUDITOR"
             }
         };
 
@@ -116,14 +126,24 @@ namespace Sentinel.Controllers
             _itemService = itemService;
         }
 
+        public ActionResult AssetManagementPageActions()
+        {
+            return PartialView("../ActionButtons/PageActionButtonsLargePartial", menuItems);
+        }
+
         public ActionResult Index()
         {
-            return View(menuItems);
+            return View();
+        }
+
+        public ActionResult ConsignmentManagementPageActions()
+        {
+            return PartialView("../ActionButtons/PageActionButtonsLargePartial", consignmentManagementOptions);
         }
 
         public ActionResult ConsignmentManagement()
         {
-            return View(consignmentManagementOptions);
+            return View();
         }
 
         public ActionResult AssignedConsignments()
@@ -154,6 +174,34 @@ namespace Sentinel.Controllers
         public ActionResult UnAssignedConsignmentsPageActions()
         {
             return PartialView("../ActionButtons/PageActionButtonsPartial", unassignedConsignmentsPageActions);
+        }
+
+        public ActionResult GetDriverPartialForAssigningConsignment()
+        {
+            var data = _consignmentService.GetUsersForConsignmentAssigning();
+            
+            if (data.Count() <= 0)
+                return PartialView("ErrorDialogPartial", "No drivers are available to assign this consignment to.");
+            else
+                return PartialView("Dialogs/DriverSelectDialog", data);
+        }
+
+        public void AssignConsignmentToDriver(string strDriverKey, string strConsignmentKey)
+        {
+            Guid oDriverKey = Guid.Parse(strDriverKey);
+            Guid oConsignmentKey = Guid.Parse(strConsignmentKey);
+
+            _consignmentService.AssignConsignmentToDriver(oConsignmentKey, oDriverKey);
+        }
+
+        public void UnAssignConsignments(string strConsignmentKeys)
+        {
+            var keys = GetEnumerableGuidSourceFromString(strConsignmentKeys);
+
+            foreach (var key in keys)
+            {
+                _consignmentService.UnAssignConsignment(key);
+            }
         }
 
         public ActionResult DeliveryItemManagement()
@@ -233,11 +281,15 @@ namespace Sentinel.Controllers
             return PartialView("DeliveryItemGridPartial", data);
         }
 
-        public ActionResult PrintDeliveryItemLabel(string strDeliveryItemKeys)
+        public ActionResult PrintDeliveryItemLabel(string strConsignmentKeys)
         {
-            var keys = GetEnumerableGuidSourceFromString(strDeliveryItemKeys);
-            var items = _itemService.GetDeliveryItemsByKey(keys);
+            var keys = GetEnumerableGuidSourceFromString(strConsignmentKeys);
+            List<AssignedDeliveryItem> items = new List<AssignedDeliveryItem>();
 
+            foreach (var key in keys)
+            {
+                items.AddRange(_itemService.GetConsignmentDeliveryItems(key));
+            }
             return new PDFResult(items);
         }
 
