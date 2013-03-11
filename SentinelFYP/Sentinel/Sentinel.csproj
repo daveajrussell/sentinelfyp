@@ -187,6 +187,7 @@
     <Content Include="Content\images\bgs\management-img.jpg" />
     <Content Include="Content\images\desc.gif" />
     <Content Include="Content\images\FYP-Diagram.png" />
+    <Content Include="Content\images\favicon.png" />
     <Content Include="Content\images\img-logo.png" />
     <Content Include="Content\images\map_loader.gif" />
     <Content Include="Content\images\test.png" />
@@ -243,7 +244,7 @@
     <Content Include="Scripts\Views\HistoricalTracking.js" />
     <Content Include="Scripts\Views\Management.js" />
     <Content Include="Scripts\Views\Monitor.js" />
-    <Content Include="Scripts\Views\RealTimeMessageMonitor.js" />
+    <Content Include="Scripts\Views\RealTimeMonitor.js" />
     <Content Include="Services\NotifierService.svc" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -355,6 +356,7 @@
     <Content Include="Views\Administration\Dialogs\ResetPasswordConfirmDialogPartial.cshtml" />
     <Content Include="Views\Heatmapping\ActivityHeatmapPartial.cshtml" />
     <Content Include="Scripts\jquery.tinyscrollbar.min.js" />
+    <Content Include="Views\Tracking\LiveElapsedMapPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">

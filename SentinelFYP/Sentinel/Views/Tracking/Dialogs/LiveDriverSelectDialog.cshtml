@@ -18,7 +18,7 @@
 
                             var driverKey = $(this).find('#driver-select option:selected').val();
 
-                            $.post('../Tracking/GetLiveUpdateByDriverKey', { strDriverKey: driverKey }, function (data) {
+                            $.post('../Tracking/GetLiveElapsedRoute', { strDriverKey: driverKey }, function (data) {
                                 $('#tracking').replaceWith(data);
                                 
                             });

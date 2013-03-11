@@ -159,26 +159,6 @@ namespace Sentinel.Controllers
             return PartialView("Dialogs/LiveDriverSelectDialog", data);
         }
 
-        public ActionResult LiveTrackingDriverFeedPageActions()
-        {
-            var actions = new List<ActionButtonsViewModel>()
-            {
-                new ActionButtonsViewModel()
-                {
-                    Display = "Back",
-                    Javascript = "navigateBack('LiveTracking')"
-                },
-                new ActionButtonsViewModel()
-                { 
-                    Display = "Show Elapsed Route",
-                    Javascript = "showElapsedRoute()",
-                    Permission = "AUDITOR"
-                }
-            };
-
-            return PartialView("../ActionButtons/PageActionButtonsPartial", actions);
-        }
-
         public ActionResult LiveElapsedTrackingDriverFeedPageActions()
         {
             var actions = new List<ActionButtonsViewModel>()
@@ -187,27 +167,10 @@ namespace Sentinel.Controllers
                 {
                     Display = "Back",
                     Javascript = "navigateBack('LiveTracking')"
-                },
-                new ActionButtonsViewModel()
-                { 
-                    Display = "Show Single Marker",
-                    Javascript = "showSingleMarker()",
-                    Permission = "AUDITOR"
                 }
             };
 
             return PartialView("../ActionButtons/PageActionButtonsPartial", actions);
-        }
-
-        public ActionResult GetLiveUpdateByDriverKey(string strDriverKey)
-        {
-            var oDriverKey = GetKeyFromString(strDriverKey);
-            var data = _liveTrackingService.GetLiveUpdate(oDriverKey);
-
-            if (null != data)
-                return PartialView("LiveTrackingDriverFeed", data);
-            else
-                return PartialView("ErrorDialogPartial", "No live data is available for this driver.");
         }
 
         public ActionResult GetLiveElapsedRoute(string strDriverKey)
@@ -217,6 +180,17 @@ namespace Sentinel.Controllers
 
             if (data.Count() > 0)
                 return PartialView("LiveElapsedTrackingDriverFeed", data);
+            else
+                return PartialView("ErrorDialogPartial", "No elapsed live data is available for this driver.");
+        }
+
+        public ActionResult GetLiveElapsedRouteUpdate(string strDriverKey)
+        {
+            var oDriverKey = GetKeyFromString(strDriverKey);
+            var data = _liveTrackingService.GetLiveElapsedRoute(oDriverKey);
+
+            if (data.Count() > 0)
+                return PartialView("LiveElapsedMapPartial", data);
             else
                 return PartialView("ErrorDialogPartial", "No elapsed live data is available for this driver.");
         }

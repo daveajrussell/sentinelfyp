@@ -116,7 +116,6 @@ namespace SqlRepositories.Helper.Builders
             try
             {
                 return from item in oSet.FirstDataTableAsEnumerable()
-                       orderby item.Field<int>("SESSION_ID") descending, item.Field<DateTime>("TIMESTAMP") ascending
                        group item by new { SessionID = item.Field<int>("SESSION_ID"), DriverKey = item.Field<Guid>("USER_KEY") } into g
                        select new ElapsedGeospatialInformation()
                        {
