@@ -82,7 +82,7 @@ namespace Sentinel.Controllers
             new ActionButtonsViewModel()
             {
                 Display = "Back",
-                Javascript = "navigateBack('Index')"
+                Javascript = "navigateBack('ConsignmentManagement')"
             },
             new ActionButtonsViewModel()
             {
@@ -103,7 +103,7 @@ namespace Sentinel.Controllers
             new ActionButtonsViewModel()
             {
                 Display = "Back",
-                Javascript = "navigateBack('Index')"
+                Javascript = "navigateBack('ConsignmentManagement')"
             },
            new ActionButtonsViewModel()
             {

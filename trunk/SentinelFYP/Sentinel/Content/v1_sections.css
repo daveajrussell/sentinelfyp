@@ -8,33 +8,33 @@
 }
 
     #site-section.management-index {
-        background-image: url(images/bgs/management-img.png);
+        background-image: url(images/bgs/management-img.jpg);
     }
 
     #site-section.consignment-management {
-        background-image: url(images/bgs/management-img.png);
+        background-image: url(images/bgs/management-img.jpg);
     }
 
     #site-section.driver-management {
-        background-image: url(images/bgs/management-img.png);
+        background-image: url(images/bgs/management-img.jpg);
     }
 
     #site-section.delivery-item-management {
-        background-image: url(images/bgs/management-img.png);
+        background-image: url(images/bgs/management-img.jpg);
     }
 
     #site-section.home-index {
-        background-image: url(images/bgs/bg-img-home.png);
+        background-image: url(images/bgs/bg-img-home.jpg);
     }
 
     #site-section.administration-index {
-        background-image: url(images/bgs/bg-img-admin.png);
+        background-image: url(images/bgs/bg-img-admin.jpg);
     }
 
     #site-section.tracking-index {
-        background-image: url(images/bgs/bg-img-tracking.png);
+        background-image: url(images/bgs/bg-img-tracking.jpg);
     }
 
     #site-section.heatmapping-index {
-        background-image: url(images/bgs/bg-img-heatmapping.png);
+        background-image: url(images/bgs/bg-img-heatmapping.jpg);
     }

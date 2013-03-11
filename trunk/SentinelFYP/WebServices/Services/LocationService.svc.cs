@@ -121,7 +121,6 @@ namespace WebServices.Services
                     var data = new DataContractJsonSerializer(typeof(GeospatialInformationDataContract));
                     data.WriteObject(stream, strGISObject);
                     client.UploadData("http://fyp.daveajrussell.com/Services/NotifierService.svc/GISNotify", "POST", stream.ToArray());
-                    //client.UploadData("http://localhost/Sentinel/Services/NotifierService.svc/GISNotify", "POST", stream.ToArray());
                 }
             }
         }

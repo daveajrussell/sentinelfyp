@@ -12,7 +12,7 @@
         };
 
         sentinelHub.client.deliveryUpdate = function (userKey, timestamp, eventType) {
-            writeEvent('<br />Driver: ' + userKey + 'made a delivery at: ' + timestamp, eventType, userKey)
+            writeEvent('<br />Driver: ' + userKey + ' made a delivery at: ' + timestamp, eventType, userKey)
         };
 
         //Write the event to the monitor
@@ -20,7 +20,7 @@
             var now = new Date();
             var nowStr = now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
 
-            $('#events-list').prepend('<div class="update ui-state-error-' + logClass + ' ui-corner-all"><p><span class="ui-icon ui-icon-alert"></span><a class="contact ui-icon ui-icon-contact" href="#" val=' + driverKey + '></a> ' + eventLog + '</p></div>');
+            $('#events-list').prepend('<div class="update ui-state-error-' + logClass + ' ui-corner-all"> <span class="dismiss ui-icon ui-icon-close"></span> <p><a class="ui-icon ui-icon-contact" href="#" val=' + driverKey + '></a></p><p>' + eventLog + '</p></div>');
 
             doAlert(logClass);
         }
@@ -49,6 +49,16 @@
             });
         }
 
+        $('#scrollbar1').tinyscrollbar();
+
+        $('.dismiss').on('click', function () {
+            
+            var update = $(this).parents('div:first');
+            $(update).slideUp("fast", function() {
+                $(update).remove();
+            });
+        });
+
         $('.contact').on('click', function () {
             
             var key = $(this).attr('val');
@@ -66,8 +76,14 @@
 <div id="updates-window-header">
     <span class="span-updates">Real-Time Monitor</span>
 </div>
-<div id="events-list">
-    <div class="update ui-state-error-normal ui-corner-all"><p><span class="ui-icon ui-icon-alert"></span><a class="ui-icon ui-icon-contact" href="#"></a>Normal Event</p></div>
-    <div class="update ui-state-error-caution ui-corner-all"><p><span class="ui-icon ui-icon-alert"></span><a class="ui-icon ui-icon-contact" href="#"></a>Cautionary Event</p></div>
-    <div class="update ui-state-error-severe ui-corner-all"><p><span class="ui-icon ui-icon-alert"></span><a class="ui-icon ui-icon-contact" href="#"></a>Severe Event</p></div>
+<div id="scrollbar1">
+    <div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
+    <div class="viewport">
+        <div id="events-list" class="overview">
+            <div class="update ui-state-error-normal ui-corner-all"> <span class="dismiss ui-icon ui-icon-close"></span> <p><a class="ui-icon ui-icon-contact" href="#"></a></p><p>Normal Event</p></div>
+            <div class="update ui-state-error-caution ui-corner-all"> <span class="dismiss ui-icon ui-icon-close"></span> <p><a class="ui-icon ui-icon-contact" href="#"></a></p><p>Cautionary Event</p></div>
+            <div class="update ui-state-error-severe ui-corner-all"> <span class="dismiss ui-icon ui-icon-close"></span> <p><a class="ui-icon ui-icon-contact" href="#"></a></p><p>Severe Event</p></div>
+        </div>
+    </div>
 </div>
+

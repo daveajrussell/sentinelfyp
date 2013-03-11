@@ -180,11 +180,11 @@
     <Content Include="Content\etc\color-schemes\pbj.png" />
     <Content Include="Content\etc\color-schemes\pgaitch.png" />
     <Content Include="Content\images\asc.gif" />
-    <Content Include="Content\images\bgs\bg-img-admin.png" />
-    <Content Include="Content\images\bgs\bg-img-heatmapping.png" />
-    <Content Include="Content\images\bgs\bg-img-home.png" />
-    <Content Include="Content\images\bgs\bg-img-tracking.png" />
-    <Content Include="Content\images\bgs\management-img.png" />
+    <Content Include="Content\images\bgs\bg-img-admin.jpg" />
+    <Content Include="Content\images\bgs\bg-img-heatmapping.jpg" />
+    <Content Include="Content\images\bgs\bg-img-home.jpg" />
+    <Content Include="Content\images\bgs\bg-img-tracking.jpg" />
+    <Content Include="Content\images\bgs\management-img.jpg" />
     <Content Include="Content\images\desc.gif" />
     <Content Include="Content\images\FYP-Diagram.png" />
     <Content Include="Content\images\img-logo.png" />
@@ -213,6 +213,7 @@
     <Content Include="Content\images\ui-login_dark.png" />
     <Content Include="Content\jquery-ui-1.10.0.custom.css" />
     <Content Include="Content\jquery.qtip.min.css" />
+    <Content Include="Content\jquery.tinyscrollbar.css" />
     <Content Include="Content\v1_actions.css" />
     <Content Include="Content\v1_grid.css" />
     <Content Include="Content\v1_login.css" />
@@ -353,6 +354,7 @@
     <Content Include="Views\Administration\ResetPasswordPartial.cshtml" />
     <Content Include="Views\Administration\Dialogs\ResetPasswordConfirmDialogPartial.cshtml" />
     <Content Include="Views\Heatmapping\ActivityHeatmapPartial.cshtml" />
+    <Content Include="Scripts\jquery.tinyscrollbar.min.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">
