@@ -16,8 +16,7 @@
         };
 
         var map = new google.maps.Map(document.getElementById('map'), mapOpts);
-        var marker;
-        var infoWindow = new google.maps.InfoWindow();
+
         var path = [];
 
         @{
@@ -27,30 +26,11 @@
                     var latlng = new google.maps.LatLng('@info.Latitude', '@info.Longitude');
                     path.push(latlng);
 
-                    marker = new google.maps.Marker({
+                    var marker = new google.maps.Marker({
                         position: latlng,
                         map: map,
                         title: '@info.Latitude, @info.Longitude'
                     });
-
-                    var gisInfo =
-                        '<div id="gis-info">' +
-                            '<span>Date: @info.TimeStamp.ToShortDateString() </span> <br/>' +
-                            '<span>Time: @info.TimeStamp.ToShortTimeString() <br />' +
-                            '<span>Speed: @info.Speed </span> <br />' +
-                            '<span>Orientation: @info.Orientation <span>' +
-                        '</div>';
-
-                    infoWindow = new google.maps.InfoWindow({
-                        content: gisInfo
-                    });
-
-                    google.maps.event.addListener(marker, 'click', (function (marker, gisInfo) {
-                        return function () {
-                            infoWindow.setContent(gisInfo);
-                            infoWindow.open(map, marker);
-                        }
-                    })(marker, gisInfo));
 
                 </text>
             }
@@ -67,7 +47,8 @@
 
         poly.setMap(map);
 
-        /*var marker = new google.maps.Marker({
+       var marker = new google.maps.Marker({
+
             position: pos,
             map: map,
             title: "Current Position",
@@ -82,7 +63,23 @@
                     scale: 4
                 }
             }]
-        });*/
+        });
+
+        var gisInfo =
+                '<div id="gis-info">' +
+                    '<span>Date: @Model.First().TimeStamp.ToShortDateString() </span> <br/>' +
+                    '<span>Time: @Model.First().TimeStamp.ToShortTimeString() <br />' +
+                    '<span>Speed: @Model.First().Speed </span> <br />' +
+                    '<span>Orientation: @Model.First().Orientation <span>' +
+                '</div>';
+
+        var infoWindow = new google.maps.InfoWindow({
+            content: gisInfo
+        });
+
+        google.maps.event.addListener(marker, 'click', function () {
+            infoWindow.open(map, marker);
+        });
 
         //Create SignalR object to get communicate with server
         var sentinelHub = $.connection.sentinelHub;
