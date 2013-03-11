@@ -41,6 +41,8 @@ namespace WebServices.Services
             };
 
             _service.SubmitGeoTaggedDeliveryItem(oItem);
+
+            Notify(strGeoTaggedDeliveryObject);
         }
 
         public void UnTagDelivery(string strAssetKey)
@@ -59,7 +61,7 @@ namespace WebServices.Services
                     var data = new DataContractJsonSerializer(typeof(GeotaggedAssetDataContract));
                     data.WriteObject(stream, strGeoTaggedDeliveryObject);
                     client.UploadData("http://fyp.daveajrussell.com/Services/NotifierService.svc/DeliveryNotify", "POST", stream.ToArray());
-                    //client.UploadData("http://localhost/Sentinel/Services/NotifierService.svc/DeliveryNotify", "POST", stream.ToArray());
+                    client.UploadData("http://localhost/Sentinel/Services/NotifierService.svc/DeliveryNotify", "POST", stream.ToArray());
                 }
             }
         }

@@ -49,76 +49,71 @@
 
         map.overlayMapTypes.push(arrOverlay);
 
-        var count = '@Model.Count()';
-        if (count > 0) {
-            @{
-                foreach (var set in Model)
+        @{
+            foreach (var set in Model)
+            {
+                @:var path = [];
+                foreach (var info in set.GeospatialInformation)
                 {
-                    @:var path = [];
-                    foreach (var info in set.GeospatialInformation)
-                    {
-                        <text>
-                            var latlng = new google.maps.LatLng('@info.Latitude', '@info.Longitude');
-                            path.push(latlng);
-
-                            var marker = new google.maps.Marker({
-                                position: position,
-                                map: map,
-                                title: '@info.Latitude, @info.Longitude'
-                            });
-
-                        </text>
-                    }
-                    
                     <text>
-                        var hex = getHex();
-
-                        poly = new google.maps.Polyline({
-                            path: path,
-                            strokeColor: hex,
-                            strokeOpacity: 1.0,
-                            strokeWeight: 3
-                        });
-
-                        poly.setMap(map);
+                        var latlng = new google.maps.LatLng('@info.Latitude', '@info.Longitude');
+                        path.push(latlng);
 
                         var marker = new google.maps.Marker({
-                            position: pos,
+                            position: position,
                             map: map,
-                            title: "Current Position",
-                            icons: [{
-                                icon: {
-                                    path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-                                    strokeColor: 'black',
-                                    strokeOpacity: 1.0,
-                                    strokeWeight: 1.0,
-                                    fillColor: 'yellow',
-                                    fillOpacity: 1.0,
-                                    scale: 4
-                                }
-                            }]
+                            title: '@info.Latitude, @info.Longitude'
                         });
 
-                        var gisInfo =
-                            '<div id="gis-info">' +
-                                '<span>Date: @set.GeospatialInformation.First().TimeStamp.ToShortDateString() </span> <br/>' +
-                                '<span>Time: @set.GeospatialInformation.First().TimeStamp.ToShortTimeString() <br />' +
-                                '<span>Speed: @set.GeospatialInformation.First().Speed </span> <br />' +
-                                '<span>Orientation: @set.GeospatialInformation.First().Orientation <span>' +
-                            '</div>';
-
-                            var infoWindow = new google.maps.InfoWindow({
-                                content: gisInfo
-                            });
-
-                            google.maps.event.addListener(marker, 'click', function () {
-                                infoWindow.open(map, marker);
-                            });
-                        </text>
+                    </text>
                 }
-        }
-        } else {
-            $('#tracking').append('<div>No Data!</div>');
+                    
+                <text>
+                    var hex = getHex();
+
+                    poly = new google.maps.Polyline({
+                        path: path,
+                        strokeColor: hex,
+                        strokeOpacity: 1.0,
+                        strokeWeight: 3
+                    });
+
+                    poly.setMap(map);
+
+                    var marker = new google.maps.Marker({
+                        position: pos,
+                        map: map,
+                        title: "Current Position",
+                        icons: [{
+                            icon: {
+                                path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+                                strokeColor: 'black',
+                                strokeOpacity: 1.0,
+                                strokeWeight: 1.0,
+                                fillColor: 'yellow',
+                                fillOpacity: 1.0,
+                                scale: 4
+                            }
+                        }]
+                    });
+
+                    var gisInfo =
+                        '<div id="gis-info">' +
+                            '<span>Date: @set.GeospatialInformation.First().TimeStamp.ToShortDateString() </span> <br/>' +
+                            '<span>Time: @set.GeospatialInformation.First().TimeStamp.ToShortTimeString() <br />' +
+                            '<span>Speed: @set.GeospatialInformation.First().Speed </span> <br />' +
+                            '<span>Orientation: @set.GeospatialInformation.First().Orientation <span>' +
+                        '</div>';
+
+                        var infoWindow = new google.maps.InfoWindow({
+                            content: gisInfo
+                        });
+
+                        google.maps.event.addListener(marker, 'click', function () {
+                            infoWindow.open(map, marker);
+                        });
+                    </text>
+            }
         }
     });
 </script>

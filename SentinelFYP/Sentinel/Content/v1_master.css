@@ -66,12 +66,6 @@ a, a:visited {
     height: 10em;
 }
 
-#events-list {
-    height: 100%;
-    margin: 1em;
-    border-radius: .8em;
-}
-
 #gis-info {
     color: #666;
 }

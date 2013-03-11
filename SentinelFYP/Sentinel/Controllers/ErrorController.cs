@@ -12,7 +12,7 @@ namespace Sentinel.Controllers
         public ActionResult Error(Exception exception)
         {
             if (null == State.Session)
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Login", "Account");
             else
                 return View(exception);
         }

@@ -36,7 +36,7 @@ namespace Sentinel.Helpers.ExtensionMethods
             PdfDocument document = new PdfDocument();
 
             // Set document info
-            document.Info.Title = "Test PDF Action Result";
+            document.Info.Title = DateTime.Now.Ticks.ToString();
             document.Info.Author = State.User.UserName;
             document.Info.CreationDate = DateTime.Now;
 
@@ -98,7 +98,7 @@ namespace Sentinel.Helpers.ExtensionMethods
             {
                 httpContext.Response.Clear();
                 httpContext.Response.ContentType = "application/pdf";
-                httpContext.Response.AddHeader("content-disposition", "attachment; filename=test.pdf");
+                httpContext.Response.AddHeader("content-disposition", "attachment; filename=" + DateTime.Now.Ticks.ToString() + ".pdf");
                 document.Save(oStream, false);
                 oStream.WriteTo(httpContext.Response.OutputStream);
             }

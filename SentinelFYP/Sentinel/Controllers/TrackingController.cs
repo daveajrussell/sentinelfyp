@@ -90,7 +90,10 @@ namespace Sentinel.Controllers
             var oDriverKey = GetKeyFromString(strDriverKey);
             var data = _histroicalTrackingService.GetAllHistoricalTrackingDataByDriverKey(oDriverKey);
 
-            return PartialView("AllDriverHistoricalTrackingPartial", data);
+            if (data.Count() > 0)
+                return PartialView("AllDriverHistoricalTrackingPartial", data);
+            else
+                return PartialView("ErrorDialogPartial", "No historical data is available for this user.");
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -100,7 +103,10 @@ namespace Sentinel.Controllers
             
             var data = _histroicalTrackingService.GetFilteredHistoricalDataByDriverKey(oDriverKey, iSessionID);
 
-            return PartialView("FilteredDriverHistoricalTrackingPartial", data);
+            if (null != data)
+                return PartialView("FilteredDriverHistoricalTrackingPartial", data);
+            else
+                return PartialView("ErrorDialogPartial", "No historical data is available for this session.");
         }
 
         public ActionResult FilteredHistoricalPageDataPageActions()
@@ -110,7 +116,7 @@ namespace Sentinel.Controllers
                 new ActionButtonsViewModel()
                 {
                     Display = "Back",
-                    Javascript = "javascript:showAllHistoricalData()"
+                    Javascript = "showAllHistoricalData()"
                 }
             };
 
@@ -124,7 +130,7 @@ namespace Sentinel.Controllers
                 new ActionButtonsViewModel()
                 {
                     Display = "Back",
-                    Javascript = "navigateBack('Index')"
+                    Javascript = "navigateBack('HistoricalTracking')"
                 },
                 new ActionButtonsViewModel()
                 {
@@ -160,12 +166,13 @@ namespace Sentinel.Controllers
                 new ActionButtonsViewModel()
                 {
                     Display = "Back",
-                    Javascript = "navigateBack('Index')"
+                    Javascript = "navigateBack('LiveTracking')"
                 },
                 new ActionButtonsViewModel()
                 { 
                     Display = "Show Elapsed Route",
-                    Javascript = "showElapsedRoute()"
+                    Javascript = "showElapsedRoute()",
+                    Permission = "AUDITOR"
                 }
             };
 
@@ -179,12 +186,13 @@ namespace Sentinel.Controllers
                 new ActionButtonsViewModel()
                 {
                     Display = "Back",
-                    Javascript = "navigateBack('Index')"
+                    Javascript = "navigateBack('LiveTracking')"
                 },
                 new ActionButtonsViewModel()
                 { 
                     Display = "Show Single Marker",
-                    Javascript = "showSingleMarker()"
+                    Javascript = "showSingleMarker()",
+                    Permission = "AUDITOR"
                 }
             };
 
@@ -207,7 +215,7 @@ namespace Sentinel.Controllers
             var oDriverKey = GetKeyFromString(strDriverKey);
             var data = _liveTrackingService.GetLiveElapsedRoute(oDriverKey);
 
-            if (null != data)
+            if (data.Count() > 0)
                 return PartialView("LiveElapsedTrackingDriverFeed", data);
             else
                 return PartialView("ErrorDialogPartial", "No elapsed live data is available for this driver.");

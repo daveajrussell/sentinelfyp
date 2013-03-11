@@ -10,24 +10,30 @@
 
 #updates-window-header
 {
-    
     text-align:center;
     font-weight: bold;
 }
 
 .update
 {
+    text-align:left;
+    width:150px;
     margin: .5em 0;
 }
 
+    .update .dismiss {
+        cursor:pointer;
+        float:right;
+    }
+
     .update p
     {
-        margin: 1em 0
+        margin:1em;
+        clear:left;
     }
 
         .update p span,
         .update p a
         {
-            float:left; 
-            margin-right: .3em
+            float:left;
         }

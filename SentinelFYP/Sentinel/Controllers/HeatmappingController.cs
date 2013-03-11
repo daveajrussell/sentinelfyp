@@ -97,14 +97,22 @@ namespace Sentinel.Controllers
         public ActionResult LiveActivityHeatmapData()
         {
             var data = _trackingService.GetAllLiveElapsedRoutes();
-            return PartialView("ActivityHeatmapPartial", data);
+
+            if(data.Count() > 0)
+                return PartialView("ActivityHeatmapPartial", data);
+            else
+                return PartialView("ErrorDialogPartial", "No activity heatmap data is available.");
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult LiveSignalHeatmapData()
         {
             var data = _trackingService.GetAllLiveElapsedRoutes();
-            return PartialView("SignalHeatmapPartial", data);
+
+            if(data.Count() > 0)
+                return PartialView("SignalHeatmapPartial", data);
+            else
+                return PartialView("ErrorDialogPartial", "No signal heatmap data is available.");
         }
 
         public TileResult ActivityTile(string zoom, string x, string y)
