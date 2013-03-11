@@ -1,0 +1,69 @@
+﻿@model IEnumerable<DomainModel.Models.GISModels.GeospatialInformation>
+
+<script type="text/javascript">
+
+    $(function () {
+        // Create a LatLng object to set to the center
+        var pos = new google.maps.LatLng('@Model.First().Latitude', '@Model.First().Longitude');
+
+        // Create an array of Map options
+        var mapOpts = {
+            zoom: 15,
+            center: pos,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        var map = new google.maps.Map(document.getElementById('map'), mapOpts);
+
+        var path = [];
+
+        @{
+            foreach (var info in Model)
+            {
+                <text>
+                    var latlng = new google.maps.LatLng('@info.Latitude', '@info.Longitude');
+                    path.push(latlng);
+                </text>
+            }
+        }
+
+        var hex = getHex();
+
+        poly = new google.maps.Polyline({
+            path: path,
+            strokeColor: hex,
+            strokeOpacity: 1.0,
+            strokeWeight: 3
+        });
+
+        poly.setMap(map);
+
+        var marker = new google.maps.Marker({
+            position: pos,
+            map: map,
+            title: "Current Position"
+        });
+
+        var gisInfo =
+                '<div id="gis-info">' +
+                    '<span>Date: @Model.First().TimeStamp.ToShortDateString() </span> <br/>' +
+                    '<span>Time: @Model.First().TimeStamp.ToShortTimeString() <br />' +
+                    '<span>Speed: @Model.First().Speed </span> <br />' +
+                    '<span>Orientation: @Model.First().Orientation <span>' +
+                '</div>';
+
+        var infoWindow = new google.maps.InfoWindow({
+            content: gisInfo
+        });
+
+        google.maps.event.addListener(marker, 'click', function () {
+            infoWindow.open(map, marker);
+        });
+    });
+</script>
+
+<section id="tracking" class="historical-tracking">
+    <div id="map">
+    </div>
+    @Html.Action("LiveElapsedTrackingDriverFeedPageActions")
+</section>

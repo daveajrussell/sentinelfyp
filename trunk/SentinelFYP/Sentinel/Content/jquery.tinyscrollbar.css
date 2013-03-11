@@ -64,8 +64,7 @@
 }
 
 #events-list {
-    width: 200px;
+    border-radius: .8em;
     margin-left: 1em;
     margin-right: 1em;
-    border-radius: .8em;
 }

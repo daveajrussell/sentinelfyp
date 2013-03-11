@@ -235,31 +235,6 @@ namespace Sentinel.Tests.Controllers
         }
 
         [Fact]
-        public void TestLiveTrackingDriverFeedPageActions()
-        {
-            var target = new TrackingController(_histroicalTrackingService.Object, _liveTrackingService.Object);
-
-            var result = target.LiveTrackingDriverFeedPageActions();
-            var itemOne = (new List<ActionButtonsViewModel>(((List<ActionButtonsViewModel>)(((ViewResultBase)(result)).Model))))[0];
-            var itemTwo = (new List<ActionButtonsViewModel>(((List<ActionButtonsViewModel>)(((ViewResultBase)(result)).Model))))[1];
-
-            Assert.NotNull(result);
-            Assert.NotNull(itemOne);
-            Assert.NotNull(itemTwo);
-
-            Assert.IsAssignableFrom<PartialViewResult>(result);
-            Assert.Equal("../ActionButtons/PageActionButtonsPartial", ((ViewResultBase)(result)).ViewName);
-
-            Assert.IsAssignableFrom<ActionButtonsViewModel>(itemOne);
-            Assert.Equal("Back", itemOne.Display);
-            Assert.Equal("navigateBack('Index')", itemOne.Javascript);
-
-            Assert.IsAssignableFrom<ActionButtonsViewModel>(itemTwo);
-            Assert.Equal("Show Elapsed Route", itemTwo.Display);
-            Assert.Equal("showElapsedRoute()", itemTwo.Javascript);
-        }
-
-        [Fact]
         public void TestLiveElapsedTrackingDriverFeedPageActions()
         {
             var target = new TrackingController(_histroicalTrackingService.Object, _liveTrackingService.Object);
@@ -282,23 +257,6 @@ namespace Sentinel.Tests.Controllers
             Assert.IsAssignableFrom<ActionButtonsViewModel>(itemTwo);
             Assert.Equal("Show Single Marker", itemTwo.Display);
             Assert.Equal("showSingleMarker()", itemTwo.Javascript);
-        }
-
-        [Fact]
-        public void TestGetLiveUpdateByDriverKey()
-        {
-            var target = new TrackingController(_histroicalTrackingService.Object, _liveTrackingService.Object);
-            var driverKey = "66FBA0E1-6429-4999-9538-6566DEE70048";
-
-            var result = target.GetLiveUpdateByDriverKey(driverKey);
-            var item = ((ViewResultBase)(result)).Model;
-
-            Assert.NotNull(result);
-            Assert.IsAssignableFrom<PartialViewResult>(result);
-            Assert.Equal("LiveTrackingDriverFeed", ((ViewResultBase)(result)).ViewName);
-
-            Assert.NotNull(item);
-            Assert.IsAssignableFrom<GeospatialInformation>(item);
         }
 
         [Fact]
