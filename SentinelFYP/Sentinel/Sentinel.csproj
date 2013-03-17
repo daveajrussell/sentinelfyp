@@ -157,6 +157,7 @@
     <Compile Include="Infrastructure\SentinelRoleProvider.cs" />
     <Compile Include="Models\ActionButtonsViewModel.cs" />
     <Compile Include="Models\AssignDeliveryItemViewModel.cs" />
+    <Compile Include="Models\CreateUserViewModel.cs" />
     <Compile Include="Models\DriverHistoricalTrackingViewModel.cs" />
     <Compile Include="Models\MenuViewModel.cs" />
     <Compile Include="Models\Tracking.cs" />
@@ -357,6 +358,11 @@
     <Content Include="Scripts\jquery.tinyscrollbar.min.js" />
     <Content Include="Views\Tracking\LiveElapsedMapPartial.cshtml" />
     <Content Include="Views\AssetManagement\DeliveryManagement.cshtml" />
+    <Content Include="Views\AssetManagement\DriverManagement.cshtml" />
+    <Content Include="Views\Administration\CreateUser.cshtml" />
+    <Content Include="Views\Administration\RoleSelectPartial.cshtml" />
+    <Content Include="Views\Administration\Dialogs\UserCreateConfirm.cshtml" />
+    <Content Include="Scripts\Views\Administration.CreateUser.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">

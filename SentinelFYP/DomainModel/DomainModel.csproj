@@ -114,7 +114,9 @@
     <Compile Include="Models\GISModels\HistoricalGeospatialInformation.cs" />
     <Compile Include="Models\GISModels\Opacity.cs" />
     <Compile Include="Models\GISModels\Tile.cs" />
+    <Compile Include="Models\SecurityModels\Role.cs" />
     <Compile Include="Models\SecurityModels\User.cs" />
+    <Compile Include="Models\SecurityModels\Vehicle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\SaltedHashGenerator.cs" />
     <Compile Include="Services\ConsignmentManagementService.cs" />

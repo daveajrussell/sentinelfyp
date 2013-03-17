@@ -25,6 +25,10 @@ namespace Sentinel.Controllers
         {
             Guid oDriverKey = new Guid(strDriverKey);
             var data = _securityService.GetUserByUserKey(oDriverKey);
+            var vehicle = _securityService.GetUserVehicle(oDriverKey);
+
+            data.UserAssignedVehicle = vehicle;
+
             return PartialView("UserContactDetailsPartial", data);
         }
     }

@@ -27,9 +27,9 @@ namespace SqlRepositories
         {
             var sqlParam = new SqlParameter("@IP_USER_NAME", SqlDbType.VarChar).Value = strUsername;
 
-            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, "[SECURITY].[GET_ROLES_FOR_USER]", sqlParam))
+            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, "[SECURITY].[GET_ROLES_FOR_USER_BY_USERNAME]", sqlParam))
             {
-                return oSet.ToRoleSet();
+                return oSet.ToRoleStringSet();
             }
         }
 

@@ -12,6 +12,7 @@ using SqlRepositories.Helper;
 using System.Net;
 using DomainModel.Models.AuditModels;
 using SqlRepositories.Helper.Extensions;
+using DomainModel.Models.SecurityModels;
 
 namespace SqlRepositories
 {
@@ -121,6 +122,48 @@ namespace SqlRepositories
                 return false;
             }
             return true;
+        }
+
+        public Vehicle GetUserVehicle(Guid oUserKey)
+        {
+            var sqlParam = new SqlParameter("@IP_USER_KEY", oUserKey);
+
+            using (var oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[SECURITY].[GET_USER_ASSIGNED_VEHICLE]", sqlParam))
+            {
+                return oSet.ToVehicle();
+            }
+        }
+
+        public IEnumerable<Role> GetRolesForUser(User oUser)
+        {
+            var sqlParam = new SqlParameter("@IP_USER_KEY", oUser.UserKey);
+
+            using (var oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[SECURITY].[GET_ROLES_FOR_USER]", sqlParam))
+            {
+                return oSet.ToRoleSet();
+            }
+        }
+
+        public Guid CreateUser(string strUsername, Guid oCompanyKey, string strRoles, string strFirstName, string strLastName, string strNumber, string strEmail, string strSalt, string strHash)
+        {
+            var arrParams = new SqlParameter[]
+            {
+                new SqlParameter("@IP_USER_NAME", strUsername),
+                new SqlParameter("@IP_USER_COMPANY_KEY", oCompanyKey),
+                new SqlParameter("@IP_ROLES", strRoles),
+                new SqlParameter("@IP_FIRST_NAME", strFirstName),
+                new SqlParameter("@IP_LAST_NAME", strLastName),
+                new SqlParameter("@IP_NUMBER", strNumber),
+                new SqlParameter("@IP_EMAIL", strEmail),
+                new SqlParameter("@IP_SALT", strSalt),
+                new SqlParameter("@IP_HASH", strHash)
+            };
+
+            using (var oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[SECURITY].[CREATE_USER]", arrParams))
+            {
+                return (from key in oSet.FirstDataTableAsEnumerable()
+                        select key.Field<Guid>("USER_KEY")).First();
+            }
         }
     }
 }

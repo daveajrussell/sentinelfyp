@@ -22,9 +22,10 @@
     <div>
         <p>Name: @Html.DisplayFor(u => u.FirstName) @Html.DisplayFor(u => u.LastName)</p>
         <p>Contact Number: @Html.DisplayFor(u => u.UserContactNumber)</p>
-        <p>Assigned Vehicle:</p>
-        <p>Registration:</p>
-        <p>Colour:</p>
+        <p>Assigned Vehicle: @Html.DisplayFor(u => u.UserAssignedVehicle.VehicleManufacturer) @Html.DisplayFor(u => u.UserAssignedVehicle.VehicleModel) </p>
+        <p>Year: @Html.DisplayFor(u => u.UserAssignedVehicle.VehicleYear)</p>
+        <p>Registration: @Html.DisplayFor(u => u.UserAssignedVehicle.VehicleRegistration)</p>
+        <p>Colour: @Html.DisplayFor(u => u.UserAssignedVehicle.VehicleColour)</p>
     </div>
 </div>
 
