@@ -92,9 +92,11 @@ namespace SqlRepositories
             }
         }
 
-        public IEnumerable<User> GetUsers()
+        public IEnumerable<User> GetUsers(User oUser)
         {
-            using (var oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT * FROM [SECURITY].[USER]"))
+            var sqlParam = new SqlParameter("@IP_COMPANY_KEY", oUser.UserCompanyKey);
+
+            using (var oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[ASSET].[GET_DRIVERS]", sqlParam))
             {
                 return oSet.ToUserSet();
             }

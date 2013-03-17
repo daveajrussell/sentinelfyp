@@ -21,9 +21,9 @@ namespace DomainModel.Services
             _consignmentManagementRepository = consignmentManagementRepository;
         }
 
-        public UnAssignedConsignment CreateConsignment(DateTime dtConsignmentDeliveryDate)
+        public UnAssignedConsignment CreateConsignment(User oUser, DateTime dtConsignmentDeliveryDate)
         {
-            return _consignmentManagementRepository.CreateConsignment(dtConsignmentDeliveryDate);
+            return _consignmentManagementRepository.CreateConsignment(oUser, dtConsignmentDeliveryDate);
         }
 
         public AssignedConsignment AssignConsignmentToDriver(Guid oConsignmentKey, Guid oDriverKey)
@@ -45,14 +45,14 @@ namespace DomainModel.Services
             _consignmentManagementRepository.UnAssignConsignment(oConsignmentKey);
         }
 
-        public IEnumerable<AssignedConsignment> GetAssignedConsignments()
+        public IEnumerable<AssignedConsignment> GetAssignedConsignments(User oUser)
         {
-            return _consignmentManagementRepository.GetAssignedConsignments();
+            return _consignmentManagementRepository.GetAssignedConsignments(oUser);
         }
 
-        public IEnumerable<UnAssignedConsignment> GetUnAssignedConsignments()
+        public IEnumerable<UnAssignedConsignment> GetUnAssignedConsignments(User oUser)
         {
-            return _consignmentManagementRepository.GetUnAssignedConsignments();
+            return _consignmentManagementRepository.GetUnAssignedConsignments(oUser);
         }
 
         public AssignedConsignment GetConsignmentByDriverKey(Guid oDriverKey)
@@ -63,15 +63,15 @@ namespace DomainModel.Services
             return _consignmentManagementRepository.GetConsignmentByDriverKey(oDriverKey);
         }
 
-        public IEnumerable<CompletedConsignment> GetCompletedConsignments()
+        public IEnumerable<CompletedConsignment> GetCompletedConsignments(User oUser)
         {
-            return _consignmentManagementRepository.GetCompletedConsignments();
+            return _consignmentManagementRepository.GetCompletedConsignments(oUser);
         }
 
 
-        public IEnumerable<User> GetUsersForConsignmentAssigning()
+        public IEnumerable<User> GetUsersForConsignmentAssigning(User oUser)
         {
-            return _consignmentManagementRepository.GetUsersForConsignmentAssigning();
+            return _consignmentManagementRepository.GetUsersForConsignmentAssigning(oUser);
         }
     }
 }

@@ -95,6 +95,7 @@
     <Compile Include="Services\NotifierServiceTest.cs" />
     <Compile Include="Services\SeverityHelperTest.cs" />
     <Compile Include="TestHelpers\AuthenticationTestHelper.cs" />
+    <Compile Include="TestHelpers\MockContext.cs" />
     <Compile Include="TestHelpers\TrackingTestHelper.cs" />
   </ItemGroup>
   <ItemGroup>

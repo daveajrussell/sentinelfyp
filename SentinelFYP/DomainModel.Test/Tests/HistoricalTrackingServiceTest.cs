@@ -59,7 +59,7 @@ namespace DomainModel.Test.Tests
                                                                     } 
                                     });
 
-            _repository.Setup(m => m.GetDrivers())
+            _repository.Setup(m => m.GetDrivers(It.IsAny<User>()))
                 .Returns(() => new List<User>() { new User(), new User()});
         }
 
@@ -127,7 +127,7 @@ namespace DomainModel.Test.Tests
         public void TestGetDrivers()
         {
             var target = new HistoricalTrackingService(_repository.Object);
-            var data = target.GetDrivers();
+            var data = target.GetDrivers(new User());
 
             Xunit.Assert.IsAssignableFrom<IEnumerable<User>>(data);
             Xunit.Assert.NotEmpty(data);

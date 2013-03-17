@@ -7,6 +7,7 @@ using DomainModel.Interfaces.Services;
 using GMap.NET;
 using Sentinel.Helpers.ExtensionMethods;
 using Sentinel.Models;
+using DomainModel.Models.AuditModels;
 
 namespace Sentinel.Controllers
 {
@@ -46,6 +47,11 @@ namespace Sentinel.Controllers
             }
         };
 
+        public HeatmappingController()
+        {
+
+        }
+
         public HeatmappingController(IPointService pointService, IGHeatService gheatService, ILiveTrackingService trackingService)
         {
             if (pointService == null)
@@ -63,7 +69,7 @@ namespace Sentinel.Controllers
 
             _trackingService = trackingService;
 
-            _activityPoints = _pointService.LoadActivityPoints();
+            _activityPoints = _pointService.LoadActivityPoints(State.User);
 
             _signalBlackspotPoints = _pointService.LoadSignalBlackspotPoints();
         }
@@ -96,7 +102,7 @@ namespace Sentinel.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult LiveActivityHeatmapData()
         {
-            var data = _trackingService.GetAllLiveElapsedRoutes();
+            var data = _trackingService.GetAllLiveElapsedRoutes(State.User);
 
             if(data.Count() > 0)
                 return PartialView("ActivityHeatmapPartial", data);
@@ -107,7 +113,7 @@ namespace Sentinel.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult LiveSignalHeatmapData()
         {
-            var data = _trackingService.GetAllLiveElapsedRoutes();
+            var data = _trackingService.GetAllLiveElapsedRoutes(State.User);
 
             if(data.Count() > 0)
                 return PartialView("SignalHeatmapPartial", data);

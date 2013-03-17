@@ -32,9 +32,9 @@ namespace DomainModel.Services
             return _trackingRepository.GetFilteredHistoricalDataByDriverKey(oDriverKey, iSessionID);
         }
 
-        public IEnumerable<User> GetDrivers()
+        public IEnumerable<User> GetDrivers(User oUser)
         {
-            return _trackingRepository.GetDrivers();
+            return _trackingRepository.GetDrivers(oUser);
         }
     }
 }

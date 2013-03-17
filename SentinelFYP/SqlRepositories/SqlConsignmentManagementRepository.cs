@@ -24,11 +24,15 @@ namespace SqlRepositories
             _connectionString = connectionString;
         }
 
-        public UnAssignedConsignment CreateConsignment(DateTime dtConsignmentDeliveryDate)
+        public UnAssignedConsignment CreateConsignment(User oUser, DateTime dtConsignmentDeliveryDate)
         {
-            var sqlParam = new SqlParameter("@IP_CONSIGNMENT_DELIVERY_DATE_TIME", dtConsignmentDeliveryDate);
+            var arrParams = new SqlParameter[]
+            {
+                new SqlParameter("@IP_COMPANY_KEY", oUser.UserCompanyKey),
+                new SqlParameter("@IP_CONSIGNMENT_DELIVERY_DATE_TIME", dtConsignmentDeliveryDate)
+            };
 
-            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[ASSET].[CREATE_CONSIGNMENT]", sqlParam))
+            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[ASSET].[CREATE_CONSIGNMENT]", arrParams))
             {
                 return oSet.ToUnAssignedConsignment();
             }
@@ -73,17 +77,21 @@ namespace SqlRepositories
             SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "[ASSET].[UNASSIGN_CONSIGNMENT]", arrParams);
         }
 
-        public IEnumerable<AssignedConsignment> GetAssignedConsignments()
+        public IEnumerable<AssignedConsignment> GetAssignedConsignments(User oUser)
         {
-            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[ASSET].[GET_ASSIGNED_CONSIGNMENTS]"))
+            var sqlParam = new SqlParameter("@IP_COMPANY_KEY", oUser.UserCompanyKey);
+
+            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[ASSET].[GET_ASSIGNED_CONSIGNMENTS]", sqlParam))
             {
                 return oSet.ToConsignmentSet();
             }
         }
 
-        public IEnumerable<UnAssignedConsignment> GetUnAssignedConsignments()
+        public IEnumerable<UnAssignedConsignment> GetUnAssignedConsignments(User oUser)
         {
-            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[ASSET].[GET_UNASSIGNED_CONSIGNMENTS]"))
+            var sqlParam = new SqlParameter("@IP_COMPANY_KEY", oUser.UserCompanyKey);
+
+            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[ASSET].[GET_UNASSIGNED_CONSIGNMENTS]", sqlParam))
             {
                 return oSet.ToUnAssignedConsignmentSet();
             }
@@ -98,18 +106,22 @@ namespace SqlRepositories
                 return oSet.ToConsignment(); 
             }
         }
-        
-        public IEnumerable<CompletedConsignment> GetCompletedConsignments()
+
+        public IEnumerable<CompletedConsignment> GetCompletedConsignments(User oUser)
         {
-            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[ASSET].[GET_COMPLETED_CONSIGNMENTS]"))
+            var sqlParam = new SqlParameter("@IP_COMPANY_KEY", oUser.UserCompanyKey);
+
+            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[ASSET].[GET_COMPLETED_CONSIGNMENTS]", sqlParam))
             {
                 return oSet.ToCompletedConsignmentSet();
             }
         }
 
-        public IEnumerable<User> GetUsersForConsignmentAssigning()
+        public IEnumerable<User> GetUsersForConsignmentAssigning(User oUser)
         {
-            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[ASSET].[GET_DRIVERS_FOR_ASSIGNING_CONSIGNMENT]"))
+            var sqlParam = new SqlParameter("@IP_COMPANY_KEY", oUser.UserCompanyKey);
+
+            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[ASSET].[GET_DRIVERS_FOR_ASSIGNING_CONSIGNMENT]", sqlParam))
             {
                 return oSet.ToUserSet();
             }

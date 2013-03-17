@@ -11,6 +11,7 @@ using SqlRepositories.Helper.Extensions;
 using SqlRepositories.Helper.Builders;
 using System.Drawing;
 using System.Data.SqlClient;
+using DomainModel.SecurityModels;
 
 namespace SqlRepositories
 {
@@ -41,9 +42,11 @@ namespace SqlRepositories
             }
         }
 
-        public List<PointLatLng> LoadActivityPoints()
+        public List<PointLatLng> LoadActivityPoints(User oUser)
         {
-            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT * FROM [GIS].[GEOSPATIAL_INFORMATION]"))
+            var sqlParam = new SqlParameter("@IP_COMPANY_KEY", oUser.UserCompanyKey);
+
+            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[ASSET].[GET_ALL_LIVE_ELAPSED_ROUTES]", sqlParam))
             {
                 return (from row in oSet.FirstDataTableAsEnumerable()
                         select row.ToPointLatLng()).ToList();

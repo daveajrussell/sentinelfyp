@@ -48,9 +48,11 @@ namespace SqlRepositories
             }
         }
 
-        public IEnumerable<User> GetDrivers()
+        public IEnumerable<User> GetDrivers(User oUser)
         {
-            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT * FROM [SECURITY].[USER]"))
+            var sqlParam = new SqlParameter("@IP_COMPANY_KEY", oUser.UserCompanyKey);
+
+            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[ASSET].[GET_DRIVERS_IN_ROLE]", sqlParam))
             {
                 return oSet.ToUserSet();
             }

@@ -21,9 +21,11 @@ namespace SqlRepositories
             _connectionString = connectionString;
         }
 
-        public IEnumerable<User> GetLiveDrivers()
+        public IEnumerable<User> GetLiveDrivers(User oUser)
         {
-            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT T1.* FROM [SECURITY].[USER] T1 INNER JOIN [AUDIT].[SESSION] T2 ON T1.USER_KEY = T2.USER_KEY"))
+            var sqlParam = new SqlParameter("@IP_COMPANY_KEY", oUser.UserCompanyKey);
+
+            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[ASSET].[GET_LIVE_DRIVERS]", sqlParam))
             {
                 return oSet.ToUserSet();
             }
@@ -55,9 +57,11 @@ namespace SqlRepositories
             }
         }
 
-        public IEnumerable<ElapsedGeospatialInformation> GetAllLiveElapsedRoutes()
+        public IEnumerable<ElapsedGeospatialInformation> GetAllLiveElapsedRoutes(User oUser)
         {
-            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.Text, "SELECT * FROM [GIS].[GEOSPATIAL_INFORMATION] ORDER BY [TIMESTAMP] DESC"))
+            var sqlParam = new SqlParameter("@IP_COMPANY_KEY", oUser.UserCompanyKey);
+
+            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[ASSET].[GET_ALL_LIVE_ELAPSED_ROUTES]", sqlParam))
             {
                 return oSet.ToEnumerableGeospatialInformationSet();
             }   

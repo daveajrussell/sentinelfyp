@@ -5,8 +5,6 @@
     ViewBag.Title = "Live Tracking";
 }
 
-@Html.Action("GetAllDriversForLiveTracking", "Tracking")
-
 <section id="tracking" class="historical-tracking">
-
+    @Html.Action("GetAllDriversForLiveTracking", "Tracking")
 </section>

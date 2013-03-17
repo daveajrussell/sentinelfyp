@@ -324,7 +324,6 @@
     <Content Include="Views\AssetManagement\UnAssignDeliveryItemPartial.cshtml" />
     <Content Include="Views\AssetManagement\AssignDeliveryItemPartial.cshtml" />
     <Content Include="Views\AssetManagement\Index.cshtml" />
-    <Content Include="Views\AssetManagement\DeliveryItemManagement.cshtml" />
     <Content Include="Views\AssetManagement\ConsignmentManagement.cshtml" />
     <Content Include="Views\AssetManagement\ConsignmentManagement\Assigned.cshtml" />
     <Content Include="Views\AssetManagement\ConsignmentManagement\UnAssigned.cshtml" />
@@ -357,6 +356,7 @@
     <Content Include="Views\Heatmapping\ActivityHeatmapPartial.cshtml" />
     <Content Include="Scripts\jquery.tinyscrollbar.min.js" />
     <Content Include="Views\Tracking\LiveElapsedMapPartial.cshtml" />
+    <Content Include="Views\AssetManagement\DeliveryManagement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">

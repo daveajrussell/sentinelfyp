@@ -21,9 +21,9 @@ namespace DomainModel.Services
             _liveTrackingRepository = liveTrackingRepository;
         }
 
-        public IEnumerable<User> GetLiveDrivers()
+        public IEnumerable<User> GetLiveDrivers(User oUser)
         {
-            return _liveTrackingRepository.GetLiveDrivers();
+            return _liveTrackingRepository.GetLiveDrivers(oUser);
         }
 
         public GeospatialInformation GetLiveUpdate(Guid oUserKey)
@@ -36,9 +36,9 @@ namespace DomainModel.Services
             return _liveTrackingRepository.GetLiveElapsedRoute(oUserKey);
         }
 
-        public IEnumerable<ElapsedGeospatialInformation> GetAllLiveElapsedRoutes()
+        public IEnumerable<ElapsedGeospatialInformation> GetAllLiveElapsedRoutes(User oUser)
         {
-            return _liveTrackingRepository.GetAllLiveElapsedRoutes();
+            return _liveTrackingRepository.GetAllLiveElapsedRoutes(oUser);
         }
     }
 }

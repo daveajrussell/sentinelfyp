@@ -20,7 +20,7 @@ namespace DomainModel.Test.Tests
         {
             _liveTrackingRepository = new Mock<ILiveTrackingRepository>();
 
-            _liveTrackingRepository.Setup(m => m.GetLiveDrivers())
+            _liveTrackingRepository.Setup(m => m.GetLiveDrivers(It.IsAny<User>()))
                 .Returns(() => new List<User>() { new User(), new User() });
 
             _liveTrackingRepository.Setup(m => m.GetLiveUpdate(It.IsAny<Guid>()))
@@ -29,7 +29,7 @@ namespace DomainModel.Test.Tests
             _liveTrackingRepository.Setup(m => m.GetLiveElapsedRoute(It.IsAny<Guid>()))
                 .Returns(() => new List<GeospatialInformation>() { new GeospatialInformation(), new GeospatialInformation(), new GeospatialInformation() });
 
-            _liveTrackingRepository.Setup(m => m.GetAllLiveElapsedRoutes())
+            _liveTrackingRepository.Setup(m => m.GetAllLiveElapsedRoutes(It.IsAny<User>()))
                 .Returns(() => new List<ElapsedGeospatialInformation>() { new ElapsedGeospatialInformation(), new ElapsedGeospatialInformation(), new ElapsedGeospatialInformation() });
         }
 
@@ -54,7 +54,7 @@ namespace DomainModel.Test.Tests
         public void TestGetLiveDrivers()
         {
             var target = new LiveTrackingService(_liveTrackingRepository.Object);
-            var liveDrivers = target.GetLiveDrivers();
+            var liveDrivers = target.GetLiveDrivers(new User());
 
             Xunit.Assert.NotEmpty(liveDrivers);
             Xunit.Assert.IsAssignableFrom<IEnumerable<User>>(liveDrivers);
@@ -90,7 +90,7 @@ namespace DomainModel.Test.Tests
         public void TestGetAllLiveElapsedRoutes()
         {
             var target = new LiveTrackingService(_liveTrackingRepository.Object);
-            var allLiveElapsedRoutes = target.GetAllLiveElapsedRoutes();
+            var allLiveElapsedRoutes = target.GetAllLiveElapsedRoutes(new User());
 
             Xunit.Assert.NotNull(allLiveElapsedRoutes);
             Xunit.Assert.NotEmpty(allLiveElapsedRoutes);

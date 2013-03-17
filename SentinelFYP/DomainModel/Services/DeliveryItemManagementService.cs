@@ -5,6 +5,7 @@ using System.Text;
 using DomainModel.Interfaces.Repositories;
 using DomainModel.Interfaces.Services;
 using DomainModel.Models.AssetModels;
+using DomainModel.SecurityModels;
 
 namespace DomainModel.Services
 {
@@ -25,9 +26,9 @@ namespace DomainModel.Services
             return _repository.GetDeliveryItemsByKey(oDeliveryItemKeys);
         }
 
-        public IEnumerable<AssignedDeliveryItem> GetAllAssignedDeliveryItems()
+        public IEnumerable<AssignedDeliveryItem> GetAllAssignedDeliveryItems(User oUser)
         {
-            return _repository.GetAllAssignedDeliveryItems();
+            return _repository.GetAllAssignedDeliveryItems(oUser);
         }
 
         public IEnumerable<AssignedDeliveryItem> GetConsignmentDeliveryItems(Guid oConsignmentKey)
@@ -35,9 +36,9 @@ namespace DomainModel.Services
             return _repository.GetConsignmentDeliveryItems(oConsignmentKey);
         }
 
-        public IEnumerable<DeliveryItem> GetAllUnassignedDeliveryItems()
+        public IEnumerable<DeliveryItem> GetAllUnassignedDeliveryItems(User oUser)
         {
-            return _repository.GetAllUnassignedDeliveryItems();
+            return _repository.GetAllUnassignedDeliveryItems(oUser);
         }
 
         public void AssignDeliveryItemsToConsignment(IEnumerable<Guid> oDeliveryItemKeys, Guid oConsingmentKey)
@@ -53,6 +54,11 @@ namespace DomainModel.Services
         public void UnAssignDeliveryItems(Guid oAssignmentKey, IEnumerable<Guid> oDeliveryItemKeys)
         {
             _repository.UnAssignDeliveryItems(oAssignmentKey, oDeliveryItemKeys);
+        }
+
+        public IEnumerable<GeoTaggedDeliveryItem> GetGeotaggedDeliveryItems(User oUser)
+        {
+            return _repository.GetGeotaggedDeliveryItems(oUser);
         }
     }
 }

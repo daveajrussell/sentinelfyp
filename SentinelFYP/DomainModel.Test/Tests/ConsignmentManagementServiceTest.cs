@@ -17,8 +17,8 @@ namespace DomainModel.Test.Tests
         {
             _repository = new Mock<IConsignmentManagementRepository>();
 
-            _repository.Setup(m => m.CreateConsignment(It.IsAny<DateTime>()))
-                .Returns<DateTime>((dtConsignmentDeliveryDate) => ConsignmentManagementTestHelper.CreateConsignmentMock(dtConsignmentDeliveryDate));
+            _repository.Setup(m => m.CreateConsignment(It.IsAny<User>(), It.IsAny<DateTime>()))
+                .Returns<User, DateTime>((user, dtConsignmentDeliveryDate) => ConsignmentManagementTestHelper.CreateConsignmentMock(user, dtConsignmentDeliveryDate));
 
             _repository.Setup(m => m.AssignConsignmentToDriver(It.IsAny<Guid>(), It.IsAny<Guid>()))
                 .Returns<Guid, Guid>((oConsignmentKey, oDriverKey) => ConsignmentManagementTestHelper.AssignConsignmentToDriverMock(oConsignmentKey, oDriverKey));
@@ -38,7 +38,7 @@ namespace DomainModel.Test.Tests
             var service = new ConsignmentManagementService(_repository.Object);
             UnAssignedConsignment result = null;
 
-            Xunit.Assert.DoesNotThrow(() => result = service.CreateConsignment(DateTime.Today));
+            Xunit.Assert.DoesNotThrow(() => result = service.CreateConsignment(new User(), DateTime.Today));
 
             Xunit.Assert.NotNull(result);
             Xunit.Assert.IsAssignableFrom<UnAssignedConsignment>(result);
@@ -66,7 +66,7 @@ namespace DomainModel.Test.Tests
         {
             var service = new ConsignmentManagementService(_repository.Object);
 
-            UnAssignedConsignment consignment = service.CreateConsignment(DateTime.Today);
+            UnAssignedConsignment consignment = service.CreateConsignment(new User(), DateTime.Today);
             AssignedConsignment updatedConsignment = null;
             User user = new User() { UserKey = Guid.NewGuid() };
             
@@ -81,7 +81,7 @@ namespace DomainModel.Test.Tests
         {
             var service = new ConsignmentManagementService(_repository.Object);
 
-            UnAssignedConsignment oUnAssignedConsignment = service.CreateConsignment(DateTime.Today);
+            UnAssignedConsignment oUnAssignedConsignment = service.CreateConsignment(new User(), DateTime.Today);
             AssignedConsignment oAssignedConsignment;
 
             User driver = new User() { UserKey = Guid.NewGuid() };

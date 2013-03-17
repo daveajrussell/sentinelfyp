@@ -74,6 +74,7 @@ namespace Sentinel.Helpers.ExtensionMethods
                 gfx.DrawString(item.RecipientAddress, font, XBrushes.Black, new XRect(10, _Y += 15, page.Width, page.Height), XStringFormats.TopLeft);
                 gfx.DrawString(item.RecipientTown, font, XBrushes.Black, new XRect(10, _Y += 15, page.Width, page.Height), XStringFormats.TopLeft);
                 gfx.DrawString(item.RecipientPostCode, font, XBrushes.Black, new XRect(10, _Y += 15, page.Width, page.Height), XStringFormats.TopLeft);
+                gfx.DrawString(item.DeliveryItemKey.ToString(), font, XBrushes.Black, new XRect(10, _Y += 15, page.Width, page.Height), XStringFormats.TopLeft);
 
                 var qrString = item.DeliveryItemKey.ToString();
 

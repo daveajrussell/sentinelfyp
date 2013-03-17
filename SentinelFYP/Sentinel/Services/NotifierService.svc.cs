@@ -54,5 +54,5 @@ namespace Sentinel.Services
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SentinelHub>();
             context.Clients.All.deliveryUpdate(oItem.DriverKey, oItem.TimeStamp.ToShortDateString(), SeverityHelper.NORMAL);
         }
-}
+    }
 }
