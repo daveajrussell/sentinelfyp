@@ -16,6 +16,7 @@ namespace SqlRepositories.Helper.Builders
                     select new User()
                     {
                         UserKey = user.Field<Guid>("USER_KEY"),
+                        UserCompanyKey = user.Field<Guid>("USER_COMPANY_KEY"),
                         UserName = user.Field<string>("USERNAME"),
                         FirstName = user.Field<string>("USER_FIRST_NAME"),
                         LastName = user.Field<string>("USER_LAST_NAME"),

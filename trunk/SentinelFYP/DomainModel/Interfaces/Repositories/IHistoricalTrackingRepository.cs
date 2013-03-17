@@ -11,6 +11,6 @@ namespace DomainModel.Interfaces.Repositories
     {
         IEnumerable<HistoricalGeospatialInformation> GetAllHistoricalTrackingDataByDriverKey(Guid oDriverKey);
         HistoricalGeospatialInformation GetFilteredHistoricalDataByDriverKey(Guid oDriverKey, int iSessionID);
-        IEnumerable<User> GetDrivers();
+        IEnumerable<User> GetDrivers(User oUser);
     }
 }

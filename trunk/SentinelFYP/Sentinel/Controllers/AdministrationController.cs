@@ -1,4 +1,5 @@
 ﻿using DomainModel.Interfaces.Services;
+using DomainModel.Models.AuditModels;
 using Sentinel.Infrastructure;
 using Sentinel.Models;
 using System;
@@ -104,7 +105,7 @@ namespace Sentinel.Controllers
 
         public ActionResult ResetPassword()
         {
-            var users = _securityService.GetUsers();
+            var users = _securityService.GetUsers(State.User);
             return View(users);
         }
 

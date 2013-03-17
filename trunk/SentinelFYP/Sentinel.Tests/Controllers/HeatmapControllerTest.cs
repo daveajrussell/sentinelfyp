@@ -16,6 +16,8 @@ using System.Drawing.Imaging;
 using Sentinel.Controllers;
 using Sentinel.Tests.TestHelpers;
 using DomainModel.Models.GISModels;
+using DomainModel.SecurityModels;
+using System.Web;
 
 namespace Sentinel.Tests.Controllers
 {
@@ -24,6 +26,8 @@ namespace Sentinel.Tests.Controllers
         private Mock<IPointService> _pointService;
         private Mock<IGHeatService> _gheatService;
         private Mock<ILiveTrackingService> _trackingService;
+        private Mock<ControllerContext> _mock;
+        private Mock<HttpSessionStateBase> _mockSession;
 
         public HeatmapControllerTest()
         {
@@ -31,13 +35,19 @@ namespace Sentinel.Tests.Controllers
             _gheatService = new Mock<IGHeatService>();
             _trackingService = new Mock<ILiveTrackingService>();
 
+            _mock = new Mock<ControllerContext>();
+            _mockSession = new Mock<HttpSessionStateBase>();
+
+            _mock.Setup(p => p.HttpContext.Session)
+                .Returns(_mockSession.Object);
+
             _gheatService.Setup(m => m.GetTile(It.IsAny<List<PointLatLng>>(), It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>()))
                 .Returns<List<PointLatLng>, string, int, int, int>((points, colorScheme, zoom, x, y) => TrackingTestHelper.GetTileMock(points, colorScheme, zoom, x, y));
 
             _pointService.Setup(m => m.LoadSignalBlackspotPoints())
                 .Returns(new List<PointLatLng>() { new PointLatLng(12, 12) });
 
-            _trackingService.Setup(m => m.GetAllLiveElapsedRoutes())
+            _trackingService.Setup(m => m.GetAllLiveElapsedRoutes(It.IsAny<User>()))
                 .Returns(() => TrackingTestHelper.MockGetAllLiveElapsedRoutes());
         }
 
@@ -62,16 +72,24 @@ namespace Sentinel.Tests.Controllers
         [Fact]
         public void ControllerConstructorShouldNotThrow()
         {
-            Assert.DoesNotThrow(() => new HeatmappingController(_pointService.Object, _gheatService.Object, _trackingService.Object));
+            var target = new HeatmappingController();
+            target.ControllerContext = _mock.Object;
+            HttpContext.Current = MockContext.FakeHttpContext();
+
+            Assert.DoesNotThrow(() => target = new HeatmappingController(_pointService.Object, _gheatService.Object, _trackingService.Object));
         }
 
         [Fact]
         public void IndexReturnsActionResult()
         {
-            var controller = new HeatmappingController(_pointService.Object, _gheatService.Object, _trackingService.Object);
+            var target = new HeatmappingController();
+            target.ControllerContext = _mock.Object;
+            HttpContext.Current = MockContext.FakeHttpContext();
+
+            target = new HeatmappingController(_pointService.Object, _gheatService.Object, _trackingService.Object);
             ActionResult result = null;
 
-            Assert.DoesNotThrow(() => result = controller.Index());
+            Assert.DoesNotThrow(() => result = target.Index());
             Assert.NotNull(result);
             Assert.IsAssignableFrom<ActionResult>(result);
         }
@@ -79,10 +97,14 @@ namespace Sentinel.Tests.Controllers
         [Fact]
         public void GetTileReturnsTileResult()
         {
-            var controller = new HeatmappingController(_pointService.Object, _gheatService.Object, _trackingService.Object);
+            var target = new HeatmappingController();
+            target.ControllerContext = _mock.Object;
+            HttpContext.Current = MockContext.FakeHttpContext();
+
+            target = new HeatmappingController(_pointService.Object, _gheatService.Object, _trackingService.Object);
             TileResult result = null;
 
-            Assert.DoesNotThrow(() => result = controller.BlackSpotTile("5", "12", "12"));
+            Assert.DoesNotThrow(() => result = target.BlackSpotTile("5", "12", "12"));
             Assert.NotNull(result);
             Assert.IsAssignableFrom<TileResult>(result);
         }

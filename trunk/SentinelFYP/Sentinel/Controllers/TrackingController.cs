@@ -75,7 +75,7 @@ namespace Sentinel.Controllers
 
         public ActionResult AllDriverLiveTracking()
         {
-            var data = _liveTrackingService.GetAllLiveElapsedRoutes();
+            var data = _liveTrackingService.GetAllLiveElapsedRoutes(State.User);
             return View(data);
         }
 
@@ -144,7 +144,7 @@ namespace Sentinel.Controllers
 
         public ActionResult GetAllDriversForDriverSelect()
         {
-            var data = _histroicalTrackingService.GetDrivers();
+            var data = _histroicalTrackingService.GetDrivers(State.User);
             return PartialView("Dialogs/DriverSelectDialog", data);
         }
 
@@ -155,7 +155,7 @@ namespace Sentinel.Controllers
 
         public ActionResult GetAllDriversForLiveTracking()
         {
-            var data = _liveTrackingService.GetLiveDrivers();
+            var data = _liveTrackingService.GetLiveDrivers(State.User);
             return PartialView("Dialogs/LiveDriverSelectDialog", data);
         }
 

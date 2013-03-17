@@ -9,9 +9,9 @@ namespace DomainModel.Interfaces.Services
 {
     public interface ILiveTrackingService
     {
-        IEnumerable<User> GetLiveDrivers();
+        IEnumerable<User> GetLiveDrivers(User oUser);
         GeospatialInformation GetLiveUpdate(Guid oUserKey);
         IEnumerable<GeospatialInformation> GetLiveElapsedRoute(Guid oUserKey);
-        IEnumerable<ElapsedGeospatialInformation> GetAllLiveElapsedRoutes();
+        IEnumerable<ElapsedGeospatialInformation> GetAllLiveElapsedRoutes(User oUser);
     }
 }

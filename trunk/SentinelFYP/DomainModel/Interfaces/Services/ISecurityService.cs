@@ -12,7 +12,7 @@ namespace DomainModel.Interfaces.Services
         void LogIn(string strUsername, string strPassword, out User oUser, out Session oSession);
         void Logout();
         User GetUserByUserKey(Guid oUserKey);
-        IEnumerable<User> GetUsers();
+        IEnumerable<User> GetUsers(User oUser);
         bool ResetPassword(Guid oUserKey, string strPassword);
     }
 }

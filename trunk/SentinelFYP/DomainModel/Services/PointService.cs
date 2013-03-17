@@ -10,6 +10,7 @@ using System.Drawing;
 using DomainModel.Interfaces.Repositories;
 using DomainModel.Models;
 using DomainModel.Models.GISModels;
+using DomainModel.SecurityModels;
 
 namespace DomainModel.Services
 {
@@ -30,9 +31,9 @@ namespace DomainModel.Services
             return _pointRepository.LoadSignalBlackspotPoints();
         }
 
-        public List<PointLatLng> LoadActivityPoints()
+        public List<PointLatLng> LoadActivityPoints(User oUser)
         {
-            return _pointRepository.LoadActivityPoints();
+            return _pointRepository.LoadActivityPoints(oUser);
         }
 
         public GMap.NET.Point AdjustMapPixelsToTilePixels(GMap.NET.Point tileXYPoint, GMap.NET.Point mapPixelPoint)

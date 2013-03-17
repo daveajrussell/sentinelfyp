@@ -8,6 +8,8 @@ using Moq;
 using Sentinel.Controllers;
 using Sentinel.Models;
 using Xunit;
+using System.Web;
+using Sentinel.Tests.TestHelpers;
 
 namespace Sentinel.Tests.Controllers
 {
@@ -16,6 +18,8 @@ namespace Sentinel.Tests.Controllers
         private Mock<IHistoricalTrackingService> _histroicalTrackingService;
         private Mock<ILiveTrackingService> _liveTrackingService;
         private List<MenuViewModel> _menuItems;
+        private Mock<ControllerContext> _mock;
+        private Mock<HttpSessionStateBase> _mockSession;
 
         public TrackingControllerTest()
         {
@@ -35,6 +39,12 @@ namespace Sentinel.Tests.Controllers
                 }
             };
 
+            _mock = new Mock<ControllerContext>();
+            _mockSession = new Mock<HttpSessionStateBase>();
+
+            _mock.Setup(p => p.HttpContext.Session)
+                .Returns(_mockSession.Object);
+
             _histroicalTrackingService = new Mock<IHistoricalTrackingService>();
 
             _histroicalTrackingService.Setup(m => m.GetAllHistoricalTrackingDataByDriverKey(It.IsAny<Guid>()))
@@ -43,12 +53,12 @@ namespace Sentinel.Tests.Controllers
             _histroicalTrackingService.Setup(m => m.GetFilteredHistoricalDataByDriverKey(It.IsAny<Guid>(), It.IsAny<int>()))
                 .Returns<Guid, int>((driverKey, sessionID) => new HistoricalGeospatialInformation() { DriverKey = driverKey, HistoricalSessionID = sessionID });
 
-            _histroicalTrackingService.Setup(m => m.GetDrivers())
+            _histroicalTrackingService.Setup(m => m.GetDrivers(It.IsAny<User>()))
                 .Returns(() => new List<User>() { new User(), new User() });
 
             _liveTrackingService = new Mock<ILiveTrackingService>();
 
-            _liveTrackingService.Setup(m => m.GetLiveDrivers())
+            _liveTrackingService.Setup(m => m.GetLiveDrivers(It.IsAny<User>()))
                 .Returns(() => new List<User>() { new User(), new User() });
 
             _liveTrackingService.Setup(m => m.GetLiveUpdate(It.IsAny<Guid>()))
@@ -163,7 +173,7 @@ namespace Sentinel.Tests.Controllers
 
             Assert.IsAssignableFrom<ActionButtonsViewModel>(item);
             Assert.Equal("Back", item.Display);
-            Assert.Equal("javascript:showAllHistoricalData()", item.Javascript);
+            Assert.Equal("showAllHistoricalData()", item.Javascript);
         }
 
         [Fact]
@@ -184,7 +194,7 @@ namespace Sentinel.Tests.Controllers
 
             Assert.IsAssignableFrom<ActionButtonsViewModel>(itemOne);
             Assert.Equal("Back", itemOne.Display);
-            Assert.Equal("navigateBack('Index')", itemOne.Javascript);
+            Assert.Equal("navigateBack('HistoricalTracking')", itemOne.Javascript);
 
             Assert.IsAssignableFrom<ActionButtonsViewModel>(itemTwo);
             Assert.Equal("Select New Driver", itemTwo.Display);
@@ -195,6 +205,8 @@ namespace Sentinel.Tests.Controllers
         public void TestGetAllDriversForDriverSelect()
         {
             var target = new TrackingController(_histroicalTrackingService.Object, _liveTrackingService.Object);
+            target.ControllerContext = _mock.Object;
+            HttpContext.Current = MockContext.FakeHttpContext();
 
             var result = target.GetAllDriversForDriverSelect();
             var item = (new List<User>(((List<User>)(((ViewResultBase)(result)).Model))))[0];
@@ -222,6 +234,8 @@ namespace Sentinel.Tests.Controllers
         public void TestGetAllDriversForLiveTracking()
         {
             var target = new TrackingController(_histroicalTrackingService.Object, _liveTrackingService.Object);
+            target.ControllerContext = _mock.Object;
+            HttpContext.Current = MockContext.FakeHttpContext();
 
             var result = target.GetAllDriversForLiveTracking();
             var item = (new List<User>(((List<User>)(((ViewResultBase)(result)).Model))))[0];
@@ -241,22 +255,17 @@ namespace Sentinel.Tests.Controllers
 
             var result = target.LiveElapsedTrackingDriverFeedPageActions();
             var itemOne = (new List<ActionButtonsViewModel>(((List<ActionButtonsViewModel>)(((ViewResultBase)(result)).Model))))[0];
-            var itemTwo = (new List<ActionButtonsViewModel>(((List<ActionButtonsViewModel>)(((ViewResultBase)(result)).Model))))[1];
 
             Assert.NotNull(result);
             Assert.NotNull(itemOne);
-            Assert.NotNull(itemTwo);
+            //Assert.NotNull(itemTwo);
 
             Assert.IsAssignableFrom<PartialViewResult>(result);
             Assert.Equal("../ActionButtons/PageActionButtonsPartial", ((ViewResultBase)(result)).ViewName);
 
             Assert.IsAssignableFrom<ActionButtonsViewModel>(itemOne);
             Assert.Equal("Back", itemOne.Display);
-            Assert.Equal("navigateBack('Index')", itemOne.Javascript);
-
-            Assert.IsAssignableFrom<ActionButtonsViewModel>(itemTwo);
-            Assert.Equal("Show Single Marker", itemTwo.Display);
-            Assert.Equal("showSingleMarker()", itemTwo.Javascript);
+            Assert.Equal("navigateBack('LiveTracking')", itemOne.Javascript);
         }
 
         [Fact]

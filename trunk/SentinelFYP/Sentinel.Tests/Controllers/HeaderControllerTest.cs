@@ -13,6 +13,7 @@ using Moq;
 using Sentinel.Controllers;
 using Sentinel.Models;
 using Xunit;
+using Sentinel.Tests.TestHelpers;
 
 namespace Sentinel.Tests.Controllers
 {
@@ -35,7 +36,7 @@ namespace Sentinel.Tests.Controllers
         {
             var target = new HeaderController();
             target.ControllerContext = _mock.Object;
-            HttpContext.Current = FakeHttpContext();
+            HttpContext.Current = MockContext.FakeHttpContext();
 
             var result = target.Index();
 
@@ -51,8 +52,8 @@ namespace Sentinel.Tests.Controllers
         {
             var target = new HeaderController();
             target.ControllerContext = _mock.Object;
-            
-            HttpContext.Current = FakeHttpContext();
+
+            HttpContext.Current = MockContext.FakeHttpContext();
             State.User = new User() { UserName = "Test User", LastLoginDate = DateTime.Now };
 
             var result = target.Index();
@@ -68,19 +69,5 @@ namespace Sentinel.Tests.Controllers
             Assert.Equal("HeaderPartial", ((ViewResultBase)(result)).ViewName);
         }
 
-        public static HttpContext FakeHttpContext()
-        {
-            var httpRequest = new HttpRequest("", "http://localhost/Sentinel/", "");
-            var stringWriter = new StringWriter();
-            var httpResponse = new HttpResponse(stringWriter);
-            var httpContext = new HttpContext(httpRequest, httpResponse);
-
-            var sessionContainer = new HttpSessionStateContainer("id", new SessionStateItemCollection(), new HttpStaticObjectsCollection(), 10, true, HttpCookieMode.AutoDetect, SessionStateMode.InProc, false);
-
-            httpContext.Items["AspSession"] = typeof(HttpSessionState).GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, CallingConventions.Standard, new[] { typeof(HttpSessionStateContainer) }, null)
-                .Invoke(new object[] { sessionContainer });
-
-            return httpContext;
-        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using DomainModel.Interfaces.Services;
 using DomainModel.Models.AssetModels;
+using DomainModel.SecurityModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Sentinel.Controllers;
@@ -41,10 +42,10 @@ namespace Sentinel.Tests.Controllers
             _consignmentService = new Mock<IConsignmentManagementService>();
             _itemService = new Mock<IDeliveryItemManagementService>();
 
-            _consignmentService.Setup(m => m.GetAssignedConsignments())
+            _consignmentService.Setup(m => m.GetAssignedConsignments(It.IsAny<User>()))
                 .Returns(() => new List<AssignedConsignment>() { new AssignedConsignment(Guid.NewGuid(), Guid.NewGuid(), "", "", "", DateTime.Now) });
 
-            _consignmentService.Setup(m => m.GetUnAssignedConsignments())
+            _consignmentService.Setup(m => m.GetUnAssignedConsignments(It.IsAny<User>()))
                 .Returns(() => new List<UnAssignedConsignment>() { new UnAssignedConsignment(Guid.NewGuid(), DateTime.Now), new UnAssignedConsignment(Guid.NewGuid(), DateTime.Now) });
 
             _itemService.Setup(m => m.GetConsignmentDeliveryItems(It.IsAny<Guid>()))
@@ -107,7 +108,7 @@ namespace Sentinel.Tests.Controllers
             Xunit.Assert.NotNull(item);
             Xunit.Assert.IsAssignableFrom<ActionButtonsViewModel>(item);
             Xunit.Assert.Equal("Back", item.Display);
-            Xunit.Assert.Equal("navigateBack('Index')", item.Javascript);
+            Xunit.Assert.Equal("navigateBack('ConsignmentManagement')", item.Javascript);
         }
 
         [Fact]
@@ -144,7 +145,7 @@ namespace Sentinel.Tests.Controllers
             Xunit.Assert.NotNull(itemOne);
             Xunit.Assert.IsAssignableFrom<ActionButtonsViewModel>(itemOne);
             Xunit.Assert.Equal("Back", itemOne.Display);
-            Xunit.Assert.Equal("navigateBack('Index')", itemOne.Javascript);
+            Xunit.Assert.Equal("navigateBack('ConsignmentManagement')", itemOne.Javascript);
 
             Xunit.Assert.NotNull(itemTwo);
             Xunit.Assert.IsAssignableFrom<ActionButtonsViewModel>(itemTwo);
@@ -157,7 +158,7 @@ namespace Sentinel.Tests.Controllers
         {
             var target = new AssetManagementController(_consignmentService.Object, _itemService.Object);
 
-            var result = target.DeliveryItemManagement();
+            var result = target.DeliveryManagement();
 
             Xunit.Assert.NotNull(result);
             Xunit.Assert.IsAssignableFrom<ViewResult>(result);
@@ -220,7 +221,7 @@ namespace Sentinel.Tests.Controllers
         [TestMethod]
         public void TestGetAssignDeliveryItemPartialNoItems()
         {
-            _itemService.Setup(m => m.GetAllUnassignedDeliveryItems())
+            _itemService.Setup(m => m.GetAllUnassignedDeliveryItems(It.IsAny<User>()))
                 .Returns(() => new List<DeliveryItem>());
 
             var target = new AssetManagementController(_consignmentService.Object, _itemService.Object);
@@ -236,7 +237,7 @@ namespace Sentinel.Tests.Controllers
         [TestMethod]
         public void TestGetAssignDeliveryItemPartialWithItems()
         {
-            _itemService.Setup(m => m.GetAllUnassignedDeliveryItems())
+            _itemService.Setup(m => m.GetAllUnassignedDeliveryItems(It.IsAny<User>()))
                 .Returns(() => new List<DeliveryItem>() { new DeliveryItem(Guid.NewGuid(), Guid.NewGuid()), new DeliveryItem(Guid.NewGuid(), Guid.NewGuid()) });
 
             var target = new AssetManagementController(_consignmentService.Object, _itemService.Object);

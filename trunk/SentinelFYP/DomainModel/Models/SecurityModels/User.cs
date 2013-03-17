@@ -11,6 +11,7 @@ namespace DomainModel.SecurityModels
     public class User : MembershipUser
     {
         public Guid UserKey { get; set; }
+        public Guid UserCompanyKey { get; set; }
         public Session Session { get; set; }
         public string UserName { get; set; }
         public string FirstName { get; set; }

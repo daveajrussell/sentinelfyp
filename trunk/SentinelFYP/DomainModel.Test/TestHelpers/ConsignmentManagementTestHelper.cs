@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DomainModel.Models.AssetModels;
+using DomainModel.SecurityModels;
 
 namespace DomainModel.Test.TestHelpers
 {
     public static class ConsignmentManagementTestHelper
     {
-        public static UnAssignedConsignment CreateConsignmentMock(DateTime dtConsignmentDeliveryDate)
+        public static UnAssignedConsignment CreateConsignmentMock(User oUser, DateTime dtConsignmentDeliveryDate)
         {
             return CreateConsignment();
         }

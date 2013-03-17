@@ -9,6 +9,7 @@ using DomainModel.Interfaces.Repositories;
 using DomainModel.Models.AssetModels;
 using Sentinel.SqlDataAccess;
 using SqlRepositories.Helper.Builders;
+using DomainModel.SecurityModels;
 
 namespace SqlRepositories
 {
@@ -36,9 +37,11 @@ namespace SqlRepositories
             }
         }
 
-        public IEnumerable<AssignedDeliveryItem> GetAllAssignedDeliveryItems()
+        public IEnumerable<AssignedDeliveryItem> GetAllAssignedDeliveryItems(User oUser)
         {
-            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[ASSET].[GET_ALL_ASSIGNED_DELIVERY_ITEMS]"))
+            var sqlParam = new SqlParameter("@IP_COMPANY_KEY", oUser.UserCompanyKey);
+
+            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[ASSET].[GET_ALL_ASSIGNED_DELIVERY_ITEMS]", sqlParam))
             {
                 return oSet.ToAssignedDeliveryItemSet();
             }
@@ -54,9 +57,11 @@ namespace SqlRepositories
             }
         }
 
-        public IEnumerable<DeliveryItem> GetAllUnassignedDeliveryItems()
+        public IEnumerable<DeliveryItem> GetAllUnassignedDeliveryItems(User oUser)
         {
-            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[ASSET].[GET_ALL_UNASSIGNED_DELIVERY_ITEMS]"))
+            var sqlParam = new SqlParameter("@IP_COMPANY_KEY", oUser.UserCompanyKey);
+
+            using (DataSet oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[ASSET].[GET_ALL_UNASSIGNED_DELIVERY_ITEMS]", sqlParam))
             {
                 return oSet.ToDeliveryItemSet();
             }
@@ -103,6 +108,16 @@ namespace SqlRepositories
         {
             return new XDocument(new XElement("ITEM_KEYS", from key in oKeys
                                                            select new XElement("ITEM", new XAttribute("KEY", key))));
+        }
+
+        public IEnumerable<GeoTaggedDeliveryItem> GetGeotaggedDeliveryItems(User oUser)
+        {
+            var sqlParam = new SqlParameter("@IP_COMPANY_KEY", oUser.UserCompanyKey);
+
+            using (var oSet = SqlHelper.ExecuteDataset(_connectionString, CommandType.StoredProcedure, "[ASSET].[GET_GEOTAGGED_DELIVERIES]", sqlParam))
+            {
+                return oSet.ToGeotaggedDeliveriesSet();
+            }
         }
     }
 }

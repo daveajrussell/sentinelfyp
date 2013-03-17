@@ -8,6 +8,7 @@ using DomainModel.Models.AssetModels;
 using DomainModel.Services;
 using Moq;
 using Xunit;
+using DomainModel.SecurityModels;
 
 namespace DomainModel.Test.Tests
 {
@@ -44,10 +45,10 @@ namespace DomainModel.Test.Tests
                                                    where item.ConsignmentKey == consignmentKey
                                                    select item);
 
-            _repository.Setup(m => m.GetAllAssignedDeliveryItems())
+            _repository.Setup(m => m.GetAllAssignedDeliveryItems(It.IsAny<User>()))
                 .Returns(() => _assignedDeliveryItems);
 
-            _repository.Setup(m => m.GetAllUnassignedDeliveryItems())
+            _repository.Setup(m => m.GetAllUnassignedDeliveryItems(It.IsAny<User>()))
                 .Returns(() => _unassignedDeliveryItems);
         }
 
@@ -126,7 +127,7 @@ namespace DomainModel.Test.Tests
         public void TestGetAllAssignedDeliveryItems()
         {
             var target = new DeliveryItemManagementService(_repository.Object);
-            var assignedItems = target.GetAllAssignedDeliveryItems();
+            var assignedItems = target.GetAllAssignedDeliveryItems(new User());
 
             Xunit.Assert.NotEmpty(assignedItems);
 
@@ -143,7 +144,7 @@ namespace DomainModel.Test.Tests
         public void TestGetAllUnassignedDeliveryItems()
         {
             var target = new DeliveryItemManagementService(_repository.Object);
-            var unassignedItems = target.GetAllUnassignedDeliveryItems();
+            var unassignedItems = target.GetAllUnassignedDeliveryItems(new User());
 
             Xunit.Assert.NotEmpty(unassignedItems);
 
