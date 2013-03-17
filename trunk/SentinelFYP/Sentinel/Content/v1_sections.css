@@ -38,3 +38,11 @@
     #site-section.heatmapping-index {
         background-image: url(images/bgs/bg-img-heatmapping.jpg);
     }
+
+#create-user {
+    margin: 1em;
+}
+
+.editor-field .display-field {
+    margin-bottom: 1em;
+}

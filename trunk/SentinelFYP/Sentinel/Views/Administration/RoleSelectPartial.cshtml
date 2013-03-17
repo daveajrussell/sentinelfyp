@@ -1,0 +1,13 @@
+﻿@model IEnumerable<DomainModel.Models.SecurityModels.Role>
+
+<div class="editor-label">
+    @Html.Label("Roles")
+</div>
+<div class="editor-field">
+    @foreach (var role in Model)
+    {
+        <input class="Roles" type="checkbox" value="@role.RoleKey" />
+        <label>@role.RoleName</label>
+        <br />
+    }
+</div>

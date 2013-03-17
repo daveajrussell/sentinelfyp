@@ -1,0 +1,78 @@
+﻿@model Sentinel.Models.CreateUserViewModel
+
+<script type="text/javascript">
+
+    $(function () {
+        $('#user-created-dialog').dialog({
+            autoOpen: true,
+            resizable: false,
+            draggable: false,
+            modal: true,
+            title: "User Created",
+            buttons:
+                [
+                    {
+                        text: "Ok",
+                        click: function () {
+                            $(this).dialog("destroy");
+                            navigateBack('Index');
+                        }
+                    }
+                ]
+        });
+    });
+
+</script>
+
+<div id="user-created-dialog" style="display:none">
+    <div class="display-label">User Name:</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserName)
+    </div>
+
+    <br />
+
+    <div class="display-label">Roles:</div>
+    <div class="display-field">
+    @foreach (var role in Model.UserRoles)
+    {
+        <label>@role.RoleName</label>
+        <br />
+    }
+    </div>
+
+    <br />
+
+    <div class="display-label">First Name:</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FirstName)
+    </div>
+
+    <br />
+
+    <div class="display-label">Last Name:</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LastName)
+    </div>
+    
+    <br />
+
+    <div class="display-label">User Contact Number:</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserContactNumber)
+    </div>
+
+    <br />
+
+    <div class="display-label">Email:</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Email)
+    </div>
+
+    <br />
+
+    <div class="display-label">Password:</div>
+    <div class="display-field">
+        <label>Default Password: password</label>
+    </div>
+</div>

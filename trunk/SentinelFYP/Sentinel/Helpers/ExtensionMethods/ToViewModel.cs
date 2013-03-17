@@ -6,6 +6,7 @@ using Sentinel.Models;
 using DomainModel.SecurityModels;
 using DomainModel.Models.AssetModels;
 using System.Data;
+using DomainModel.Models.SecurityModels;
 
 namespace Sentinel.Helpers.ExtensionMethods
 {
@@ -24,6 +25,19 @@ namespace Sentinel.Helpers.ExtensionMethods
                        Item = item,
                        ConsignmentKey = oConsignmentKey
                    };
+        }
+
+        public static CreateUserViewModel ToViewModel(this User user, IEnumerable<Role> roles)
+        {
+            return new CreateUserViewModel()
+            {
+                UserName = user.UserName,
+                UserRoles = roles,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                UserContactNumber = user.UserContactNumber,
+                Email = user.Email,
+            };
         }
     }
 }

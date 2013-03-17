@@ -66,6 +66,7 @@
     <Compile Include="Helper\Builders\RoleBuilder.cs" />
     <Compile Include="Helper\Builders\SessionBuilder.cs" />
     <Compile Include="Helper\Builders\UserBuilder.cs" />
+    <Compile Include="Helper\Builders\VehicleBuilder.cs" />
     <Compile Include="Helper\SecurityHelper.cs" />
     <Compile Include="Helper\Extensions\DataSetExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

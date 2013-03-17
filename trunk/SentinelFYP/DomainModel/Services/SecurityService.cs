@@ -7,6 +7,8 @@ using DomainModel.Interfaces.Repositories;
 using DomainModel.SecurityModels;
 using DomainModel.Models.AuditModels;
 using DomainModel.Security;
+using DomainModel.Models.SecurityModels;
+using System.Xml.Linq;
 
 namespace DomainModel.Services
 {
@@ -48,6 +50,11 @@ namespace DomainModel.Services
             return _securityRepository.GetUsers(oUser);
         }
 
+        public IEnumerable<Role> GetRolesForUser(User oUser)
+        {
+            return _securityRepository.GetRolesForUser(oUser);
+        }
+
 
         public bool ResetPassword(Guid oUserKey, string strPassword)
         {
@@ -57,6 +64,26 @@ namespace DomainModel.Services
             SaltedHashGenerator.CreateSaltAndHashFromPassword(strPassword, out strSalt, out strHash);
 
             return _securityRepository.ResetPassword(oUserKey, strSalt, strHash);
+        }
+
+        public Vehicle GetUserVehicle(Guid oUserKey)
+        {
+            return _securityRepository.GetUserVehicle(oUserKey);
+        }
+
+
+        public Guid CreateUser(string strUsername, string strRoles, string strFirstName, string strLastName, string strNumber, string strEmail)
+        {
+            string strSalt;
+            string strHash;
+            string strRolesXML;
+
+            SaltedHashGenerator.CreateSaltAndHashFromPassword("password", out strSalt, out strHash);
+
+            strRolesXML = new XDocument(new XElement("ROLES", from key in strRoles.Split(',')
+                                                              select new XElement("ROLE", new XAttribute("KEY", key)))).ToString();
+
+            return _securityRepository.CreateUser(strUsername, State.User.UserCompanyKey, strRolesXML, strFirstName, strLastName, strNumber, strEmail, strSalt, strHash);
         }
     }
 }

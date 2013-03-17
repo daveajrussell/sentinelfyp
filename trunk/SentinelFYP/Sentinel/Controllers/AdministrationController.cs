@@ -1,5 +1,6 @@
 ﻿using DomainModel.Interfaces.Services;
 using DomainModel.Models.AuditModels;
+using DomainModel.SecurityModels;
 using Sentinel.Infrastructure;
 using Sentinel.Models;
 using System;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Sentinel.Helpers.ExtensionMethods;
 
 namespace Sentinel.Controllers
 {
@@ -34,16 +36,17 @@ namespace Sentinel.Controllers
 
         List<MenuViewModel> userAdminItems = new List<MenuViewModel>()
         {
-            /*new MenuViewModel()
+            new MenuViewModel()
             {
                 Display = "Create User",
+                Description = "Create a new user.",
                 URL = "~/Administration/CreateUser",
                 Permission = "ADMINISTRATOR"
-            },*/
+            },
             new MenuViewModel()
             {
                 Display = "Reset Password",
-                Description = "Reset a user's password",
+                Description = "Reset a user's password.",
                 URL = "~/Administration/ResetPassword",
                 Permission = "ADMINISTRATOR"
             }
@@ -73,24 +76,73 @@ namespace Sentinel.Controllers
             }
         };
 
-        public ActionResult AdministrationPageActionButtons()
-        {
-            return PartialView("../ActionButtons/PageActionButtonsLargePartial", menuItems);
-        }
+        
 
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult UserAdministrationPageActionButtons()
-        {
-            return PartialView("../ActionButtons/PageActionButtonsLargePartial", userAdminItems);
-        }
-
         public ActionResult UserAdministration()
         {
             return View();
+        }
+
+        public ActionResult ResetPassword()
+        {
+            var users = _securityService.GetUsers(State.User);
+            return View(users);
+        }
+
+        public ActionResult CreateUser()
+        {
+            return View();
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult CreateUser(string strUsername, string strKeys, string strFirstName, string strLastName, string strNumber, string strEmail)
+        {
+            var newUserKey = _securityService.CreateUser(strUsername, strKeys, strFirstName, strLastName, strNumber, strEmail);
+            var newUser = _securityService.GetUserByUserKey(newUserKey);
+            var roles = _securityService.GetRolesForUser(newUser);
+
+            return PartialView("Dialogs/UserCreateConfirm", newUser.ToViewModel(roles));
+        }
+
+        public ActionResult GetRolesForUser()
+        {
+            var data = _securityService.GetRolesForUser(State.User);
+            return PartialView("RoleSelectPartial", data);
+        }
+
+        public ActionResult CreateUserPageActions()
+        {
+            List<ActionButtonsViewModel> createUserPageActions = new List<ActionButtonsViewModel>()
+            {
+                new ActionButtonsViewModel()
+                {
+                    Display = "Back",
+                    Javascript = "navigateBack('UserAdministration')"
+                },
+                new ActionButtonsViewModel()
+                {
+                    ID = "btnCreateUser",
+                    Display = "Create User",
+                    Permission = "ADMINISTRATOR"
+                }
+            };
+
+            return PartialView("../ActionButtons/PageActionButtonsPartial", createUserPageActions);
+        }
+        
+        public ActionResult AdministrationPageActionButtons()
+        {
+            return PartialView("../ActionButtons/PageActionButtonsLargePartial", menuItems);
+        }
+
+        public ActionResult UserAdministrationPageActionButtons()
+        {
+            return PartialView("../ActionButtons/PageActionButtonsLargePartial", userAdminItems);
         }
 
         public ActionResult UserSelectPageActionButtons()
@@ -101,12 +153,6 @@ namespace Sentinel.Controllers
         public ActionResult ResetPasswordPageActionButtons()
         {
             return PartialView("../ActionButtons/PageActionButtonsPartial", resetPasswordItems);
-        }
-
-        public ActionResult ResetPassword()
-        {
-            var users = _securityService.GetUsers(State.User);
-            return View(users);
         }
 
         public ActionResult GetResetPasswordPartial(string strUserKey)

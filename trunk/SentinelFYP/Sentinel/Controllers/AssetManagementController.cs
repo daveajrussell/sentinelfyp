@@ -180,11 +180,25 @@ namespace Sentinel.Controllers
                 new ActionButtonsViewModel()
                 {
                     Display = "Back",
-                    Javascript = "navigateBack('AssetManagement')"
+                    Javascript = "navigateBack('Index')"
                 }
             };
 
             return PartialView("../ActionButtons/PageActionButtonsPartial", deliveryManagementPageActions);
+        }
+
+        public ActionResult DriverManagementPageActions()
+        {
+            List<ActionButtonsViewModel> driverManagementPageActions = new List<ActionButtonsViewModel>()
+            {
+                new ActionButtonsViewModel()
+                {
+                    Display = "Back",
+                    Javascript = "navigateBack('Index')"
+                }
+            };
+
+            return PartialView("../ActionButtons/PageActionButtonsPartial", driverManagementPageActions);
         }
 
         public ActionResult DeliveryItemsGridActions()

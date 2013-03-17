@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Security;
 using DomainModel.Models.AuditModels;
+using DomainModel.Models.SecurityModels;
 
 namespace DomainModel.SecurityModels
 {
@@ -13,6 +14,7 @@ namespace DomainModel.SecurityModels
         public Guid UserKey { get; set; }
         public Guid UserCompanyKey { get; set; }
         public Session Session { get; set; }
+        public Vehicle UserAssignedVehicle { get; set; }
         public string UserName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
