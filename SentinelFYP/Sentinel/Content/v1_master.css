@@ -73,3 +73,27 @@ a, a:visited {
 .input-error {
     border: 2px solid #cc0033;
 }
+
+.editor-field input[type="text"] {
+    width: 16em;
+    height: 2em;
+    font-size: 1em;
+    border-radius: 4px;
+    margin-bottom: 1em;
+}
+
+.editor-field input[type="password"] {
+    width: 16em;
+    height: 2em;
+    font-size: 1em;
+    border-radius: 4px;
+    margin-bottom: 1em;
+}
+
+#user-select-div select {
+        width: 16em;
+    height: 2em;
+    font-size: 1em;
+    border-radius: 4px;
+    margin-bottom: 1em;
+}
