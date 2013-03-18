@@ -18,6 +18,14 @@
                 self.ValidatePassword(e);
             });
 
+            $('#Username').on('keyup', function (e) {
+                self.ValidateUsername(e);
+            });
+
+            $('#Password').on('keyup', function (e) {
+                self.ValidatePassword(e);
+            });
+
             $('#Username').watermark('Username');
             $('#Password').watermark('Password');
         });
