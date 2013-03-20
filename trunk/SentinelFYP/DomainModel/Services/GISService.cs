@@ -31,6 +31,10 @@ namespace DomainModel.Services
             _gisRepository.AddGeospatialInformationSet(oGeoInformationSet);
         }
 
+        public void AddHistoricalInformation(GeospatialInformation oGeoInformation)
+        {
+            _gisRepository.AddHistoricalInformation(oGeoInformation);
+        }
 
         public void AddHistoricalGeospatialInformationSet(IEnumerable<GeospatialInformation> oHistoricalGeoInformationSet)
         {

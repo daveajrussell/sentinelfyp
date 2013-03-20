@@ -5,6 +5,7 @@ using System.Text;
 using Sentinel.Services;
 using Xunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Sentinel.Services.DataContracts;
 
 namespace Sentinel.Tests.Services
 {
@@ -28,14 +29,22 @@ namespace Sentinel.Tests.Services
         [TestMethod]
         public void TestGISNotify()
         {
-            string strNotificationString = "{\"iSessionID\":630,\"oUserIdentification\":\"66fba0e1-6429-4999-9538-6566dee70048\",\"lTimeStamp\":1359309623997,\"dLatitude\":54,\"dLongitude\":34,\"dSpeed\":0,\"iOrientation\":1}";
-            Xunit.Assert.DoesNotThrow(() => client.GISNotify(strNotificationString));
+            GeospatialInformationDataContract contract = new GeospatialInformationDataContract()
+            {
+                oUserIdentification = "66fba0e1-6429-4999-9538-6566dee70048",
+                iSessionID = 630,
+                lTimeStamp = 1359309623997,
+                dLatitude = 54,
+                dLongitude = 34,
+                iOrientation = 1
+            };
+            Xunit.Assert.DoesNotThrow(() => client.GISNotify(contract));
         }
 
         [Fact]
         public void TestGISNotifyShouldThow()
         {
-            Xunit.Assert.Throws<FormatException>(() => client.GISNotify(""));
+            Xunit.Assert.Throws<ArgumentNullException>(() => client.GISNotify(null));
         }
     }
 }

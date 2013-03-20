@@ -8,6 +8,173 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+namespace WebServices.DataContracts
+{
+    using System.Runtime.Serialization;
+    
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GeospatialInformationDataContract", Namespace="http://schemas.datacontract.org/2004/07/WebServices.DataContracts")]
+    public partial class GeospatialInformationDataContract : object, System.Runtime.Serialization.IExtensibleDataObject
+    {
+        
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private decimal dLatitudeField;
+        
+        private decimal dLongitudeField;
+        
+        private decimal dSpeedField;
+        
+        private int iOrientationField;
+        
+        private int iSessionIDField;
+        
+        private long lTimeStampField;
+        
+        private string oUserIdentificationField;
+        
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+        {
+            get
+            {
+                return this.extensionDataField;
+            }
+            set
+            {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal dLatitude
+        {
+            get
+            {
+                return this.dLatitudeField;
+            }
+            set
+            {
+                this.dLatitudeField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal dLongitude
+        {
+            get
+            {
+                return this.dLongitudeField;
+            }
+            set
+            {
+                this.dLongitudeField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal dSpeed
+        {
+            get
+            {
+                return this.dSpeedField;
+            }
+            set
+            {
+                this.dSpeedField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int iOrientation
+        {
+            get
+            {
+                return this.iOrientationField;
+            }
+            set
+            {
+                this.iOrientationField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int iSessionID
+        {
+            get
+            {
+                return this.iSessionIDField;
+            }
+            set
+            {
+                this.iSessionIDField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long lTimeStamp
+        {
+            get
+            {
+                return this.lTimeStampField;
+            }
+            set
+            {
+                this.lTimeStampField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string oUserIdentification
+        {
+            get
+            {
+                return this.oUserIdentificationField;
+            }
+            set
+            {
+                this.oUserIdentificationField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GeospatialInformationSetDataContract", Namespace="http://schemas.datacontract.org/2004/07/WebServices.DataContracts")]
+    public partial class GeospatialInformationSetDataContract : object, System.Runtime.Serialization.IExtensibleDataObject
+    {
+        
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private WebServices.DataContracts.GeospatialInformationDataContract[] BufferedDataField;
+        
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+        {
+            get
+            {
+                return this.extensionDataField;
+            }
+            set
+            {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WebServices.DataContracts.GeospatialInformationDataContract[] BufferedData
+        {
+            get
+            {
+                return this.BufferedDataField;
+            }
+            set
+            {
+                this.BufferedDataField = value;
+            }
+        }
+    }
+}
 
 
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -16,16 +183,13 @@ public interface ILocationService
 {
     
     [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILocationService/PostGeospatialData", ReplyAction="http://tempuri.org/ILocationService/PostGeospatialDataResponse")]
-    void PostGeospatialData(string strGeospatialDataJsonString);
-    
-    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILocationService/PostGeospatialData", ReplyAction="http://tempuri.org/ILocationService/PostGeospatialDataResponse")]
-    System.Threading.Tasks.Task PostGeospatialDataAsync(string strGeospatialDataJsonString);
+    void PostGeospatialData(WebServices.DataContracts.GeospatialInformationDataContract oGeoInformationContract);
     
     [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILocationService/PostBufferedGeospatialDataSet", ReplyAction="http://tempuri.org/ILocationService/PostBufferedGeospatialDataSetResponse")]
-    void PostBufferedGeospatialDataSet(string strBufferedGeospatialDataSetJsonString);
+    void PostBufferedGeospatialDataSet(WebServices.DataContracts.GeospatialInformationSetDataContract oGeoInformationSetContract);
     
-    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILocationService/PostBufferedGeospatialDataSet", ReplyAction="http://tempuri.org/ILocationService/PostBufferedGeospatialDataSetResponse")]
-    System.Threading.Tasks.Task PostBufferedGeospatialDataSetAsync(string strBufferedGeospatialDataSetJsonString);
+    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILocationService/PostBufferedHistoricalData", ReplyAction="http://tempuri.org/ILocationService/PostBufferedHistoricalDataResponse")]
+    void PostBufferedHistoricalData(WebServices.DataContracts.GeospatialInformationSetDataContract oGeoInformationSetContract);
 }
 
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -42,7 +206,7 @@ public partial class LocationServiceClient : System.ServiceModel.ClientBase<ILoc
     {
     }
     
-    /*public LocationServiceClient(string endpointConfigurationName) : 
+    public LocationServiceClient(string endpointConfigurationName) : 
             base(endpointConfigurationName)
     {
     }
@@ -60,25 +224,20 @@ public partial class LocationServiceClient : System.ServiceModel.ClientBase<ILoc
     public LocationServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
             base(binding, remoteAddress)
     {
-    }*/
-    
-    public void PostGeospatialData(string strGeospatialDataJsonString)
-    {
-        base.Channel.PostGeospatialData(strGeospatialDataJsonString);
     }
     
-    public System.Threading.Tasks.Task PostGeospatialDataAsync(string strGeospatialDataJsonString)
+    public void PostGeospatialData(WebServices.DataContracts.GeospatialInformationDataContract oGeoInformationContract)
     {
-        return base.Channel.PostGeospatialDataAsync(strGeospatialDataJsonString);
+        base.Channel.PostGeospatialData(oGeoInformationContract);
     }
     
-    public void PostBufferedGeospatialDataSet(string strBufferedGeospatialDataSetJsonString)
+    public void PostBufferedGeospatialDataSet(WebServices.DataContracts.GeospatialInformationSetDataContract oGeoInformationSetContract)
     {
-        base.Channel.PostBufferedGeospatialDataSet(strBufferedGeospatialDataSetJsonString);
+        base.Channel.PostBufferedGeospatialDataSet(oGeoInformationSetContract);
     }
     
-    public System.Threading.Tasks.Task PostBufferedGeospatialDataSetAsync(string strBufferedGeospatialDataSetJsonString)
+    public void PostBufferedHistoricalData(WebServices.DataContracts.GeospatialInformationSetDataContract oGeoInformationSetContract)
     {
-        return base.Channel.PostBufferedGeospatialDataSetAsync(strBufferedGeospatialDataSetJsonString);
+        base.Channel.PostBufferedHistoricalData(oGeoInformationSetContract);
     }
 }

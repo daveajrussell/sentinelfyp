@@ -44,6 +44,14 @@ namespace SqlRepositories
             SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "[GIS].[ADD_GEOSPATIAL_INFORMATION_SET]", sqlParam);
         }
 
+        public void AddHistoricalInformation(GeospatialInformation oHistoricalGeoInformation)
+        {
+            var oXmlString = GetXmlString(oHistoricalGeoInformation);
+            var sqlParam = new SqlParameter("@IP_XML", oXmlString);
+
+            SqlHelper.ExecuteNonQuery(_connectionString, CommandType.StoredProcedure, "[GIS].[ADD_HISTORICAL_GEOSPATIAL_INFORMATION]", sqlParam);
+        }
+
         public void AddHistoricalGeospatialInformationSet(IEnumerable<GeospatialInformation> oHistoricalGeoInformationSet)
         {
             var oXmlString = GetXmlString(oHistoricalGeoInformationSet);

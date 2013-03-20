@@ -12,6 +12,7 @@ using Xunit;
 using Moq;
 using DomainModel.SecurityModels;
 using DomainModel.Models.AuditModels;
+using System.IO;
 
 namespace WebServices.Test.Tests
 {
@@ -39,14 +40,18 @@ namespace WebServices.Test.Tests
         [TestMethod]
         public void TestAuthenticate()
         {
-            string strResult = null;
-            string strCredentials = "{\"strUsername\":\"DR_DRIVER\",\"strPassword\":\"password\"}";
+            Stream resultStream = null;
+            CredentialsDataContract Credentials = new CredentialsDataContract()
+            {
+                strUsername = "DR_DRIVER",
+                strPassword = "password"
+            };
 
-            Xunit.Assert.DoesNotThrow(() => strResult = client.Authenticate(strCredentials));
+            Xunit.Assert.DoesNotThrow(() => resultStream = client.Authenticate(Credentials));
 
-            Xunit.Assert.NotNull(strResult);
+            Xunit.Assert.NotNull(resultStream);
 
-            TestAuthenticateResultObject oResult = JsonR.JsonDeserializer<TestAuthenticateResultObject>(strResult);
+            TestAuthenticateResultObject oResult = JsonR.JsonDeserializer<TestAuthenticateResultObject>(resultStream);
 
             Xunit.Assert.NotNull(oResult);
 
@@ -58,14 +63,18 @@ namespace WebServices.Test.Tests
         [TestMethod]
         public void TestAuthentiateInvalidCredentinals()
         {
-            string strResult = null;
-            string strCredentials = "{\"strUsername\":\"WRONG\",\"strPassword\":\"BAD\"}";
+            Stream resultStream = null;
+            CredentialsDataContract Credentials = new CredentialsDataContract()
+            {
+                strUsername = "WRONG",
+                strPassword = "BAD"
+            };
 
-            Xunit.Assert.Throws<MessageSecurityException>(() => strResult = client.Authenticate(strCredentials));
-            Xunit.Assert.Null(strResult);
+            Xunit.Assert.Throws<MessageSecurityException>(() => resultStream = client.Authenticate(Credentials));
+            Xunit.Assert.Null(resultStream);
         } 
         
-        [Fact]
+        /*[Fact]
         [TestMethod]
         public void TestAuthenticateCorruptJsonString()
         {
@@ -74,40 +83,44 @@ namespace WebServices.Test.Tests
 
             Xunit.Assert.Throws<ProtocolException>(() => strResult = client.Authenticate(strBadJson));
             Xunit.Assert.Null(strResult);
-        }
+        }*/
 
         [Fact]
         [TestMethod]
         public void TestLogout()
         {
-            string strCredentials = "{\"strUsername\":\"DR_DRIVER\",\"strPassword\":\"password\"}";
+            CredentialsDataContract Credentials = new CredentialsDataContract()
+            {
+                strUsername = "DR_DRIVER",
+                strPassword = "password"
+            };
 
-            string strResultOne = client.Authenticate(strCredentials);
-            TestAuthenticateResultObject oResultOne = JsonR.JsonDeserializer<TestAuthenticateResultObject>(strResultOne);
+            Stream resultStreamOne = client.Authenticate(Credentials);
 
-            SessionDataContract oContract = new SessionDataContract()
+            TestAuthenticateResultObject oResultOne = JsonR.JsonDeserializer<TestAuthenticateResultObject>(resultStreamOne);
+
+            SessionDataContract LogoutCredentials = new SessionDataContract()
             {
                 oUserIdentification = oResultOne.UserKey.ToString(),
                 iSessionID = oResultOne.SessionID
             };
 
-            string strLogoutCredentials = JsonR.JsonSerializer(oContract);
-            Xunit.Assert.DoesNotThrow(() => client.Logout(strLogoutCredentials));
+            Xunit.Assert.DoesNotThrow(() => client.Logout(LogoutCredentials));
 
-            string strResultTwo = client.Authenticate(strCredentials);
-            TestAuthenticateResultObject oResultTwo = JsonR.JsonDeserializer<TestAuthenticateResultObject>(strResultTwo);
+            Stream resultStreamTwo = client.Authenticate(Credentials);
+            TestAuthenticateResultObject oResultTwo = JsonR.JsonDeserializer<TestAuthenticateResultObject>(resultStreamTwo);
 
             Xunit.Assert.Equal(oResultOne.UserKey, oResultTwo.UserKey);
             Xunit.Assert.NotEqual<int>(oResultOne.SessionID, oResultTwo.SessionID);
         }
 
-        [Fact]
+        /*[Fact]
         [TestMethod]
         public void TestLogoutMalformedJson()
         {
             string strLogoutCredentials = "{\"iSesssssssssssssssssionID\":abc,\"oUserIdentification\":\"48765d10-------9f41-481a-b311-2f6ec9e9db6e\"}";
             Xunit.Assert.Throws<ProtocolException>(() => client.Logout(strLogoutCredentials));
-        }
+        }*/
     }
 
     public class TestAuthenticateResultObject

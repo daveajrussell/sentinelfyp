@@ -8,6 +8,107 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+namespace WebServices.DataContracts
+{
+    using System.Runtime.Serialization;
+    
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GeotaggedAssetDataContract", Namespace="http://schemas.datacontract.org/2004/07/WebServices.DataContracts")]
+    public partial class GeotaggedAssetDataContract : object, System.Runtime.Serialization.IExtensibleDataObject
+    {
+        
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private decimal dLatitudeField;
+        
+        private decimal dLongitudeField;
+        
+        private long lTimeStampField;
+        
+        private string oAssetKeyField;
+        
+        private string oUserIdentificationField;
+        
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+        {
+            get
+            {
+                return this.extensionDataField;
+            }
+            set
+            {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal dLatitude
+        {
+            get
+            {
+                return this.dLatitudeField;
+            }
+            set
+            {
+                this.dLatitudeField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal dLongitude
+        {
+            get
+            {
+                return this.dLongitudeField;
+            }
+            set
+            {
+                this.dLongitudeField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long lTimeStamp
+        {
+            get
+            {
+                return this.lTimeStampField;
+            }
+            set
+            {
+                this.lTimeStampField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string oAssetKey
+        {
+            get
+            {
+                return this.oAssetKeyField;
+            }
+            set
+            {
+                this.oAssetKeyField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string oUserIdentification
+        {
+            get
+            {
+                return this.oUserIdentificationField;
+            }
+            set
+            {
+                this.oUserIdentificationField = value;
+            }
+        }
+    }
+}
 
 
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -16,16 +117,10 @@ public interface IDeliveryService
 {
     
     [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDeliveryService/GeoTagDelivery", ReplyAction="http://tempuri.org/IDeliveryService/GeoTagDeliveryResponse")]
-    void GeoTagDelivery(string strGeoTaggedDeliveryObject);
-    
-    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDeliveryService/GeoTagDelivery", ReplyAction="http://tempuri.org/IDeliveryService/GeoTagDeliveryResponse")]
-    System.Threading.Tasks.Task GeoTagDeliveryAsync(string strGeoTaggedDeliveryObject);
+    void GeoTagDelivery(WebServices.DataContracts.GeotaggedAssetDataContract oGeotaggedAssetContract);
     
     [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDeliveryService/UnTagDelivery", ReplyAction="http://tempuri.org/IDeliveryService/UnTagDeliveryResponse")]
     void UnTagDelivery(string strAssetKey);
-    
-    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDeliveryService/UnTagDelivery", ReplyAction="http://tempuri.org/IDeliveryService/UnTagDeliveryResponse")]
-    System.Threading.Tasks.Task UnTagDeliveryAsync(string strAssetKey);
 }
 
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -42,7 +137,7 @@ public partial class DeliveryServiceClient : System.ServiceModel.ClientBase<IDel
     {
     }
     
-    /*public DeliveryServiceClient(string endpointConfigurationName) : 
+    public DeliveryServiceClient(string endpointConfigurationName) : 
             base(endpointConfigurationName)
     {
     }
@@ -60,25 +155,15 @@ public partial class DeliveryServiceClient : System.ServiceModel.ClientBase<IDel
     public DeliveryServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
             base(binding, remoteAddress)
     {
-    }*/
-    
-    public void GeoTagDelivery(string strGeoTaggedDeliveryObject)
-    {
-        base.Channel.GeoTagDelivery(strGeoTaggedDeliveryObject);
     }
     
-    public System.Threading.Tasks.Task GeoTagDeliveryAsync(string strGeoTaggedDeliveryObject)
+    public void GeoTagDelivery(WebServices.DataContracts.GeotaggedAssetDataContract oGeotaggedAssetContract)
     {
-        return base.Channel.GeoTagDeliveryAsync(strGeoTaggedDeliveryObject);
+        base.Channel.GeoTagDelivery(oGeotaggedAssetContract);
     }
     
     public void UnTagDelivery(string strAssetKey)
     {
         base.Channel.UnTagDelivery(strAssetKey);
-    }
-    
-    public System.Threading.Tasks.Task UnTagDeliveryAsync(string strAssetKey)
-    {
-        return base.Channel.UnTagDeliveryAsync(strAssetKey);
     }
 }

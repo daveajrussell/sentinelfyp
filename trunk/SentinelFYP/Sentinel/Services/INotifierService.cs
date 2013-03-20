@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using System.ServiceModel.Web;
+using Sentinel.Services.DataContracts;
 
 namespace Sentinel.Services
 {
@@ -13,10 +14,10 @@ namespace Sentinel.Services
     {
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "/GISNotify", RequestFormat = WebMessageFormat.Json)]
-        void GISNotify(string message);
+        void GISNotify(GeospatialInformationDataContract oGeoInformationContract);
 
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "/DeliveryNotify", RequestFormat = WebMessageFormat.Json)]
-        void DeliveryNotify(string message);
+        void DeliveryNotify(GeotaggedAssetDataContract oGeotaggedAssetContract);
     }
 }
