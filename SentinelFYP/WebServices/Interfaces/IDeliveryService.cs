@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using WebServices.DataContracts;
 
 namespace WebServices.Interfaces
 {
@@ -13,7 +14,7 @@ namespace WebServices.Interfaces
     {
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "/GeoTagDelivery", RequestFormat = WebMessageFormat.Json)]
-        void GeoTagDelivery(string strGeoTaggedDeliveryObject);
+        void GeoTagDelivery(GeotaggedAssetDataContract oGeotaggedAssetContract);
 
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "/UnTagDelivery", RequestFormat = WebMessageFormat.Json)]

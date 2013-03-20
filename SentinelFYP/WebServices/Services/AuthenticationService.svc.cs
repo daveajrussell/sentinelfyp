@@ -11,6 +11,8 @@ using DomainModel.Models.AuditModels;
 using DomainModel.SecurityModels;
 using WebServices.DataContracts;
 using WebServices.Interfaces;
+using SentinelExceptionManagement;
+using System.IO;
 
 namespace WebServices.Services
 {
@@ -26,29 +28,39 @@ namespace WebServices.Services
             _securityRepostiory = securityRepository;
         }
 
-        public string Authenticate(string strCredentials)
+        public Stream Authenticate(CredentialsDataContract oCredentialsContract)
         {
             User oUser;
             Session oSession;
 
-            CredentialsDataContract oCredentialsContract = JsonR.JsonDeserializer<CredentialsDataContract>(strCredentials);
-            _securityRepostiory.LogIn(oCredentialsContract.strUsername, oCredentialsContract.strPassword, out oUser, out oSession);
+            try
+            {
+                //CredentialsDataContract oCredentialsContract = JsonR.JsonDeserializer<CredentialsDataContract>(strCredentials);
+                _securityRepostiory.LogIn(oCredentialsContract.strUsername, oCredentialsContract.strPassword, out oUser, out oSession);
 
-            if (oUser == null && oSession == null)
-            {
-                throw new WebFaultException(System.Net.HttpStatusCode.Unauthorized);
+                if (oUser == null && oSession == null)
+                {
+                    throw new Exception("Username: " + oCredentialsContract.strUsername + " Password: " + oCredentialsContract.strPassword); //WebFaultException(System.Net.HttpStatusCode.Unauthorized);
+                }
+                else
+                {
+                    var oUserSession = new { UserKey = oUser.UserKey, SessionID = oSession.SessionID };
+                    //return JsonR.JsonSerializer(oUserSession);
+                    WebOperationContext.Current.OutgoingResponse.ContentType = "application/json; charset=utf-8";
+                    return new MemoryStream(Encoding.UTF8.GetBytes(JsonR.JsonSerializer(oUserSession)));
+                }
             }
-            else
+            catch (Exception ex)
             {
-                var oUserSession = new { UserKey = oUser.UserKey, SessionID = oSession.SessionID };
-                return JsonR.JsonSerializer(oUserSession);
+                ExceptionManager.LogException(ex);
+                throw new WebFaultException(System.Net.HttpStatusCode.Unauthorized);
             }
         }
 
 
-        public void Logout(string strSessionInformation)
+        public void Logout(SessionDataContract oSessionContract)
         {
-            SessionDataContract oSessionContract = JsonR.JsonDeserializer<SessionDataContract>(strSessionInformation);
+            //SessionDataContract oSessionContract = JsonR.JsonDeserializer<SessionDataContract>(strSessionInformation);
             var oUserKey = new Guid(oSessionContract.oUserIdentification);
             _securityRepostiory.Logout(oUserKey, oSessionContract.iSessionID);
         }

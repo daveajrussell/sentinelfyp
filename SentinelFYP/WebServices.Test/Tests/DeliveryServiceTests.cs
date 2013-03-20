@@ -28,12 +28,12 @@ namespace WebServices.Test.Tests
             Xunit.Assert.NotNull(client.Endpoint);
         }
 
-        [Fact]
+        /*[Fact]
         public void TestSubmittingMalformedJsonShouldThrow()
         {
             string strMalformedJson = "{\"RUBBSIH\"}";
             Xunit.Assert.Throws<ProtocolException>(() => client.GeoTagDelivery(strMalformedJson));
-        }
+        }*/
 
         [Fact]
         public void TestSubmittingNonExistentDeliveryItemShouldThrow()
@@ -46,9 +46,8 @@ namespace WebServices.Test.Tests
                 dLatitude = 52.800000M,
                 dLongitude = -2.000000M,
             };
-            string strInvalidDeliveryItemJson = JsonR.JsonSerializer(oAsset);
 
-            Xunit.Assert.Throws<ProtocolException>(() => client.GeoTagDelivery(strInvalidDeliveryItemJson));
+            Xunit.Assert.Throws<ProtocolException>(() => client.GeoTagDelivery(oAsset));
         }
 
         [Fact]
@@ -63,9 +62,7 @@ namespace WebServices.Test.Tests
                 dLongitude = -2.000000M,
             };
 
-            string strInvalidDeliveryItemJson = JsonR.JsonSerializer(oAsset);
-
-            Xunit.Assert.Throws<ProtocolException>(() => client.GeoTagDelivery(strInvalidDeliveryItemJson));
+            Xunit.Assert.Throws<ProtocolException>(() => client.GeoTagDelivery(oAsset));
         }
 
         [Fact]
@@ -80,9 +77,7 @@ namespace WebServices.Test.Tests
                 dLongitude = -2.000000M,
             };
 
-            string strInvalidDeliveryItemJson = JsonR.JsonSerializer(oAsset);
-
-            Xunit.Assert.Throws<ProtocolException>(() => client.GeoTagDelivery(strInvalidDeliveryItemJson));
+            Xunit.Assert.Throws<ProtocolException>(() => client.GeoTagDelivery(oAsset));
         }
 
         /*[Fact]
@@ -123,17 +118,10 @@ namespace WebServices.Test.Tests
                 dLatitude = 52.800000M,
                 dLongitude = -2.000000M,
             };
-
-            var oUnTagAsset = new AssetKeyDataContract()
-            {
-                oAssetKey = key
-            };
             
             string strValidDeliveryItemJson = JsonR.JsonSerializer(oAsset);
-            string strAssetKey = JsonR.JsonSerializer(oUnTagAsset);
 
-            Xunit.Assert.DoesNotThrow(() => client.GeoTagDelivery(strValidDeliveryItemJson));
-            client.UnTagDelivery(strAssetKey);
+            Xunit.Assert.DoesNotThrow(() => client.GeoTagDelivery(oAsset));
         }
     }
 }

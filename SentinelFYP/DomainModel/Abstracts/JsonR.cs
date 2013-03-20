@@ -42,5 +42,21 @@ namespace DomainModel.Abstracts
                 throw new FormatException(ex.Message, ex.InnerException);
             }
         }
+
+        public static T JsonDeserializer<T>(Stream oJsonStream)
+        {
+            try
+            {
+                using (var streamReader = new StreamReader(oJsonStream))
+                {
+                    var serializer = new JsonSerializer();
+                    return (T)serializer.Deserialize(streamReader, typeof(T));
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new FormatException(ex.Message, ex.InnerException);
+            }
+        }
     }
 }

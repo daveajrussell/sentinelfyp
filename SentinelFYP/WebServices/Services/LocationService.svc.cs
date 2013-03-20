@@ -32,11 +32,11 @@ namespace WebServices.Services
             _gisService = gisService;
         }
 
-        public void PostGeospatialData(string strGeospatialDataJsonString)
+        public void PostGeospatialData(GeospatialInformationDataContract oGeoInformationContract)
         {
             try
             {
-                GeospatialInformationDataContract oGeoInformationContract = JsonR.JsonDeserializer<GeospatialInformationDataContract>(strGeospatialDataJsonString);
+                //GeospatialInformationDataContract oGeoInformationContract = JsonR.JsonDeserializer<GeospatialInformationDataContract>(strGeospatialDataJsonString);
                 GeospatialInformation oGeoInformation = new GeospatialInformation
                 {
                     SessionID = oGeoInformationContract.iSessionID,
@@ -50,7 +50,7 @@ namespace WebServices.Services
 
                 _gisService.AddGeospatialInformation(oGeoInformation);
 
-                Notify(strGeospatialDataJsonString);
+                Notify(oGeoInformationContract);
             }
             catch (Exception ex)
             {
@@ -59,11 +59,11 @@ namespace WebServices.Services
             }
         }
 
-        public void PostBufferedGeospatialDataSet(string strBufferedGeospatialDataSetJsonString)
+        public void PostBufferedGeospatialDataSet(GeospatialInformationSetDataContract oGeoInformationSetContract)
         {
             try
             {
-                GeospatialInformationSetDataContract oGeoInformationSetContract = JsonR.JsonDeserializer<GeospatialInformationSetDataContract>(strBufferedGeospatialDataSetJsonString);
+                //GeospatialInformationSetDataContract oGeoInformationSetContract = JsonR.JsonDeserializer<GeospatialInformationSetDataContract>(strBufferedGeospatialDataSetJsonString);
                 var data = from geoInfo in oGeoInformationSetContract.BufferedData
                            select new GeospatialInformation()
                            {
@@ -85,11 +85,37 @@ namespace WebServices.Services
             }
         }
 
-        public void PostBufferedHistoricalData(string strBufferedHistoricalDataJsonString)
+        public void PostHistoricalData(GeospatialInformationDataContract oGeoInformationContract)
         {
             try
             {
-                GeospatialInformationSetDataContract oGeoInformationSetContract = JsonR.JsonDeserializer<GeospatialInformationSetDataContract>(strBufferedHistoricalDataJsonString);
+                GeospatialInformation oGeoInformation = new GeospatialInformation
+                {
+                    SessionID = oGeoInformationContract.iSessionID,
+                    DriverKey = new Guid(oGeoInformationContract.oUserIdentification),
+                    TimeStamp = new DateTime(1970, 1, 1).AddMilliseconds(oGeoInformationContract.lTimeStamp),
+                    Latitude = oGeoInformationContract.dLatitude,
+                    Longitude = oGeoInformationContract.dLongitude,
+                    Speed = oGeoInformationContract.dSpeed,
+                    Orientation = oGeoInformationContract.iOrientation
+                };
+
+                _gisService.AddHistoricalInformation(oGeoInformation);
+
+                Notify(oGeoInformationContract);
+            }
+            catch (Exception ex)
+            {
+                ExceptionManager.LogException(ex);
+                throw ex;
+            }
+        }
+
+        public void PostBufferedHistoricalData(GeospatialInformationSetDataContract oGeoInformationSetContract)
+        {
+            try
+            {
+                //GeospatialInformationSetDataContract oGeoInformationSetContract = JsonR.JsonDeserializer<GeospatialInformationSetDataContract>(strBufferedHistoricalDataJsonString);
                 var data = from geoInfo in oGeoInformationSetContract.BufferedData
                            select new GeospatialInformation()
                            {
@@ -111,7 +137,7 @@ namespace WebServices.Services
             }
         }
 
-        private void Notify(string strGISObject)
+        private void Notify(GeospatialInformationDataContract oGeoInformationContract)
         {
             using (var client = new WebClient())
             {
@@ -119,7 +145,7 @@ namespace WebServices.Services
                 using (var stream = new MemoryStream())
                 {
                     var data = new DataContractJsonSerializer(typeof(GeospatialInformationDataContract));
-                    data.WriteObject(stream, strGISObject);
+                    data.WriteObject(stream, oGeoInformationContract);
                     client.UploadData("http://fyp.daveajrussell.com/Services/NotifierService.svc/GISNotify", "POST", stream.ToArray());
                 }
             }

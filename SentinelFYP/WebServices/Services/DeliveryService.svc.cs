@@ -28,9 +28,9 @@ namespace WebServices.Services
             _service = service;
         }
 
-        public void GeoTagDelivery(string strGeoTaggedDeliveryObject)
+        public void GeoTagDelivery(GeotaggedAssetDataContract oGeotaggedAssetContract)
         {
-            GeotaggedAssetDataContract oGeotaggedAssetContract = JsonR.JsonDeserializer<GeotaggedAssetDataContract>(strGeoTaggedDeliveryObject);
+            //GeotaggedAssetDataContract oGeotaggedAssetContract = JsonR.JsonDeserializer<GeotaggedAssetDataContract>(strGeoTaggedDeliveryObject);
             GeoTaggedDeliveryItem oItem = new GeoTaggedDeliveryItem()
             {
                 AssetKey = new Guid(oGeotaggedAssetContract.oAssetKey),
@@ -42,7 +42,7 @@ namespace WebServices.Services
 
             _service.SubmitGeoTaggedDeliveryItem(oItem);
 
-            Notify(strGeoTaggedDeliveryObject);
+            Notify(oGeotaggedAssetContract);
         }
 
         public void UnTagDelivery(string strAssetKey)
@@ -51,7 +51,7 @@ namespace WebServices.Services
             _service.UnTagDelivery(Guid.Parse(oAssetKey.oAssetKey));
         }
 
-        private void Notify(string strGeoTaggedDeliveryObject)
+        private void Notify(GeotaggedAssetDataContract oGeotaggedAssetContract)
         {
             using (var client = new WebClient())
             {
@@ -59,9 +59,9 @@ namespace WebServices.Services
                 using (var stream = new MemoryStream())
                 {
                     var data = new DataContractJsonSerializer(typeof(GeotaggedAssetDataContract));
-                    data.WriteObject(stream, strGeoTaggedDeliveryObject);
+                    data.WriteObject(stream, oGeotaggedAssetContract);
                     client.UploadData("http://fyp.daveajrussell.com/Services/NotifierService.svc/DeliveryNotify", "POST", stream.ToArray());
-                    client.UploadData("http://localhost/Sentinel/Services/NotifierService.svc/DeliveryNotify", "POST", stream.ToArray());
+                    //client.UploadData("http://localhost/Sentinel/Services/NotifierService.svc/DeliveryNotify", "POST", stream.ToArray());
                 }
             }
         }

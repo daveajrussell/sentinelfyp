@@ -11,6 +11,7 @@ namespace DomainModel.Interfaces.Repositories
     {
         void AddGeospatialInformation(GeospatialInformation oGeoInformation);
         void AddGeospatialInformationSet(IEnumerable<GeospatialInformation> oGeoInformationSet);
+        void AddHistoricalInformation(GeospatialInformation oGeoInformation);
         void AddHistoricalGeospatialInformationSet(IEnumerable<GeospatialInformation> oHistoricalGeoInformationSet);
     }
 }

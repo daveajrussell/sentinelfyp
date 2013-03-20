@@ -17,9 +17,12 @@ namespace Sentinel.Services
 {
     public class NotifierService : INotifierService
     {
-        public void GISNotify(string message)
+        public void GISNotify(GeospatialInformationDataContract oGeoInformationContract)
         {
-            GeospatialInformationDataContract oGeoInformationContract = JsonR.JsonDeserializer<GeospatialInformationDataContract>(message);
+            if (null == oGeoInformationContract)
+                throw new ArgumentNullException("contract");
+
+            //GeospatialInformationDataContract oGeoInformationContract = JsonR.JsonDeserializer<GeospatialInformationDataContract>(message);
             GeospatialInformation oGeoInformation = new GeospatialInformation
             {
                 SessionID = oGeoInformationContract.iSessionID,
@@ -39,9 +42,9 @@ namespace Sentinel.Services
             context.Clients.All.allLocationUpdates(oGeoInformation.DriverKey.ToString(), oGeoInformation.TimeStamp.ToShortDateString(), oGeoInformation.Latitude, oGeoInformation.Longitude, oGeoInformation.Speed, oGeoInformation.Orientation, strSeverity);
         }
 
-        public void DeliveryNotify(string message)
+        public void DeliveryNotify(GeotaggedAssetDataContract oGeotaggedAssetContract)
         {
-            GeotaggedAssetDataContract oGeotaggedAssetContract = JsonR.JsonDeserializer<GeotaggedAssetDataContract>(message);
+            //GeotaggedAssetDataContract oGeotaggedAssetContract = JsonR.JsonDeserializer<GeotaggedAssetDataContract>(message);
             GeoTaggedDeliveryItem oItem = new GeoTaggedDeliveryItem()
             {
                 AssetKey = new Guid(oGeotaggedAssetContract.oAssetKey),

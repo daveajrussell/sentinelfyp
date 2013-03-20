@@ -119,6 +119,7 @@
     </Compile>
     <Compile Include="Interfaces\ILocationService.cs" />
     <Compile Include="Interfaces\IAuthenticationService.cs" />
+    <Compile Include="MyContentTypeMapper.cs" />
     <Compile Include="Services\DeliveryService.svc.cs">
       <DependentUpon>DeliveryService.svc</DependentUpon>
     </Compile>

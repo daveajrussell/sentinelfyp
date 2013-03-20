@@ -52,6 +52,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -74,6 +75,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="MyContentTypeMapper.cs" />
     <Compile Include="Proxies\AuthenticationService.cs" />
     <Compile Include="Proxies\DeliveryService.cs" />
     <Compile Include="Proxies\LocationService.cs" />
@@ -104,10 +106,6 @@
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">
       <Project>{5d3f52f5-a1d0-4401-a177-04c2631b69a9}</Project>
       <Name>DomainModel %28DomainModel\DomainModel%29</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WebServices\WebServices.csproj">
-      <Project>{22de6170-af7e-4a47-8589-e84014309312}</Project>
-      <Name>WebServices %28WebServices\WebServices%29</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

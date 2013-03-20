@@ -8,6 +8,113 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+namespace WebServices.DataContracts
+{
+    using System.Runtime.Serialization;
+    
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CredentialsDataContract", Namespace="http://schemas.datacontract.org/2004/07/WebServices.DataContracts")]
+    public partial class CredentialsDataContract : object, System.Runtime.Serialization.IExtensibleDataObject
+    {
+        
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private string strPasswordField;
+        
+        private string strUsernameField;
+        
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+        {
+            get
+            {
+                return this.extensionDataField;
+            }
+            set
+            {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string strPassword
+        {
+            get
+            {
+                return this.strPasswordField;
+            }
+            set
+            {
+                this.strPasswordField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string strUsername
+        {
+            get
+            {
+                return this.strUsernameField;
+            }
+            set
+            {
+                this.strUsernameField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SessionDataContract", Namespace="http://schemas.datacontract.org/2004/07/WebServices.DataContracts")]
+    public partial class SessionDataContract : object, System.Runtime.Serialization.IExtensibleDataObject
+    {
+        
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private int iSessionIDField;
+        
+        private string oUserIdentificationField;
+        
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+        {
+            get
+            {
+                return this.extensionDataField;
+            }
+            set
+            {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int iSessionID
+        {
+            get
+            {
+                return this.iSessionIDField;
+            }
+            set
+            {
+                this.iSessionIDField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string oUserIdentification
+        {
+            get
+            {
+                return this.oUserIdentificationField;
+            }
+            set
+            {
+                this.oUserIdentificationField = value;
+            }
+        }
+    }
+}
 
 
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -16,16 +123,10 @@ public interface IAuthenticationService
 {
     
     [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationService/Authenticate", ReplyAction="http://tempuri.org/IAuthenticationService/AuthenticateResponse")]
-    string Authenticate(string strCredentials);
-    
-    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationService/Authenticate", ReplyAction="http://tempuri.org/IAuthenticationService/AuthenticateResponse")]
-    System.Threading.Tasks.Task<string> AuthenticateAsync(string strCredentials);
+    System.IO.Stream Authenticate(WebServices.DataContracts.CredentialsDataContract Credentials);
     
     [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationService/Logout", ReplyAction="http://tempuri.org/IAuthenticationService/LogoutResponse")]
-    void Logout(string strCredentials);
-    
-    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationService/Logout", ReplyAction="http://tempuri.org/IAuthenticationService/LogoutResponse")]
-    System.Threading.Tasks.Task LogoutAsync(string strCredentials);
+    void Logout(WebServices.DataContracts.SessionDataContract Credentials);
 }
 
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -42,7 +143,7 @@ public partial class AuthenticationServiceClient : System.ServiceModel.ClientBas
     {
     }
     
-    /*public AuthenticationServiceClient(string endpointConfigurationName) : 
+    public AuthenticationServiceClient(string endpointConfigurationName) : 
             base(endpointConfigurationName)
     {
     }
@@ -60,25 +161,15 @@ public partial class AuthenticationServiceClient : System.ServiceModel.ClientBas
     public AuthenticationServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
             base(binding, remoteAddress)
     {
-    }*/
-    
-    public string Authenticate(string strCredentials)
-    {
-        return base.Channel.Authenticate(strCredentials);
     }
     
-    public System.Threading.Tasks.Task<string> AuthenticateAsync(string strCredentials)
+    public System.IO.Stream Authenticate(WebServices.DataContracts.CredentialsDataContract Credentials)
     {
-        return base.Channel.AuthenticateAsync(strCredentials);
+        return base.Channel.Authenticate(Credentials);
     }
     
-    public void Logout(string strCredentials)
+    public void Logout(WebServices.DataContracts.SessionDataContract Credentials)
     {
-        base.Channel.Logout(strCredentials);
-    }
-    
-    public System.Threading.Tasks.Task LogoutAsync(string strCredentials)
-    {
-        return base.Channel.LogoutAsync(strCredentials);
+        base.Channel.Logout(Credentials);
     }
 }
